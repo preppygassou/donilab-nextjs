@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="342" height="279" viewBox="0 0 342 279">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Retângulo_1116" data-name="Retângulo 1116" width="342" height="279" transform="translate(0 4536)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Grupo_de_máscara_315" data-name="Grupo de máscara 315" transform="translate(0 -4536)" clip-path="url(#clip-path)">
+    <g id="Grupo_947" data-name="Grupo 947" transform="translate(622.229 432)">
+      <g id="Elipse_54" data-name="Elipse 54" transform="translate(-670.791 3992.438)" fill="none" stroke="#95b71d" stroke-width="75">
+        <circle cx="129.037" cy="129.037" r="129.037" stroke="none"/>
+        <circle cx="129.037" cy="129.037" r="91.537" fill="none"/>
+      </g>
+      <g id="Elipse_56" data-name="Elipse 56" transform="translate(-803.229 3860)" fill="none" stroke="#95b71d" stroke-width="75">
+        <circle cx="261.5" cy="261.5" r="261.5" stroke="none"/>
+        <circle cx="261.5" cy="261.5" r="224" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

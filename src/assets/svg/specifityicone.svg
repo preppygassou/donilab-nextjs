@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="145.121" height="125.616" viewBox="0 0 145.121 125.616">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Retângulo_1152" data-name="Retângulo 1152" width="102" height="125.616" transform="translate(261.755 280.743)" fill="#2755a1"/>
+    </clipPath>
+  </defs>
+  <g id="Grupo_1000" data-name="Grupo 1000" transform="translate(-261.755 -280.743)">
+    <circle id="Ellipse_151" data-name="Ellipse 151" cx="52.5" cy="52.5" r="52.5" transform="translate(301.876 290.742)" fill="#95b71d"/>
+    <g id="Grupo_999" data-name="Grupo 999">
+      <g id="Grupo_998" data-name="Grupo 998">
+        <g id="Grupo_997" data-name="Grupo 997" clip-path="url(#clip-path)">
+          <path id="Tracé_777" data-name="Tracé 777" d="M359.505,400.28a2.078,2.078,0,0,1-2.125,2.026H268.131A2.079,2.079,0,0,1,266,400.28V290.874a2.078,2.078,0,0,1,2.127-2.026H291.5V292.9H272.38a2.074,2.074,0,0,0-2.125,2.025h0v101.3a2.074,2.074,0,0,0,2.121,2.026h55.253a2.187,2.187,0,0,0,1.506-.6l25.494-24.307a1.985,1.985,0,0,0,.626-1.436V294.923a2.075,2.075,0,0,0-2.123-2.026H334.005v-4.05h23.376a2.078,2.078,0,0,1,2.125,2.026Zm-11.5-26.337-18.246,17.4v-17.4ZM331.884,301a2.078,2.078,0,0,0,2.125-2.026v-2.026h17V369.89H327.634a2.073,2.073,0,0,0-2.125,2.021V394.2h-51v-97.25h17v2.026A2.078,2.078,0,0,0,293.634,301ZM295.755,284.8h34v12.157h-34Zm61.626,0H334.005v-2.026a2.077,2.077,0,0,0-2.125-2.026H293.63a2.077,2.077,0,0,0-2.125,2.026V284.8H268.132a6.239,6.239,0,0,0-6.377,6.078V400.28a6.241,6.241,0,0,0,6.377,6.078h89.249a6.24,6.24,0,0,0,6.375-6.078V290.874a6.238,6.238,0,0,0-6.375-6.078" fill="#2755a1"/>
+        </g>
+      </g>
+    </g>
+    <rect id="Retângulo_1153" data-name="Retângulo 1153" width="42.61" height="4.076" transform="translate(304.14 315.463)" fill="#2755a1"/>
+    <rect id="Retângulo_1154" data-name="Retângulo 1154" width="13.369" height="13.369" transform="translate(282.585 309.829)" fill="#2755a1"/>
+    <rect id="Retângulo_1155" data-name="Retângulo 1155" width="42.61" height="4.076" transform="translate(304.14 334.528)" fill="#2755a1"/>
+    <rect id="Retângulo_1156" data-name="Retângulo 1156" width="13.369" height="13.369" transform="translate(282.585 328.893)" fill="#2755a1"/>
+    <rect id="Retângulo_1157" data-name="Retângulo 1157" width="42.61" height="4.076" transform="translate(304.14 354.73)" fill="#2755a1"/>
+    <rect id="Retângulo_1158" data-name="Retângulo 1158" width="13.369" height="13.369" transform="translate(282.585 349.096)" fill="#2755a1"/>
+    <rect id="Retângulo_1159" data-name="Retângulo 1159" width="24.879" height="4.076" transform="translate(304.14 375.08)" fill="#2755a1"/>
+    <rect id="Retângulo_1160" data-name="Retângulo 1160" width="13.369" height="13.369" transform="translate(282.585 369.446)" fill="#2755a1"/>
+  </g>
+</svg>

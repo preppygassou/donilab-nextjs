@@ -1,0 +1,47 @@
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #95b71d;
+      }
+
+      .cls-3 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-4 {
+        fill: #2755a1;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" x="56" y="17.192" width="102" height="125.616"/>
+    </clipPath>
+  </defs>
+  <g>
+    <circle id="Ellipse_151" data-name="Ellipse 151" class="cls-2" cx="54.5" cy="79.6919" r="52.5"/>
+    <g>
+      <g class="cls-3">
+        <path id="Tracé_777" data-name="Tracé 777" class="cls-4" d="M153.75,136.729a2.077,2.077,0,0,1-2.125,2.026H62.376a2.079,2.079,0,0,1-2.127-2.026V27.323a2.08,2.08,0,0,1,2.127-2.026H85.749v4.052H66.625A2.0759,2.0759,0,0,0,64.5,31.3749h0v101.3a2.0741,2.0741,0,0,0,2.1208,2.0262l.0042,0h55.249a2.1841,2.1841,0,0,0,1.506-.5949l25.494-24.307a1.9784,1.9784,0,0,0,.626-1.4361V31.3721a2.0749,2.0749,0,0,0-2.1228-2.026H128.25v-4.05h23.376a2.0782,2.0782,0,0,1,2.125,2.026Zm-11.5-26.337-18.246,17.4v-17.4ZM126.129,37.453a2.077,2.077,0,0,0,2.125-2.026V33.401h17v72.938H121.879a2.074,2.074,0,0,0-2.1249,2.0218V130.65h-51V33.4h17v2.026a2.0769,2.0769,0,0,0,2.125,2.026ZM90,21.244h34V33.401H90Zm61.626,0H128.25V19.218a2.0769,2.0769,0,0,0-2.125-2.026H87.875a2.0769,2.0769,0,0,0-2.125,2.026v2.026H62.3769A6.24,6.24,0,0,0,56,27.322V136.729a6.24,6.24,0,0,0,6.3769,6.078H151.626a6.2391,6.2391,0,0,0,6.375-6.078V27.323a6.239,6.239,0,0,0-6.375-6.078"/>
+        <path id="Tracé_778" data-name="Tracé 778" class="cls-4" d="M90,57.713H77.249V45.556h9.747l-7,6.671,3,2.865,7-6.671ZM75.126,41.504a2.0769,2.0769,0,0,0-2.125,2.026V59.739a2.0769,2.0769,0,0,0,2.125,2.026h17a2.0789,2.0789,0,0,0,2.1269-2.026V44.369l3.624-3.46-3-2.863L91.251,41.504Z"/>
+        <path id="Tracé_779" data-name="Tracé 779" class="cls-4" d="M90,82.026H77.251V69.869h9.745l-7,6.671,3,2.865,7-6.671Zm1.246-16.209H75.1239a2.0769,2.0769,0,0,0-2.125,2.026V84.052a2.075,2.075,0,0,0,2.1228,2.026H92.1239a2.0752,2.0752,0,0,0,2.125-2.0238V68.682l3.628-3.46-3-2.863Z"/>
+        <path id="Tracé_780" data-name="Tracé 780" class="cls-4" d="M90,106.338H77.251V94.181h9.745l-7,6.673,3,2.865,7-6.673Zm4.874-19.667-3.628,3.458H75.1239a2.0751,2.0751,0,0,0-2.125,2.0238V108.364a2.076,2.076,0,0,0,2.1249,2.026h17a2.078,2.078,0,0,0,2.1269-2.026V92.994l3.626-3.458Z"/>
+      </g>
+      <rect id="Rectangle_1064" data-name="Rectangle 1064" class="cls-4" x="98.5" y="41.503" width="4.25" height="4.052"/>
+      <rect id="Rectangle_1065" data-name="Rectangle 1065" class="cls-4" x="106.999" y="41.503" width="34" height="4.052"/>
+      <rect id="Rectangle_1066" data-name="Rectangle 1066" class="cls-4" x="136.749" y="49.608" width="4.25" height="4.052"/>
+      <rect id="Rectangle_1067" data-name="Rectangle 1067" class="cls-4" x="98.5" y="49.608" width="34" height="4.052"/>
+      <rect id="Rectangle_1068" data-name="Rectangle 1068" class="cls-4" x="98.5" y="65.817" width="4.25" height="4.052"/>
+      <rect id="Rectangle_1069" data-name="Rectangle 1069" class="cls-4" x="106.999" y="65.817" width="34" height="4.052"/>
+      <rect id="Rectangle_1070" data-name="Rectangle 1070" class="cls-4" x="136.749" y="73.921" width="4.25" height="4.052"/>
+      <rect id="Rectangle_1071" data-name="Rectangle 1071" class="cls-4" x="98.5" y="73.921" width="34" height="4.052"/>
+      <rect id="Rectangle_1072" data-name="Rectangle 1072" class="cls-4" x="98.5" y="90.13" width="4.25" height="4.052"/>
+      <rect id="Rectangle_1073" data-name="Rectangle 1073" class="cls-4" x="106.999" y="90.13" width="34" height="4.052"/>
+      <rect id="Rectangle_1074" data-name="Rectangle 1074" class="cls-4" x="136.749" y="98.235" width="4.25" height="4.052"/>
+      <rect id="Rectangle_1075" data-name="Rectangle 1075" class="cls-4" x="98.5" y="98.235" width="34" height="4.052"/>
+    </g>
+  </g>
+</svg>

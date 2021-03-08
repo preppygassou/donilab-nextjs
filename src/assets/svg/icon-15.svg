@@ -1,0 +1,20 @@
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #95b71d;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Groupe_977" data-name="Groupe 977">
+    <ellipse id="Ellipse_14" data-name="Ellipse 14" class="cls-1" cx="84.7409" cy="110" rx="76" ry="75.5"/>
+    <g id="Groupe_32" data-name="Groupe 32">
+      <rect id="Rectangle_19" data-name="Rectangle 19" class="cls-2" x="133.3629" y="103.7109" width="13.18" height="17.927"/>
+      <path class="cls-2" d="M163.3985,60.061,163.3977,45.4H116.5061V60.061H68.6448v97.1H211.2591v-97.1ZM73.638,152.1342v-41.705a15.2458,15.2458,0,0,0,11.2549,5.1132h52.1992l-.001-4.8984H84.8929c-5.6885,0-10.4036-4.687-11.2549-10.7866V65.0844H206.2669v34.771c-.8487,6.1031-5.5651,10.7935-11.2549,10.7935H142.58v4.8984H195.012l.2832-.0049v-.0019a15.2672,15.2672,0,0,0,10.9717-5.1192v41.7129ZM121.1585,49.9379h37.5879V60.061H121.1585Z"/>
+    </g>
+  </g>
+</svg>

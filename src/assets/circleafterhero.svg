@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="305" height="611" viewBox="0 0 305 611">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Retângulo_943" data-name="Retângulo 943" width="305" height="611" transform="translate(1615 695)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Grupo_de_máscara_250" data-name="Grupo de máscara 250" transform="translate(-1615 -695)" clip-path="url(#clip-path)">
+    <g id="Grupo_744" data-name="Grupo 744" transform="translate(2418.179 -3164.658)">
+      <g id="Elipse_54" data-name="Elipse 54" transform="translate(-599.726 4063.274)" fill="none" stroke="#2755a1" stroke-width="53">
+        <circle cx="101.887" cy="101.887" r="101.887" stroke="none"/>
+        <circle cx="101.887" cy="101.887" r="75.387" fill="none"/>
+      </g>
+      <g id="Elipse_55" data-name="Elipse 55" transform="translate(-701.613 3961.387)" fill="none" stroke="#2755a1" stroke-width="53">
+        <circle cx="203.774" cy="203.774" r="203.774" stroke="none"/>
+        <circle cx="203.774" cy="203.774" r="177.274" fill="none"/>
+      </g>
+      <g id="Elipse_56" data-name="Elipse 56" transform="translate(-803.5 3859.5)" fill="none" stroke="#2755a1" stroke-width="53">
+        <circle cx="305.66" cy="305.66" r="305.66" stroke="none"/>
+        <circle cx="305.66" cy="305.66" r="279.16" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,13 +1,52 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './global.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from "react-redux";
+import store from "./store";
 
+/* 
+const client = new ApolloClient({
+  uri: 'http://cors-anywhere.herokuapp.com/https://blog.donilab.net/graphql)',
+  cache: new InMemoryCache()
+});
+ */
+
+/* const client = new ApolloClient({
+  uri: 'https://blog.donilab.net/graphql',
+  cache: new InMemoryCache()
+});
+
+
+
+/* 
+client
+  .query({
+    query: gql`
+   query {
+      posts {
+        edges {
+          node {
+            title
+            databaseId
+          }
+        }
+      }
+    }
+    
+    `
+  })
+  .then(result => console.log(result)); */
+
+ 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
+  <BrowserRouter>
     <App />
-  </React.StrictMode>,
+  </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );
 

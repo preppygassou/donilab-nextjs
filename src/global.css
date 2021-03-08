@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates');
+
+
+  @font-face {
+    font-family: 'CeraRoundPro-Bold';
+    src: url('CeraRoundPro-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+    
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Montserrat Alternates',sans-serif; 
+  scrollbar-color: #454a4d #202324;
+}
+
+
+ svg:hover path {
+ background-color: #fff;
+}
+
+
+body,html {
+  
+  
+  font-family:"Montserrat Alternates" , "CeraRoundPro-Bold", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* align-items: center; */
+  /* background-color: #fff; */
+}
+
+a{
+  text-decoration: none;
+  
+}
+
+.homesectiontitle {
+  color: #2755A1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: .5vh 0 9vh 0;
+}
+.homesectiontitle h1{
+  font-size: 5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.homesectiontitle img{
+ position: absolute;
+ width: 95px;
+left: 51vh;
+bottom: -1vh;
+
+}
+.homesectiontitle span{
+ color: #95B71D;
+}
+
+.App{
+  display: flex;
+  flex-direction: column;
+}
+
+.cls-2 *{
+  fill: #2755a1;
+}
+.cls-2:hover *{
+  fill: #fff;
+}
