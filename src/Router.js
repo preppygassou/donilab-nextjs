@@ -12,6 +12,7 @@ import Programs from './screens/Programs'
 import Program from './screens/Program'
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
+import NotFound from './screens/NotFound'
 
 function Router() {
   return (
@@ -20,6 +21,7 @@ function Router() {
       <Switch>       
       <Route path="/" exact={true} component={Home} />
       <Route path="/about" component={About} />
+      <Route  component={NotFound} />
       <Route path="/blog" component={Blog} />
       <Route path="/blogsingle" component={BlogSingle} />
       <Route path="/contact" component={Contact} />

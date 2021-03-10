@@ -42,7 +42,7 @@ const Blogcard = ({ post }) => {
  // const [imgUrl, setImgUrl] = useState('')
   //const [categoriess, setCategories] = useState([])
   //const [isLoaded, setIsLoaded] = useState(false)
-
+  const CategoriesId = post.categories;
   const postListCategories = useSelector((state )=> state.postListCategories);
   const {loading,error,categories} = postListCategories;
 
@@ -58,8 +58,8 @@ const Blogcard = ({ post }) => {
   }, [categoriess]) */
 
   useEffect(() => {
-    dispatch(listCategories(post.categories))
-  }, [dispatch,post.categories])
+    dispatch(listCategories(CategoriesId))
+  }, [dispatch])
 
 
   //const intersection = categoriess.filter(element => post.categories.includes(element.id));
