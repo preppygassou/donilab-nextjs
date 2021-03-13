@@ -3,7 +3,7 @@ import styled,{css} from 'styled-components/macro'
 import Slider from "react-slick";
 
 const PartnersContainer = styled.div `
-
+margin-bottom:10vh;
 .slick-track{
   width:auto !important;
 }
@@ -21,7 +21,7 @@ const Partner = styled.div `
 `;
 
 const PartnerImg = styled.img `
- width:250px;
+ width:200px;
 `;
 
 const settings = {

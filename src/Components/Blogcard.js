@@ -38,72 +38,69 @@ p{
 `;
 
 
+
 const Blogcard = ({ post }) => {
- // const [imgUrl, setImgUrl] = useState('')
+  // const [imgUrl, setImgUrl] = useState('')
   //const [categoriess, setCategories] = useState([])
   //const [isLoaded, setIsLoaded] = useState(false)
-  const CategoriesId = post.categories;
-  const postListCategories = useSelector((state )=> state.postListCategories);
-  const {loading,error,categories} = postListCategories;
+  const CategoriesId = post.id;
+  const postListCategories = useSelector((state) => state.postListCategories);
+  const { loading, error, categories } = postListCategories;
 
-   const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
- /*  useEffect(() => {
-      
-    axios.get('/wp-json/wp/v2/categories')      
-    .then(res => 
-      setCategories(res.data) , 
-        ); 
-  //console.log(categoriess)
-  }, [categoriess]) */
+  /*  useEffect(() => {
+       
+     axios.get('/wp-json/wp/v2/categories')      
+     .then(res => 
+       setCategories(res.data) , 
+         ); 
+   //console.log(categoriess)
+   }, [categoriess]) */
 
   useEffect(() => {
-    dispatch(listCategories(CategoriesId))
+    dispatch(listCategories())
   }, [dispatch])
 
 
-  //const intersection = categoriess.filter(element => post.categories.includes(element.id));
+  const intersection = categories.filter(element => post.categories.includes(element.id));
   /*  const CategoryFilter = (inc)=>categoriess.filter(filterCat=>(
      inc ===filterCat.id ? [...(filterCat.name)] :""
      
    )) */
 
-    return (
+  return (
 
-      <BlogSlider className="blogslider" key={post.id} /* onClick={() => history.push("/blogsingle"+ index)} */>
-        <div className="blogcardhead">
-          <img src={post.fimg_url} alt={post.title.rendered} />
-        </div>
-        <div className="blogcardcontent">
-  
-          <h4>
-            {
-              loading ? <span>loading...</span> :
-              categories.map(category=>(
-               <span key={category.id}>{category.name +  ","} </span>
+    <BlogSlider className="blogslider" key={post.id} /* onClick={() => history.push("/blogsingle"+ index)} */>
+      <div className="blogcardhead">
+        <img src={post.fimg_url} alt={post.title.rendered} />
+      </div>
+      <div className="blogcardcontent">
 
-              ))
-            }
-
-         {/*    {
-              intersection.map((category)=>(
-                intersection.length <=0 ? <span key={category.id}>{category.name} </span>
-               : <span key={category.id}>{category.name +  ","} </span>
-          
-
-                )
-                
-       )
-         
-          } */}
+        <h4>
+          {/*   {
+               loading ? <span>loading...</span> :
+               categories.map(category=>(
+                <span key={category.id}>{category.name +  ","} </span>
+ 
+               ))
+             }
+  */}
+              {
+               intersection.map((category)=>(
+                 intersection.length === 1 ? <span key={category.id}>{category.name} </span>
+                : <span key={category.id}>{category.name +  ","} </span>
            
-            </h4>
+                 ))
+           } 
 
-          <h1>{post.title.rendered}</h1>
-          <p>{moment(post.date).format('LL')}</p>
-        </div>
-      </BlogSlider>
-    )
+        </h4>
+
+        <h1>{post.title.rendered}</h1>
+        <p>{moment(post.date).format('LL')}</p>
+      </div>
+    </BlogSlider>
+  )
 
 }
 

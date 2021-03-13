@@ -16,6 +16,8 @@ import SectionTitle from "../Components/SectionTitle";
 import Oconnect from "./../assets/svg/oconnect.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { listHubs } from '../actions/HubActions';
+import Loading from '../Components/Loading';
+import MessageBox from '../Components/MessageBox';
 
 const AboutContainer = styled.div `
 
@@ -254,7 +256,7 @@ export default function About() {
         </p>
       </AboutMission>
       {
-        loading ? <div>chargement ...</div> : error ? <div>erreur de chargement ...</div> :(
+        loading ? <Loading/> : error ? <MessageBox>erreur de chargement .</MessageBox> :(
           hubs.map((hub,index)=>(
             index === 0  && (<TeamSection about="about" hub={hub}/> )  
             ))

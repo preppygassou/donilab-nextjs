@@ -9,6 +9,8 @@ import odersHub from '../Components/Hub/odersHub';
 import ProgramsOfHub from '../Components/Hub/ProgramsOfHub';
 import SpecifityOfWeb from '../Components/Hub/SpecifityOfWeb';
 import TeamsOfHub from '../Components/Hub/TeamsOfHub';
+import Loading from '../Components/Loading';
+import MessageBox from '../Components/MessageBox';
 
 
 const HubSection = styled.section`
@@ -29,7 +31,7 @@ function Hub(props) {
   
   return (
 
-    loading ? <div>chargement ...</div> : error ? <div> erreure de chargement</div> :(
+    loading ? <Loading></Loading> : error ? <MessageBox>erreur de chargement</MessageBox> :(
       <HubSection>
     <HeroHub hub={hub}/>
     <EnResume hub={hub}/>

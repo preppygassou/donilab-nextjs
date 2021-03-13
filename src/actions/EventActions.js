@@ -20,7 +20,8 @@ const listevents = () => async (dispatch) => {
   try {
     dispatch({ type:EVENT_LIST_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.net/wp-json/wp/v2/donievent?_embed"
+    
+      "https://blog.donilab.org/wp-json/wp/v2/donievent?_embed"
     );
     dispatch({ type: EVENT_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -32,7 +33,7 @@ const eventimage = (featuredMedia) => async (dispatch) => {
   try {
     dispatch({ type:EVENT_IMAGE_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.net/wp-json/wp/v2/media/"+featuredMedia+"?_embed"
+      "https://blog.donilab.org/wp-json/wp/v2/media/"+featuredMedia+"?_embed"
     );
     dispatch({ type: EVENT_IMAGE_SUCCESS, payload: data });
   } catch (error) {
@@ -44,7 +45,7 @@ const listLieuDeshubs = () => async (dispatch) => {
   try {
     dispatch({ type: EVENT_LIST_TYPE_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.net/wp-json/wp/v2/donievent?_embed"
+      "https://blog.donilab.org/wp-json/wp/v2/donievent?_embed"
     );
     dispatch({ type: EVENT_LIST_TYPE_SUCCESS, payload: data });
   } catch (error) {
@@ -56,7 +57,7 @@ const detailsEvent = (EventId) => async (dispatch) => {
   try {
     dispatch({ type: EVENT_DETAILS_REQUEST, payload: EventId });
     const { data } = await axios.get(
-      "https://blog.donilab.net/wp-json/wp/v2/donievent/" + EventId+"?_embed"
+      "https://blog.donilab.org/wp-json/wp/v2/donievent/" + EventId+"?_embed"
     );
     dispatch({ type: EVENT_DETAILS_SUCCESS, payload: data });
   } catch (error) {

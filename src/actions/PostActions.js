@@ -17,7 +17,7 @@ const listPosts = () => async (dispatch) => {
   try {
     dispatch({ type: POST_LIST_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.net//wp-json/wp/v2/posts"
+      "https://blog.donilab.org//wp-json/wp/v2/posts?_embed"
     );
     dispatch({ type: POST_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -27,12 +27,11 @@ const listPosts = () => async (dispatch) => {
 
 
 
-
-const listCategories = (CategoriesId) => async (dispatch) => {
+const listCategories = () => async (dispatch) => {
   try {
     dispatch({ type: POST_CATEGORIES_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.net/wp-json/wp/v2/categories?include="+CategoriesId
+      "https://blog.donilab.org/wp-json/wp/v2/categories"
     );
     dispatch({ type: POST_CATEGORIES_SUCCESS, payload: data });
   } catch (error) {
@@ -44,7 +43,7 @@ const PostImage = (PostId) => async (dispatch) => {
   try {
     dispatch({ type: POST_IMAGE_REQUEST, payload: PostId });
     const { data } = await axios.get(
-      "https://blog.donilab.net/wp-json/wp/v2/media/" + PostId
+      "https://blog.donilab.org/wp-json/wp/v2/media/" + PostId
     );
     dispatch({ type: POST_IMAGE_SUCCESS, payload: data });
   } catch (error) {

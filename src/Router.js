@@ -21,15 +21,15 @@ function Router() {
       <Switch>       
       <Route path="/" exact={true} component={Home} />
       <Route path="/about" component={About} />
-      <Route  component={NotFound} />
-      <Route path="/blog" component={Blog} />
-      <Route path="/blogsingle" component={BlogSingle} />
-      <Route path="/contact" component={Contact} />
       <Route path="/expertise" component={Expertise} />
-      <Route path="/hubs" component={Hubs} />
-      <Route path="/hub/:id" component={Hub} />
       <Route path="/programs" component={Programs} />      
       <Route path="/program/:id" component={Program} />      
+      <Route path="/hubs" component={Hubs} />
+      <Route path="/hub/:id" component={Hub} />
+      <Route path="/blog" component={Blog} />
+      <Route path="/contact" component={Contact} />
+      <Route path="/blogsingle" component={BlogSingle} />
+      <Route path="/*" component={NotFound} />
      </Switch>
       <Footer/> 
     </>

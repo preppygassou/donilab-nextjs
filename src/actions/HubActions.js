@@ -20,7 +20,7 @@ const listHubs = () => async (dispatch) => {
   try {
     dispatch({ type: HUB_LIST_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.net/wp-json/wp/v2/hubs"
+      "https://blog.donilab.org/wp-json/wp/v2/hubs"
     );
     dispatch({ type: HUB_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -35,7 +35,7 @@ const listLieuDeshubs = () => async (dispatch) => {
   try {
     dispatch({ type: HUB_LIST_TYPE_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.net/wp-json/wp/v2/lieudeshubs"
+      "https://blog.donilab.org/wp-json/wp/v2/lieudeshubs"
     );
     dispatch({ type: HUB_LIST_TYPE_SUCCESS, payload: data });
   } catch (error) {
@@ -48,7 +48,7 @@ const detailsHub = (HubId) => async (dispatch) => {
   try {
     const { data } = await axios.get(
       
-      "https://blog.donilab.net/wp-json/wp/v2/hubs/" + HubId
+      "https://blog.donilab.org/wp-json/wp/v2/hubs/" + HubId
     );
     dispatch({ type: HUB_DETAILS_SUCCESS, payload: data });
   } catch (error) {
@@ -64,7 +64,7 @@ const hubimage = (featuredMedia) => async (dispatch) => {
   try {
     dispatch({ type:HUB_IMAGE_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.net/wp-json/wp/v2/media/"+featuredMedia
+      "https://blog.donilab.org/wp-json/wp/v2/media/"+featuredMedia
     );
     dispatch({ type: HUB_IMAGE_SUCCESS, payload: data });
   } catch (error) {

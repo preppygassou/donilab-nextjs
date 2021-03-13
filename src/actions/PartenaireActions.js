@@ -12,7 +12,7 @@ const listPartenaires = () => async (dispatch) => {
   try {
     dispatch({ type: PARTENAIRE_LIST_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.net/wp-json/wp/v2/partenaire"
+      "https://blog.donilab.org/wp-json/wp/v2/partenaire"
     );
     dispatch({ type: PARTENAIRE_LIST_SUCCESS, payload: data });
   } catch (error) {

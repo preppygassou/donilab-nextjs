@@ -295,7 +295,7 @@ const settings = {
     
     </BlogContainer>
     <AllblogBtnsection className="allblog">
-        <Link to={ { pathname: '//blog.donilab.net' } }>Toutes nos actualités</Link>
+        <Link to={ { pathname: '//blog.donilab.org' } }>Toutes nos actualités</Link>
       </AllblogBtnsection>
   </BlogSection>
   )

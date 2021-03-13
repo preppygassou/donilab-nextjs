@@ -319,10 +319,9 @@ function NotFound() {
     </g>
   </svg>
 
-	<p id="errorText">O-o-oh! Something broke.</p>
-	<Link id="errorLink" href="/">Go Back</Link>
+	<p id="errorText">O-o-oh! quelque chose c'est cassé .</p>
+	<Link id="errorLink" href="/">Retourne á l'accueil</Link>
 </main>
-<main/>
   
     </NotFoundConatiner>
   );

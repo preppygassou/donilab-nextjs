@@ -7,94 +7,36 @@ import Slider from "react-slick";
 import { useDispatch, useSelector } from 'react-redux';
 import { eventimage, listevents } from '../actions/EventActions';
 import DoniEventContent from './DoniEventContent';
+import Loading from './Loading';
+import MessageBox from './MessageBox';
+import Dots from './Dots';
 
 
 
 
 const DoniEventContainer = styled.section`
-height:100vh;
- max-height:1100px;
  position:relative;
  overflow:hidden;
+ margin:0 auto;
+ width:1000px;
+ z-index:1; 
+ height:50vh ;
+
 `;
 
 const DoniEventSection = styled.section`
 height:70vh;
+margin-bottom:2vh;
 overflow:hidden;
- .slick-slider{
-  margin: 30px auto 50px;
-  position: relative;
- }
- .slick-slider .slick-list{
-  position: relative;
-    top: 0;
-    left: 0;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    height: 60vh !important;
- }
- .slick-slider .slick-track{
-  position: relative;
-    top: 0;
-    left: 0;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 1000px !important;
-    
- }
- .slick-slider .slick-track:after{
-  clear: both;
- }
- .slick-slider .slick-track:after, .slick-track:before {
-   
-    content: "";
-}
- 
- .slick-slider .slick-track{
-  position: relative;
- }
- .slick-slider .slick-initialized .slick-slide {
-    width:1000px !important;
-    height: 60vh;
-}
- .slick-slider .slick-dots {
-    display: flex !important;
-   justify-content:center;
-   z-index:10;
-   list-style-type: none;
-position: absolute;
-bottom: 15%;
-left: 0;
-right: 0;
-}
- .slick-slider .slick-dots .slick-active button{
-   background-color:#2755A1;
-   color:#2755A1;
-}
- .slick-slider .slick-dots button{
-   border-radius:50%;
-   padding:1vh;
-   color:#F0F0F0;
-   border:none;
-   margin:1vh;
-   width:15px;
-   height: 15px;
-   font-size: 1px;
-   content: attr(data-unfollow);
-}
 
 `;
 
 const DoniEventWrapper = styled.div`
-height:100%;
-width:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
 position:relative;
+width:1300px;
+height:55vh;
+margin:0 auto;
+
 `;
 
 const DoniEventSlide = styled.div `
@@ -120,6 +62,11 @@ const SliderButtons =styled.div `
 
 
 `;
+const SliderDots =styled.div `
+width: 100%;
+position:absolute;
+bottom:0;
+`;
 
 
 const arrowButton = css`
@@ -127,7 +74,7 @@ z-index:10;
 width: 80px;
 cursor:pointer;
 position: absolute;
-top: 20%;
+top: 38%;
 padding:10px;
 margin-right:1rem;
 user-select:none;
@@ -140,7 +87,7 @@ transform:scale(1.05);
 
 const PrevArrow = styled.img`
 ${arrowButton}
-left: 25px;
+left: 0;
 
 `;
 
@@ -150,40 +97,20 @@ right: 0;
 `;
 
 
-function SampleNextArrow(props) {
-  const { onClick } = props;
-  return (
-    <NextArrow
-    src={ArrowRighthIcon}
-      onClick={onClick}
-    />
-  );
-}
-
-function SamplePrevArrow(props) {
-  const { onClick } = props;
-  return (
-    <PrevArrow
-      src={ArrowLeftIcon}
-      onClick={onClick}
-    />
-  );
-}
-
 
 export default function DoniEvent() {
+  const eventList = useSelector((state )=> state.eventList);
+  const {loading,error,events} = eventList;
   const [current, setCurrent] = useState(0);
- const length = EventData.length;
+ const length = events.length;
  const timeout = useRef(null);
- const eventList = useSelector((state )=> state.eventList);
- const {loading,error,events} = eventList;
 const dispatch = useDispatch()
 
  useEffect(() => {
   dispatch(listevents())
  }, [dispatch])
 
- /* useEffect(() => {
+ useEffect(() => {
   const nextSlide = ()=>{
     setCurrent(current=>(current === length -1 ? 0 : current +1 ))
   };
@@ -193,7 +120,7 @@ const dispatch = useDispatch()
       clearTimeout(timeout.current)
     }
   }
- }, [current,length]) */
+ }, [current,length])
 
   const nextSlide = ()=>{
     if (timeout.current){
@@ -209,66 +136,43 @@ const dispatch = useDispatch()
      setCurrent(current=== 0 ? length -1 : current  - 1)
    }
     
-   if(!Array.isArray(EventData)||EventData.length <=0){
+   if(!Array.isArray(events)||events.length <=0){
      return null;
    }
 
-   const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />,
-      className: 'EventSlider',
-      swipeToSlide: true,
-      variableWidth: true,
-  };
+ 
 
   return (
     <DoniEventSection>
         <DoniEventHead>
         <h1>Nos évènements</h1>
         </DoniEventHead>
-      {/*   <DoniEventContainer>
-
-          <DoniEventWrapper> */}
-
-                 
-          <Slider {...settings}>
-          {  
-          loading ? <div>chargement ...</div> : error ? <div>erreur de chargement</div> :
-          events.map(event=>(
-            
-              <DoniEventContent key={event.id} event={event}/>
-             
-             ))
-            }
-          </Slider>
-             
-
-        {/* {
-          EventData.map((event,index)=>(
-        <DoniEventSlide key={index}>
-            {index === current && (
-            <DoniEventSlider >
-              <EventImage src={event.image} alt={event.title}/>
-              <EventContent>
-              <h1>{event.title}</h1>
-              <p>{event.description}</p>
-              </EventContent>
-             <div>
-               <img src={event.image} alt=""/>
-             </div>
-            </DoniEventSlider>
-            )}
-        </DoniEventSlide>
-         ))
-        } */}
-       {/*  </DoniEventWrapper>
-        </DoniEventContainer> */}
      
+          {  
+            loading ? <Loading></Loading> : error ? <MessageBox>erreur de chargement</MessageBox>:
+            <DoniEventWrapper >
+        <DoniEventContainer>
+          {events.map((event,index)=>(  
+            <DoniEventSlide key={index}> 
+            {index === current && (                 
+              <DoniEventContent  event={event}/> 
+              )
+        }
+              </DoniEventSlide>  
+                       
+             ))}
+                 
+        
+     </DoniEventContainer>
+     <SliderButtons>
+        <PrevArrow src={ArrowLeftIcon} onClick={prevSlide}/>
+        <NextArrow src={ArrowRighthIcon} onClick={nextSlide}/>
+      </SliderButtons>
+     <SliderDots>
+      <Dots slides={events} activeIndex={current}></Dots>
+     </SliderDots>
+     </DoniEventWrapper>
+      } 
     </DoniEventSection>
   )
 }

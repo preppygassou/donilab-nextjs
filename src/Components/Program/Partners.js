@@ -8,9 +8,8 @@ const PartnersSectionLogo = styled.div `
 overflow:hidden;
 `;
 const PartnersSectionWrapper = styled.div `
-display:flex;
-justify-content:center;
-flex-direction:column;
+text-align:center;
+margin:10vh 0;
 
 h1{
   color:#2755A1;
@@ -21,7 +20,7 @@ h1{
   text-align:center;
 }
 img {
-  width:80px;
+  width:100px;
 }
 `;
 

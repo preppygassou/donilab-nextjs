@@ -24,7 +24,7 @@ p{
 
 h1{
   font-family:"CeraRoundPro-Bold";
-  font-size: 1.8rem;
+  font-size: 3rem;
     font-weight: bold;
     text-transform: uppercase;
     margin: 2.5vh 0 3vh 0;
@@ -37,19 +37,18 @@ const ResultatsSectionparalaxImgtop = styled.img `
 position:absolute;
 top: 0;
 left: 0;
-width: 310px;
+width: 200px;
 
 `;
 const ResultatsSectionparalaxImgbottom = styled.img `
 position:absolute;
 bottom: 0;
 right:0;
-width: 125px;
+width: 130px;
 
 `;
 const ResultatsSectionVisionMissionIcon = styled.img `
-
-
+width:100px;
 `;
 
 

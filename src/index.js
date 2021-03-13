@@ -9,13 +9,13 @@ import store from "./store";
 
 /* 
 const client = new ApolloClient({
-  uri: 'http://cors-anywhere.herokuapp.com/https://blog.donilab.net/graphql)',
+  uri: 'http://cors-anywhere.herokuapp.com/https://blog.donilab.org/graphql)',
   cache: new InMemoryCache()
 });
  */
 
 /* const client = new ApolloClient({
-  uri: 'https://blog.donilab.net/graphql',
+  uri: 'https://blog.donilab.org/graphql',
   cache: new InMemoryCache()
 });
 

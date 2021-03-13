@@ -16,21 +16,21 @@ const BeneficiairesSections = styled.section`
   padding:12vh 45vh;
   position:relative;
 
+
+`;
+
+
+
+const BeneficiairesLogoContent = styled.div`
 h1{
   font-family:"CeraRoundPro-Bold";
   font-size: 1.8rem;
     font-weight: bold;
     text-transform: uppercase;
     margin: 2.5vh 0 3vh 0;
-}
-`;
-
-
-
-const BeneficiairesLogoContent = styled.div`
-
-h1{
-  color:#fff;
+  color:#95B71D;
+  padding:1rem 0;
+  border-bottom:solid 2px #95B71D;
 }
 `;
 const BeneficiairesLogoCard = styled.div`
@@ -48,15 +48,21 @@ display:flex;
 align-items:center;
 `;
 const BeneficiairesLogo = styled.img`
-width:100px;
-border-radius:50%;
+width:75px;
+
+
 
 `;
 const CibleVisionMissionIcon = styled.img`
-
+width:100px;
 `;
 
 const BeneficiairesTitle = styled.h1`
+ font-family:"CeraRoundPro-Bold";
+  font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 2.5vh 0 3vh 0;
 color:#fff;
 `;
 
@@ -65,7 +71,7 @@ function Beneficiaires({program}) {
     <BeneficiairesSections>
         <CibleVisionMissionIcon className="" src={PartnersImg} alt="Historic icon" />
         <BeneficiairesTitle >
-        BÉNÉFICIAiRES DU PROGRAMME
+        BÉNÉFICIAiRES <br/> DU PROGRAMME
        </BeneficiairesTitle >
        <BeneficiairesLogoContent>
          <h1>1er édition</h1>

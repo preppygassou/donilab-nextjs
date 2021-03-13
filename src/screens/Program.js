@@ -9,6 +9,8 @@ import Beneficiaires from '../Components/Program/Beneficiaires'
 import Partners from '../Components/Program/Partners'
 import { useDispatch, useSelector } from 'react-redux'
 import { detailsProgram } from '../actions/ProgramActions'
+import Loading from '../Components/Loading'
+import MessageBox from '../Components/MessageBox'
 
 function Program(props) {
 
@@ -26,9 +28,11 @@ function Program(props) {
   return (
     <>
     {loading ? (
-      <div>chargement</div>
+      <div style={{height:'50vh'}}>
+        <Loading></Loading>
+      </div>
       ) : error ? (
-      <div>{error}</div>
+        <MessageBox>{error}</MessageBox>
         ) : (
       <div>
       <HeroProgram  program={program}/>

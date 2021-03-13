@@ -116,7 +116,7 @@ line-height: 1.32;
 
 const HeroProgramInfo = styled.div`
 flex: 1;
-margin-left:8vh;
+margin:0 8vh;
 @media (min-width: 769px) and (max-width: 1024px) {
   margin-left:6vh;
   p{
@@ -161,13 +161,13 @@ function HeroProgram({program}) {
   return (
       <HeroProgramSection>
         <HeroProgramWrapper>     
-      <HeroProgramTextBox>
-     <HeroProgramImgarc src={CircleHeroImg} />
-     <HeroProgramInfo>
-       <img src={program.acf.logo_en_png_ou_svg.url} alt=""/>
-       <h1>
-       {program.title.rendered}
-       </h1>
+        <HeroProgramTextBox>
+        <HeroProgramImgarc src={CircleHeroImg} />
+        <HeroProgramInfo>
+        <img src={program.acf.logo_en_png_ou_svg.url} alt=""/>
+          <h1>
+          {program.title.rendered}
+          </h1>
        <h3>
        État du projet : <span>{program.acf.etat}</span>
        </h3>

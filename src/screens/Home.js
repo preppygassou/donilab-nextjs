@@ -9,6 +9,8 @@ import Labelafricinnov from '../Components/Labelafricinnov';
 import { TeamData } from '../data/TeamData';
 import { useDispatch, useSelector } from 'react-redux';
 import { listHubs } from '../actions/HubActions';
+import Loading from '../Components/Loading';
+import MessageBox from '../Components/MessageBox';
 
 
 
@@ -32,7 +34,7 @@ function Home() {
       <BlogSlideSection/>
       <ImpactSection/>
       {
-        loading ? <div>chargement ...</div> : error ? <div>erreur de chargement ...</div> :(
+        loading ? <Loading></Loading>  : error ? <MessageBox></MessageBox> :(
           hubs.map((hub,index)=>(
             index === 0  && (<TeamSection hub={hub}/> )  
             ))

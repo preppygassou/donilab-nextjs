@@ -17,18 +17,23 @@ position:relative;
 
 h1{
   font-family:"CeraRoundPro-Bold";
-  font-size: 1.8rem;
+  font-size: 3rem;
     font-weight: bold;
     text-transform: uppercase;
     margin: 2.5vh 0 3vh 0;
+}
+
+.cibleslistes ul li{
+  margin-top:1rem;
+padding-left:-0.5em;
+
 }
 
 `;
 
 
 const CibleVisionMissionIcon = styled.img `
-
-
+width:100px;
 `;
 
 function Activity({program}) {
@@ -40,9 +45,11 @@ function Activity({program}) {
         <h1>
         activités menées
        </h1>
+        <div className="cibleslistes">
         {
           parse(program.acf.activites)
         }
+        </div>
       </ActivitySection>
     </div>
   )

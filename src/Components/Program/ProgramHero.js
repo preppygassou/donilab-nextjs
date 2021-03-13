@@ -102,7 +102,7 @@ line-height: 1.32;
 
 const HeroInfo = styled.div`
 flex: 1;
-margin-left:8vh;
+margin:0 8vh;
 @media (min-width: 769px) and (max-width: 1024px) {
   margin-left:6vh;
 }

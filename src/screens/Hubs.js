@@ -13,6 +13,8 @@ import Oconnect from "./../assets/svg/oconnect.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { listHubs, listLieuDeshubs } from '../actions/HubActions';
 import parse from "html-react-parser";
+import Loading from '../Components/Loading';
+import MessageBox from '../Components/MessageBox';
 
 
 const HubPage = styled.div`
@@ -263,7 +265,7 @@ function Hubs() {
 
       <HubsSection>
         {
-          loading ? <div>chargement .... </div> : error ? 'erreur de chargement' :
+          loading ? <Loading></Loading>: error ? <MessageBox>erreur de chargement</MessageBox>  :
           hubs.map((hub, index) => (
             index === 0 ? (
               <HubBamako key={index}>

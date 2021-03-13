@@ -13,6 +13,8 @@ import SectionTitle from "../Components/SectionTitle";
 import Oconnect from "./../assets/svg/oconnect.svg";
 import { listProgramsTypeOfDonilab, listProgramsTypeWithPartner } from "../actions/ProgramActions";
 import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../Components/Loading';
+import MessageBox from '../Components/MessageBox';
 
 
 const SectionTitlell =styled.div`
@@ -164,7 +166,7 @@ function Program() {
         <ProgramSectionTitle>
           INITIÉS PAR DONILAB
         </ProgramSectionTitle>
-       { loadingprogramsbydonilab ? <div>chargement...</div> :errorloadingprogrambydonilab ? <div>erreur de chargement</div> :
+       { loadingprogramsbydonilab ? <Loading></Loading> :errorloadingprogrambydonilab ? <MessageBox>erreur de chargement</MessageBox> :
          <ProgramByDonilab ProgramData={programsByDonilab}/>
          }
         </ProgramByDonilabSection>
@@ -174,7 +176,7 @@ function Program() {
           EN PARTENARIAT
         </ProgramSectionTitle>
         {
-          loading ? <div>chargement...</div> :error ? <div>erreur de chargement</div> :
+          loading ? <Loading></Loading> :error ? <MessageBox>erreur de chargement</MessageBox> :
           <ProgramByDonilab ProgramData={programsWithPartners}/>
           }
         </PrograminParnterSection>

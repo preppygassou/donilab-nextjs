@@ -21,11 +21,15 @@ position:relative;
 
 h1{
   font-family:"CeraRoundPro-Bold";
-  font-size: 1.8rem;
+  font-size: 3rem;
     font-weight: bold;
     text-transform: uppercase;
-    margin: 2.5vh 0 3vh 0;
+    margin: 2.5vh 0 1vh 0;
 }
+.cibleslistes ul li{
+  margin-top:1rem;
+}
+
 `;
 
 
@@ -40,11 +44,12 @@ const CibleparalaxImgbottom = styled.img `
 position:absolute;
 bottom: 0;
 right:0;
-width: 125px;
+width: 200px;
 
 `;
 const CibleVisionMissionIcon = styled.img `
 
+width: 100px;
 
 `;
 
@@ -59,9 +64,11 @@ function Cibles({program}) {
         <h1>
         cibles
        </h1>
+       <div className="cibleslistes">
         {
           parse(program.acf.les_cibles_du_programmes)
         }
+        </div>
       </CibleSection>
   )
 } 
