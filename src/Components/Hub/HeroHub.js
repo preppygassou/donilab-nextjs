@@ -7,16 +7,19 @@ import CircleHubHeroImg from "./../../assets/svg/CircleHeroHUb.svg";
 import parse from "html-react-parser";
 import { useDispatch, useSelector } from 'react-redux';
 import { hubimage } from '../../actions/HubActions';
+import Dots from '../Dots';
 
 const HeroHubSection = styled.section`
  height:78vh;
  background-color:#EFEFEF;
  overflow:hidden;
+ position:relative;
 `;
 
 const HeroHubWrapper = styled.div`
 width:100%;
-display:flex;
+display:grid;
+grid-template-columns:40% 60%;
 align-items:center;
 height:78vh;
 @media (max-width: 768px) {
@@ -30,14 +33,12 @@ height:78vh;
 `;
 
 const HeroHubTextBox = styled.div`
-position:absolute;
-flex: 1;
 background-color:#95B71D;
-width:80vh;
+width:100%;
 z-index:1;
 display:flex;
 align-items:center;
-height:78vh;
+height:100%;
 padding:0 10rem;
 
 @media (max-width: 768px) {
@@ -118,7 +119,7 @@ line-height: 1.32;
 `;
 
 const HeroHubInfo = styled.div`
-flex: 1;
+
 margin-left:8vh;
 @media (min-width: 769px) and (max-width: 1024px) {
   margin-left:6vh;
@@ -134,20 +135,55 @@ top:0;
 left:0;
 `;
 
-const HeroHubImgBox = styled.div`
-
-object-fit:cover;
-
-@media (max-width: 768px) {
-  width:120vh;
-  height:39vh;
-}
-
+const HeroHubSlideWrapper = styled.div`
+position:relative;
+ overflow:hidden;
+ width:100%;
+ z-index:1; 
+ height:100%;
+`;
+const HeroHubSlide = styled.div`
+z-index:1;
+width:100%;
+height:100%;
 
 `;
-const HeroHubImg = styled.img`
-width: 100vw;
+const HeroHubSlider = styled.div`
+  width:100%;
+height: 100%;
+position:absolute;
+top:0;
 
+&::before{
+  content:'';
+  z-index:2;
+  position:absolute;
+  top:0;
+width:100%;
+height: 100%;
+  overflow:hidden;
+  opacity: 0.4;
+  background:linear-gradient(0deg,
+  rgba(0, 0, 0, 0.2) 0%,
+  rgba(0, 0, 0, 0.2) 50%,
+  rgba(0, 0, 0, 0.6) 100%,
+  );
+}
+`;
+const HeroHubSliderImg = styled.div`
+background: no-repeat center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width:100%;
+height: 100%;
+
+`;
+const SliderDots = styled.div`
+position:absolute;
+bottom:20px;
+width:100%;
 `;
 const HeroHubInImgarc = styled.img`
 position:absolute;
@@ -157,15 +193,26 @@ right: 61vh;
 
 
 function HeroHub({ hub }) {
-
-  const hubImage = useSelector((state) => state.hubImage);
-  const { loading, error, image } = hubImage;
-  const dispatch = useDispatch()
+  const [current, setCurrent] = useState(0);
+  const length = hub.acf.galerie.length;
+  const timeout = useRef(null);
 
   useEffect(() => {
-    dispatch(hubimage(hub.featured_media))
-  }, [dispatch, hub.featured_media])
+    const nextSlide = () => {
+      setCurrent(current => (current === length - 1 ? 0 : current + 1))
+    };
+    timeout.current = setTimeout(nextSlide, 3000);
+    return function () {
+      if (timeout.current) {
+        clearTimeout(timeout.current)
+      }
+    }
+  }, [current, length])
 
+
+  if (!Array.isArray(hub.acf.galerie) || hub.acf.galerie.length <= 0) {
+    return null;
+  }
 
   return (
     <HeroHubSection>
@@ -183,9 +230,24 @@ function HeroHub({ hub }) {
 
           </HeroHubInfo>
         </HeroHubTextBox>
-        <HeroHubImgBox>
-        <HeroHubImg src={hub.fimg_url} alt={hub.title.rendered} />
-        </HeroHubImgBox>
+        <HeroHubSlideWrapper>
+          {
+            hub.acf.galerie.map((image, index) => (
+              <HeroHubSlide key={index}>
+                {index === current && (
+                  <HeroHubSlider>
+                    <HeroHubSliderImg style={{ backgroundImage: `url("${image.url}")` }}>
+                    </HeroHubSliderImg>
+                  </HeroHubSlider>
+                )}
+              </HeroHubSlide>
+            ))
+          }
+
+          <SliderDots>
+            <Dots slides={hub.acf.galerie} activeIndex={current}></Dots>
+          </SliderDots>
+        </HeroHubSlideWrapper>
       </HeroHubWrapper>
     </HeroHubSection>
   )

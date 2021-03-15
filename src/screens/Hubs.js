@@ -213,20 +213,8 @@ function Hubs() {
 
   const dispatch = useDispatch()
   const hubList = useSelector((state) => state.hubList)
-  const hubListType = useSelector((state) => state.hubListType)
-
+ 
   const { loading,error,hubs } = hubList;
-  const { lieux } = hubList;
-
- /*  const LieuxOfHub = lieux.map(element => (
-    hubs.map(hub=>(
-      hub.includes(element.id)
-    ))
-    )
-    );
-
-  console.log(LieuxOfHub)
- */
 
   useEffect(() => {
     dispatch(listHubs())
@@ -265,7 +253,7 @@ function Hubs() {
 
       <HubsSection>
         {
-          loading ? <Loading></Loading>: error ? <MessageBox>erreur de chargement</MessageBox>  :
+          loading ? <div style={{height:'50vh'}}> <Loading></Loading> </div>: error ? <div style={{height:'50vh'}}><MessageBox>erreur de chargement des hubs</MessageBox> </div>  :
           hubs.map((hub, index) => (
             index === 0 ? (
               <HubBamako key={index}>

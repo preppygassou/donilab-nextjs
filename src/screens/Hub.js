@@ -5,8 +5,8 @@ import { detailsHub } from '../actions/HubActions';
 import DomaineOfIntervation from '../Components/Hub/DomaineOfIntervation';
 import EnResume from '../Components/Hub/EnResume';
 import HeroHub from '../Components/Hub/HeroHub';
-import odersHub from '../Components/Hub/odersHub';
 import ProgramsOfHub from '../Components/Hub/ProgramsOfHub';
+import RelatedHub from '../Components/Hub/RelatedHub';
 import SpecifityOfWeb from '../Components/Hub/SpecifityOfWeb';
 import TeamsOfHub from '../Components/Hub/TeamsOfHub';
 import Loading from '../Components/Loading';
@@ -31,7 +31,7 @@ function Hub(props) {
   
   return (
 
-    loading ? <Loading></Loading> : error ? <MessageBox>erreur de chargement</MessageBox> :(
+    loading ?<div style={{height:'50vh'}}> <Loading></Loading> </div>: error ? <div style={{height:'50vh'}}><MessageBox>erreur de chargement</MessageBox> </div>:(
       <HubSection>
     <HeroHub hub={hub}/>
     <EnResume hub={hub}/>
@@ -39,7 +39,7 @@ function Hub(props) {
     <TeamsOfHub hub={hub}/>
     <DomaineOfIntervation hub={hub}/>
     <ProgramsOfHub hub={hub}/>
-    <odersHub hub={hub}/>
+    <RelatedHub hub={hub}/>
     </HubSection>
     )
   )

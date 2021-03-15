@@ -16,7 +16,7 @@ justify-content:center;
 align-items:center;
 color:#fff;
 text-align:center;
-padding:12vh 45vh;
+padding:12vh 55vh;
 position:relative;
 
 h1{
@@ -24,7 +24,11 @@ h1{
   font-size: 1.8rem;
     font-weight: bold;
     text-transform: uppercase;
-    margin: 2.5vh 0 3vh 0;
+    margin: 4vh 0 1vh 0;
+}
+h2{
+  margin: 1vh 0 3vh 0;
+
 }
 `;
 
@@ -36,7 +40,7 @@ left: 45px;
 width: 310px;
 
 `;
-const EnResumeparalaxImgbottom = styled.img `
+const EnResumeparalaxImg = styled.img `
 position:absolute;
 top: -8rem;
 right:0;
@@ -52,7 +56,7 @@ function EnResume({hub}) {
   return (
     <EnResumeSection>
       <EnResumeparalaxImgtop src={EnResumeparalaximgtop} alt=""/>
-        <EnResumeparalaxImgbottom src={EnResumeparalaximgLeft} alt=""/>
+        <EnResumeparalaxImg src={EnResumeparalaximgLeft} alt=""/>
         <EnResumeVisionMissionIcon className="" src={EnResumeIcone} alt="Historic icon" />
         <h1>
         en résumé

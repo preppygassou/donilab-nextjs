@@ -10,7 +10,7 @@ const Dot = ({ active }) => (
       margin-right: 5px;
       cursor: pointer;
       border-radius: 50%;
-      background: ${active ? '#2755A1' : '#E3E3E3'};
+      background: ${active ? '#2755A1' :  '#E3E3E3'};
     `}
   />
 )
@@ -26,7 +26,7 @@ function Dots({slides, activeIndex}) {
   return (
     <DotsContainer>
           {slides.map((slide, i) => (
-      <Dot key={slide} active={activeIndex === i} />
+      <Dot key={i} active={activeIndex === i} />
     ))}
     </DotsContainer>
   )

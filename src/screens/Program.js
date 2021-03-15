@@ -32,7 +32,9 @@ function Program(props) {
         <Loading></Loading>
       </div>
       ) : error ? (
+      <div style={{height:'50vh'}}>
         <MessageBox>{error}</MessageBox>
+      </div>
         ) : (
       <div>
       <HeroProgram  program={program}/>

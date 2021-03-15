@@ -33,8 +33,15 @@ h1{
   border-bottom:solid 2px #95B71D;
 }
 `;
-const BeneficiairesLogoCard = styled.div`
-width:120px;
+
+const BeneficiairesLogoCards = styled.div`
+display:flex;
+align-items:center;
+`;
+const BeneficiaireLogoWrapper = styled.div`
+position:relative;
+.BeneficiairesLogoCard{
+  width:120px;
 height:120px;
 background-color:#fff;
 border-radius:50%;
@@ -42,10 +49,35 @@ display:flex;
 align-items:center;
 justify-content:center;
 margin:1rem;
+}
+&:hover{
+  .BeneficiairesLogoCard{
+    display:none;
+  }
+
+  .BeneficiairesLogoDescription{
+background-color:#95B71D;
+color:#fff;
+width: 145px;
+    height: 145px;
+    border-radius: 15px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    p{
+width:100%;
+padding: 0.3rem;
+    word-break: break-word
+    }
+}
+}
+.BeneficiairesLogoDescription{
+  display:none;
+}
 `;
-const BeneficiairesLogoCards = styled.div`
-display:flex;
-align-items:center;
+const BeneficiaireLogoDescription = styled.div`
+
 `;
 const BeneficiairesLogo = styled.img`
 width:75px;
@@ -79,9 +111,15 @@ function Beneficiaires({program}) {
          <BeneficiairesLogoCards>
            {
              program.acf.information_du_beneficiare.map((beneficiaires,index)=>(
-              <BeneficiairesLogoCard key={index}>
+               <BeneficiaireLogoWrapper key={index}>
+              <div className="BeneficiairesLogoCard">
               <BeneficiairesLogo src={beneficiaires.logo_de_lentreprise_beneficiaire.url}/>
-              </BeneficiairesLogoCard>
+              </div>
+              <div className="BeneficiairesLogoDescription">
+                <p>{beneficiaires.bref_resumer}</p>
+              </div>
+              </BeneficiaireLogoWrapper>
+
              ))
            }
          </BeneficiairesLogoCards>
