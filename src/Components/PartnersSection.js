@@ -37,7 +37,7 @@ span{
 `;
 const PartnerSection = styled.div `
 background-color:#fff;
-padding:4rem;
+padding:4rem 0;
 overflow:hidden;
 `;
 

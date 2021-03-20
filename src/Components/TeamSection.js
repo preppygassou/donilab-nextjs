@@ -10,6 +10,9 @@ import SectionTitle from "./SectionTitle"
 import Slider from "react-slick";
 import Oconnect from "./../assets/svg/oconnect.svg"
 import TeamInHubSectionIcone from "./../assets/svg/teaminhubsectionicone.svg";
+import CarouselCenter from './CarouselCenter'
+import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
 
 
 const SectionTitletest = styled.div`
@@ -51,19 +54,20 @@ padding:5rem 0;
 height: 100%;
 background-color:#EFEFEF;
 position: relative;
-.slick-track{
+/* .slick-track{
   display:flex;
 align-items:center;
 justify-content:space-around;
 width:100%;
-}
-.slick-slider{
+} */
+/* .slick-slider{
 position:relative ;
 padding: 0 0 31vh 0;
 }
 .slick-slide{
 position:relative ;
 }
+
 .slick-slide{
   width:200px !important;
   .teamslider{
@@ -81,42 +85,78 @@ top:0;
 bottom:0;
 right:0;
 left:0;
+} */
+
+ ul {
+  padding-bottom: 10vh !important;
+ }
+
+.teamslider{
+  display: flex;
+    justify-content: center; 
+.teamimg{
+  position:relative;
+width:200px;
 }
-  
-  img {
+.teamloop{
+    border-radius:50%;
+background-color:rgba(39,85,161);
+background-color:rgba(39,85,161,.77);
+width:200px;
+height:200px;
+position:absolute;
+top:0;
+bottom:0;
+right:0;
+left:0;
+}
+img {
 filter: blur(4px);
 -webkit-filter: blur(4px);
 width:200px;
 }
+.teaminfo,.teamboder{
+  display:none;
 }
-.slick-center {
-  width:250px !important;
+
+}
+
+.BrainhubCarouselItem--active > .teamslider{
+  /* width:250px ; */
   display:flex;
+  width:100%;
 justify-content:center;
-flex-direction:column;
-position:relative;
-text-align:center;
-.teamslider{
-  position:relative;
-  width:250px !important;
-}
 .teamloop{
   display:none;
 }
-img{
+.teamboder{
+  display:block;
+  border-radius:50%;
   border:8px solid #95B71D;
+width:250px;
+height:250px;
+position:absolute;
+top:0;
+bottom:0;
+right:0;
+left:0;
+}
+
+
+.teamimg{
+  position:relative;
+width:250px;
+}
+img{
  width:250px;
  filter: none;
 -webkit-filter: none;
 }
-}
 .teaminfo{
-    display: flex;
+  display:block;
   position:absolute;
-   bottom: -35%;
-    right: 43px;
-    flex-direction: column;
-    justify-content: center;
+  bottom:-30%;
+    text-align:center;
     color:#95B71D;
 h1{
  
@@ -126,6 +166,7 @@ h1{
 }
 p{
   font-size:1rem;
+}
 }
 }
 `;
@@ -138,6 +179,8 @@ width:100%;
 `;
 const TeamSlider = styled.div` 
 display:flex;
+height:100%;
+margin: 8;
 justify-content:center;
 flex-direction:column;
 position:relative;
@@ -154,7 +197,7 @@ p{
 img {
 filter: blur(4px);
 -webkit-filter: blur(4px);
-width:250px;
+width:200px;
 }
 `;
 
@@ -202,16 +245,16 @@ transform:scale(1.05);
 const PrevArrow = styled.img`
 ${arrowButton}
 position:absolute;
-bottom: 50px;
-left:40%;
-width: 70px;
+bottom: 12%;
+left:45%;
+width: 60px;
 `;
 const NextArrow = styled.img`
 ${arrowButton}
 position:absolute;
-bottom: 50px;
-right:40%;
-width: 70px;
+bottom: 12%;
+right:45%;
+width: 60px;
 `;
 const TeamImgLoop = styled.div`
 border-radius:50%;
@@ -376,52 +419,76 @@ function TeamSection({ initialSlide, about, ishub, hub }) {
                     <path id="Caminho_662" data-name="Caminho 662" d="M-431.462,178.8l-21.067-19.376a16.519,16.519,0,0,1-10.7,3.855,16.594,16.594,0,0,1-16.522-16.668,16.594,16.594,0,0,1,16.666-16.522,16.6,16.6,0,0,1,16.522,16.668,16.506,16.506,0,0,1-2.053,7.926l21.737,19.993Z" transform="translate(479.75 -130.087)" fill="#95b71d" />
                     <path id="Caminho_663" data-name="Caminho 663" d="M-405.252,132.127a16.594,16.594,0,0,0-16.666,16.522,16.351,16.351,0,0,0,4.157,11.081l-10.953,13.414a64.927,64.927,0,0,1,6.514,4.568l10.953-13.325a13.261,13.261,0,0,0,5.851.928,16.593,16.593,0,0,0,16.666-16.522,16.594,16.594,0,0,0-16.522-16.666" transform="translate(517.369 -128.623)" fill="#95b71d" />
                   </svg>
-
                 </span>
             tre équipe
           </h1>
             </SectionTitle>
 
       }
+      <div style={{ maxWidth: '96%', height: '100%', zIndex: 10, marginLeft: 'auto', marginRight: 'auto', marginTop: 64,marginBottom: "15vh" }}>
 
-      <Slider {...settings}>
-        {
-          hub.acf.team_member.map((team, index) => (
-            index === current ?
+        {/* <Slider {...settings}> */}
+        <Carousel
+          slidesPerPage={5}
+          infinite
+          centered
+          /* autoPlay={2000}
+        animationSpeed={1000}
+        stopAutoPlayOnHover={true} */
+          arrowLeft={<PrevArrow src={ArrowLeftIcon} />
+          }
+          arrowRight={<NextArrow src={ArrowRighthIcon} />}
+          addArrowClickHandler={true}
+
+          offset={16}
+          breakpoints={{
+            640: {
+              slidesPerPage: 1,
+            },
+            900: {
+              slidesPerPage: 3,
+              offset: 0,
+            }
+          }}
+        >
+          {
+            hub.acf.team_member.map((team, index) => (
+
               <div className="teamslider" key={index}>
-                <TeamImg src={team.image_team.url} alt={team.name_team} />
+                <div className="teamimg">
+                  <img src={team.image_team.url} alt={team.name_team} />
+                  <div className="teamloop"></div>
+                  <div className="teamboder"></div>
+                </div>
                 <div className="teaminfo">
                   <h1>{team.name_team}</h1>
                   <p>{team.poste_team}</p>
                 </div>
               </div>
-              :
-              <div className="teamslider" key={index}>
-                <TeamImg src={team.image_team.url} alt={team.name_team} />
-                <div className="teamloop"></div>
 
 
-              </div>
-            /* index === current && ( */
-            /* currentSlide*/
+              /* index === current && ( */
+              /* currentSlide*/
 
-            /*  index === current ? 
-             <TeamSlideractive key={index}>
-             <TeamImg src={team.image} alt={team.teamname}/>
-             <TeamInfo>
-                <h1>{team.teamname}</h1>
-                <p>{team.poste}</p>
-                </TeamInfo>    
-        </TeamSlideractive> : 
-               
-           <TeamSlider key={index}>
-                <TeamImg src={team.image} alt={team.teamname}/>                 
-                <TeamImgLoop></TeamImgLoop>                                 
-           </TeamSlider> */
-            /* ) */
-          ))
-        }
-      </Slider>
+              /*  index === current ? 
+               <TeamSlideractive key={index}>
+               <TeamImg src={team.image} alt={team.teamname}/>
+               <TeamInfo>
+                  <h1>{team.teamname}</h1>
+                  <p>{team.poste}</p>
+                  </TeamInfo>    
+          </TeamSlideractive> : 
+                 
+             <TeamSlider key={index}>
+                  <TeamImg src={team.image} alt={team.teamname}/>                 
+                  <TeamImgLoop></TeamImgLoop>                                 
+             </TeamSlider> */
+              /* ) */
+            ))
+          }
+        </Carousel>
+      </div>
+      {/* </Slider> */}
       {/*  <SliderButtons>
             <PrevArrow  onClick={prevSlide} src={ArrowLeftIcon}/>
             <NextArrow onClick={nextSlide} src={ArrowRighthIcon}/>

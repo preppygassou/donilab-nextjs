@@ -146,7 +146,7 @@ class Carousel extends Component {
     const { children } = this.props;
     return (
       <>
-      <div ref={this.containerRef}>
+      <div>
         <ul
           style={{
           listStyle: "none",

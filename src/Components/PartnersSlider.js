@@ -1,6 +1,8 @@
 import React from 'react'
 import styled,{css} from 'styled-components/macro'
 import Slider from "react-slick";
+import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
 
 const PartnersContainer = styled.div `
 
@@ -14,10 +16,13 @@ align-items:center;
 justify-content:space-between;
 margin-right: -23vh;
 }
+/* ul li{
+ margin:0 1rem !important;
+} */
 `;
 const Partner = styled.div `
  
- margin:0 2rem;
+
 `;
 
 const PartnerImg = styled.img `
@@ -38,7 +43,23 @@ const settings = {
 function PartnersSlider({PartnersData}) {
   return (
     <PartnersContainer>
-    <Slider {...settings}>
+    <Carousel
+    slidesPerPage={4}
+    infinite
+    autoPlay={2000}
+  animationSpeed={1000}
+  stopAutoPlayOnHover={true}
+  offset={32}
+  breakpoints={{
+    640: {
+      slidesPerPage: 1,
+    },
+    900: {
+      slidesPerPage: 2,
+      offset:0,
+    }
+  }}
+    >
           {
             PartnersData.map(partner=>(
               <Partner key={partner.id}>
@@ -47,7 +68,7 @@ function PartnersSlider({PartnersData}) {
             ))
           }
           
-        </Slider>
+        </Carousel>
         </PartnersContainer>
   )
 }

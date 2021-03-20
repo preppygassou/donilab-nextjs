@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styled,{css} from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 import ConectImgTitle from "./../assets/svg/conecttitle.svg"
 import SectionBlogParalaxeImg from "./../assets/svg/sectionblogparalaxe.svg"
 import BlogParalaxeImgright from "./../assets/svg/blogparalaxeimgright.png"
@@ -15,25 +15,27 @@ import axios from 'axios'
 import Blogcard from "./Blogcard"
 import { useDispatch, useSelector } from 'react-redux'
 import { listPosts } from '../actions/PostActions'
-import Carousel from './Carousel'
-/* import Carousel, { slidesToShowPlugin,arrowsPlugin } from '@brainhubeu/react-carousel';
-import '@brainhubeu/react-carousel/lib/style.css'; */
+/* import Carousel from './Carousel' */
+import Carousel, { slidesToShowPlugin, arrowsPlugin } from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
 
 
 
-const BlogSection = styled.section `
+const BlogSection = styled.section`
 position:relative;
-padding:8vh 0;
+padding:8vh 0 8vh 18vh;
 background-color:#fff;
 overflow:hidden;
+@media  (max-width: 640px) {
+  padding:8vh 0 8vh 8vh;
+
+}
 
 `;
-const BlogContainer = styled.div `
+const BlogContainer = styled.div`
 display: flex;
     width: 100%;
-    position: relative;
-    margin-bottom: 15vh;
-
+    margin-bottom: 17vh;
     @media (min-width: 769px) and (max-width: 1024px) {
 
       margin-bottom: 8vh;
@@ -46,20 +48,24 @@ display: flex;
 }
 
  .BrainhubCarousel__container{
-position:relative;
+/* position:relative; */
  }
  ul{
    display:flex;
    align-items:end;
-   margin-bottom: 15vh;
-    margin-left: 33vh !important;
+   /* margin-bottom: 15vh;
+    margin-left: 33vh !important; */
  }
  ul li{
    list-style-type:none;
-   width:40vh !important;
-   max-width: 40vh !important;
-    min-width: 40vh !important;
-    margin:0 1rem !important;
+   
+    @media  (max-width: 640px) {
+ 
+  width:400px !important;
+   max-width: 400px !important;
+    min-width: 400px !important;
+}
+    
  }
 
  /* Carousel css */
@@ -86,12 +92,12 @@ align-items:start;
 
 }
 `;
-const BlogWrapper = styled.div `
+const BlogWrapper = styled.div`
 overflow: hidden;
     width: 100%;
     height: 100%;
 `;
-const BlogSlide = styled.div `
+const BlogSlide = styled.div`
     display: flex;
     align-items:flex-start;
     transition: all 250ms linear;
@@ -131,7 +137,7 @@ const BlogSlide = styled.div `
 `;
 
 
-const SectionTitletest =styled.div`
+const SectionTitletest = styled.div`
 color: #2755A1;
   display: flex;
   justify-content: center;
@@ -158,7 +164,7 @@ span{
 
 `;
 
-const SliderButtons = styled.div `
+const SliderButtons = styled.div`
 z-index: 10;
 display:flex;
 justify-content:space-between;
@@ -166,7 +172,7 @@ align-items:center;
 
 
 `;
-const AllblogBtnsection =styled.div `
+const AllblogBtnsection = styled.div`
 z-index:10;
 display:flex;
 align-items:center;
@@ -214,14 +220,14 @@ transform:scale(1.05);
 }
 `;
 
-const ParalaxeBlogImg  = styled.img`
+const ParalaxeBlogImg = styled.img`
 position:absolute;
 left:0;
 top:0;
 bottom:0;
 
 `;
-const ParalaxeBlogImgRight  = styled.img`
+const ParalaxeBlogImgRight = styled.img`
 position:absolute;
 right:0;
 bottom:0;
@@ -244,43 +250,40 @@ width:200px;
 const NextArrow = styled.img`
 ${arrowButton}
 position:absolute;
-bottom: 55%;
-left: 5%;
-z-index: 2;
-width: 70px;
+top:40%;
+left:3%;
+width: 60px;
 `;
 const PrevArrow = styled.img`
 position:absolute;
-bottom:0;
-left:40%;
+top:40%;
+left:3%;
 ${arrowButton}
-position:relative;
-display:none;
-left: 145vh;
+/* display:none; */
 z-index: 2;
 `;
 
 function SampleNextArrow(props) {
-  const { currentSlide,onClick } = props;
-  console.log("bbb"+currentSlide)
+  const { currentSlide, onClick } = props;
+  console.log("bbb" + currentSlide)
 
   return (
     <NextArrow
-    src={ArrowRighthIcon}
-    onClick={onClick}
+      src={ArrowRighthIcon}
+      onClick={onClick}
     />
   );
 }
 
 
-const BlogSlideSection= () =>{
+const BlogSlideSection = () => {
   //const [posts, setPosts] = useState([])
   const [isloaded, setIsloaded] = useState(false)
- const postList = useSelector((state )=> state.postList);
- const {loading,error,posts} = postList;
+  const postList = useSelector((state) => state.postList);
+  const { loading, error, posts } = postList;
   /* const posts = data.posts; */
   const dispatch = useDispatch()
-  
+
   const history = useHistory();
 
   const [current, setCurrent] = useState(0);
@@ -293,164 +296,195 @@ const BlogSlideSection= () =>{
   const [breakpoint, setBreakpoint] = useState({
     desktop: { min: 900, max: 3000, itemsToShow: 3 },
     tablet: { min: 500, max: 900, itemsToShow: 2 },
-    mobile: { min: 0, max: 500, itemsToShow: 1}
+    mobile: { min: 0, max: 500, itemsToShow: 1 }
   });
   const [domLoaded, setDomLoaded] = useState(false);
   const [active, setActive] = useState(0);
   const [touchPosition, setTouchPosition] = useState(null)
-const length = posts.length;
-const timeout = useRef(null);
+  const length = posts.length;
+  const timeout = useRef(null);
 
-const nextSlide = ()=>{
- /*  if (current < (length - slidesToShow)) {
-    setCurrent(prevState => prevState + 1)
-} */
+  const nextSlide = () => {
+    /*  if (current < (length - slidesToShow)) {
+       setCurrent(prevState => prevState + 1)
+   } */
 
-  if (timeout.current){
-    clearTimeout(timeout.current)
+    if (timeout.current) {
+      clearTimeout(timeout.current)
+    }
+    setCurrent(current === length - 1 ? 0 : current + 1)
   }
-   setCurrent(current=== length - 1 ? 0 : current + 1)
- }
- const prevSlide = ()=>{
-  if (current > 0) {
-    setCurrent(prevState => prevState - 1)
-}
-/* 
-  if (timeout.current){
-    clearTimeout(timeout.current)
-  }
-   setCurrent(current=== 0 ? length -1 : current  - 1) */
- }
-
- const next = () => {
-  if (current < (length - slidesToShow)) {
-      setCurrent(prevState => prevState + 1)
-  }
-}
-
-const prev = () => {
-  if (current > 0) {
+  const prevSlide = () => {
+    if (current > 0) {
       setCurrent(prevState => prevState - 1)
+    }
+    /* 
+      if (timeout.current){
+        clearTimeout(timeout.current)
+      }
+       setCurrent(current=== 0 ? length -1 : current  - 1) */
   }
 
-}
- const handleTouchStart = (e) => {
-  const touchDown = e.touches[0].clientX
-  setTouchPosition(touchDown)
-}
+  const next = () => {
+    if (current < (length - slidesToShow)) {
+      setCurrent(prevState => prevState + 1)
+    }
+  }
 
-const handleTouchMove = (e) => {
-  const touchDown = touchPosition
+  const prev = () => {
+    if (current > 0) {
+      setCurrent(prevState => prevState - 1)
+    }
 
-  if(touchDown === null) {
+  }
+  const handleTouchStart = (e) => {
+    const touchDown = e.touches[0].clientX
+    setTouchPosition(touchDown)
+  }
+
+  const handleTouchMove = (e) => {
+    const touchDown = touchPosition
+
+    if (touchDown === null) {
       return
-  }
+    }
 
-  const currentTouch = e.touches[0].clientX
-  const diff = touchDown - currentTouch
+    const currentTouch = e.touches[0].clientX
+    const diff = touchDown - currentTouch
 
-  if (diff > 5) {
+    if (diff > 5) {
       next()
-  }
+    }
 
-  if (diff < -5) {
+    if (diff < -5) {
       prev()
+    }
+
+    setTouchPosition(null)
   }
 
-  setTouchPosition(null)
-}
+
+  useEffect(() => {
+    dispatch(listPosts())
+    setDomLoaded(true)
+  }, [dispatch])
+
+  useEffect(() => {
+    setActive((length - (posts % length)) % length) // prettier-ignore
+  }, [length, posts])
 
 
- useEffect(() => {
-   dispatch(listPosts())
-   setDomLoaded(true)
- }, [dispatch])
+  /* setDeviceType  ('desktop') // presuming this deviceType is the result after our user-agent detection for the sake of simplicity.
+ 
+     const isServerSide = !domLoaded && deviceType;
+     if (isServerSide) {
+       setItemWidth (100 / breakpoint[deviceType].itemsToShow).toFixed(1);
+       // we are on desktop, then the item width here will be 33.3% based // on our pre-defined breakpoint that we declared in the constructor.
+     } else {
+       setItemWidth (containerWidth / slidesToShow)
+     }
+  */
 
- useEffect(() => {
-  setActive((length - (posts % length)) % length) // prettier-ignore
-}, [length,posts])
+  if (!Array.isArray(posts) || posts.length <= 0) {
+    return null;
+  }
 
-
- /* setDeviceType  ('desktop') // presuming this deviceType is the result after our user-agent detection for the sake of simplicity.
-
-    const isServerSide = !domLoaded && deviceType;
-    if (isServerSide) {
-      setItemWidth (100 / breakpoint[deviceType].itemsToShow).toFixed(1);
-      // we are on desktop, then the item width here will be 33.3% based // on our pre-defined breakpoint that we declared in the constructor.
-    } else {
-      setItemWidth (containerWidth / slidesToShow)
-    }
- */
+  /*  function SampleNextArrow(props) {
+    const { currentSlide,onClick } = props;
+    
   
-    if(!Array.isArray(posts)||posts.length <=0){
-      return null;
-    }
-   
-/*  function SampleNextArrow(props) {
-  const { currentSlide,onClick } = props;
-  
+    return (
+      <NextArrow
+      src={ArrowRighthIcon}
+      onClick={()=>{nextSlide(onClick);}}
+      />
+    );
+  } */
 
-  return (
-    <NextArrow
-    src={ArrowRighthIcon}
-    onClick={()=>{nextSlide(onClick);}}
-    />
-  );
-} */
+  function SamplePrevArrow(props) {
+    const { onClick, currentSlide } = props;
 
-function SamplePrevArrow(props) {
-  const { onClick ,currentSlide} = props;
-  
-  return (
-    <PrevArrow
-      src={ArrowLeftIcon}
-      onClick={onClick}
-    />
-  );
-}
+    return (
+      <PrevArrow
+        src={ArrowLeftIcon}
+        onClick={onClick}
+      />
+    );
+  }
 
-/* const settings = {
-  slidesToShow: 4,
-  slidesToScroll:1,
-  nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />,  
-      slide:'<>',   
-}; */
-/* const settings = {
-  slidesToShow: 4,
-  slidesToScroll:1,
-  nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />,  
-      slide:'<>',   
-}; */
+  /* const settings = {
+    slidesToShow: 4,
+    slidesToScroll:1,
+    nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />,  
+        slide:'<>',   
+  }; */
+  /* const settings = {
+    slidesToShow: 4,
+    slidesToScroll:1,
+    nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />,  
+        slide:'<>',   
+  }; */
 
-/* if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>; */
+  /* if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :(</p>; */
 
   return (
     <BlogSection>
-      <ParalaxeBlogImg src={SectionBlogParalaxeImg} alt=""/>
-      <ParalaxeBlogImgRight src={BlogParalaxeImgright} alt=""/>
+      <ParalaxeBlogImg src={SectionBlogParalaxeImg} alt="" />
+      <ParalaxeBlogImgRight src={BlogParalaxeImgright} alt="" />
       <SectionTitle>
-         
-          <h1> 
-            n
-            <span className="conectimg">
-              o
-              <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
-  <path id="Caminho_661" data-name="Caminho 661" d="M-430.554,188.391l-17.435,20.484a16.525,16.525,0,0,1,3.358,10.076A16.6,16.6,0,0,1-461.3,235.473a16.594,16.594,0,0,1-16.522-16.666,16.594,16.594,0,0,1,16.668-16.522,16.519,16.519,0,0,1,8.618,2.455l17.52-21.039Z" transform="translate(481.135 -91.604)" fill="#95b71d"/>
-  <path id="Caminho_662" data-name="Caminho 662" d="M-431.462,178.8l-21.067-19.376a16.519,16.519,0,0,1-10.7,3.855,16.594,16.594,0,0,1-16.522-16.668,16.594,16.594,0,0,1,16.666-16.522,16.6,16.6,0,0,1,16.522,16.668,16.506,16.506,0,0,1-2.053,7.926l21.737,19.993Z" transform="translate(479.75 -130.087)" fill="#95b71d"/>
-  <path id="Caminho_663" data-name="Caminho 663" d="M-405.252,132.127a16.594,16.594,0,0,0-16.666,16.522,16.351,16.351,0,0,0,4.157,11.081l-10.953,13.414a64.927,64.927,0,0,1,6.514,4.568l10.953-13.325a13.261,13.261,0,0,0,5.851.928,16.593,16.593,0,0,0,16.666-16.522,16.594,16.594,0,0,0-16.522-16.666" transform="translate(517.369 -128.623)" fill="#95b71d"/>
-</svg>
 
-            </span>
+        <h1>
+          n
+            <span className="conectimg">
+            o
+              <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
+              <path id="Caminho_661" data-name="Caminho 661" d="M-430.554,188.391l-17.435,20.484a16.525,16.525,0,0,1,3.358,10.076A16.6,16.6,0,0,1-461.3,235.473a16.594,16.594,0,0,1-16.522-16.666,16.594,16.594,0,0,1,16.668-16.522,16.519,16.519,0,0,1,8.618,2.455l17.52-21.039Z" transform="translate(481.135 -91.604)" fill="#95b71d" />
+              <path id="Caminho_662" data-name="Caminho 662" d="M-431.462,178.8l-21.067-19.376a16.519,16.519,0,0,1-10.7,3.855,16.594,16.594,0,0,1-16.522-16.668,16.594,16.594,0,0,1,16.666-16.522,16.6,16.6,0,0,1,16.522,16.668,16.506,16.506,0,0,1-2.053,7.926l21.737,19.993Z" transform="translate(479.75 -130.087)" fill="#95b71d" />
+              <path id="Caminho_663" data-name="Caminho 663" d="M-405.252,132.127a16.594,16.594,0,0,0-16.666,16.522,16.351,16.351,0,0,0,4.157,11.081l-10.953,13.414a64.927,64.927,0,0,1,6.514,4.568l10.953-13.325a13.261,13.261,0,0,0,5.851.928,16.593,16.593,0,0,0,16.666-16.522,16.594,16.594,0,0,0-16.522-16.666" transform="translate(517.369 -128.623)" fill="#95b71d" />
+            </svg>
+
+          </span>
             s Actualités
             </h1>
-        </SectionTitle>
+      </SectionTitle>
 
-    <BlogContainer>
-         
-        <BlogWrapper
+      <BlogContainer>
+
+        {
+
+          loading ? <div>chargement ...</div> : error ? <div>erreur de chargement </div> :
+            <Carousel
+              slidesPerPage={4}
+              infinite
+              offset={8}
+              arrowLeft= {<NextArrow src={ArrowLeftIcon}/> }
+              addArrowClickHandler= {true}
+              breakpoints={{
+                640: {
+                  slidesPerPage: 1,
+                },
+                900: {
+                  slidesPerPage: 2,
+                }
+              }}
+            >
+              {
+                posts.map((post, index) => (
+                  <Blogcard key={index} post={post} />
+                ))
+              }
+
+            </Carousel>
+
+
+        }
+
+
+
+        {/*         <BlogWrapper
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         >
@@ -470,24 +504,17 @@ function SamplePrevArrow(props) {
         }
          </BlogSlide>
         
-        {/* <Slider {...settings}>
-        {
-        loading ? <div>chargement ...</div> : error ? <div>erreur de chargement </div> :
-        posts.map((post)=>(
-          <Blogcard key={post.id} post={post}/>
-        ))    
-        }
-         </Slider> */}
+       
          <SliderButtons>
             <PrevArrow  onClick={prevSlide} src={ArrowRighthIcon}/>
             <NextArrow onClick={nextSlide} src={ArrowLeftIcon}/>
           </SliderButtons>
-          </BlogWrapper>
-    </BlogContainer>
-    <AllblogBtnsection className="allblog">
+          </BlogWrapper> */}
+      </BlogContainer>
+      <AllblogBtnsection className="allblog">
         <a href="https:/blog.donilab.org" target="_blank" rel="noopener noreferrer">Toutes nos actualités</a>
       </AllblogBtnsection>
-  </BlogSection>
+    </BlogSection>
   )
 }
 
