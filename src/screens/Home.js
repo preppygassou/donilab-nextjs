@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listHubs } from '../actions/HubActions';
 import Loading from '../Components/Loading';
 import MessageBox from '../Components/MessageBox';
+import ErrorBoundary from '../Components/ErrorBoundary';
 
 
 
@@ -31,16 +32,25 @@ function Home() {
     <>
       <Hero/>
       <ExpertiseSection/>
+      <ErrorBoundary>
       <BlogSlideSection/>
+      </ErrorBoundary>
       <ImpactSection/>
+      <ErrorBoundary>
       {
         loading ? <Loading></Loading>  : error ? <MessageBox></MessageBox> :(
           hubs.map((hub,index)=>(
-            index === 0  && (<TeamSection hub={hub}/> )  
+            index === 0  && (
+            <TeamSection hub={hub}/> 
+              
+              )  
             ))
         )
       }
+      </ErrorBoundary>
+      <ErrorBoundary>
       <PartnersSection/>
+      </ErrorBoundary>
       <Labelafricinnov/>
     </>
   )

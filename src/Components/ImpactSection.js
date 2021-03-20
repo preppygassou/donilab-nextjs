@@ -11,10 +11,26 @@ const ImpactSectionContainer = styled.section`
   padding:5vh 0 9vh 0;
 `;
 const ImpactWrapper = styled.div`
-  margin-top: 7vh;
-  display: flex;
+  margin: 7vh auto 0 auto;
+  width:95%;
+  display: grid;
+  grid-template-columns:repeat(4,1fr);
+grid-auto-rows: 1fr;
   align-items: baseline;
-  justify-content: center;
+  
+  @media (min-width: 1281px) { 
+  max-width:90% 
+}
+@media (max-width: 768px)  {
+  max-width:80% ;
+  grid-template-columns: 1fr;
+  margin: 3vh auto 0 auto;
+}
+
+@media (min-width:  769px) and (max-width: 1280px) {
+  margin: 3vh auto 0 auto;
+  grid-template-columns: repeat(2, 1fr); 
+}
 `;
 
 const ImpactCard = styled.div`
@@ -24,8 +40,8 @@ const ImpactCard = styled.div`
   align-items: center;
   text-align: center;
   color: #fff;
-  width: 30vh;
-  margin: 0 4vh;
+  width: 100%;
+  
   h1 {
     font-family: "CeraRoundPro-Bold";
     font-weight: bold;
@@ -36,8 +52,29 @@ const ImpactCard = styled.div`
     font-size: 1.5rem;
   }
   img {
-    width: 120px;
+    width: 100px;
   }
+
+  @media (min-width:  769px) and (max-width: 1280px) {
+  h1{
+    font-size: 4rem;
+  }
+  p{
+    font-size: 1.2rem;
+  }
+  margin-top:2vh;
+
+  }
+  @media (max-width: 768px)  {
+  margin-top:2vh;
+  h1{
+    font-size: 5rem;
+  }
+  p{
+    font-size: 1.5rem;
+  }
+ 
+}
 `;
 
 /* const SectionTitle =styled.div`
@@ -70,16 +107,14 @@ function ImpactSection() {
         <h1>
           n
           <span className="conectimg">
-            <object
-              style={{ fill: " #fff " }}
-              id={Oconnect}
-              type="image/svg+xml"
-              width="100"
-              height="100"
-              data={Oconnect}
-              className="svg"
-            ></object>
-          </span>
+              o
+              <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
+  <path id="Caminho_661" data-name="Caminho 661" d="M-430.554,188.391l-17.435,20.484a16.525,16.525,0,0,1,3.358,10.076A16.6,16.6,0,0,1-461.3,235.473a16.594,16.594,0,0,1-16.522-16.666,16.594,16.594,0,0,1,16.668-16.522,16.519,16.519,0,0,1,8.618,2.455l17.52-21.039Z" transform="translate(481.135 -91.604)" fill="#95b71d"/>
+  <path id="Caminho_662" data-name="Caminho 662" d="M-431.462,178.8l-21.067-19.376a16.519,16.519,0,0,1-10.7,3.855,16.594,16.594,0,0,1-16.522-16.668,16.594,16.594,0,0,1,16.666-16.522,16.6,16.6,0,0,1,16.522,16.668,16.506,16.506,0,0,1-2.053,7.926l21.737,19.993Z" transform="translate(479.75 -130.087)" fill="#95b71d"/>
+  <path id="Caminho_663" data-name="Caminho 663" d="M-405.252,132.127a16.594,16.594,0,0,0-16.666,16.522,16.351,16.351,0,0,0,4.157,11.081l-10.953,13.414a64.927,64.927,0,0,1,6.514,4.568l10.953-13.325a13.261,13.261,0,0,0,5.851.928,16.593,16.593,0,0,0,16.666-16.522,16.594,16.594,0,0,0-16.522-16.666" transform="translate(517.369 -128.623)" fill="#95b71d"/>
+</svg>
+
+            </span>
           tre impact
         </h1>
       </SectionTitle>

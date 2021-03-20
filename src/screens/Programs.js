@@ -15,6 +15,7 @@ import { listProgramsTypeOfDonilab, listProgramsTypeWithPartner } from "../actio
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../Components/Loading';
 import MessageBox from '../Components/MessageBox';
+import ErrorBoundary from '../Components/ErrorBoundary';
 
 
 const SectionTitlell =styled.div`
@@ -167,7 +168,9 @@ function Program() {
           INITIÉS PAR DONILAB
         </ProgramSectionTitle>
        { loadingprogramsbydonilab ? <Loading></Loading> :errorloadingprogrambydonilab ? <MessageBox>erreur de chargement</MessageBox> :
+      <ErrorBoundary>
          <ProgramByDonilab ProgramData={programsByDonilab}/>
+         </ErrorBoundary>
          }
         </ProgramByDonilabSection>
         <PrograminParnterSection>
@@ -177,7 +180,9 @@ function Program() {
         </ProgramSectionTitle>
         {
           loading ? <Loading></Loading> :error ? <MessageBox>erreur de chargement</MessageBox> :
+        <ErrorBoundary>
           <ProgramByDonilab ProgramData={programsWithPartners}/>
+        </ErrorBoundary>
           }
         </PrograminParnterSection>
         </ProgramContainerWrapper>

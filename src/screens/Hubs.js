@@ -15,6 +15,7 @@ import { listHubs, listLieuDeshubs } from '../actions/HubActions';
 import parse from "html-react-parser";
 import Loading from '../Components/Loading';
 import MessageBox from '../Components/MessageBox';
+import ErrorBoundary from '../Components/ErrorBoundary';
 
 
 const HubPage = styled.div`
@@ -213,8 +214,8 @@ function Hubs() {
 
   const dispatch = useDispatch()
   const hubList = useSelector((state) => state.hubList)
- 
-  const { loading,error,hubs } = hubList;
+
+  const { loading, error, hubs } = hubList;
 
   useEffect(() => {
     dispatch(listHubs())
@@ -252,48 +253,49 @@ function Hubs() {
       </HeroHub>
 
       <HubsSection>
-        {
-          loading ? <div style={{height:'50vh'}}> <Loading></Loading> </div>: error ? <div style={{height:'50vh'}}><MessageBox>erreur de chargement des hubs</MessageBox> </div>  :
-          hubs.map((hub, index) => (
-            index === 0 ? (
-              <HubBamako key={index}>
-                <Hubbamakoparalaxe src={HubbamakoparalaxeImg} alt="" />
-                <HubBamakoInfo>
-                  <h1>
-                    Bamako
+        <ErrorBoundary>
+          {
+            loading ? <div style={{ height: '50vh' }}> <Loading></Loading> </div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> :
+              hubs.map((hub, index) => (
+                index === 0 ? (
+                  <HubBamako key={index}>
+                    <Hubbamakoparalaxe src={HubbamakoparalaxeImg} alt="" />
+                    <HubBamakoInfo>
+                      <h1>
+                        Bamako
                   </h1>
-                  <div className="contenthubinfo">
-                    {parse(hub.content.rendered)}
-                  </div>
+                      <div className="contenthubinfo">
+                        {parse(hub.content.rendered)}
+                      </div>
 
-                  <HubExploreLink to={`/hub/${hub.id}`} green="true">
-                    découvrir le hub
+                      <HubExploreLink to={`/hub/${hub.id}`} green="true">
+                        découvrir le hub
                     </HubExploreLink>
-                </HubBamakoInfo>
-                <HubBamakoImg>
-                  <img src={HubImg} alt="" />
-                </HubBamakoImg>
-              </HubBamako>
-            ) : index === 1 ? (
-              <HubSikasso key={index}>
-                <Hubsikassoparalaxe src={HubsikassoparalaxeImg} alt="" />
-                <HubSikassoImg>
-                  <img src={HubImg} alt="" />
-                </HubSikassoImg>
+                    </HubBamakoInfo>
+                    <HubBamakoImg>
+                      <img src={HubImg} alt="" />
+                    </HubBamakoImg>
+                  </HubBamako>
+                ) : index === 1 ? (
+                  <HubSikasso key={index}>
+                    <Hubsikassoparalaxe src={HubsikassoparalaxeImg} alt="" />
+                    <HubSikassoImg>
+                      <img src={HubImg} alt="" />
+                    </HubSikassoImg>
 
-                <HubSikassoInfo>
-                  <h1>sikasso</h1>
-                  <div className="contenthubinfo">
-                    {parse(hub.content.rendered)}
-                  </div>
-                  <HubExploreLink to={`/hub/${hub.id}`}>
-                    découvrir le hub
+                    <HubSikassoInfo>
+                      <h1>sikasso</h1>
+                      <div className="contenthubinfo">
+                        {parse(hub.content.rendered)}
+                      </div>
+                      <HubExploreLink to={`/hub/${hub.id}`}>
+                        découvrir le hub
               </HubExploreLink>
-                </HubSikassoInfo>
+                    </HubSikassoInfo>
 
-              </HubSikasso>
+                  </HubSikasso>
 
-            ) : (
+                ) : (
 
                   <HubSegou key={index}>
                     <Hubbamakoparalaxe src={HubsegouparalaxeImg} alt="" />
@@ -311,12 +313,10 @@ function Hubs() {
                     </HubBamakoImg>
                   </HubSegou>
                 )
-          ))
-        }
+              ))
+          }
 
-
-
-
+        </ErrorBoundary>
 
       </HubsSection>
 

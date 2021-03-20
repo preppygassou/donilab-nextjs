@@ -18,18 +18,16 @@ grid-auto-rows: 1fr;
 box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
 /* margin:2rem 9rem; */
 
-@media (min-width: 1281px) {
-  
-  max-width:95%;
-  
+@media (min-width: 1281px) { 
+  max-width:95% 
 }
-@media (min-width: 768px) and (max-width: 1024px) {
-  grid-template-columns: repeat(2, 1fr);
-  
+@media (max-width: 768px)  {
+  max-width:80% ;
+  grid-template-columns: 1fr;
 }
-@media (min-width:  1025px) and (max-width: 1280px) {
-  grid-template-columns: repeat(3, 1fr);
-  
+
+@media (min-width:  769px) and (max-width: 1280px) {
+  grid-template-columns: repeat(2, 1fr); 
 }
 `;
 

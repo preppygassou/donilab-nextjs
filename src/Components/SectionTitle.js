@@ -15,19 +15,45 @@ h1{
   font-family:"CeraRoundPro-Bold";
   display:flex;
   justify-content:center;
+  align-items:center;
+}
+span  {
+  position:relative;
+  font-size: 4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family:"CeraRoundPro-Bold";
+}
+span svg {
+  position: absolute;
+    /* top: 0; */
+    left: -23px;
+    bottom: -39px;
+    /* margin: 0 auto; */
+    width: 87px;
 }
 @media (max-width: 768px) {
-  h1{
+  h1,span{
    
-    font-size: 3rem;
+    font-size: 2rem;
   }
+  span svg {
+    width: 43px;
+    left: -10px;
+    bottom: -56px;
+}
 }
  
 @media (min-width: 769px) and (max-width: 1024px) {
-  h1{
+  h1,span{
    
-   font-size: 3rem;
+   font-size: 2.5rem;
  }
+ span svg {
+    width: 54px;
+    left: -14px;
+    bottom: -51px;
+}
 
 }
 

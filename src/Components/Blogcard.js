@@ -8,12 +8,12 @@ import { listCategories } from '../actions/PostActions';
 
 
 const BlogSlider = styled.div`
-width:40vh !important;
+width:100%;
 border-radius:20px;
 margin:0 1vh;
 z-index: 1;
 background-color:#2755A1;
-/* cursor: pointer; */
+cursor: pointer;
 .blogcardcontent{
   padding:2vh;
 }
@@ -72,6 +72,7 @@ const Blogcard = ({ post }) => {
   return (
 
     <BlogSlider className="blogslider" key={post.id} /* onClick={() => history.push("/blogsingle"+ index)} */>
+      <a href={post.link} target="_blank" rel="noopener noreferrer">
       <div className="blogcardhead">
         <img src={post.fimg_url} alt={post.title.rendered} />
       </div>
@@ -99,6 +100,7 @@ const Blogcard = ({ post }) => {
         <h1>{post.title.rendered}</h1>
         <p>{moment(post.date).format('LL')}</p>
       </div>
+      </a>
     </BlogSlider>
   )
 

@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listHubs } from '../actions/HubActions';
 import Loading from '../Components/Loading';
 import MessageBox from '../Components/MessageBox';
+import ErrorBoundary from '../Components/ErrorBoundary';
 
 const AboutContainer = styled.div `
 
@@ -255,6 +256,7 @@ export default function About() {
         La mission de DoniLab consiste à accompagner les jeunes vers l’entrepreneuriat, en favorisant les projets créant de la valeur ajoutée pour le Mali. L’ambition étant aussi de constituer le chaînon manquant entre la start-up et l’entreprise rentable à travers des programmes d’accélération de croissance, de renforcement des compétences clés de l’entrepreneur et de ses collaborateurs  afin de les accompagner vers le succès.
         </p>
       </AboutMission>
+      <ErrorBoundary>
       {
         loading ? <Loading/> : error ? <MessageBox>erreur de chargement .</MessageBox> :(
           hubs.map((hub,index)=>(
@@ -262,8 +264,10 @@ export default function About() {
             ))
         )
       }
-
+      </ErrorBoundary>
+      <ErrorBoundary>
       <DoniEvent/>
+      </ErrorBoundary>
       </AboutWrapper>
     </AboutContainer>
   )

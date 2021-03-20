@@ -52,7 +52,6 @@ width:100px;
 `;
 
 
-
 function Resultats({program}) {
   return (
     <ResultatsSection>

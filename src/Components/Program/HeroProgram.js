@@ -187,7 +187,7 @@ width:100%;
 
 function HeroProgram({ program }) {
   const [current, setCurrent] = useState(0);
-  const length = program.acf.galerie.length;
+  const length = program.acf.galerie_programme.length;
   const timeout = useRef(null);
 
 
@@ -204,7 +204,7 @@ function HeroProgram({ program }) {
   }, [current, length])
 
 
-  if (!Array.isArray(program.acf.galerie) || program.acf.galerie.length <= 0) {
+  if (!Array.isArray(program.acf.galerie_programme) || program.acf.galerie.length <= 0) {
     return null;
   }
 
@@ -232,7 +232,7 @@ function HeroProgram({ program }) {
         </HeroProgramTextBox>
         <HeroProgramSlideWrapper>
           {
-            program.acf.galerie.map((image, index) => (
+            program.acf.galerie_programme.map((image, index) => (
               <HeroProgramSlide key={index}>
                 {index === current && (
                   <HeroProgramSlider>
@@ -245,7 +245,7 @@ function HeroProgram({ program }) {
           }
 
           <SliderDots>
-            <Dots slides={program.acf.galerie} activeIndex={current}></Dots>
+            <Dots slides={program.acf.galerie_programme} activeIndex={current}></Dots>
           </SliderDots>
         </HeroProgramSlideWrapper>
       </HeroProgramWrapper>

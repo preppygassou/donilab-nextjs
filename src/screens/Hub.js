@@ -2,6 +2,7 @@ import React,{useState,useRef, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro'
 import { detailsHub } from '../actions/HubActions';
+import ErrorBoundary from '../Components/ErrorBoundary';
 import DomaineOfIntervation from '../Components/Hub/DomaineOfIntervation';
 import EnResume from '../Components/Hub/EnResume';
 import HeroHub from '../Components/Hub/HeroHub';
@@ -33,13 +34,27 @@ function Hub(props) {
 
     loading ?<div style={{height:'50vh'}}> <Loading></Loading> </div>: error ? <div style={{height:'50vh'}}><MessageBox>erreur de chargement</MessageBox> </div>:(
       <HubSection>
+    <ErrorBoundary>
     <HeroHub hub={hub}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
     <EnResume hub={hub}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
     <SpecifityOfWeb hub={hub}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
     <TeamsOfHub hub={hub}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
     <DomaineOfIntervation hub={hub}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
     <ProgramsOfHub hub={hub}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
     <RelatedHub hub={hub}/>
+    </ErrorBoundary>
     </HubSection>
     )
   )

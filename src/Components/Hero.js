@@ -76,12 +76,13 @@ h1 {
 }
  
 @media (min-width: 769px) and (max-width: 1024px) {
+  padding-right:2rem;
   h1{
    
-   font-size: 2rem;
+   font-size: 1.9rem;
  }
  p{
-   font-size:1.5rem ;
+   font-size:1.3rem ;
  }
 }
  

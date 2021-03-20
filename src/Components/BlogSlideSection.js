@@ -15,6 +15,9 @@ import axios from 'axios'
 import Blogcard from "./Blogcard"
 import { useDispatch, useSelector } from 'react-redux'
 import { listPosts } from '../actions/PostActions'
+import Carousel from './Carousel'
+/* import Carousel, { slidesToShowPlugin,arrowsPlugin } from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css'; */
 
 
 
@@ -26,9 +29,40 @@ overflow:hidden;
 
 `;
 const BlogContainer = styled.div `
-/*  display:flex;
- flex-direction:column;
- align-items:center; */
+display: flex;
+    width: 100%;
+    position: relative;
+    margin-bottom: 15vh;
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+
+      margin-bottom: 8vh;
+
+}
+
+@media (max-width: 768px)   {
+  margin-bottom: 0vh;
+
+}
+
+ .BrainhubCarousel__container{
+position:relative;
+ }
+ ul{
+   display:flex;
+   align-items:end;
+   margin-bottom: 15vh;
+    margin-left: 33vh !important;
+ }
+ ul li{
+   list-style-type:none;
+   width:40vh !important;
+   max-width: 40vh !important;
+    min-width: 40vh !important;
+    margin:0 1rem !important;
+ }
+
+ /* Carousel css */
  .slick-cloned{
    display:none;
  }
@@ -53,13 +87,47 @@ align-items:start;
 }
 `;
 const BlogWrapper = styled.div `
-
+overflow: hidden;
+    width: 100%;
+    height: 100%;
 `;
 const BlogSlide = styled.div `
-display:flex;
-align-items:baseline;
-margin-bottom:5vh;
-margin-right: -43vh;
+    display: flex;
+    align-items:flex-start;
+    transition: all 250ms linear;
+    margin-left: 32vh;
+    -ms-overflow-style: none;  /* hide scrollbar in IE and Edge */
+    scrollbar-width: none;  /* hide scrollbar in Firefox */
+    &::-webkit-scrollbar, .carousel-content::-webkit-scrollbar {
+    display: none;
+    }
+
+    @media (min-width: 1281px) { 
+      margin-left: 25vh;
+   
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  margin-left: 19vh;
+
+}
+
+@media (max-width: 768px)   {
+  margin-left: 16vh;
+}
+
+@media (min-width:  1025px) and (max-width: 1280px) {
+  margin-left: 23vh;
+}
+  
+.show-3 > * {
+    width: calc(100% / 3);
+}
+.show-4 > * {
+    width: calc(100% / 4);
+}
+
 `;
 
 
@@ -90,14 +158,12 @@ span{
 
 `;
 
-const SliderButtons =styled.div `
-
+const SliderButtons = styled.div `
+z-index: 10;
 display:flex;
 justify-content:space-between;
 align-items:center;
-position:absolute;
-left: 16vh;
-top:46vh;
+
 
 `;
 const AllblogBtnsection =styled.div `
@@ -124,10 +190,21 @@ transform:scale(1.05);
 }
 }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  margin-top:3vh;
+
+}
+
+@media (max-width: 768px)   {
+  margin-top:1vh;
+}
+
 `;
 const arrowButton = css`
 
 cursor:pointer;
+z-index: 10;
 
 margin-right:1rem;
 user-select:none;
@@ -149,17 +226,30 @@ position:absolute;
 right:0;
 bottom:0;
 width:200px;
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  width:120px;
+
+
+}
+
+@media (max-width: 768px)   {
+  width:100px;
+
+
+}
 `;
 
-const PrevArrow = styled.img`
+const NextArrow = styled.img`
 ${arrowButton}
 position:absolute;
-bottom: 43%;
+bottom: 55%;
 left: 5%;
 z-index: 2;
 width: 70px;
 `;
-const NextArrow = styled.img`
+const PrevArrow = styled.img`
 position:absolute;
 bottom:0;
 left:40%;
@@ -194,41 +284,109 @@ const BlogSlideSection= () =>{
   const history = useHistory();
 
   const [current, setCurrent] = useState(0);
+  const [slidesToShow, setSlidesToShow] = useState(3);
+  const [slidesToSlide, setSlidesToSlide] = useState(1);
+  const [containerWidth, setContainerWidth] = useState(1);
+  const [itemWidth, setItemWidth] = useState(1);
+  const [transform, setTransform] = useState(0);
+  const [deviceType, setDeviceType] = useState("");
+  const [breakpoint, setBreakpoint] = useState({
+    desktop: { min: 900, max: 3000, itemsToShow: 3 },
+    tablet: { min: 500, max: 900, itemsToShow: 2 },
+    mobile: { min: 0, max: 500, itemsToShow: 1}
+  });
+  const [domLoaded, setDomLoaded] = useState(false);
   const [active, setActive] = useState(0);
+  const [touchPosition, setTouchPosition] = useState(null)
 const length = posts.length;
 const timeout = useRef(null);
 
 const nextSlide = ()=>{
+ /*  if (current < (length - slidesToShow)) {
+    setCurrent(prevState => prevState + 1)
+} */
+
   if (timeout.current){
     clearTimeout(timeout.current)
   }
    setCurrent(current=== length - 1 ? 0 : current + 1)
  }
  const prevSlide = ()=>{
+  if (current > 0) {
+    setCurrent(prevState => prevState - 1)
+}
+/* 
   if (timeout.current){
     clearTimeout(timeout.current)
   }
-   setCurrent(current=== 0 ? length -1 : current  - 1)
+   setCurrent(current=== 0 ? length -1 : current  - 1) */
  }
+
+ const next = () => {
+  if (current < (length - slidesToShow)) {
+      setCurrent(prevState => prevState + 1)
+  }
+}
+
+const prev = () => {
+  if (current > 0) {
+      setCurrent(prevState => prevState - 1)
+  }
+
+}
+ const handleTouchStart = (e) => {
+  const touchDown = e.touches[0].clientX
+  setTouchPosition(touchDown)
+}
+
+const handleTouchMove = (e) => {
+  const touchDown = touchPosition
+
+  if(touchDown === null) {
+      return
+  }
+
+  const currentTouch = e.touches[0].clientX
+  const diff = touchDown - currentTouch
+
+  if (diff > 5) {
+      next()
+  }
+
+  if (diff < -5) {
+      prev()
+  }
+
+  setTouchPosition(null)
+}
+
 
  useEffect(() => {
    dispatch(listPosts())
+   setDomLoaded(true)
  }, [dispatch])
 
  useEffect(() => {
   setActive((length - (posts % length)) % length) // prettier-ignore
-}, [length])
+}, [length,posts])
+
+
+ /* setDeviceType  ('desktop') // presuming this deviceType is the result after our user-agent detection for the sake of simplicity.
+
+    const isServerSide = !domLoaded && deviceType;
+    if (isServerSide) {
+      setItemWidth (100 / breakpoint[deviceType].itemsToShow).toFixed(1);
+      // we are on desktop, then the item width here will be 33.3% based // on our pre-defined breakpoint that we declared in the constructor.
+    } else {
+      setItemWidth (containerWidth / slidesToShow)
+    }
+ */
   
- if(!Array.isArray(posts)||posts.length <=0){
-   return null;
- }
- const toSingle =(link)=>{
-  history.push("/blogsingle"+link);
- }
-
-
-
- function SampleNextArrow(props) {
+    if(!Array.isArray(posts)||posts.length <=0){
+      return null;
+    }
+   
+/*  function SampleNextArrow(props) {
   const { currentSlide,onClick } = props;
   
 
@@ -238,7 +396,7 @@ const nextSlide = ()=>{
     onClick={()=>{nextSlide(onClick);}}
     />
   );
-}
+} */
 
 function SamplePrevArrow(props) {
   const { onClick ,currentSlide} = props;
@@ -251,13 +409,20 @@ function SamplePrevArrow(props) {
   );
 }
 
-const settings = {
+/* const settings = {
   slidesToShow: 4,
   slidesToScroll:1,
   nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />,  
       slide:'<>',   
-};
+}; */
+/* const settings = {
+  slidesToShow: 4,
+  slidesToScroll:1,
+  nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />,  
+      slide:'<>',   
+}; */
 
 /* if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>; */
@@ -271,8 +436,13 @@ const settings = {
           <h1> 
             n
             <span className="conectimg">
-              <object style={{fill:' #fff '}} id={Oconnect} type="image/svg+xml" width="100" height="100" data={Oconnect} className="svg"> 
-              </object>
+              o
+              <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
+  <path id="Caminho_661" data-name="Caminho 661" d="M-430.554,188.391l-17.435,20.484a16.525,16.525,0,0,1,3.358,10.076A16.6,16.6,0,0,1-461.3,235.473a16.594,16.594,0,0,1-16.522-16.666,16.594,16.594,0,0,1,16.668-16.522,16.519,16.519,0,0,1,8.618,2.455l17.52-21.039Z" transform="translate(481.135 -91.604)" fill="#95b71d"/>
+  <path id="Caminho_662" data-name="Caminho 662" d="M-431.462,178.8l-21.067-19.376a16.519,16.519,0,0,1-10.7,3.855,16.594,16.594,0,0,1-16.522-16.668,16.594,16.594,0,0,1,16.666-16.522,16.6,16.6,0,0,1,16.522,16.668,16.506,16.506,0,0,1-2.053,7.926l21.737,19.993Z" transform="translate(479.75 -130.087)" fill="#95b71d"/>
+  <path id="Caminho_663" data-name="Caminho 663" d="M-405.252,132.127a16.594,16.594,0,0,0-16.666,16.522,16.351,16.351,0,0,0,4.157,11.081l-10.953,13.414a64.927,64.927,0,0,1,6.514,4.568l10.953-13.325a13.261,13.261,0,0,0,5.851.928,16.593,16.593,0,0,0,16.666-16.522,16.594,16.594,0,0,0-16.522-16.666" transform="translate(517.369 -128.623)" fill="#95b71d"/>
+</svg>
+
             </span>
             s Actualités
             </h1>
@@ -280,22 +450,42 @@ const settings = {
 
     <BlogContainer>
          
-        <Slider {...settings}>
+        <BlogWrapper
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        >
+          <BlogSlide 
+         className={`show-${slidesToShow}`}
+         style={{ transform: `translateX(-${current * (100 / slidesToShow)}%)` }}
+         >
+        {
+        loading ? <div>chargement ...</div> : error ? <div>erreur de chargement </div> :
+        posts.map((post,index)=>(
+          
+      
+<Blogcard key={index} post={post}  />
+          
+          
+        ))    
+        }
+         </BlogSlide>
+        
+        {/* <Slider {...settings}>
         {
         loading ? <div>chargement ...</div> : error ? <div>erreur de chargement </div> :
         posts.map((post)=>(
           <Blogcard key={post.id} post={post}/>
         ))    
         }
-         </Slider>
-         {/* <SliderButtons>
-            <PrevArrow  onClick={prevSlide} src={ArrowLeftIcon}/>
-            <NextArrow onClick={nextSlide} src={ArrowRighthIcon}/>
-          </SliderButtons> */}
-    
+         </Slider> */}
+         <SliderButtons>
+            <PrevArrow  onClick={prevSlide} src={ArrowRighthIcon}/>
+            <NextArrow onClick={nextSlide} src={ArrowLeftIcon}/>
+          </SliderButtons>
+          </BlogWrapper>
     </BlogContainer>
     <AllblogBtnsection className="allblog">
-        <Link to={ { pathname: '//blog.donilab.org' } }>Toutes nos actualités</Link>
+        <a href="https:/blog.donilab.org" target="_blank" rel="noopener noreferrer">Toutes nos actualités</a>
       </AllblogBtnsection>
   </BlogSection>
   )

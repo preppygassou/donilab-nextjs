@@ -6,6 +6,13 @@ const LabelAfricinnovContainer = styled.div`
 background-color:#EFEFEF;
 height: 100%;
 padding:8vh 5vh;
+
+  @media (min-width: 481px) and (max-width: 1024px) {
+    padding:5vh; 
+    h1{
+      padding:3rem;
+    }
+}
 h1{
 text-align:center;
 color:#2755A1;
@@ -15,35 +22,52 @@ font-weight: bold;
 }
 `;
 const LabelContent = styled.div`
-  margin:0 9rem;
-  display:flex;
+  width:100%;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:45% 55%;
+  grid-auto-rows:1fr;
   align-items:center;
   
-  justify-content:center;
-  p{
-    
-     width:600px;
-     margin-left:6vh;
-  }
   @media (min-width: 768px) and (max-width: 1024px) {
   
-  /* CSS */
+    grid-template-columns:1fr;
   
 }
   @media (min-width: 481px) and (max-width: 767px) {
-  flex-direction:column;
-  text-align:center;
-  p{
-    
-    margin-left:0;
- }
+    grid-template-columns:1fr;
+ 
 }
 `;
-const LabelLogo = styled.img`
- margin-right:5vh;
- width:350px;
+const LabelLogo = styled.div`
+width:100%;
+display:flex;
+justify-content:center;
+ img{
+
+   width:350px;
+ }
  @media (min-width: 481px) and (max-width: 767px) {
-  margin:4vh 0;
+
+ 
+}
+`;
+const LabelInfo = styled.div`
+width:100%;
+ padding-right:4rem;
+ @media (min-width: 481px) and (max-width: 767px) {
+ padding-right:0rem;
+  
+}
+@media (max-width: 768px)  {
+ padding-right:0rem;
+  
+ padding-top:2rem;
+}
+
+@media (min-width:  769px) and (max-width: 1280px) {
+  padding-right:0rem;
+ 
 }
 `;
 function Labelafricinnov() {
@@ -51,10 +75,10 @@ function Labelafricinnov() {
     <LabelAfricinnovContainer >
       <h1>LE LABEL AFRIC'INNOV</h1>
       <LabelContent>
-        <div>
-          <LabelLogo src={LabelAfricinnov} alt="Label Afric'innov" />
-        </div>
-        <div>
+        <LabelLogo>
+          <img src={LabelAfricinnov} alt="Label Afric'innov" />
+        </LabelLogo>
+        <LabelInfo>
           <p>En 2021, DoniLab a vu sa méthodologie d’accompagnement certifiée.
           Développé pour améliorer la lisibilité des écosystèmes entrepreneuriaux africains,
           le Label Afric'innov met en évidence les incubateurs  les plus performants sur le continent.
@@ -64,7 +88,7 @@ function Labelafricinnov() {
           sur vingt critères évaluant les infrastructures, la gouvernance, la méthodologie
           et ressources d'accompagnement, ainsi que l'offre de services mis à disposition
           des entrepreneurs accompagnés.</p>
-        </div>
+        </LabelInfo>
       </LabelContent>
     </LabelAfricinnovContainer >
   )

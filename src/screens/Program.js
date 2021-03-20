@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { detailsProgram } from '../actions/ProgramActions'
 import Loading from '../Components/Loading'
 import MessageBox from '../Components/MessageBox'
+import ErrorBoundary from '../Components/ErrorBoundary'
 
 function Program(props) {
 
@@ -37,14 +38,30 @@ function Program(props) {
       </div>
         ) : (
       <div>
+    <ErrorBoundary>
       <HeroProgram  program={program}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
       <Objectifs program={program}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
       <Zones program={program}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
       <Cibles program={program}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
       <Activity program={program}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
       <Resultats program={program}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
       <Beneficiaires program={program}/>
+    </ErrorBoundary>
+    <ErrorBoundary>
       <Partners program={program}/>
+    </ErrorBoundary>
       </div>
         )}
     </>

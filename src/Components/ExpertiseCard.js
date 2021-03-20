@@ -42,11 +42,14 @@ p{
 }
 
 
-svg path  {
-    fill: #fff !important;
+object.hover{
+display:none
 }
-&:hover > object svg .cls-2{
-      fill:#fff;
+&:hover > object.hover {
+      display: block;
+     }
+&:hover > object.default {
+      display: none;
      }
     
 &:hover > a {
@@ -71,7 +74,9 @@ function ExpertiseCard({item,index}) {
     
           <ExpertiseCardContent key={index} className="expertise">
               {/* <img src={item.icon} alt="" srcset=""/> */}
-              <object style={{fill:' #fff '}} id={item.icon} type="image/svg+xml" width="100" height="100" data={item.icon} className="svg"> 
+              <object id={item.icon} type="image/svg+xml" width="100" height="100" data={item.icon} className="svg default"> 
+              </object>
+              <object id={item.iconHover} type="image/svg+xml" width="100" height="100" data={item.iconHover} className="svg hover"> 
               </object>
             <h1>{item.title}</h1>
             <p>{item.description}</p>
