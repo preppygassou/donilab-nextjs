@@ -135,8 +135,21 @@ h3{
 const FooterSocial = styled.div`
 display:flex;
 `;
-const FooterSocialLink = styled(Link)`
-
+const FooterSocialLink = styled.a`
+background-color:#fff;
+color:rgb(29, 57, 105);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size: 1.8rem;
+border-radius:50%;
+margin:.5rem;
+width:52px;
+height:52px;
+transition:0.3s;
+&:hover{
+transform:scale(1.05);
+}
 `;
 const FooterSocialImg = styled.img`
 padding-left:15px;
@@ -198,8 +211,18 @@ function Footer() {
           <h3>© 2021 DONILAB | </h3>
         </FooterCopyright>
         <FooterSocial>
-          <FooterSocialLink ><FooterSocialImg src={FbIcone} alt="Facebook icone" /></FooterSocialLink >
-          <FooterSocialLink ><FooterSocialImg src={TwIcone} alt="Facebook icone" /></FooterSocialLink >
+              <FooterSocialLink href="https://www.facebook.com/donilab.officiel" target="_blank" rel="noopener noreferrer">
+              <i className="fa fa-facebook-f"  aria-hidden="true"></i>
+              </FooterSocialLink>
+              <FooterSocialLink href="https://twitter.com/Donilab1" target="_blank" rel="noopener noreferrer">
+              <i className="fa fa-twitter" aria-hidden="true"></i>
+              </FooterSocialLink>
+              <FooterSocialLink href="https://www.instagram.com/donilab1/" target="_blank" rel="noopener noreferrer">
+                <i className="fa fa-instagram" aria-hidden="true"></i>
+              </FooterSocialLink>
+              <FooterSocialLink href="https://www.instagram.com/donilab1/" target="_blank" rel="noopener noreferrer">
+              <i className="fa fa-linkedin" aria-hidden="true"></i>
+              </FooterSocialLink>
         </FooterSocial>
       </FooterContainerBottom>
     </FooterContainer>

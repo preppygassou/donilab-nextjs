@@ -204,7 +204,7 @@ function HeroProgram({ program }) {
   }, [current, length])
 
 
-  if (!Array.isArray(program.acf.galerie_programme) || program.acf.galerie.length <= 0) {
+  if (!Array.isArray(program.acf.galerie_programme) || program.acf.galerie_programme.length <= 0) {
     return null;
   }
 

@@ -11,34 +11,33 @@ import ContactIcone from "./../assets/contacticone.png";
 import EmailIcone from "./../assets/emailicone.png";
 import MapIcone from "./../assets/mapicone.png";
 
-const ContactPage = styled.div``;
-const ContactheroparalaxeLeft = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
+const ContactPage = styled.section`
+
 `;
-const HeroContact = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+const HeroContact = styled.div`
+  text-align:left;
+  
   background-color: #2755a1;
-  height: 40vh;
+  padding:10rem 10rem 7rem 10rem;
   h1 {
+    font-family:"CeraRoundPro-Bold";
     font-size: 3rem;
-    margin-top: 14vh;
+    line-height: 1.16; 
+    font-size: 3rem;
+    
+    letter-spacing: -0.03em;
+    color: rgb(255, 255, 255);
   }
 `;
 
-const ContactheroparalaxeRight = styled.img`
-  position: absolute;
-  right: 0;
-`;
-
 const ContactSection = styled.section`
-  display: flex;
+ /*  display: flex;
   justify-content: center;
   position: relative;
-  padding: 10vh;
+  padding: 10vh; */
+  padding:4rem 10rem;
+
   h1{
     font-family:"CeraRoundPro-Bold";
   font-size: 2rem;
@@ -55,28 +54,20 @@ line-height: 1.32;
     font-weight: 400;
 letter-spacing: -0.01em;
 font-size: 1.125rem;
-line-height: 1.32
+line-height: 1.32;
   }
-  a{
-    text-decoration: none;
-    text-decoration-color: #2755A1;
-line-height: 1.35;
-display: inline-flex;
-align-items: center;
-background-repeat: no-repeat;
-background-position: 0px 100%, 100% 100%;
-background-size: 0px 8%, 100% 8%;
-transition: background-size 0.2s ease-in-out 0s;
-font-weight: 500;
-letter-spacing: -0.03em;
-font-size: 1.125rem;
-  }
+
+
+svg{
+  margin: 0px 0px 0px 0.5rem;
+  color: rgb(39,85,161);
+}
 `;
 const ContactInfoContainer = styled.div`
   min-height: auto;
-  width: 80%;
+ /*  width: 80%;
   margin-left:auto;
-  margin-right:auto;
+  margin-right:auto; */
   .Channel_Divider {
     border: 1px solid rgba(17, 17, 17, 0.2);
     margin: 32px 0px;
@@ -92,18 +83,39 @@ const ContactFormContainer = styled.div`
   padding: 2vh;
 `;
 const Channels = styled.div`
-  display: flex;
+  display: grid;
   width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
+  grid-template-columns:repeat(2,1fr);
+  grid-template-rows:1fr;
 `;
 const Channel = styled.div`
-  flex: 1 1 0%;
+
   text-align: left;
 `;
-const ChannelLink = styled(Link)`
-    
-}
+const ChannelLink = styled.a`
+color: rgb(39, 85, 161);
+font-weight: 500;
+letter-spacing: -0.03em;
+font-size: 1.125rem;
+text-align: left;
+text-decoration: none;
+line-height: 1.35;
+display: inline-flex;
+-moz-box-align: center;
+align-items: center;
+background-repeat: no-repeat;
+background-position: 0px 100%, 100% 100%;
+background-size: 0px 8%, 100% 8%;
+transition: background-size 0.2s ease-in-out 0s;
+background-image: linear-gradient(120deg, rgb(39, 85, 161) 0%, rgb(39, 85, 161) 100%), linear-gradient(120deg, transparent, transparent);
+    &:hover,&:focus {
+    text-decoration: none;
+    background-size: 100% 8%, 100% 8%;
+    }
+    i{
+    padding-left:.5rem;
+      transform:rotate(-37deg)
+    }
 `;
 const goToDonilab = styled.div`
   margin: 2rem 0rem;
@@ -118,7 +130,22 @@ const FooterInfoMapIcone = styled.img``;
 const FooterSocial = styled.div`
   display: flex;
 `;
-const FooterSocialLink = styled(Link)``;
+const FooterSocialLink = styled.a`
+background-color:rgb(39, 85, 161);
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size: 1.8rem;
+border-radius:50%;
+transition:0.3s;
+&:hover{
+transform:scale(1.05);
+}
+margin:.5rem;
+width:55px;
+height:55px;
+`;
 const FooterSocialImg = styled.img`
   padding-left: 15px;
 `;
@@ -127,9 +154,7 @@ function Contact() {
   return (
     <ContactPage>
       <HeroContact>
-        <SectionTitle white="true">
-          <h1>Comment préférez-vous nous parler?</h1>
-        </SectionTitle>
+        <h1>Comment préférez-vous nous parler?</h1>
       </HeroContact>
       <ContactSection>
         <ContactInfoContainer>
@@ -140,8 +165,9 @@ function Contact() {
                 Avez-vous un doute? Nous pouvons vous aider via notre canal de
                 email.
               </p>
-              <ChannelLink to="mailto:info@donilab.net">
+              <ChannelLink href="mailto:info@donilab.net" target="_blank" rel="noopener noreferrer">
                 info@donilab.net
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
               </ChannelLink>
             </Channel>
             <Channel>
@@ -150,8 +176,9 @@ function Contact() {
                 Vous pouvez appeler à tout moment au numéro ci-dessous. <br />
                 Nous travaillons les jours ouvrables de 9h à 18h
               </p>
-              <ChannelLink to="mailto:info@donilab.net">
+              <ChannelLink href="tel:info@donilab.net" target="_blank" rel="noopener noreferrer">
                 +223 70091609
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
               </ChannelLink>
             </Channel>
           </Channels>
@@ -163,8 +190,9 @@ function Contact() {
               <p>
                 Sotuba ACI 2000 <br /> Bamako, Mali
               </p>
-              <ChannelLink to="mailto:info@donilab.net">
+              <ChannelLink href="https://goo.gl/maps/FSLUzaFMUvnsJaZv8" target="_blank" rel="noopener noreferrer">
                 Lien vers le map
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
               </ChannelLink>
             </Channel>
           </goToDonilab>
@@ -176,11 +204,17 @@ function Contact() {
               sociaux .
             </p>
             <FooterSocial>
-              <FooterSocialLink>
-                <FooterSocialImg src={FbIcone} alt="Facebook icone" />
+              <FooterSocialLink href="https://www.facebook.com/donilab.officiel" target="_blank" rel="noopener noreferrer">
+              <i className="fa fa-facebook-f"  aria-hidden="true"></i>
               </FooterSocialLink>
-              <FooterSocialLink>
-                <FooterSocialImg src={TwIcone} alt="Facebook icone" />
+              <FooterSocialLink href="https://twitter.com/Donilab1" target="_blank" rel="noopener noreferrer">
+              <i className="fa fa-twitter" aria-hidden="true"></i>
+              </FooterSocialLink>
+              <FooterSocialLink href="https://www.instagram.com/donilab1/" target="_blank" rel="noopener noreferrer">
+                <i className="fa fa-instagram" aria-hidden="true"></i>
+              </FooterSocialLink>
+              <FooterSocialLink href="https://www.instagram.com/donilab1/" target="_blank" rel="noopener noreferrer">
+              <i className="fa fa-linkedin" aria-hidden="true"></i>
               </FooterSocialLink>
             </FooterSocial>
           </SocialLinks>

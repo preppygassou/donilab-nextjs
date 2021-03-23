@@ -314,6 +314,11 @@ function TeamSection({ initialSlide, about, ishub, hub }) {
   const [active, setActive] = useState(0);
   const length = TeamData.length;
   const timeout = useRef(null);
+  const [value, setValue] = useState(0);
+
+  const onChange = value => {
+  setValue(value);
+  }
 
   const nextSlide = (currentSlide) => {
     if (timeout.current) {
@@ -432,9 +437,12 @@ function TeamSection({ initialSlide, about, ishub, hub }) {
           slidesPerPage={5}
           infinite
           centered
+          clickToChange
           /* autoPlay={2000}
         animationSpeed={1000}
         stopAutoPlayOnHover={true} */
+        value={value}
+        onChange={onChange}
           arrowLeft={<PrevArrow src={ArrowLeftIcon} />
           }
           arrowRight={<NextArrow src={ArrowRighthIcon} />}
@@ -465,7 +473,7 @@ function TeamSection({ initialSlide, about, ishub, hub }) {
                   <p>{team.poste_team}</p>
                 </div>
               </div>
-
+                 
 
               /* index === current && ( */
               /* currentSlide*/
