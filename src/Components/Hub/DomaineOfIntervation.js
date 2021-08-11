@@ -1,21 +1,26 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled, { css } from 'styled-components/macro';
 import DomaineParalaxsvgtop from "./../../assets/svg/DomaineParalaxsvgtop.svg";
 import DomaineParalaxsvgbottom from "./../../assets/svg/DomaineParalaxsvgbottom.svg";
 import DomaineHubIcone from "./../../assets/svg/DomaineHubIcone.svg";
 import line from "./../../assets/svg/line.svg";
 import plus from "./../../assets/svg/plus.svg";
+import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
 const DomaineOfHubSection = styled.section`
 padding:4rem 8rem;
 position:relative;
 background-color:#94B61D;
 color:#fff;
+@media (max-width:768px){
+padding:4rem 1rem;
+  
+       }
 
 `;
 
 const DomaineHeadContent = styled.div `
-width:1000px;
+width:90%;
 margin:0 auto;
 text-align:center;
 display:flex;
@@ -25,6 +30,11 @@ align-items:center;
 color:#2755A1;
 text-align:center;
 padding:4rem 8rem;
+z-index: 2;
+@media (max-width:768px){
+padding:4rem 1rem;
+  
+       }
 
 h1{
   font-family:"CeraRoundPro-Bold";
@@ -33,6 +43,14 @@ h1{
     text-transform: uppercase;
     margin: 2.5vh 0 3vh 0;
     color:#fff;
+    @media (max-width:768px){
+  font-size: 2rem;
+  margin: 2vh 0;
+       }
+  @media (max-width:360px){
+  font-size: 1.8rem;
+
+}
 }
 p{
   color:#fff;
@@ -44,23 +62,46 @@ position:absolute;
 top: 0;
 left:0;
 width: 200px;
+@media (max-width:768px){
+width: 150px;
+}
+@media (max-width:500px){
+display:none;
+}
 `;
 
 const DomaineParalaxImgbottom = styled.img `
 position:absolute;
 bottom: 0;
 right:0;
-width: 200px;
+width: 190px;
+@media (max-width:1199px){
+  width: 170px;
+
+}
+@media (max-width:991px){
+  width: 155px;
+
+}
+@media (max-width:768px){
+
+display:none;
+}
+
 `;
 
 const DomainePisionMissionIcon = styled.img `
 width:100px;
+@media (max-width:768px){
+width: 80px;
+}
 `;
 
 const DomaineAcordeon = styled.div `
-width:1000px;
+width:90%;
 margin:0 auto;
 height: 100%;
+z-index: 2;
 .content {
   min-height: calc(100vh - 150px);
   max-width: 500px;
@@ -93,6 +134,10 @@ button {
   color: #2755A1;
   font-weight: bold;
   padding: 1rem;
+  @media (max-width:768px){
+  font-size: 1rem;
+
+  }
 }
 button:focus { outline: none; }
 
@@ -174,6 +219,8 @@ function DomaineOfIntervation({hub}) {
         indexPlus = index + 1;
         return indexPlus;
     }
+    const value = useContext(CurrentLangContext);
+  const {currentLang} = value
 
 
   return (
@@ -182,10 +229,15 @@ function DomaineOfIntervation({hub}) {
        <DomaineParalaxImgbottom src={DomaineParalaxsvgbottom} alt=""/>
      <DomaineHeadContent>
         <DomainePisionMissionIcon className="" src={DomaineHubIcone} alt="Domaine icon" />
-      <h1>domaine d’intervention</h1>
+      <h1>
+        
+        {currentLang=== "en" ?"area of intervention":"domaine d’intervention"}
+
+      </h1>
       <p>
-        L’une des spécificités du Hub de Bamako réside dans son caractère transversal. 
-        En effet, tout type de projet y est développé et accompagné 
+        {
+          hub.acf.description
+        }
       </p>
      </DomaineHeadContent>
      <DomaineAcordeon>

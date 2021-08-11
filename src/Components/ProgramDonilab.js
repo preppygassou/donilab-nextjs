@@ -3,14 +3,14 @@ import styled from 'styled-components/macro';
 import { ProgramyDonilaData } from '../data/ProgramData';
 import { Link } from 'react-router-dom';
 import parse from "html-react-parser";
+import { useTranslation } from 'react-i18next';
 
 const ProgramDonilabContent = styled.ul `
 display:grid;
- margin-left:auto;
- margin-right:auto;
+ margin:0 auto;
 grid-template-columns: repeat(4, 1fr);
 grid-auto-rows: 1fr;
- max-width:85%;
+ max-width:1350px;
 z-index:10;
 background-color:#fff;
  border-radius: 25px;
@@ -21,29 +21,28 @@ list-style-type:none;
 
 
 
-@media (min-width: 1281px) {
+/* @media (min-width: 1281px) {
   
   max-width:95%;
   
+} */
+
+@media (max-width: 1200px) {
+  grid-template-columns: repeat(3, 1fr);
 }
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (max-width: 900px) {
   grid-template-columns: repeat(2, 1fr);
+}
+@media (max-width: 768px) {
+  grid-template-columns: repeat(1, 1fr);
   
 }
-@media (min-width: 481px) and (max-width: 767px) {
+
+/* @media (max-width: 500px) {
  
   grid-template-columns: repeat(1, 1fr);
   
-}
-@media (min-width: 320px) and (max-width: 480px) {
-  
-  grid-template-columns: repeat(1, 1fr);
-
-}
-@media (min-width:  1025px) and (max-width: 1280px) {
-  grid-template-columns: repeat(3, 1fr);
-  
-}
+} */
 `;
 const OneOfProgramDonilab = styled.li `
 
@@ -98,14 +97,32 @@ align-items:center;
 flex-direction:column;
 padding:1rem 2rem;
 
+@media (max-width: 1200px) {
+  p{
+    font-size:1rem;
+  }
+  }
+
+@media (max-width: 768px) {
+  p{
+    font-size:0.9rem;
+  }
+  
+}
+
 `;
 const ProgramLogo = styled.div `
-padding:1rem 2rem;
-height:17vh;
-
+/* s */
+/* s */
+height:12vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 img{
-  width:200px;
-  
+  width:70%;
+/* object-fit:cover; */
+  height:95%;
 }
 `;
 const OneOfProgramLink = styled(Link) `
@@ -118,17 +135,21 @@ font-size: 1.2rem;
   font-family:"CeraRoundPro-Bold";
   text-align:center;
   text-decoration:none;
+  @media (max-width: 768px) {
+    font-size: 1rem;
+}
 
 `;
 function myFunction(str) {
   let thestr;
-  if (str.length > 100) {
-     thestr = str = str.substring(0,100) + "...";
+  if (str.length > 40) {
+     thestr = str = str.substring(0,40) + "...";
   }
   return thestr;
 }
 
 function ProgramDonilab({ProgramData,history}) {
+  const { t} = useTranslation()
 
   return (
     <ProgramDonilabContent>
@@ -136,21 +157,21 @@ function ProgramDonilab({ProgramData,history}) {
        ProgramData.map((program)=>(
          <OneOfProgramDonilab key={program.id}>
           <ProgramLogo>
-          <img src={program.acf.logo_en_png_ou_svg.url} alt={program.title.rendered}/>
+          <img src={program.acf.logo_officiel.url} alt={program.title.rendered}/>
           </ProgramLogo>
          <ProgramBody>
          <ProgramInfoContent>
          <h1>{program.title.rendered}</h1>
-         {parse(program.content.rendered)} 
+         {/* <p>{myFunction(program.acf.programme_description)}</p>  */}
+         <p>{program.acf.programme_description.length > 70 ? program.acf.programme_description.substring(0,70) + "..." : program.acf.programme_description }</p> 
          </ProgramInfoContent>
-         <OneOfProgramLink to={`/program/${program.id}`}>
-            EN SAVOIR PLUS
+         <OneOfProgramLink to={`/program/${program.id}`}>            
+      {t("more")}
           </OneOfProgramLink>
          </ProgramBody>
          </OneOfProgramDonilab>
        ))
-     }
-      
+     }      
     </ProgramDonilabContent>
   )
 }

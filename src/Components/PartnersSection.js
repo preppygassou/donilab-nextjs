@@ -8,6 +8,7 @@ import PartnersSlider from './PartnersSlider';
 import Oconnect from "./../assets/svg/oconnect.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { listPartenaires } from '../actions/PartenaireActions';
+import { useTranslation } from 'react-i18next';
 
 
 const SectionTitletest =styled.div`
@@ -62,6 +63,7 @@ const PartnerImg = styled.img `
 
 function PartnersSection() {
   const dispatch = useDispatch()
+  const { t} = useTranslation()
   const partenaireList = useSelector((state) => state.partenaireList)
 
 
@@ -77,7 +79,7 @@ function PartnersSection() {
       <SectionTitle>
 
           <h1>
-          n
+          {t('n')}
           <span className="conectimg">
               o
               <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
@@ -87,7 +89,7 @@ function PartnersSection() {
 </svg>
 
             </span>
-          s partenaires
+            {t('os')} {t('partner')}
         </h1>
         </SectionTitle>
        <PartnersSlider PartnersData={partenaires}/>

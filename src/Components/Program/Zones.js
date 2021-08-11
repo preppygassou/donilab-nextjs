@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components/';
+import { CurrentLangContext } from '../../Context/CurrentLangContext';
 import Zonessvg from "./../../assets/svg/zones.svg";
 import Zonesbamako from "./../../assets/svg/zonesbamako.svg";
 
@@ -11,15 +12,36 @@ grid-template-columns:1fr 1fr;
 align-items:center;
 padding:2rem;
 color:#fff;
+@media (max-width:768px){
+    justify-content:center;
+    display:flex;
+    flex-direction:column-reverse;
+padding:6rem 2rem 0 2rem;
+
+  }
 `;
 const ZonesBamako = styled.div`
 display:flex;
 justify-content:center;
 svg{
   width:400px;
+  @media (max-width:1080px){
+  width:300px;
+  }
+  @media (max-width:900px){
+  width:250px;
+  }
+  @media (max-width:768px){
+  width:80%;
 }
+}
+  
 `;
+
 const ZonesInfos = styled.div`
+@media (max-width:768px){ 
+text-align:center;
+}
 h1{
   padding:0.8rem 1rem;
 color:#fff;
@@ -27,20 +49,41 @@ font-size:3rem;
 text-transform: uppercase;
 margin: 0.2vh 0 1vh 0;
 font-family:"CeraRoundPro-Bold";
+@media (max-width:1080px){ 
+font-size:2.5rem;
+
+  }
+@media (max-width:900px){ 
+font-size:1.5rem;
+
+  }
 }
 ul {
   padding-left:1rem;
 }
+
 `;
 const ZonesIcone = styled.img `
 width: 100px;
+@media (max-width:1080px){ 
+  width: 90px;
+  }
+  @media (max-width:900px){ 
+    width: 70px;
+
+  }
+  @media (max-width:900px){ 
+    width: 60px;
+
+  }
 `;
 
 function Zones({program}) {
 
   const zonesactive = (zoneactive) => (program.acf.zones.includes(zoneactive) ? "#95b71d" : "none")
   
-  
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value 
     
   return (
     <ZonesSections>
@@ -62,7 +105,14 @@ function Zones({program}) {
       </ZonesBamako>
       <ZonesInfos>
           <ZonesIcone src={Zonessvg} alt=""/>
-          <h1>zones <br/>d’interventions</h1>
+          <h1>
+      {currentLang=== "en" ?"Intervention":"zones"}
+
+             <br/>
+      {currentLang=== "en" ?"areas":"d’interventions"}
+
+            
+            </h1>
           
           <ul>
           {

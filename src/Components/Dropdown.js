@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { menuData } from '../data/MenuData';
+import { menuDataEn } from '../data/MenuDataEn';
 import {Link} from 'react-router-dom'
 import {FaTimes} from 'react-icons/fa'
 import { ContactBtn } from './ContactBtn';
 import LogoDonilab from "./../assets/logodonilab.png"
+import LanguageSelector from './LanguageSelector';
+import { CurrentLangContext } from '../Context/CurrentLangContext';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 
 const DropdownContainer = styled.div `
@@ -45,10 +50,26 @@ height:100%;
 const DropdownMenu = styled.div `
 display:grid;
 grid-template-columns:1fr;
-grid-template-rows: repeat(6, 80px);
+grid-template-rows: repeat(7, 80px);
 margin-bottom: 4rem;
+.selectorlanguage{
+  margin: 0 16px;
+  padding-bottom:.5rem;
+  display:flex;
+  align-items:center;
+  img{
+    width:18px;
+  }
+  button{
+    border:none;
+    margin:.5rem;
+    cursor:pointer;
+    outline: none;
+  }
+}
 @media screen and (max-width: 480px){
-grid-template-rows: repeat(6, 60px);
+grid-template-rows: repeat(7, 60px);
+
 }
 `;
 const DropdownLink = styled(Link)`
@@ -87,6 +108,11 @@ width:100%;
 `;
 
 function Dropdown({isOpen,toggle}) {
+  const value = useContext(CurrentLangContext);
+  const generalList = useSelector((state) => state.generalList)
+  const {loading, error,generals }= generalList
+
+  const {currentLang} = value
   return (
       <DropdownContainer isOpen={isOpen} onClick={toggle}>
       <DropdownLogo>
@@ -97,12 +123,26 @@ function Dropdown({isOpen,toggle}) {
       </DropdownLogo>
       <DropdownWrapper>
         <DropdownMenu>
-        {menuData.map((item,index)=>(
+        {currentLang === "en" ? menuDataEn.map((item,index)=>(
+            <DropdownLink to={item.link} key={index}>
+            {item.title}
+            </DropdownLink>
+           )): menuData.map((item,index)=>(
             <DropdownLink to={item.link} key={index}>
             {item.title}
             </DropdownLink>
            ))}
+           <LanguageSelector/>
         </DropdownMenu>
+       {/*  <DropdownMenu>
+        {loading? "" :
+             generals[0].acf.menu.map((item,index)=>(
+            <DropdownLink to={item.link} key={index}>
+            {item.title}
+            </DropdownLink>
+           ))}
+           <LanguageSelector/>
+        </DropdownMenu> */}
       </DropdownWrapper>
       </DropdownContainer>
   )

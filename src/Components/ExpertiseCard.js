@@ -1,6 +1,8 @@
-import React from 'react'
+import parse from "html-react-parser";
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro'
+import { CurrentLangContext } from "../Context/CurrentLangContext";
 
 const ExpertiseCardContent = styled.div `
 display:flex;
@@ -40,6 +42,22 @@ p{
   justify-content:center;
 
 }
+@media (max-width: 768px) {
+ p{
+  height:100%;
+  font-size:.9rem;
+
+ }
+ h1{
+   font-size:1rem;
+  height:100%;
+
+ }
+
+}
+@media (max-width: 500px) {
+
+}
 
 
 object.hover{
@@ -69,18 +87,22 @@ const BtnLinkExpertiseCard = styled(Link) `
   margin-top:2rem;
   border-radius: 25px;
 `;
-function ExpertiseCard({item,index}) {
-  return (
-    
-          <ExpertiseCardContent key={index} className="expertise">
+function ExpertiseCard({item}) {
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value
+  return ( 
+          <ExpertiseCardContent key={item.id} className="expertise">
               {/* <img src={item.icon} alt="" srcset=""/> */}
-              <object id={item.icon} type="image/svg+xml" width="100" height="100" data={item.icon} className="svg default"> 
+       
+             <object id={item.acf.icone_normal.id} type="image/svg+xml" width="100" height="100" data={item.acf.icone_normal.url} className="svg default"> 
               </object>
-              <object id={item.iconHover} type="image/svg+xml" width="100" height="100" data={item.iconHover} className="svg hover"> 
+              <object id={item.acf.icone_onhover.id} type="image/svg+xml" width="100" height="100" data={item.acf.icone_onhover.url} className="svg hover"> 
               </object>
-            <h1>{item.title}</h1>
-            <p>{item.description}</p>
-            <BtnLinkExpertiseCard to={item.link}>en savoir plus</BtnLinkExpertiseCard>
+            <h1>{item.title.rendered}</h1>
+            {parse(item.excerpt.rendered)}
+            <BtnLinkExpertiseCard to="/expertise">
+        {currentLang === "en" ?"find out more":"en savoir plus"}             
+            </BtnLinkExpertiseCard>
           </ExpertiseCardContent>
     
   )

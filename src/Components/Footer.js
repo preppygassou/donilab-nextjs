@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro'
 import FbIcone from "./../assets/fbicone.png"
@@ -7,9 +7,14 @@ import LogoDonilab from "./../assets/logodonilabwhite.png"
 import ContactIcone from "./../assets/contacticone.png"
 import EmailIcone from "./../assets/emailicone.png"
 import MapIcone from "./../assets/mapicone.png"
-import { FootermenuData } from '../data/FooterMenuData';
+import Scroll from './Scroll';
+import { CurrentLangContext } from '../Context/CurrentLangContext';
+import axios from 'axios';
+import Loading from './Loading';
+import { useSelector } from 'react-redux';
 
 const FooterContainer = styled.div`
+position: relative;
 color:#fff;
 
 `;
@@ -26,17 +31,21 @@ padding:12px 50px 12px 50px;
   justify-content:space-between; 
   
 }
-@media (min-width: 481px) and (max-width: 767px) {
+@media (max-width: 767px) {
   
   flex-direction:column;
+
   
+}
+@media (max-width: 500px) {
+padding:8px 40px 8px 40px;
 }
 `;
 const FooterAbout = styled.div`
 @media (min-width: 768px) and (max-width: 1024px) {
  width: auto;
 }
-@media (min-width: 481px) and (max-width: 767px) {
+@media (max-width: 767px) {
   
  width:100%;
  p{
@@ -51,7 +60,7 @@ p{
 const FooterAboutLogo = styled.img`
 width:150px;
 margin-bottom:.5rem;
-@media (min-width: 481px) and (max-width: 767px) {
+@media (max-width: 767px) {
   margin:4vh 0 1vh 0;
 }
 `;
@@ -61,7 +70,7 @@ display:flex;
 flex-direction:column;
 margin-left:13vh;
 
-@media (min-width: 481px) and (max-width: 767px) {
+@media (max-width: 767px) {
   
   width:100%;
   margin-left:0;
@@ -82,7 +91,7 @@ transition: all .2s linear;
 `;
 const FooterInfo = styled.div`
 width:32%;
-@media (min-width: 481px) and (max-width: 767px) {
+@media (max-width: 767px) {
   
   width:100%;
    
@@ -124,12 +133,18 @@ display:flex;
 align-items: center;
 justify-content:space-between;
 color:#fff;
-
+@media (max-width: 767px) {
+ flex-direction:column;
+padding:26px 5px 20px 5px;
+ }
 `;
 const FooterCopyright = styled.div`
 display:flex;
 h3{
   font-family:"CeraRoundPro-Bold";
+  @media (max-width: 767px) {
+font-size: 1.2rem;  
+ }
 }
 `;
 const FooterSocial = styled.div`
@@ -147,6 +162,11 @@ margin:.5rem;
 width:52px;
 height:52px;
 transition:0.3s;
+@media (max-width: 767px) {
+  width:35px;
+height:35px;
+font-size: 1.3rem;  
+ }
 &:hover{
 transform:scale(1.05);
 }
@@ -156,54 +176,95 @@ padding-left:15px;
 `;
 
 function Footer() {
+  const generalList = useSelector((state) => state.generalList)
+  const {loading, error,generals }= generalList
+  const [generale, setGenerale] = useState({
+    acf:{
+    about_footer:"",
+    infos_contact:[],
+    menu:[]
+  }})
+ // const [loading, setLoading] = useState(true)
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value
+
+  /*  useEffect(() => { 
+    setLoading(true) 
+     axios.get(`https://blog.donilab.org/wp-json/wp/v2/generale/?lang=${currentLang}`)      
+     .then(res => 
+       setGenerale(res.data[0]) ,
+       setLoading(false) 
+         ); 
+   }, [currentLang])
+   console.log(generale) */
   return (
-    <FooterContainer>
+    <>
+    {
+      loading ?  "" : <FooterContainer>
+      
+      
       <FooterContainerTop>
         <FooterAbout>
           <div><FooterAboutLogo src={LogoDonilab} alt="Donilab logo" /></div>
           <div>
             <p>
-              DoniLab est la première structure d’accompagnement de l’entreprenariat
-              innovant au Mali. Depuis 2015, sa mission consiste à accompagner les
-              jeunes dans leur parcours entrepreneurial,
-              en favorisant les projets créant de la valeur ajoutée pour le Mali.
+
+              {generals[0].acf.doni_about_footer}
+        
             </p>
           </div>
         </FooterAbout>
         <FooterMenu>
-          {FootermenuData.map((item, index) => (
+          {generals[0].acf.menu.map((item, index) => (
             <FooterMenuLinks to={item.link} key={index}>
               {item.title}
             </FooterMenuLinks>
           ))}
         </FooterMenu>
         <FooterInfo>
-          <FooterInfoContact>
+          {
+            generals[0].acf.infos_contact.map((info,index)=>(
+              index === 0 ? <FooterInfoContact>
+              <div>
+                <h1>{info.title_contact}</h1>
+              </div>
+              <div>
+                {
+                info.info_contact.map((item,index)=>(
+                  <div key={index} className="iconline">
+                  <span><FooterInfoMapIcone src={item.icon_contact.url} alt={item.icon_contact.filename}/></span>
+                  <span>{item.content_contact}</span>
+                </div>
+                ))
+                }
+                {/* <div className="iconline">
+                  <span><FooterInfoMapIcone src={ContactIcone} alt="icone" /></span>
+                  <span>+223 70091609</span>
+                </div>
+                <div className="iconline">
+                  <span><FooterInfoMapIcone src={EmailIcone} alt="icone" /></span>
+                  <span>info@donilab.net</span>
+                </div> */}
+              </div>
+            </FooterInfoContact> : <FooterInfoMap>
             <div>
-              <h1>Contactez-nous</h1>
+              <h1>{info.title_contact}</h1>
             </div>
             <div>
-              <div className="iconline">
-                <span><FooterInfoMapIcone src={ContactIcone} alt="icone" /></span>
-                <span>+223 70091609</span>
-              </div>
-              <div className="iconline">
-                <span><FooterInfoMapIcone src={EmailIcone} alt="icone" /></span>
-                <span>info@donilab.net</span>
-              </div>
-            </div>
-          </FooterInfoContact>
-          <FooterInfoMap>
-            <div>
-              <h1>Se rendre à DONILAB</h1>
-            </div>
-            <div>
-              <div className="iconline">
-                <span><FooterInfoMapIcone src={MapIcone} alt="icone" /></span>
-                <span>Sotuba ACI 2000 <br /> Bamako, Mali</span>
-              </div>
+            {
+                info.info_contact.map((item,index)=>(
+                  <div key={index} className="iconline">
+                  <span><FooterInfoMapIcone src={item.icon_contact.url} alt={item.icon_contact.filename}/></span>
+                  <span>Sotuba ACI 2000 <br/> Bamako, Mali</span>
+                </div>
+                ))
+                }
             </div>
           </FooterInfoMap>
+            ))
+          }
+          
+          
         </FooterInfo>
       </FooterContainerTop>
       <FooterContainerBottom>
@@ -225,8 +286,11 @@ function Footer() {
               </FooterSocialLink>
         </FooterSocial>
       </FooterContainerBottom>
+      <Scroll/>
+    
     </FooterContainer>
-  )
+  }
+  </>)
 }
 
 export default Footer

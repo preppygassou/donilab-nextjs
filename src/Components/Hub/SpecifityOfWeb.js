@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled,{css} from 'styled-components/macro'
 import SpecifyIcone from "./../../assets/svg/specifityicone.svg";
 import SpecifityTopParalaxeImgTop from "./../../assets/svg/SpecifityTopParalaxeImgTop.svg";
 import SpecifityTopParalaxeImgFull from "./../../assets/svg/SpecifityTopParalaxeImgFull.svg";
 import PropTypes from 'prop-types';
+import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
 
 
@@ -19,6 +20,10 @@ justify-content:space-around;
 
 align-items:center;
 z-index: 1;
+@media (max-width:768px){
+ height:100%;
+
+}
 `;
 
 const SpecifityContentCard = css `
@@ -28,14 +33,30 @@ height: 30vh;
 margin:3vh auto;
 border-radius:20px;
 z-index:2;
+@media (max-width:768px){
+  width:100%;
+
+}
+
 `;
 const SpecifityContentImageCss = css `
 width:30vh;
 height: 100%;
+@media (max-width:768px){
+  width:80%;
+margin:0 auto;
+height: 100%;
+
+}
 img{
   object-fit:cover;
 width:30vh;
 height: 100%;
+@media (max-width:768px){
+  width:100%;
+  border-radius: 10px;
+
+}
 
 }
 `;
@@ -48,33 +69,64 @@ height: 100%;
 display:flex;
 flex-direction:column;
 justify-content:space-evenly;
+@media (max-width:768px){
+  width:80%;
+margin:1rem auto;
+height: 100%;
+
+}
 
 `;
 
 const SpecifityContentCardOne = styled.div `
 ${SpecifityContentCard}
+@media (max-width:768px){
+flex-direction:column-reverse;
+}
 .SpecifityContentImage{
   ${SpecifityContentImageCss}
   img{
     border-radius: 0px 10px 13px 0px;
+    @media (max-width:768px){
+  border-radius: 10px;
+
+}
   }
 }
 .SpecifityContentBox{
 ${SpecifityContentBox}
 border-radius: 10px 0 0 10px;
+@media (max-width:768px){
+  border-radius: 10px;
+  height: 60vh;
+
+}
 }
 `;
 const SpecifityContentCardTwo = styled.div `
+@media (max-width:768px){
+flex-direction:column;
+}
 ${SpecifityContentCard}
 .SpecifityContentImage{
   ${SpecifityContentImageCss}
 img{
   border-radius: 13px 0 0 10px;
+  @media (max-width:768px){
+  border-radius: 10px;
+
+}
 }
 }
 .SpecifityContentBox{
 ${SpecifityContentBox}
 border-radius: 0 10px 10px 0;
+@media (max-width:768px){
+  border-radius: 10px;
+  height: 60vh;
+padding:1vh;
+
+}
 }
 `;
 
@@ -89,14 +141,25 @@ align-items:center;
 color:#2755A1;
 text-align:center;
 padding-top:8vh;
-z-index:2;
+z-index:10;
+@media (max-width:768px){
+  padding-top:3vh;
+  margin-bottom: 31vh;
+}
 
 h1{
   font-family:"CeraRoundPro-Bold";
+z-index:10;
+
   font-size: 3rem;
     font-weight: bold;
     text-transform: uppercase;
     margin: 2.5vh 0 3vh 0;
+    @media (max-width:768px){
+  font-size: 1.2rem;
+  margin: 2vh 0;
+       }
+
 }
 `;
 
@@ -105,6 +168,22 @@ position:absolute;
 top: 0;
 right: 0;
 width: 310px;
+@media (max-width:1199px){
+  width:180px;
+
+}
+/* @media (max-width:991px){
+  width:200px;
+
+} */
+@media (max-width:768px){
+  width:150px;
+
+}
+@media (max-width:500px){
+  width:100px;
+
+}
 
 `;
 const SpecifityParalaxImgbottom = styled.img `
@@ -112,22 +191,34 @@ position:absolute;
 top: 0;
 left:0;
 height: 100%;
+@media (max-width:768px){
+  display:none;
+
+}
 
 `;
 const SpecifityPisionMissionIcon = styled.img `
-
 width:100px;
+@media (max-width:768px){
+width: 80px;
+}
 `;
 
 
 function SpecifityOfWeb({hub}) {
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value
   return (
     <SpecifitySection>
       <SpecifityParalaxImgtop src={SpecifityTopParalaxeImgTop} alt=""/>
         <SpecifityParalaxImgbottom src={SpecifityTopParalaxeImgFull} alt=""/>
      <SpecifityHeadContent>
         <SpecifityPisionMissionIcon className="" src={SpecifyIcone} alt="Historic icon" />
-      <h1>les spécificités du hub</h1>
+      <h1>
+        
+        {currentLang=== "en" ?"the specificities of the hub":"les spécificités du hub"}
+
+      </h1>
      </SpecifityHeadContent>
      <SpecifityContent>
        {

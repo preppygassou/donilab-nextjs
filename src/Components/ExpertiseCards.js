@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ExpertiseCard from './ExpertiseCard';
 import styled from 'styled-components';
 import { ExpertiseData } from '../data/ExpertiseData';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { listExpertises } from '../actions/ExpertiseActions';
+import { CurrentLangContext } from '../Context/CurrentLangContext';
 
 
 const ExpertisesContainer = styled.div `
@@ -21,6 +25,7 @@ box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
 @media (min-width: 1281px) { 
   max-width:95% 
 }
+
 @media (max-width: 768px)  {
   max-width:80% ;
   grid-template-columns: 1fr;
@@ -33,9 +38,29 @@ box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
 
 
 function ExpertiseCards() {
+ /*  const [expertises, setExpertises] = useState([]) */
+/*   useEffect(() => {
+       
+    axios.get(`https://blog.donilab.org/wp-json/wp/v2/expertises`)      
+    .then(res => 
+      setExpertises(res.data) , 
+        ); 
+  //console.log(categoriess)
+  }, [])
+ */
+  const expertiseList = useSelector((state) => state.expertiseList);
+  const { loading, error, expertises } = expertiseList;
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(listExpertises(currentLang))
+  }, [dispatch,currentLang])
+
   return (
         <ExpertisesContainer>
-          {ExpertiseData.map((item,index)=>(
+          {expertises.map((item,index)=>(
             <ExpertiseCard item={item} index={index}/>
               
             ))}

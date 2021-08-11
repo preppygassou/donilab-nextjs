@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import DoniEvent from '../Components/DoniEventSection';
 import TeamSection from '../Components/TeamSection';
@@ -19,9 +19,14 @@ import { listHubs } from '../actions/HubActions';
 import Loading from '../Components/Loading';
 import MessageBox from '../Components/MessageBox';
 import ErrorBoundary from '../Components/ErrorBoundary';
+import { CurrentLangContext } from '../Context/CurrentLangContext';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import parser from 'html-react-parser';
 
 const AboutContainer = styled.div `
-
+width:100%;
+overflow:hidden;
 `;
 const AboutWrapper = styled.div `
 .iconAbout{
@@ -36,11 +41,30 @@ justify-content:center;
 flex-direction:column;
 align-items:center;
 color:#fff;
-padding-top:2vh;
+padding:2rem 15rem;
+width:100%;
+@media (min-width:769px) and (max-width:1600px){
+  padding: 20rem 5rem;
+}
+@media (max-width:768px){
+  padding:2rem 4rem;
+  p{
+    font-size:0.9rem;
+  }
+}
+@media (max-width:500px){
+  padding: 25rem 2rem;
+}
+h1{
+animation: slideInFromBottom 1s ease-in;
+
+}
 `;
 const AboutParagraph = styled.div `
+animation: slideInFromBottom 1s ease-in;
 text-align:center;
-width:95vh;
+margin:0 auto;
+width:100%;
 p{
   margin:0  2vh 2vh 0;
 }
@@ -83,6 +107,18 @@ color:#2755A1;
 text-align:center;
 padding:12vh 45vh;
 position:relative;
+@media (min-width:769px) and (max-width:1600px){
+  padding: 5rem 5rem;
+}
+@media (max-width:768px){
+  padding:2rem 4rem;
+  p{
+    font-size:0.9rem;
+  }
+}
+@media (max-width:500px){
+  padding: 5rem 2rem;
+}
 
 h1{
   font-family:"CeraRoundPro-Bold";
@@ -103,6 +139,15 @@ color:#FFF;
 text-align:center;
 padding:12vh 45vh;
 position:relative;
+@media (max-width:768px){
+  padding:2rem 4rem;
+  p{
+    font-size:0.9rem;
+  }
+}
+@media (max-width:500px){
+  padding: 5rem 2rem;
+}
 
 h1{
   font-family:"CeraRoundPro-Bold";
@@ -111,6 +156,7 @@ h1{
     text-transform: uppercase;
     margin: 2.5vh 0 3vh 0;
 }
+
 
 `;
 const AboutMission = styled.div `
@@ -123,6 +169,15 @@ color:#2755A1;
 text-align:center;
 padding:12vh 45vh;
 position:relative;
+@media (max-width:768px){
+  padding:2rem 4rem;
+  p{
+    font-size:0.9rem;
+  }
+}
+@media (max-width:500px){
+  padding: 5rem 2rem;
+}
 
 h1{
   font-family:"CeraRoundPro-Bold";
@@ -137,19 +192,38 @@ position:absolute;
 top:0;
 left:0;
 width:350px;
+@media (max-width:1600px){
+  width:250px;
+}
+@media (max-width:768px){
+  width:150px;
+}
 `;
 const AboutheroparalaxeRight = styled.img `
 position:absolute;
-top: 78px;
+top: 60px;
 right:0;
 width:400px;
-
+@media (max-width:1600px){
+  width:250px;
+  top: 60px;
+}
+@media (max-width:768px){
+  width:150px;
+}
 `;
 const HistoryparalaxImgtop = styled.img `
 position:absolute;
 top: 0;
 left: 12vh;
 width: 310px;
+@media (max-width:900px){
+  width:250px;
+  
+}
+@media (max-width:768px){
+  width:150px;
+}
 
 `;
 const HistoryparalaxImgbottom = styled.img `
@@ -157,17 +231,26 @@ position:absolute;
 bottom: 0;
 right:0;
 width: 125px;
-
+@media (max-width:768px){
+  width:90px;
+}
 `;
 const HistoryVisionMissionIcon = styled.img `
-
+width:100px;
 
 `;
 const MissionParalaxeImgBottom = styled.img `
 position:absolute;
 top: 0;
 left: 12vh;
-width: 310px;
+width: 300px;
+@media (max-width:900px){
+  width:250px;
+  
+}
+@media (max-width:768px){
+  width:150px;
+}
 `;
 const MissionParalaxeImgRight = styled.img `
 
@@ -175,87 +258,92 @@ position:absolute;
 bottom: 0;
 right:0;
 width: 200px;
+@media (max-width:900px){
+  width:150px;
+  
+}
+@media (max-width:768px){
+  width:85px;
+}
 `;
 
 export default function About() {
   const dispatch = useDispatch()
   const hubList = useSelector((state) => state.hubList)
-
-
+  const {t} = useTranslation()
+  const [abouts, setAbouts] = useState([])
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value
   const { loading,error,hubs } = hubList;
 
 
+   useEffect(() => { 
+    
+     axios.get(`https://blog.donilab.org/wp-json/wp/v2/about/?lang=${currentLang}`)      
+     .then(res => 
+      setAbouts(res.data) , 
+         ); 
+   }, [currentLang])
+
+
   useEffect(() => {
-    dispatch(listHubs())
-  }, [dispatch])
+    dispatch(listHubs(currentLang))
+  }, [dispatch,currentLang])
 
   return (
     <AboutContainer>
       <AboutWrapper>
-      <AboutHero>
-        <AboutheroparalaxeLeft src={AboutheroleftparalaxeImg} alt=""/>
-        <AboutheroparalaxeRight src={AboutherorightparalaxeImg} alt=""/>
-      <SectionTitle white="true">
-      <h1>
-      À pr
+        {
+          abouts.map((about,index)=>(
+            index === 0 ? <AboutHero>
+            <AboutheroparalaxeLeft src={AboutheroleftparalaxeImg} alt=""/>
+            <AboutheroparalaxeRight src={AboutherorightparalaxeImg} alt=""/>
+          <SectionTitle white="true">
+          <h1>
+          {t("apr")}
           <span className="conectimg">
-            <object
-              style={{ fill: " #fff " }}
-              id={Oconnect}
-              type="image/svg+xml"
-              width="100"
-              height="100"
-              data={Oconnect}
-              className="svg"
-            ></object>
-          </span>
-          pos
-        </h1>
-        </SectionTitle>
-       <AboutParagraph>
-       <p>
-       DoniLab est la première structure d’accompagnement de entrepreneuriat innovant au Mali. Depuis 2015, sa mission consiste à accompagner les jeunes dans leur parcours entrepreneurial, en favorisant les projets créant de la valeur ajoutée pour le Mali.
-        </p>
-        <p>
-        DoniLab apporte tout ce dont l’entrepreneur a besoin pour réussir dans son projet : de l’accompagnement personnalisé, de la formation, des outils de prototypage, un accès à une communauté, à un réseau, un gain de visibilité, un appui dans la recherche de financement et un accès à des locaux équipés.
-        </p>
-        <p>
-        L’accompagnement à DoniLab comprend un suivi structuré et un accès à tous les services de la structure. L’accompagnement des entrepreneurs, cœur de métier de DoniLab, a pour but d’appuyer l’entrepreneur dans le processus de maturation de son idée de business, dans la structuration de son projet ainsi que son entrée et sa croissance sur le marché.
-        </p>
-       </AboutParagraph>
-      </AboutHero>
-      <AboutHistoric>
+                  o
+                  <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
+                    <path id="Caminho_661" data-name="Caminho 661" d="M-430.554,188.391l-17.435,20.484a16.525,16.525,0,0,1,3.358,10.076A16.6,16.6,0,0,1-461.3,235.473a16.594,16.594,0,0,1-16.522-16.666,16.594,16.594,0,0,1,16.668-16.522,16.519,16.519,0,0,1,8.618,2.455l17.52-21.039Z" transform="translate(481.135 -91.604)" fill="#95b71d" />
+                    <path id="Caminho_662" data-name="Caminho 662" d="M-431.462,178.8l-21.067-19.376a16.519,16.519,0,0,1-10.7,3.855,16.594,16.594,0,0,1-16.522-16.668,16.594,16.594,0,0,1,16.666-16.522,16.6,16.6,0,0,1,16.522,16.668,16.506,16.506,0,0,1-2.053,7.926l21.737,19.993Z" transform="translate(479.75 -130.087)" fill="#95b71d" />
+                    <path id="Caminho_663" data-name="Caminho 663" d="M-405.252,132.127a16.594,16.594,0,0,0-16.666,16.522,16.351,16.351,0,0,0,4.157,11.081l-10.953,13.414a64.927,64.927,0,0,1,6.514,4.568l10.953-13.325a13.261,13.261,0,0,0,5.851.928,16.593,16.593,0,0,0,16.666-16.522,16.594,16.594,0,0,0-16.522-16.666" transform="translate(517.369 -128.623)" fill="#95b71d" />
+                  </svg>
+    
+                </span>
+                {t("pos")}
+            </h1>
+            </SectionTitle>
+           <AboutParagraph>
+           {parser(about.acf.description_about)}
+           </AboutParagraph>
+          </AboutHero> : index === 1 ?  <AboutHistoric>
       <HistoryparalaxImgtop src={Historyparalaximgtop} alt=""/>
         <HistoryparalaxImgbottom src={Historyparalaximgbottom} alt=""/>
         <HistoryVisionMissionIcon className="iconAbout" src={HistoryIcon} alt="Historic icon" />
         <h1>
-        historique
+        {about.title.rendered}
        </h1>
-        <p>
-        Dr Tidiane Ball, médecin titulaire d’un doctorat en médecine, avec une spécialisation en informatique médicale a créé en 2009 Mali Santé et plus tard Doctix. Fort de ces succès, mais aussi et surtout motivé pour transmettre ses compétences, partager son expérience et mettre son réseau à profit, il fonda DoniLab en 2015. Aujourd’hui, DoniLab puise son énergie dans le formidable potentiel d’innovation et d’action de la jeunesse malienne. DoniLab s’améliore et apprend chaque jour à leur coté et nous employons toute notre énergie au service de leurs projets afin de créer de la valeur localement à travers l’impulsion et le développement des projets entrepreneuriaux dans tous les secteurs.Dr Tidiane Ball, médecin titulaire d’un doctorat en médecine, avec une spécialisation en informatique médicale a créé en 2009 Mali Santé et plus tard Doctix. Fort de ces succès, mais aussi et surtout motivé pour transmettre ses compétences, partager son expérience et mettre son réseau à profit, il fonda DoniLab en 2015. Aujourd’hui, DoniLab puise son énergie dans le formidable potentiel d’innovation et d’action de la jeunesse malienne. DoniLab s’améliore et apprend chaque jour à leur coté et nous employons toute notre énergie au service de leurs projets afin de créer de la valeur localement à travers l’impulsion et le développement des projets entrepreneuriaux dans tous les secteurs.
-        </p>
-      </AboutHistoric>
-      <AboutVision>
+        {parser(about.acf.description_about)}
+      </AboutHistoric> : index === 2 ? <AboutVision>
        
-        <HistoryVisionMissionIcon className="iconAbout" src={VisionIcon} alt="Visionicon" />
-        <h1>
-        vision
-       </h1>
-        <p>
-        Faire de DoniLab la structure d’accompagnement de l’entreprenariat innovant de référence de la sous-région à travers des services de qualité permettant à un nombre important de jeunes entrepreneurs de lancer et de faire croître sainement leurs entreprises
-        </p>
-      </AboutVision>
-      <AboutMission>
+       <HistoryVisionMissionIcon className="iconAbout" src={VisionIcon} alt="Visionicon" />
+       <h1>
+       {about.title.rendered}
+      </h1>
+      {parser(about.acf.description_about)}
+     </AboutVision> : index === 3 ? <AboutMission>
       <MissionParalaxeImgBottom src={MissionParalaxeBottom} alt=""/>
         <MissionParalaxeImgRight src={MissionRightParalaxeImg} alt=""/>
         <HistoryVisionMissionIcon className="iconAbout" src={MissionIcon} alt="Historic icon" />
         <h1>
-        mission
+        {about.title.rendered}
+
        </h1>
-        <p>
-        La mission de DoniLab consiste à accompagner les jeunes vers l’entrepreneuriat, en favorisant les projets créant de la valeur ajoutée pour le Mali. L’ambition étant aussi de constituer le chaînon manquant entre la start-up et l’entreprise rentable à travers des programmes d’accélération de croissance, de renforcement des compétences clés de l’entrepreneur et de ses collaborateurs  afin de les accompagner vers le succès.
-        </p>
-      </AboutMission>
+       {parser(about.acf.description_about)}
+      </AboutMission> : ""
+          ))
+        }
+      
       <ErrorBoundary>
       {
         loading ? <Loading/> : error ? <MessageBox>erreur de chargement .</MessageBox> :(

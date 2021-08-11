@@ -32,7 +32,11 @@ span svg {
     /* margin: 0 auto; */
     width: 87px;
 }
+
+
+}
 @media (max-width: 768px) {
+  margin: 0 0 6vh 0;
   h1,span{
    
     font-size: 2rem;
@@ -41,6 +45,17 @@ span svg {
     width: 43px;
     left: -10px;
     bottom: -56px;
+}
+}
+@media (max-width: 500px) {
+  h1,span{
+   
+   font-size: 1.5rem;
+ }
+ span svg {
+  width: 32px;
+left: -9px;
+bottom: -60px;
 }
 }
  

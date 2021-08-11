@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import ExpertiseSection from '../Components/ExpertiseSection'
 import Hero from '../Components/Hero'
 import BlogSlideSection from '../Components/BlogSlideSection';
@@ -12,6 +12,7 @@ import { listHubs } from '../actions/HubActions';
 import Loading from '../Components/Loading';
 import MessageBox from '../Components/MessageBox';
 import ErrorBoundary from '../Components/ErrorBoundary';
+import { CurrentLangContext } from '../Context/CurrentLangContext';
 
 
 
@@ -20,13 +21,16 @@ function Home() {
   const dispatch = useDispatch()
   const hubList = useSelector((state) => state.hubList)
 
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value
 
   const { loading,error,hubs } = hubList;
 
 
   useEffect(() => {
-    dispatch(listHubs())
-  }, [dispatch])
+    dispatch(listHubs(currentLang))
+  }, [dispatch,currentLang])
+
 
   return (
     <>
@@ -41,7 +45,7 @@ function Home() {
         loading ? <Loading></Loading>  : error ? <MessageBox></MessageBox> :(
           hubs.map((hub,index)=>(
             index === 0  && (
-            <TeamSection hub={hub}/> 
+            <TeamSection home="home" hub={hub}/> 
               
               )  
             ))

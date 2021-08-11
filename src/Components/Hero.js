@@ -1,9 +1,11 @@
 import React,{useState,useRef, useEffect} from 'react'
 import styled from 'styled-components/macro'
-import DonilabHeroImg from "./../assets/heroimage.png"
-import HeroDonilabImg from "./../assets/herodonilab.png"
+import DonilabHeroImg from "./../assets/donilabherohomeImg.jpg"
+import HeroDonilabImg from "./../assets/herodonilab.jpg"
 import CircleHeroImg from "./../assets/rhome1.png"
 import CircleHeroInImg from "./../assets/cercleblanc.svg"
+import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 
 const HeroSection = styled.section`
 overflow:hidden;
@@ -13,33 +15,36 @@ overflow:hidden;
 
 const HeroWrapper = styled.div`
 width:100%;
-display:flex;
+display:grid;
+grid-template-columns: 55% auto;
 align-items:center;
 height:78vh;
 @media (max-width: 768px) {
- flex-wrap:wrap-reverse;
+  /* grid-template-columns: 1fr;
+grid-auto-flow: dense; */
+display: flex;
+  
+flex-wrap:wrap-reverse;
+
 }
 
-@media (max-width: 768px) {
-  flex-wrap:wrap-reverse;
-}
+/* @media (max-width: 768px) {
+} */
 
 `;
 
 const HeroTextBox = styled.div`
-flex: 1;
 background-color:#2755A1;
-width:55vw;
+width:100%;
 z-index:1;
 display:flex;
 align-items:center;
 height:78vh;
-
 @media (max-width: 768px) {
   width:100%;
-  height:39vh;
+  height: 45vh;
 }
-
+/* 
 @media screen and (min-width:803px) and (max-width:1180px) {
   
 }
@@ -48,7 +53,7 @@ height:78vh;
 }
 @media (max-width: 768px) {
   width:100%;
-}
+} */
 
 .colorgreen{
   color:#95B71D;
@@ -71,7 +76,7 @@ h1 {
     font-size: 2.50rem;
   }
   p{
-    font-size:1.5rem !important;
+    font-size:1.4rem;
   }
 }
  
@@ -82,7 +87,7 @@ h1 {
    font-size: 1.9rem;
  }
  p{
-   font-size:1.3rem ;
+   font-size:1.1rem ;
  }
 }
  
@@ -102,8 +107,23 @@ line-height: 1.32;
 `;
 
 const HeroInfo = styled.div`
-flex: 1;
+animation: slideInFromLeft 1s ease-in;
 margin-left:8vh;
+
+@media (max-width: 768px) {
+  animation: slideInFromTop 1s ease-in;
+}
+@media (max-width: 500px) {
+  width:300px;
+  margin:0 auto;
+  padding: 1rem 2rem;
+  h1{
+    font-size: 1.5rem;
+  }
+  p{
+   font-size:1rem ;
+ }
+}
 @media (min-width: 769px) and (max-width: 1024px) {
   margin-left:6vh;
 }
@@ -114,23 +134,33 @@ h1,span{
 `;
 const HeroImgarc = styled.img`
 height:330px;
+animation: slideInFromLeft 1s ease-in;
+@media (max-width: 768px) {
+  animation: slideInFromTop 1s ease-in;
+  height: 260px;
+}
+@media (max-width: 500px) {
+ height:100%;
+}
 `;
 
 const HeroImgBox = styled.div`
-
+animation: slideInFromRight 1s ease-in;
 @media (max-width: 768px) {
-  width:100%;
-  height:39vh;
+  animation: slideInFromBottom 1s ease-in;
+  width: 100%;
+  height:35vh;
 }
-width:45vw;
-
-
+width:100%;
+/* width:45vw; */
 height:78vh;
 
 `;
 const HeroImg = styled.img`
-
 object-fit:cover;
+
+width: 100%;
+height:100%
 `;
 const HeroInImgarc = styled.img`
 position:absolute;
@@ -140,6 +170,11 @@ right: 61vh;
 
 
 function Hero({slides}) {
+  const { t} = useTranslation()
+ 
+  const generalList = useSelector((state) => state.generalList)
+  const {loading, error,generals }= generalList
+  
 
  
   return (
@@ -149,19 +184,18 @@ function Hero({slides}) {
      <HeroImgarc src={CircleHeroImg} />
      <HeroInfo>
        <h1>
-       <span className="colorgreen">L’incubateur</span>
-       <span>de</span>
-       <span>référence</span>
-       <span>au Mali</span>
+       <span className="colorgreen">{t('incubator')}</span>
+       <span>{t('de')}</span>
+       <span>{t('refe')}</span>
+       <span>{t('au')}</span>
        </h1>
        <p>
-       par les entrepreneurs & <br/>pour les entrepreneurs
+      {t('parentrepreneur')} & <br/>{t('pourentrepreneur')}
        </p>
      </HeroInfo>
       </HeroTextBox>
       <HeroImgBox>
-        {/* <HeroInImgarc src={CircleHeroInImg}/> */}
-        <HeroImg src={HeroDonilabImg}/>
+        <HeroImg src={DonilabHeroImg}/>
       </HeroImgBox>
         </HeroWrapper>
       </HeroSection>

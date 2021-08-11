@@ -1,9 +1,10 @@
-import React,{useState,useRef, useEffect} from 'react'
+import React,{useState,useRef, useEffect, useContext} from 'react'
 import styled from 'styled-components/macro'
 import DonilabHeroImg from "./../assets/heroimage.png"
 import HeroDonilabImg from "./../assets/herodonilab.png"
 import CircleHeroImg from "./../assets/rhome1.png"
 import CircleHeroInImg from "./../assets/cercleblanc.svg"
+import { CurrentLangContext } from '../../Context/CurrentLangContext'
 
 const HeroSection = styled.section`
 overflow:hidden;
@@ -139,7 +140,8 @@ right: 61vh;
 
 
 function Hero({slides}) {
-
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value
  
   return (
       <HeroSection>
@@ -150,7 +152,13 @@ function Hero({slides}) {
        <h1>
        facej
        </h1>
-       <h2>État du projet : <span>En cours</span></h2>
+       <h2>
+         État du projet : 
+         <span>
+           En cours
+
+         </span>
+      </h2>
        <h2>DURÉE : <span>3,5 ans</span></h2>
        <p>
        Le Fonds d’appui à la création d’entreprise par les jeunes/FACEJ est créé par l’Ambassade du Danemark et mis en œuvre par un gestionnaire de fonds (le consortium PLAN-BØRNEfonden et Swisscontact).

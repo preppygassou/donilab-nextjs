@@ -17,6 +17,17 @@ padding:3.5vh;
 width:100%;
 height: 100%;
 border-radius: 10px 0 0 10px;
+@media (max-width:768px){
+  height: 75vh;
+padding:2vh;
+border-radius: 0;
+p{
+  font-size:.9rem;
+/* height: 40vh; */
+
+}
+
+}
 `;
 
 const EventImage = styled.div`
@@ -28,7 +39,12 @@ background: no-repeat center center;
   width:100%;
 height: 100%;
   border-radius: 0px 10px 13px 0px;
+  @media (max-width:768px){
+border-radius: 0;
 
+display:flex;
+height: 25vh;
+}
 `;
 
 const DoniEventSlider = styled.div `
@@ -39,6 +55,15 @@ height: 100%;
 display: grid;
 align-items:center;
 grid-template-columns:1fr 1fr;
+
+@media (max-width:768px){
+display:flex;
+flex-direction:column-reverse;
+/* height:60vh; */
+/* grid-template-columns:1fr; */
+/* margin:0 auto;
+width:90%; */
+}
 
 &::before{
   content:'';

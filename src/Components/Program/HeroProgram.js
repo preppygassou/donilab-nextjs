@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import styled from 'styled-components/macro'
 //import DonilabHeroImg from "./../../assets/heroimage.png";
 import HeroDonilabImg from "./../../assets/programhero.png";
@@ -7,11 +7,15 @@ import LogoProgram from "./../../assets/logoprogram.png";
 //import CircleHeroInImg from "./../../assets/cercleblanc.svg";
 import parse from "html-react-parser";
 import Dots from '../Dots';
+import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
 const HeroProgramSection = styled.section`
 overflow:hidden;
  height:78vh;
  background-color:#EFEFEF;
+/*  @media (max-width: 900px) {
+height:100%;
+} */
 `;
 
 const HeroProgramWrapper = styled.div`
@@ -20,13 +24,17 @@ display:grid;
 grid-template-columns:1fr 1fr;
 align-items:center;
 height:78vh;
-@media (max-width: 768px) {
- flex-wrap:wrap-reverse;
+@media (max-width: 900px) {
+  display:flex;
+  flex-direction:column-reverse;
+ /* flex-wrap:wrap-reverse; */
+height:100%;
+
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   flex-wrap:wrap-reverse;
-}
+} */
 
 `;
 
@@ -38,23 +46,13 @@ z-index:1;
 display:flex;
 align-items:center;
 
-@media (max-width: 768px) {
-  width:100%;
-  height:39vh;
+@media (max-width:430px) {
+ padding:2rem 0;
 }
 
-@media screen and (min-width:803px) and (max-width:1180px) {
-  
-}
-@media screen and (min-width:803px) and (max-width:1180px) {
-  
-}
-@media (max-width: 768px) {
-  width:100%;
-}
 
 img {
-  width:90px;
+  width:150px;
 }
 
 h1 {
@@ -81,17 +79,7 @@ font-family:"Montserrat Alternates";
 font-size:1.2rem;
 }
 
-@media (max-width: 768px) {
-  h1{
-   
-    font-size: 2.50rem;
-  }
-  p{
-    font-size:1rem !important;
-  }
-}
- 
-@media (min-width: 769px) and (max-width: 1024px) {
+@media(max-width: 1024px) {
   h1{
    
    font-size: 2rem;
@@ -100,6 +88,27 @@ font-size:1.2rem;
    font-size:1rem ;
  }
 }
+
+@media (max-width: 768px) {
+  h1{
+   
+    font-size: 2rem;
+  }
+  p{
+    font-size:.9rem;
+  }
+}
+
+@media (max-width: 500px) {
+  h1,h3{
+   
+    font-size: 1.5rem;
+  }
+  p{
+    font-size:.8rem;
+  }
+}
+
  
 
 p{
@@ -118,7 +127,7 @@ line-height: 1.32;
 const HeroProgramInfo = styled.div`
 
 margin:0 8vh;
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
   margin-left:6vh;
   p{
     padding-right:2rem;
@@ -131,6 +140,9 @@ h1,span,h3{
 `;
 const HeroProgramImgarc = styled.img`
 height:330px;
+@media (max-width: 9004px) {
+  height:290px;
+}
 `;
 
 const HeroProgramSlideWrapper = styled.div`
@@ -189,7 +201,8 @@ function HeroProgram({ program }) {
   const [current, setCurrent] = useState(0);
   const length = program.acf.galerie_programme.length;
   const timeout = useRef(null);
-
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value
 
   useEffect(() => {
     const nextSlide = () => {
@@ -219,10 +232,13 @@ function HeroProgram({ program }) {
               {program.title.rendered}
             </h1>
             <h3>
-              État du projet : <span>{program.acf.etat}</span>
+        {currentLang=== "en" ?"Status of the project :":"État du projet : "}
+
+               <span>{program.acf.etat}</span>
             </h3>
-            <h3>
-              DURÉE : <span>{program.acf.duree_du_programme}</span>
+            <h3>            
+        {currentLang=== "en" ?"DURATION :":"DURÉE : "}
+              <span>{program.acf.duree_du_programme}</span>
             </h3>
             {parse(program.content.rendered)}
 

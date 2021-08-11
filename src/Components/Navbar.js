@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components/macro'
 import { Link,NavLink  } from 'react-router-dom'
 import { menuData } from '../data/MenuData';
+import { menuDataEn } from '../data/MenuDataEn';
 import Bar from '../assets/bar.svg';
 import { ContactBtn } from './ContactBtn';
 import LogoDonilab from "./../assets/logodonilab.png"
+import LanguageSelector from './LanguageSelector';
+import { CurrentLangContext } from '../Context/CurrentLangContext';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { listgenerals } from '../actions/GeneralActions';
+import Loading from './Loading';
 
 
 const Nav = styled.nav `
@@ -17,6 +24,7 @@ padding:1rem 2rem;
 position: sticky;
 top: 0;
 width:100%;
+overflow:hidden;
 background-color:#fff;
 .active {
   color:#2755A1;
@@ -73,10 +81,10 @@ position:relative;
 &:hover{
   color:#2755A1;
 }
-@media (min-width: 768px) and (max-width: 1200px) {
+@media  (max-width: 1200px) {
   p{
   
-  font-size: 15px !important; 
+  font-size: 15px; 
 
 }
 }
@@ -132,6 +140,21 @@ display:none;
 const NavMenu = styled.div `
 display:flex;
 align-items:center;
+.selectorlanguage{
+  margin: 0 16px;
+  padding-bottom:.5rem;
+  display:flex;
+  align-items:center;
+  img{
+    width:18px;
+  }
+  button{
+    border:none;
+    margin:.5rem;
+    cursor:pointer;
+    outline: none;
+  }
+}
 @media screen and (max-width:925px){
   display:none;
 }
@@ -169,6 +192,17 @@ const Contactfunction =(stylecontact) =>{
 }
 
 const Navbar = ({toggle}) => {
+
+  const value = useContext(CurrentLangContext);
+  const generalList = useSelector((state) => state.generalList)
+  const {loading, error,generals }= generalList
+  const dispatch = useDispatch()
+
+  const {currentLang} = value
+
+   useEffect(() => {     
+    dispatch(listgenerals(currentLang))       
+   }, [dispatch,currentLang])
   return (
     <Nav>
       <Logo to="/"><NavMenuLogo src={LogoDonilab} alt="logo donilab"/></Logo>
@@ -178,14 +212,33 @@ const Navbar = ({toggle}) => {
           <span class="line"></span>
         </MenuHamburger>
       <NavMenu>
-           {menuData.map((item,index)=>(
+           {currentLang === "en" ? menuDataEn.map((item,index)=>(
+        
+        <NavMenuLinks className={Contactfunction(item.link)} exact={true} to={item.link} activeClassName={Activefunction(item.link)} key={index}>
+        <p>{item.title}</p>
+        <div class="check-item"></div>
+        </NavMenuLinks>
+       )) : menuData.map((item,index)=>(
+        
+            <NavMenuLinks className={Contactfunction(item.link)} exact={true} to={item.link} activeClassName={Activefunction(item.link)} key={index}>
+            <p>{item.title}</p>
+            <div class="check-item"></div>
+            </NavMenuLinks>
+           ))}
+           <LanguageSelector/>
+      </NavMenu>
+      {/* <NavMenu>
+           {
+             loading? <Loading></Loading> :
+             generals[0].acf.menu.map((item,index)=>(
              
             <NavMenuLinks className={Contactfunction(item.link)} exact={true} to={item.link} activeClassName={Activefunction(item.link)} key={index}>
             <p>{item.title}</p>
             <div class="check-item"></div>
             </NavMenuLinks>
            ))}
-      </NavMenu>
+           <LanguageSelector/>
+      </NavMenu> */}
 
     </Nav>
   )

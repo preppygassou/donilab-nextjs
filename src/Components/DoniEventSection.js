@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled,{css} from 'styled-components/macro';
 import { EventData } from '../data/EventData';
 import ArrowLeftIcon from "./../assets/svg/arowleft.svg"
@@ -10,6 +10,8 @@ import DoniEventContent from './DoniEventContent';
 import Loading from './Loading';
 import MessageBox from './MessageBox';
 import Dots from './Dots';
+import { CurrentLangContext } from '../Context/CurrentLangContext';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -21,13 +23,20 @@ const DoniEventContainer = styled.section`
  width:1000px;
  z-index:1; 
  height:50vh ;
+@media (max-width:768px){
+ width:100%;
+ height:100% ;
 
+}
 `;
 
 const DoniEventSection = styled.section`
 height:70vh;
 margin-bottom:2vh;
 overflow:hidden;
+@media (max-width:768px){
+ height:100vh ;
+}
 
 `;
 
@@ -36,7 +45,12 @@ position:relative;
 width:1300px;
 height:55vh;
 margin:0 auto;
+@media (max-width:768px){
+ width:80%;
+height:100%;
 
+
+}
 `;
 
 const DoniEventSlide = styled.div `
@@ -99,16 +113,20 @@ right: 0;
 
 
 export default function DoniEvent() {
+  const {t} = useTranslation()
   const eventList = useSelector((state )=> state.eventList);
   const {loading,error,events} = eventList;
   const [current, setCurrent] = useState(0);
  const length = events.length;
  const timeout = useRef(null);
+ const value = useContext(CurrentLangContext);
+  const {currentLang} = value
 const dispatch = useDispatch()
 
+
  useEffect(() => {
-  dispatch(listevents())
- }, [dispatch])
+  dispatch(listevents(currentLang))
+ }, [dispatch,currentLang])
 
  useEffect(() => {
   const nextSlide = ()=>{
@@ -145,7 +163,7 @@ const dispatch = useDispatch()
   return (
     <DoniEventSection>
         <DoniEventHead>
-        <h1>Nos évènements</h1>
+        <h1>{t("nos")} {t("eventitile")}</h1>
         </DoniEventHead>
      
           {  

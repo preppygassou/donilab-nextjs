@@ -33,8 +33,6 @@ const settings = {
   slidesToScroll: 1,
   arrows: false,
   speed: 500,
-
-
 };
 
 function PartnersSlider({ program }) {
@@ -46,7 +44,7 @@ function PartnersSlider({ program }) {
 
             slidesPerPage={program.acf.les_partenaires_du_programmes.length}
             breakpoints={{
-              640: {
+              768: {
                 slidesPerPage: 1,
               },
               900: {

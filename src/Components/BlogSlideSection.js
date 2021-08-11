@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components/macro'
 import ConectImgTitle from "./../assets/svg/conecttitle.svg"
 import SectionBlogParalaxeImg from "./../assets/svg/sectionblogparalaxe.svg"
@@ -18,10 +18,13 @@ import { listPosts } from '../actions/PostActions'
 /* import Carousel from './Carousel' */
 import Carousel, { slidesToShowPlugin, arrowsPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
+import { useTranslation } from 'react-i18next'
+import { CurrentLangContext } from '../Context/CurrentLangContext'
 
 
 
 const BlogSection = styled.section`
+animation: slideInFromBottom 1s ease-in;
 position:relative;
 padding:8vh 0 8vh 18vh;
 background-color:#fff;
@@ -59,11 +62,11 @@ display: flex;
  ul li{
    list-style-type:none;
    
-    @media  (max-width: 640px) {
+    @media  (max-width: 768px) {
  
-  width:400px !important;
-   max-width: 400px !important;
-    min-width: 400px !important;
+  width:250px !important;
+   max-width: 250px !important;
+    min-width: 250px !important;
 }
     
  }
@@ -203,7 +206,11 @@ transform:scale(1.05);
 }
 
 @media (max-width: 768px)   {
-  margin-top:1vh;
+  margin-top:7vh;
+}
+@media (max-width: 400px)   {
+  margin-right:3rem;
+  text-align:center;
 }
 
 `;
@@ -241,7 +248,7 @@ width:200px;
 }
 
 @media (max-width: 768px)   {
-  width:100px;
+ display:none;
 
 
 }
@@ -250,9 +257,13 @@ width:200px;
 const NextArrow = styled.img`
 ${arrowButton}
 position:absolute;
-top:40%;
+top:38%;
 left:3%;
 width: 60px;
+@media (max-width: 768px)   {
+  width:40px;
+
+}
 `;
 const PrevArrow = styled.img`
 position:absolute;
@@ -277,12 +288,15 @@ function SampleNextArrow(props) {
 
 
 const BlogSlideSection = () => {
-  //const [posts, setPosts] = useState([])
+  //const [posts, setPosts] = useState([])\
+  const { t} = useTranslation()
   const [isloaded, setIsloaded] = useState(false)
   const postList = useSelector((state) => state.postList);
   const { loading, error, posts } = postList;
   /* const posts = data.posts; */
   const dispatch = useDispatch()
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value
 
   const history = useHistory();
 
@@ -365,9 +379,9 @@ const BlogSlideSection = () => {
 
 
   useEffect(() => {
-    dispatch(listPosts())
+    dispatch(listPosts(currentLang))
     setDomLoaded(true)
-  }, [dispatch])
+  }, [dispatch,currentLang])
 
   useEffect(() => {
     setActive((length - (posts % length)) % length) // prettier-ignore
@@ -401,7 +415,8 @@ const BlogSlideSection = () => {
     );
   } */
 
-  function SamplePrevArrow(props) {
+/*   function SamplePrevArrow(props) {
+
     const { onClick, currentSlide } = props;
 
     return (
@@ -411,25 +426,7 @@ const BlogSlideSection = () => {
       />
     );
   }
-
-  /* const settings = {
-    slidesToShow: 4,
-    slidesToScroll:1,
-    nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,  
-        slide:'<>',   
-  }; */
-  /* const settings = {
-    slidesToShow: 4,
-    slidesToScroll:1,
-    nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,  
-        slide:'<>',   
-  }; */
-
-  /* if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>; */
-
+ */
   return (
     <BlogSection>
       <ParalaxeBlogImg src={SectionBlogParalaxeImg} alt="" />
@@ -437,7 +434,8 @@ const BlogSlideSection = () => {
       <SectionTitle>
 
         <h1>
-          n
+          
+        {t('n')}
             <span className="conectimg">
             o
               <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
@@ -447,7 +445,7 @@ const BlogSlideSection = () => {
             </svg>
 
           </span>
-            s Actualités
+          {t('os')} {t('actualites')}
             </h1>
       </SectionTitle>
 
@@ -463,8 +461,11 @@ const BlogSlideSection = () => {
               arrowLeft= {<NextArrow src={ArrowLeftIcon}/> }
               addArrowClickHandler= {true}
               breakpoints={{
-                640: {
+                768: {
                   slidesPerPage: 1,
+                  centered:true,
+                 offset:1,
+
                 },
                 900: {
                   slidesPerPage: 2,
@@ -512,7 +513,7 @@ const BlogSlideSection = () => {
           </BlogWrapper> */}
       </BlogContainer>
       <AllblogBtnsection className="allblog">
-        <a href="https:/blog.donilab.org" target="_blank" rel="noopener noreferrer">Toutes nos actualités</a>
+        <a href="https:/blog.donilab.org" target="_blank" rel="noopener noreferrer">{t('allactu')}</a>
       </AllblogBtnsection>
     </BlogSection>
   )

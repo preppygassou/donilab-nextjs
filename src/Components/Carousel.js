@@ -6,7 +6,6 @@ import ArrowRighthIcon from "./../assets/svg/arowright.svg"
 const arrowButton = css`
 
 cursor:pointer;
-
 margin-right:1rem;
 user-select:none;
 transition:0.3s;

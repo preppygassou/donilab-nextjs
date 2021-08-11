@@ -16,12 +16,12 @@ const {
   
 } = require("../constants/EventConstants");
 
-const listevents = () => async (dispatch) => {
+const listevents = (currentLang) => async (dispatch) => {
   try {
     dispatch({ type:EVENT_LIST_REQUEST });
     const { data } = await axios.get(
     
-      "https://blog.donilab.org/wp-json/wp/v2/donievent?_embed"
+      `https://blog.donilab.org/wp-json/wp/v2/donievent/?lang=${currentLang}`
     );
     dispatch({ type: EVENT_LIST_SUCCESS, payload: data });
   } catch (error) {

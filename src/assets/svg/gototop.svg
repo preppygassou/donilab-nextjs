@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="103.695" height="103.695" viewBox="0 0 103.695 103.695">
+  <defs>
+    <filter id="Elipse_224" x="0" y="0" width="103.695" height="103.695" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_1035" data-name="Grupo 1035" transform="translate(-1192.51 -6793.033)">
+    <g transform="matrix(1, 0, 0, 1, 1192.51, 6793.03)" filter="url(#Elipse_224)">
+      <circle id="Elipse_224-2" data-name="Elipse 224" cx="42.119" cy="42.119" r="42.119" transform="matrix(0.02, 1, -1, 0.02, 93.23, 6)" fill="#2755a1"/>
+    </g>
+    <path id="Caminho_828" data-name="Caminho 828" d="M27.065,29.129l.015-.146L28.875,0,0,1.553" transform="translate(1223.196 6850.048) rotate(-47)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="6"/>
+  </g>
+</svg>

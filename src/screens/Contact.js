@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled, { css } from "styled-components/macro";
 import { Link } from "react-router-dom";
 import ContactheroleftparalaxeImg from "./../assets/svg/paralaxetopherohub.svg";
@@ -10,6 +10,11 @@ import LogoDonilab from "./../assets/logodonilabwhite.png";
 import ContactIcone from "./../assets/contacticone.png";
 import EmailIcone from "./../assets/emailicone.png";
 import MapIcone from "./../assets/mapicone.png";
+import { CurrentLangContext } from "../Context/CurrentLangContext";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import Loading from "../Components/Loading";
+import MessageBox from "../Components/MessageBox";
 
 const ContactPage = styled.section`
 
@@ -29,6 +34,18 @@ const HeroContact = styled.div`
     letter-spacing: -0.03em;
     color: rgb(255, 255, 255);
   }
+  @media  (max-width: 900px) {
+    padding:5rem;
+    h1{
+    font-size: 2rem;
+
+    }
+
+}
+@media  (max-width: 400px) {
+  padding:3rem 2rem;
+
+    }
 `;
 
 const ContactSection = styled.section`
@@ -37,6 +54,14 @@ const ContactSection = styled.section`
   position: relative;
   padding: 10vh; */
   padding:4rem 10rem;
+  @media  (max-width: 900px) {
+    padding:4rem 4rem;
+
+    }
+  @media  (max-width: 400px) {
+    padding:4rem 2rem;
+
+    }
 
   h1{
     font-family:"CeraRoundPro-Bold";
@@ -84,13 +109,20 @@ const ContactFormContainer = styled.div`
 `;
 const Channels = styled.div`
   display: grid;
+  grid-gap:1rem;
   width: 100%;
   grid-template-columns:repeat(2,1fr);
   grid-template-rows:1fr;
+  @media  (max-width: 900px) {
+    grid-template-columns:1fr;
+}
 `;
 const Channel = styled.div`
 
   text-align: left;
+  p{
+    word-wrap:wrap;
+  }
 `;
 const ChannelLink = styled.a`
 color: rgb(39, 85, 161);
@@ -117,7 +149,7 @@ background-image: linear-gradient(120deg, rgb(39, 85, 161) 0%, rgb(39, 85, 161) 
       transform:rotate(-37deg)
     }
 `;
-const goToDonilab = styled.div`
+const GoToDonilab = styled.div`
   margin: 2rem 0rem;
 `;
 const SocialLinks = styled.div`
@@ -129,6 +161,10 @@ const FooterInfoMap = styled.div`
 const FooterInfoMapIcone = styled.img``;
 const FooterSocial = styled.div`
   display: flex;
+  flex-wrap:wrap;
+  @media  (max-width: 300px) {
+    
+}
 `;
 const FooterSocialLink = styled.a`
 background-color:rgb(39, 85, 161);
@@ -151,57 +187,70 @@ const FooterSocialImg = styled.img`
 `;
 
 function Contact() {
+
+  const generalList = useSelector((state) => state.generalList)
+  const {loading, error,generals }= generalList
+
   return (
     <ContactPage>
+      {
+        loading ? <div style={{ height: '50vh' }}> <Loading></Loading> </div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> : <>
       <HeroContact>
-        <h1>Comment préférez-vous nous parler?</h1>
+       
+        <h1> {generals[0].title.rendered}</h1>
       </HeroContact>
       <ContactSection>
-        <ContactInfoContainer>
-          <Channels>
-            <Channel>
-              <h1>E-mail</h1>
-              <p>
-                Avez-vous un doute? Nous pouvons vous aider via notre canal de
-                email.
-              </p>
-              <ChannelLink href="mailto:info@donilab.net" target="_blank" rel="noopener noreferrer">
-                info@donilab.net
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </ChannelLink>
-            </Channel>
-            <Channel>
-              <h1>Telephone</h1>
-              <p>
-                Vous pouvez appeler à tout moment au numéro ci-dessous. <br />
-                Nous travaillons les jours ouvrables de 9h à 18h
-              </p>
-              <ChannelLink href="tel:info@donilab.net" target="_blank" rel="noopener noreferrer">
-                +223 70091609
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </ChannelLink>
-            </Channel>
-          </Channels>
-          <hr class="Channel_Divider" />
+      <ContactInfoContainer>
+         
+              <Channels>
+                 <Channel>
+                  <h1>{generals[0].acf.page_contact[0].titre_pagecontact}</h1>
+                  <p>
+                  {generals[0].acf.page_contact[0].description_pagecontact}
 
-          <goToDonilab>
-            <Channel>
-              <h1>Se rendre à DONILAB</h1>
+                  </p>
+                  <ChannelLink href={generals[0].acf.page_contact[0].link_pagecontact} target="_blank" rel="noopener noreferrer">
+                    {
+                      generals[0].acf.page_contact[0].link_title
+                    }
+                    <i className="fa fa-arrow-right" aria-hidden="true"></i>
+                  </ChannelLink>
+                </Channel> 
+                <Channel>
+              <h1>{generals[0].acf.page_contact[1].titre_pagecontact}</h1>
               <p>
-                Sotuba ACI 2000 <br /> Bamako, Mali
+              {generals[0].acf.page_contact[1].description_pagecontact}
+
               </p>
-              <ChannelLink href="https://goo.gl/maps/FSLUzaFMUvnsJaZv8" target="_blank" rel="noopener noreferrer">
-                Lien vers le map
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              <ChannelLink href={generals[0].acf.page_contact[1].link_pagecontact} target="_blank" rel="noopener noreferrer">
+              {
+                      generals[0].acf.page_contact[1].link_title
+                    }
+                <i className="fa fa-arrow-right" aria-hidden="true"></i>
               </ChannelLink>
-            </Channel>
-          </goToDonilab>
-          <hr class="Channel_Divider" />
-          <SocialLinks>
-            <h1>Nos reseaux sociaux</h1>
+            </Channel> 
+                
+          </Channels>
+          <hr className="Channel_Divider" />
+
+           <GoToDonilab>
+             <Channel>
+               <h1>{generals[0].acf.page_contact[2].titre_pagecontact}</h1>
+               <p>
+                 Sotuba ACI 2000 <br /> Bamako, Mali
+               </p>
+               <ChannelLink href="https://goo.gl/maps/FSLUzaFMUvnsJaZv8" target="_blank" rel="noopener noreferrer">
+                 {generals[0].acf.page_contact[2].link_title}
+                 <i className="fa fa-arrow-right" aria-hidden="true"></i>
+               </ChannelLink>
+             </Channel>
+           </GoToDonilab> 
+          
+          <hr className="Channel_Divider" />
+           <SocialLinks>
+            <h1>{generals[0].acf.page_contact[3].titre_pagecontact}</h1>
             <p>
-              Découvrez les nouveautés et recevez des conseils sur nos réseaux
-              sociaux .
+            {generals[0].acf.page_contact[3].description_pagecontact}
             </p>
             <FooterSocial>
               <FooterSocialLink href="https://www.facebook.com/donilab.officiel" target="_blank" rel="noopener noreferrer">
@@ -217,9 +266,14 @@ function Contact() {
               <i className="fa fa-linkedin" aria-hidden="true"></i>
               </FooterSocialLink>
             </FooterSocial>
-          </SocialLinks>
+          </SocialLinks> 
+          
+ 
         </ContactInfoContainer>
+        
       </ContactSection>
+      </>
+    }
     </ContactPage>
   );
 }

@@ -5,11 +5,14 @@ import CircleAfterHero from "./../assets/circleafterhero.svg";
 import ConectImgTitle from "./../assets/svg/conecttitle.svg"
 import Oconnect from "./../assets/svg/oconnect.svg"
 import SectionTitle from "./SectionTitle"
+import { useTranslation } from 'react-i18next';
+
 
 
 
 const ExpertisesContainerWrapper= styled.section `
 padding:8vh 0;
+animation: slideInFromBottom 1s ease-in;
 background-color:${({expertise})=>(expertise ? 'transparent':'#EFEFEF')};
 margin-bottom:${({expertise})=>(expertise ? '8vh':'0')};
 `;
@@ -22,14 +25,30 @@ right:0;
 
 img{
   height:420px;
+  
 }
 
 clear: both;
 
 @media (min-width: 1281px) { 
+  animation: slideInFromTop 1s ease-in;
+
   img{
   height:400px;
 }
+}
+
+@media (max-width: 768px) {
+  animation: slideInFromTop 1s ease-in;
+  img{
+  height:300px;
+}
+}
+@media (max-width: 500px) {
+  img{
+    display:none;
+}
+  
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -39,11 +58,6 @@ clear: both;
 
 }
 
-@media (max-width: 768px)   {
-  img{
-  height:180px;
-}
-}
 
 @media (min-width:  1025px) and (max-width: 1280px) {
   img{
@@ -93,6 +107,7 @@ span{
 `;
 
 function ExpertiseSection({expertise}) {
+  const { t} = useTranslation()
   return (
     <ExpertisesContainerWrapper expertise={expertise}>
         <CircleAfterHeroDiv expertise={expertise} className="circleafterhero">
@@ -100,7 +115,7 @@ function ExpertiseSection({expertise}) {
       </CircleAfterHeroDiv>
       <SectionTitle>
           <h1 className={expertise ? "sectiontitle" :""}> 
-            n
+          {t('n')}
             <span className="conectimg">
               o
               <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
@@ -110,7 +125,7 @@ function ExpertiseSection({expertise}) {
 </svg>
 
             </span>
-            tre savoir-faire
+            {t('tre')} {t('expertise')}
             </h1>
           {/* <span className="conectimg"><img src={ConectImgTitle} alt="" /></span> */}
           

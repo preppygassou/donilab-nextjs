@@ -121,7 +121,7 @@ const CarouselCenter = (props) => {
     }
     setCurrentIndex(currentIndex === 0 ? length - 1 : currentIndex - 1)
     //setCurrentIndex(prevState => prevState - 1)
-    setActive(active - 1)
+    setActive(currentIndex === 0 ? length - 1 : active - 1)
 
   }
 

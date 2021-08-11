@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components/macro'
 import ConectImgTitle from "./../assets/svg/conecttitle.svg"
 import Teamhomeparalaxe1 from "./../assets/svg/teamhomeparalaxe1.svg"
 import Teamhomeparalaxe2 from "./../assets/svg/teamhomeparalaxe2.svg"
+import HomeTeamparalaxeimg from "./../assets/svg/HomeTeamparalaxeimg.svg"
 import { TeamData } from '../data/TeamData';
 import ArrowLeftIcon from "./../assets/svg/arowleft.svg"
 import ArrowRighthIcon from "./../assets/svg/arowright.svg"
@@ -13,6 +14,7 @@ import TeamInHubSectionIcone from "./../assets/svg/teaminhubsectionicone.svg";
 import CarouselCenter from './CarouselCenter'
 import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
+import { useTranslation } from 'react-i18next'
 
 
 const SectionTitletest = styled.div`
@@ -147,10 +149,21 @@ left:0;
   position:relative;
 width:250px;
 }
+
 img{
  width:250px;
  filter: none;
 -webkit-filter: none;
+}
+svg{
+  width: calc(100% + 4px);
+height: calc(100% + 4px);
+position: absolute;
+top: -2px;
+left: -2px;
+-webkit-transform: rotate(-90deg);
+transform: rotate(-90deg);
+
 }
 .teaminfo{
   display:block;
@@ -246,15 +259,63 @@ const PrevArrow = styled.img`
 ${arrowButton}
 position:absolute;
 bottom: 12%;
-left:45%;
+left:40%;
 width: 60px;
+@media (max-width:1199px) {
+  bottom: 12%;
+left:40%;
+width: 50px;
+}
+@media (max-width:1199px) {
+  bottom: 12%;
+left:40%;
+width: 50px;
+}
+@media (max-width:991px) {
+  bottom: 12%;
+left:30%;
+width: 50px;
+}
+@media (max-width:900px) {
+  bottom: 12%;
+left:30%;
+width: 50px;
+}
+@media (max-width:768px) {
+  bottom: 12%;
+left:20%;
+width: 50px;
+}
 `;
 const NextArrow = styled.img`
 ${arrowButton}
 position:absolute;
 bottom: 12%;
-right:45%;
+right:40%;
 width: 60px;
+@media (max-width:1199px) {
+  bottom: 12%;
+right:40%;
+width: 50px;
+}
+@media (max-width:991px) {
+  bottom: 12%;
+right:30%;
+width: 50px;
+}
+@media (max-width:900px) {
+  bottom: 12%;
+right:30%;
+width: 50px;
+}
+@media (max-width:768px) {
+  bottom: 12%;
+right:20%;
+width: 50px;
+}
+/* @media (max-width:500px) {
+  display:none;
+} */
 `;
 const TeamImgLoop = styled.div`
 border-radius:50%;
@@ -269,19 +330,39 @@ right:0;
 left:0;
 `;
 const TeamInfo = styled.div`
-position:absolute;
-bottom: -11vh;
+    position:absolute;
+    bottom: -11vh;
     right: 43px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 `;
 const TeamhomeparalaxeFirst = styled.img`
-display:${({ about, ishub }) => (about ? 'none' : ishub ? 'none' : 'block')};
+display:${({ about, ishub }) => (ishub ==="ishub"? 'none' : about ? 'none' :  'block')};
 position:absolute;
 top:0;
 right:0;
 width:220px;
+@media (max-width:768px) {
+  width: 115px;
+}
+@media (max-width:500px) {
+  display:none;
+}
+`;
+
+const Hubteamparalaxe = styled.img`
+display:${({ about, home }) => (home ? 'none' : about ? 'none' :  'block')};
+position:absolute;
+top:0;
+right:0;
+width:220px;
+@media (max-width:768px) {
+  width: 115px;
+}
+@media (max-width:500px) {
+  display:none;
+}
 `;
 const TeamhomeparalaxeTwo = styled.img`
 display:${({ about, ishub }) => (about ? 'none' : ishub ? 'none' : 'block')};
@@ -289,6 +370,12 @@ position:absolute;
 bottom:0;
 left:0;
 width:450px;
+@media (max-width:768px) {
+  width: 115px;
+}
+@media (max-width:500px) {
+  display:none;
+}
 `;
 
 const HubTeamSectionHead = styled.div`
@@ -298,26 +385,61 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:12vh 45vh;
+color:#2755A1;
+padding:12vh 30vh;
+position:relative;
+@media (max-width:900px){
+  padding:12vh 20vh;
+
+}
+@media (max-width:768px){
+  padding:12vh 10vh;
+
+}
+@media (max-width:360px){
+  padding:12vh 4vh;
+
+}
+
 h1{
   font-family:"CeraRoundPro-Bold";
-  font-size: 1.8rem;
+  font-size: 3rem;
     font-weight: bold;
     text-transform: uppercase;
     margin: 2.5vh 0 3vh 0;
+    @media (max-width:768px){
+  font-size: 2rem;
+  margin: 2vh 0;
+       }
+  @media (max-width:360px){
+  font-size: 1.8rem;
+
+}
+}
+p{
 }
 `;
 const TeamInHubSectionIcon = styled.img`
+width:100px;
+@media (max-width:768px){
+width: 80px;
+}
 `;
 
-function TeamSection({ initialSlide, about, ishub, hub }) {
+function TeamSection({ initialSlide, about, ishub, hub,home,children}) {
+  const { t} = useTranslation()
+
   const [current, setCurrent] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [active, setActive] = useState(0);
   const length = TeamData.length;
   const timeout = useRef(null);
   const [value, setValue] = useState(0);
 
   const onChange = value => {
-  setValue(value);
+  //setValue(value);
+  setCurrentIndex(value)
+  console.log("onchange" + value)
   }
 
   const nextSlide = (currentSlide) => {
@@ -396,27 +518,31 @@ function TeamSection({ initialSlide, about, ishub, hub }) {
 
 
   };
-
+ 
   return (
     <TeamSectionContainer>
 
       {
         ishub ? <HubTeamSectionHead>
           <TeamInHubSectionIcon className="" src={TeamInHubSectionIcone} alt="team Icone" />
-          <TitleInAbout>L'ÉQUIPE</TitleInAbout>
+          <h1>
+            {t('notre')} {t('team')}
+              </h1>
           <p>
-            {hub.description_team}
+            {hub.acf.description_team}
           </p>
 
         </HubTeamSectionHead> :
 
           about ? <div>
             <img src="" alt="" />
-            <SectionTitle>NOTRE ÉQUIPE</SectionTitle>
+            <SectionTitle><h1>
+            {t('notre')} {t('team')}
+              </h1></SectionTitle>
           </div> :
             <SectionTitle>
               <h1>
-                n
+                {t('n')}
             <span className="conectimg">
                   o
               <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
@@ -425,12 +551,12 @@ function TeamSection({ initialSlide, about, ishub, hub }) {
                     <path id="Caminho_663" data-name="Caminho 663" d="M-405.252,132.127a16.594,16.594,0,0,0-16.666,16.522,16.351,16.351,0,0,0,4.157,11.081l-10.953,13.414a64.927,64.927,0,0,1,6.514,4.568l10.953-13.325a13.261,13.261,0,0,0,5.851.928,16.593,16.593,0,0,0,16.666-16.522,16.594,16.594,0,0,0-16.522-16.666" transform="translate(517.369 -128.623)" fill="#95b71d" />
                   </svg>
                 </span>
-            tre équipe
+                {t('tre')} {t('team')}
           </h1>
             </SectionTitle>
 
       }
-      <div style={{ maxWidth: '96%', height: '100%', zIndex: 10, marginLeft: 'auto', marginRight: 'auto', marginTop: 64,marginBottom: "15vh" }}>
+      <div style={{ maxWidth: '96%', height: '100%', zIndex: 10, marginLeft: 'auto', marginRight: 'auto', marginTop: 30,marginBottom: "15vh" }}>
 
         {/* <Slider {...settings}> */}
         <Carousel
@@ -438,10 +564,11 @@ function TeamSection({ initialSlide, about, ishub, hub }) {
           infinite
           centered
           clickToChange
-          /* autoPlay={2000}
+          autoPlay={2000}
         animationSpeed={1000}
-        stopAutoPlayOnHover={true} */
-        value={value}
+        stopAutoPlayOnHover={true}
+       
+        currentSlideIndex={currentIndex}
         onChange={onChange}
           arrowLeft={<PrevArrow src={ArrowLeftIcon} />
           }
@@ -450,13 +577,17 @@ function TeamSection({ initialSlide, about, ishub, hub }) {
 
           offset={16}
           breakpoints={{
-            640: {
+            500: {
               slidesPerPage: 1,
             },
-            900: {
+            768: {
+              slidesPerPage: 2,
+            },
+            1024: {
               slidesPerPage: 3,
               offset: 0,
-            }
+            },
+            
           }}
         >
           {
@@ -465,6 +596,9 @@ function TeamSection({ initialSlide, about, ishub, hub }) {
               <div className="teamslider" key={index}>
                 <div className="teamimg">
                   <img src={team.image_team.url} alt={team.name_team} />
+               {/*    <svg height="100%" width="100%">"
+						<circle class="c1" cx="50%" cy="50%" r="48%" fill="transparent" style={{opacity: "1", strokeDashoffset: "130px", strokeDasharray:' 314px'}}></circle>
+					</svg> */}
                   <div className="teamloop"></div>
                   <div className="teamboder"></div>
                 </div>
@@ -501,8 +635,9 @@ function TeamSection({ initialSlide, about, ishub, hub }) {
             <PrevArrow  onClick={prevSlide} src={ArrowLeftIcon}/>
             <NextArrow onClick={nextSlide} src={ArrowRighthIcon}/>
           </SliderButtons> */}
-      <TeamhomeparalaxeFirst about={about} src={Teamhomeparalaxe1} alt="" />
-      <TeamhomeparalaxeTwo about={about} src={Teamhomeparalaxe2} alt="" />
+      <Hubteamparalaxe home={home} about={about} src={HomeTeamparalaxeimg} alt="" />
+      <TeamhomeparalaxeFirst ishub={ishub} about={about} src={Teamhomeparalaxe1} alt="" />
+      <TeamhomeparalaxeTwo ishub={ishub} about={about} src={Teamhomeparalaxe2} alt="" />
 
     </TeamSectionContainer>
   )

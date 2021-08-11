@@ -13,11 +13,11 @@ const {
   
 } = require("../constants/PostConstants");
 
-const listPosts = () => async (dispatch) => {
+const listPosts = (currentLang) => async (dispatch) => {
   try {
     dispatch({ type: POST_LIST_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.org//wp-json/wp/v2/posts?_embed"
+      "https://blog.donilab.org/wp-json/wp/v2/posts/?lang="+ currentLang
     );
     dispatch({ type: POST_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -26,12 +26,13 @@ const listPosts = () => async (dispatch) => {
 };
 
 
-
-const listCategories = () => async (dispatch) => {
+const listCategories = (postId) => async (dispatch) => {
   try {
     dispatch({ type: POST_CATEGORIES_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.org/wp-json/wp/v2/categories"
+      "https://www.blog.donilab.net/wp-json/wp/v2/categories?post="+postId+"&cat_relation=AND"
+      /* "https://www.blog.donilab.net/wp-json/wp/v2/posts/?categories=" + CategoriesId */
+      /* "https://blog.donilab.org/wp-json/wp/v2/categories" */
     );
     dispatch({ type: POST_CATEGORIES_SUCCESS, payload: data });
   } catch (error) {

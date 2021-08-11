@@ -18,7 +18,7 @@ cursor: pointer;
   padding:2vh;
 }
 img {
-  width:40vh;
+  width: 100%;
   border-radius: 20px 20px 0 0;
 }
 h4{
@@ -30,6 +30,10 @@ h1{
   font-size:2rem;
   color:#fff;
   margin:1vh 0;
+  @media  (max-width: 768px) {
+    font-size:1.8rem;
+ 
+}
 }
 p{
   
@@ -41,27 +45,24 @@ p{
 
 const Blogcard = ({ post }) => {
   // const [imgUrl, setImgUrl] = useState('')
-  //const [categoriess, setCategories] = useState([])
+  const [categoriess, setCategories] = useState([])
   //const [isLoaded, setIsLoaded] = useState(false)
-  const CategoriesId = post.id;
+  const PostId = post.id;
+  /* const CategoriesId = post.categories; */
   const postListCategories = useSelector((state) => state.postListCategories);
   const { loading, error, categories } = postListCategories;
 
-  const dispatch = useDispatch()
+/*   const dispatch = useDispatch()
 
-  /*  useEffect(() => {
+   useEffect(() => {
        
-     axios.get('/wp-json/wp/v2/categories')      
+     axios.get(`https://www.blog.donilab.net/wp-json/wp/v2/categories?post=${PostId}&cat_relation=AND`)      
      .then(res => 
        setCategories(res.data) , 
          ); 
    //console.log(categoriess)
-   }, [categoriess]) */
-
-  useEffect(() => {
-    dispatch(listCategories())
-  }, [dispatch])
-
+   }, [PostId])
+ */
 
   const intersection = categories.filter(element => post.categories.includes(element.id));
   /*  const CategoryFilter = (inc)=>categoriess.filter(filterCat=>(
@@ -87,18 +88,23 @@ const Blogcard = ({ post }) => {
                ))
              }
   */}
-              {
-               intersection.map((category)=>(
-                 intersection.length === 1 ? <span key={category.id}>{category.name} </span>
+             {/*  {
+               categoriess.map((category)=>(
+                 categoriess.length === 1 ? <span key={category.id}>{category.name} </span>
+                : categoriess.lastIndexOf(category) ? <span key={category.id}>{category.name} </span>
                 : <span key={category.id}>{category.name +  ","} </span>
            
                  ))
-           } 
+                 
+                 
+                }  */}
+                <span>{post.x_categories} </span>
 
         </h4>
 
         <h1>{post.title.rendered}</h1>
-        <p>{moment(post.date).format('LL')}</p>
+        <p>{post.x_date}</p>
+        {/* <p>{moment(post.date).format('LL')}</p> */}
       </div>
       </a>
     </BlogSlider>

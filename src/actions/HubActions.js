@@ -16,11 +16,11 @@ const {
   
 } = require("../constants/HubConstants");
 
-const listHubs = () => async (dispatch) => {
+const listHubs = (currentLang) => async (dispatch) => {
   try {
     dispatch({ type: HUB_LIST_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.org/wp-json/wp/v2/hubs"
+      "https://blog.donilab.org/wp-json/wp/v2/hubs/?lang="+ currentLang
     );
     dispatch({ type: HUB_LIST_SUCCESS, payload: data });
   } catch (error) {

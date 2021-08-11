@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 
+
 const PartnersContainer = styled.div `
 
 .slick-track{
@@ -41,6 +42,7 @@ const settings = {
 };
 
 function PartnersSlider({PartnersData}) {
+  
   return (
     <PartnersContainer>
     <Carousel
@@ -51,7 +53,7 @@ function PartnersSlider({PartnersData}) {
   stopAutoPlayOnHover={true}
   offset={32}
   breakpoints={{
-    640: {
+    768: {
       slidesPerPage: 1,
     },
     900: {

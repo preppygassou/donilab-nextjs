@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from "styled-components/macro"
 import LabelAfricinnov from "./../assets/label.png"
+import LanguageSelector from './LanguageSelector';
+import { useTranslation } from 'react-i18next'
+
 
 const LabelAfricinnovContainer = styled.div`
 background-color:#EFEFEF;
@@ -34,8 +37,9 @@ const LabelContent = styled.div`
     grid-template-columns:1fr;
   
 }
-  @media (min-width: 481px) and (max-width: 767px) {
+  @media (max-width: 767px) {
     grid-template-columns:1fr;
+    grid-auto-rows:0.5fr;
  
 }
 `;
@@ -47,15 +51,18 @@ justify-content:center;
 
    width:350px;
  }
- @media (min-width: 481px) and (max-width: 767px) {
+ @media (max-width: 767px) {
 
- 
+  img{
+
+width:250px;
+}
 }
 `;
 const LabelInfo = styled.div`
 width:100%;
  padding-right:4rem;
- @media (min-width: 481px) and (max-width: 767px) {
+ @media (max-width: 767px) {
  padding-right:0rem;
   
 }
@@ -71,23 +78,16 @@ width:100%;
 }
 `;
 function Labelafricinnov() {
+  const { t} = useTranslation()
   return (
     <LabelAfricinnovContainer >
-      <h1>LE LABEL AFRIC'INNOV</h1>
+      <h1>{t('label_afrinov_title')}</h1>
       <LabelContent>
         <LabelLogo>
           <img src={LabelAfricinnov} alt="Label Afric'innov" />
         </LabelLogo>
         <LabelInfo>
-          <p>En 2021, DoniLab a vu sa méthodologie d’accompagnement certifiée.
-          Développé pour améliorer la lisibilité des écosystèmes entrepreneuriaux africains,
-          le Label Afric'innov met en évidence les incubateurs  les plus performants sur le continent.
-          Pour cela, il s'appuie sur un référentiel de qualité strict, initié par l’Organisation
-          Internationale de la Francophonie et le consortium fondateur d’Afric’innov,
-          et co-construit avec une cinquantaine d'acteurs de nos écosystèmes, reposant
-          sur vingt critères évaluant les infrastructures, la gouvernance, la méthodologie
-          et ressources d'accompagnement, ainsi que l'offre de services mis à disposition
-          des entrepreneurs accompagnés.</p>
+          <p>{t('label_afrinov_desc')}</p>
         </LabelInfo>
       </LabelContent>
     </LabelAfricinnovContainer >

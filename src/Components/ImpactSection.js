@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components/macro";
 import ConectImgTitle from "./../assets/svg/conecttitle.svg";
 import { ImpactData } from "../data/ImpactData";
 import SectionTitle from "./SectionTitle";
 import Oconnect from "./../assets/svg/oconnect.svg";
+import { useTranslation } from "react-i18next";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import parse from "html-react-parser";
+import { CurrentLangContext } from "../Context/CurrentLangContext";
+
 
 const ImpactSectionContainer = styled.section`
+
   background-color: #2755a1;
   height: 100%;
   padding:5vh 0 9vh 0;
@@ -66,12 +73,12 @@ const ImpactCard = styled.div`
 
   }
   @media (max-width: 768px)  {
-  margin-top:2vh;
+  margin-top:1vh;
   h1{
-    font-size: 5rem;
+    font-size: 4rem;
   }
   p{
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
  
 }
@@ -101,11 +108,30 @@ span{
 
 `; */
 function ImpactSection() {
+  const {t} = useTranslation()
+  const [impacts, setImpacts] = useState([])
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value
+
+  /* console.log("inimpact"+t+i18n) */
+  const dispatch = useDispatch()
+   
+ /*  const FecthcurrentLang = ()=>(
+    currentLang('i18nextLng') === "fr" ? setCurrentLang("fr") : setCurrentLang("en")
+  ) */
+
+   useEffect(() => { 
+    
+     axios.get(`https://blog.donilab.org/wp-json/wp/v2/impacts/?lang=${currentLang}`)      
+     .then(res => 
+       setImpacts(res.data) , 
+         ); 
+   }, [currentLang])
   return (
     <ImpactSectionContainer>
       <SectionTitle white="true">
         <h1>
-          n
+        {t('n')}
           <span className="conectimg">
               o
               <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
@@ -115,15 +141,15 @@ function ImpactSection() {
 </svg>
 
             </span>
-          tre impact
+            {t('tre')} {t('impact')} 
         </h1>
       </SectionTitle>
       <ImpactWrapper>
-        {ImpactData.map((impact, index) => (
-          <ImpactCard key={index}>
-            <img src={impact.icon} alt="" />
-            <h1>{impact.total}</h1>
-            <p>{impact.description}</p>
+        {impacts.map(impact => (
+          <ImpactCard key={impact.id}>
+            <img src={impact.fimg_url} alt="" />
+            <h1>{impact.title.rendered}</h1>
+            {parse(impact.excerpt.rendered)}
           </ImpactCard>
         ))}
       </ImpactWrapper>

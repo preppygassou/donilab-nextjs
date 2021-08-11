@@ -20,7 +20,7 @@ const listPrograms = (lestypesdehub) => async (dispatch) => {
   try {
     dispatch({ type: PROGRAM_LIST_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.org/wp-json/wp/v2/programs?lestypesdehub="+lestypesdehub
+      `https://blog.donilab.org/wp-json/wp/v2/programs?lestypesdehub=${lestypesdehub}` 
     );
     dispatch({ type: PROGRAM_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -28,11 +28,11 @@ const listPrograms = (lestypesdehub) => async (dispatch) => {
   }
 };
 
-const listProgramsTypeOfDonilab = (ProgrammestypesOfDonilab) => async (dispatch) => {
+const listProgramsTypeOfDonilab = (ProgrammestypesOfDonilab,currentLang) => async (dispatch) => {
   try {
     dispatch({ type: PROGRAM_LIST_TYPE_BYDONILAB_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.org/wp-json/wp/v2/programs?programmestypes=" + ProgrammestypesOfDonilab
+      `https://blog.donilab.org/wp-json/wp/v2/programs?programmestypes=${ProgrammestypesOfDonilab}&lang=${currentLang}`
       
     );
     dispatch({ type: PROGRAM_LIST_TYPE_BYDONILAB_SUCCESS, payload: data });
@@ -42,11 +42,11 @@ const listProgramsTypeOfDonilab = (ProgrammestypesOfDonilab) => async (dispatch)
 };
 
 
-const listProgramsTypeWithPartner = (ProgrammestypesWithPartnersId) => async (dispatch) => {
+const listProgramsTypeWithPartner = (ProgrammestypesWithPartnersId,currentLang) => async (dispatch) => {
   try {
     dispatch({ type: PROGRAM_LIST_TYPE_REQUEST });
     const { data } = await axios.get(
-      "https://blog.donilab.org/wp-json/wp/v2/programs?programmestypes=" + ProgrammestypesWithPartnersId
+      `https://blog.donilab.org/wp-json/wp/v2/programs?programmestypes=${ProgrammestypesWithPartnersId}&lang=${currentLang}`
     );
     dispatch({ type: PROGRAM_LIST_TYPE_SUCCESS, payload: data });
   } catch (error) {
@@ -58,7 +58,7 @@ const detailsProgram = (ProgramId) => async (dispatch) => {
   try {
     dispatch({ type: PROGRAM_DETAILS_REQUEST, payload: ProgramId });
     const { data } = await axios.get(
-      "https://blog.donilab.org/wp-json/wp/v2/programs/" + ProgramId
+      `https://blog.donilab.org/wp-json/wp/v2/programs/${ProgramId}`
     );
     dispatch({ type: PROGRAM_DETAILS_SUCCESS, payload: data });
   } catch (error) {

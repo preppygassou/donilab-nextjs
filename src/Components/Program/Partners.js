@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PartnersSlider from './PartnersSlider'
 import { PartnersData } from '../../data/PartnerData';
 import PartnersImg from './../../assets/svg/PartnersProgram.svg'
 import styled from 'styled-components/';
+import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
 const PartnersSectionLogo = styled.div `
 overflow:hidden;
@@ -18,19 +19,40 @@ h1{
   font-weight: bold;
   text-transform: uppercase;
   text-align:center;
+  @media (max-width:768px){
+  font-size: 2rem;
+ 
+       }
+  @media (max-width:360px){
+  font-size: 1.8rem;
+
+}
 }
 img {
   width:100px;
+  @media (max-width:768px){
+width: 80px;
+}
 }
 `;
 
 
 function Partners({program}) {
+  const value = useContext(CurrentLangContext);
+  const {currentLang} = value
+
   return (
     <PartnersSectionLogo>
       <PartnersSectionWrapper>
       <div><img src={PartnersImg} alt=""/></div>
-        <h1>PARTENAIRES DU <br/>PROGRAMME</h1>
+        <h1>
+          
+  {currentLang=== "en" ?"PROGRAMS":"PARTENAIRES DU "}
+
+          <br/>
+  {currentLang=== "en" ?"PARTENERS":" PROGRAMME "}
+
+         </h1>
       </PartnersSectionWrapper>
 <PartnersSlider program={program}/>
     </PartnersSectionLogo>
