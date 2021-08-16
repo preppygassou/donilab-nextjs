@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './global.css';
+//import './global.css';
+import GlobalStyle from './styles/global';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
@@ -46,6 +47,7 @@ ReactDOM.render(
   <Provider store={store}>
   <BrowserRouter>
     <App />
+    <GlobalStyle/>
   </BrowserRouter>
   </Provider>,
   document.getElementById('root')

@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from 'react'
+import { connect } from 'react-redux';
 import ExpertiseSection from '../Components/ExpertiseSection'
+import {Dexpertise} from '../Components/Dexpertise/index'
 import Hero from '../Components/Hero'
 import BlogSlideSection from '../Components/BlogSlideSection';
 import ImpactSection from '../Components/ImpactSection';
@@ -16,20 +18,20 @@ import { CurrentLangContext } from '../Context/CurrentLangContext';
 
 
 
-function Home() {
+function Home({hublistloading, hublistloadingerror,hubs,listHubsAction}) {
 
-  const dispatch = useDispatch()
-  const hubList = useSelector((state) => state.hubList)
+  //const dispatch = useDispatch()
+ // const hubList = useSelector((state) => state.hubList)
+ //const { loading,error,hubs } = hubList;
 
   const value = useContext(CurrentLangContext);
   const {currentLang} = value
 
-  const { loading,error,hubs } = hubList;
 
 
   useEffect(() => {
-    dispatch(listHubs(currentLang))
-  }, [dispatch,currentLang])
+    listHubsAction(currentLang)
+  }, [currentLang,listHubsAction])
 
 
   return (
@@ -42,7 +44,7 @@ function Home() {
       <ImpactSection/>
       <ErrorBoundary>
       {
-        loading ? <Loading></Loading>  : error ? <MessageBox></MessageBox> :(
+        hublistloading ? <Loading></Loading>  : hublistloadingerror ? <MessageBox></MessageBox> :(
           hubs.map((hub,index)=>(
             index === 0  && (
             <TeamSection home="home" hub={hub}/> 
@@ -52,6 +54,7 @@ function Home() {
         )
       }
       </ErrorBoundary>
+      <Dexpertise/>
       <ErrorBoundary>
       <PartnersSection/>
       </ErrorBoundary>
@@ -60,4 +63,12 @@ function Home() {
   )
 }
 
-export default Home
+const mapStateToProps = ({ hubList,  }) => {
+  const { loading:hublistloading,error:hublistloadingerror,hubs } = hubList;
+  return { hublistloading, hublistloadingerror,hubs };
+};
+const mapActionsToProps = {
+  listHubsAction:listHubs
+};
+
+export default connect(mapStateToProps,mapActionsToProps)(Home)

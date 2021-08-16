@@ -1,3 +1,6 @@
+import { createGlobalStyle } from 'styled-components';
+
+export default createGlobalStyle `
 @import url('https://fonts.googleapis.com/css2?family=Montserrat');
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates');
@@ -181,3 +184,5 @@ bottom: -1vh;
     font-weight:bold;
     font-size:1.5rem;        
 }
+
+`

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components/macro";
 import { Link } from "react-router-dom";
 import ContactheroleftparalaxeImg from "./../assets/svg/paralaxetopherohub.svg";
 import ContactherorightparalaxeImg from "./../assets/svg/paralaxebottomherohub.svg";
-import SectionTitle from "./../Components/SectionTitle";
+import SectionTitle from "../Components/SectionTitle";
 import FbIcone from "./../assets/fbicone.png";
 import TwIcone from "./../assets/twicone.png";
 import LogoDonilab from "./../assets/logodonilabwhite.png";

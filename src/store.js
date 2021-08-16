@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { eventImageReducer, eventListReducer } from "./reducers/EventReducers";
 import { expertiseDetailsReducer, expertiseListReducer } from "./reducers/ExpertiseReducers";
+import { dexpertiseDetailsReducer, dexpertiseListReducer } from "./reducers/DexpertiseReducers";
 import { generalListReducer } from "./reducers/GeneralReducers";
 import { hubDetailsReducer, hubImageReducer, hubListReducer, hubListTypeReducer } from "./reducers/HubReducers";
 import { partenaireListReducer } from "./reducers/PartenaireReducers";
@@ -12,6 +13,9 @@ import {
   programListTypeOfDonilabReducer,
   programListTypeWithPartnersReducer,
 } from "./reducers/ProgramReducers";
+import 
+  loader
+ from "./reducers/AxiosReducers";
 
 
 const reducer = combineReducers({
@@ -25,12 +29,15 @@ const reducer = combineReducers({
   postListCategories: postListCategoriesReducer,
   expertiseList: expertiseListReducer,
   expertiseDetails: expertiseDetailsReducer,
+  dexpertiseList: dexpertiseListReducer,
+  dexpertiseDetails: dexpertiseDetailsReducer,
   hubList: hubListReducer,
   hubListType: hubListTypeReducer,
   hubDetails: hubDetailsReducer,
   hubImage: hubImageReducer,
   eventList: eventListReducer,
   eventImage: eventImageReducer,
+  loader
 
 });
 

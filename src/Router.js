@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import About from './screens/About'
-import BlogSingle from './screens/BlogSingle'
+import Rapport from './screens/Rapport/Rapport'
 import Blog from './screens/Blog'
 import Contact from './screens/Contact'
 import Expertise from './screens/Expertise'
@@ -15,6 +15,7 @@ import Header from "./Components/Header";
 import NotFound from './screens/NotFound'
 import Scroll from './Components/Scroll'
 import CurrentLangContextProvider from './Context/CurrentLangContext'
+import Dexpertise from './screens/Dexpertise'
 
 function Router() {
   return (
@@ -35,7 +36,9 @@ function Router() {
       <Route path="/hub/:id" component={Hub} />
       <Route path="/blog" component={Blog} />
       <Route path="/contact" component={Contact} />
-      <Route path="/blogsingle" component={BlogSingle} />
+      <Route path="/rapport" component={Rapport} />
+      <Route path="/report" component={Rapport} />
+      <Route path="/dexpertise" component={Dexpertise} />
       <Route path="/*" component={NotFound} />
      </Switch>
       <Footer/> 
