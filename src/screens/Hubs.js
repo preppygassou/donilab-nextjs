@@ -516,7 +516,7 @@ function Hubs() {
 
         <ErrorBoundary>
           {
-            loading ? <div style={{ height: '50vh' }}> <Loading></Loading> </div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> :
+            loading ? <div style={{ height: '50vh' }}> <div className="loading"></div> </div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> :
               <HubsSectionWrapper>
                 <div className="clear"></div>
                 {

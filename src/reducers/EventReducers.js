@@ -17,7 +17,7 @@ const {
 
 
 
-function eventListReducer(state = { events:[] }, action) {
+function eventListReducer(state = {loading: true, events:[] }, action) {
   switch (action.type) {
     case EVENT_LIST_REQUEST:
       return { loading: true, events: [] };
@@ -29,7 +29,7 @@ function eventListReducer(state = { events:[] }, action) {
       return state;
   }
 }
-function eventListTypeReducer(state = { lieux: [] }, action) {
+function eventListTypeReducer(state = { loading: true,lieux: [] }, action) {
   switch (action.type) {
     case EVENT_LIST_TYPE_REQUEST:
       return { loading: true, lieux: [] };

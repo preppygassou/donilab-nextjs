@@ -3,7 +3,7 @@ import ExpertiseCard from './ExpertiseCard';
 import styled from 'styled-components';
 import { ExpertiseData } from '../../data/ExpertiseData';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { listDexpertises } from '../../actions/DexpertiseActions';
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
@@ -37,7 +37,7 @@ box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
 `;
 
 
-function ExpertiseCards() {
+function ExpertiseCards({loading, error, dexpertises,listDexpertisesAction}) {
  /*  const [expertises, setExpertises] = useState([]) */
 /*   useEffect(() => {
        
@@ -48,19 +48,19 @@ function ExpertiseCards() {
   //console.log(categoriess)
   }, [])
  */
-  const dexpertiseList = useSelector((state) => state.dexpertiseList);
-  const { loading, error, dexpertises } = dexpertiseList;
+  //const dexpertiseList = useSelector((state) => state.dexpertiseList);
+  /* const { loading, error, dexpertises } = dexpertiseList; */
   const value = useContext(CurrentLangContext);
   const {currentLang} = value
-  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(listDexpertises(currentLang))
-  }, [dispatch,currentLang])
+    listDexpertisesAction(currentLang)
+  }, [listDexpertisesAction,currentLang])
 
   return (
         <ExpertisesContainer>
-          {dexpertises.map((item,index)=>(
+          {
+          loading ? <div className="loading" /> : dexpertises.map((item,index)=>(
             <ExpertiseCard item={item} index={index}/>
               
             ))}
@@ -68,4 +68,11 @@ function ExpertiseCards() {
   )
 }
 
-export default ExpertiseCards
+const mapStateToProps = ({ dexpertiseList }) => {
+  const { loading, error, dexpertises } = dexpertiseList;
+  return { loading, error, dexpertises};
+};
+
+export default connect(mapStateToProps, {
+  listDexpertisesAction:listDexpertises
+})(ExpertiseCards);

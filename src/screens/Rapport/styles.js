@@ -3,19 +3,45 @@ export const RapportPage = styled.section`
 
 `;
 
+
 export const Container = styled.div`
 display: flex;
 gap: 3rem;
-padding: 8vh 10vh;
+padding: 8vh 0vh 8vh 40vh;
 flex-wrap: wrap;
 height: 100%;
+
+.revers{
+ 
+  @media  (max-width: 900px) {
+    flex-wrap: wrap-reverse !important;
+ 
+}
+}
+
+@media  (max-width: 900px) {
+  padding: 8vh 10vh 8vh 10vh;
+ 
+}
+@media  (max-width: 400px) {
+  width:100%;
+  padding:3rem;
+ 
+
+    }
 `;
 export const Cover = styled.div`
+//width:90vh;
 height: 100%;
 img{
+ // width:100% ;
   border-top-right-radius: 3.75rem;
 border-bottom-left-radius: 3.75rem;
 height:80vh ;
+@media  (max-width: 900px) {
+  width:100%;
+  height:100% ;
+    }
 }
 `;
 export const DownloadCtn = styled.div`
@@ -30,6 +56,7 @@ h1{
     color: #2755A1;
 
 }
+
 `;
 
 export const HeroRapport = styled.div`
@@ -74,7 +101,7 @@ user-select:none;
 transition:0.3s;
 border-radius:25px;
 &:hover{
-
+color:#fff;
 transform:scale(1.05);
 }
 @media (max-width:768px){

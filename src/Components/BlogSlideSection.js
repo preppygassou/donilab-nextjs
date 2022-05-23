@@ -13,7 +13,7 @@ import Slider from "react-slick";
 import Oconnect from "./../assets/svg/oconnect.svg";
 import axios from 'axios'
 import Blogcard from "./Blogcard"
-import { useDispatch, useSelector } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { listPosts } from '../actions/PostActions'
 /* import Carousel from './Carousel' */
 import Carousel, { slidesToShowPlugin, arrowsPlugin } from '@brainhubeu/react-carousel';
@@ -287,12 +287,12 @@ function SampleNextArrow(props) {
 }
 
 
-const BlogSlideSection = () => {
+const BlogSlideSection = ({listPostsAction,loading,error,posts}) => {
   //const [posts, setPosts] = useState([])\
   const { t} = useTranslation()
   const [isloaded, setIsloaded] = useState(false)
-  const postList = useSelector((state) => state.postList);
-  const { loading, error, posts } = postList;
+  //const postList = useSelector((state) => state.postList);
+  //const { loading, error, posts } = postList;
   /* const posts = data.posts; */
   const dispatch = useDispatch()
   const value = useContext(CurrentLangContext);
@@ -315,7 +315,7 @@ const BlogSlideSection = () => {
   const [domLoaded, setDomLoaded] = useState(false);
   const [active, setActive] = useState(0);
   const [touchPosition, setTouchPosition] = useState(null)
-  const length = posts.length;
+  const length = posts === undefined ? [{}].length : posts.length;
   const timeout = useRef(null);
 
   const nextSlide = () => {
@@ -379,9 +379,9 @@ const BlogSlideSection = () => {
 
 
   useEffect(() => {
-    dispatch(listPosts(currentLang))
+    listPostsAction(currentLang)
     setDomLoaded(true)
-  }, [dispatch,currentLang])
+  }, [listPostsAction,currentLang])
 
   useEffect(() => {
     setActive((length - (posts % length)) % length) // prettier-ignore
@@ -453,7 +453,7 @@ const BlogSlideSection = () => {
 
         {
 
-          loading ? <div>chargement ...</div> : error ? <div>erreur de chargement </div> :
+          loading ? <div className="loading" />  : error ? <div>erreur de chargement </div> :
             <Carousel
               slidesPerPage={4}
               infinite
@@ -519,4 +519,12 @@ const BlogSlideSection = () => {
   )
 }
 
-export default BlogSlideSection
+
+const mapStateToProps = ({ postList }) => {
+  const { loading, error, posts } = postList;
+  return { loading, error, posts};
+};
+
+export default connect(mapStateToProps, {
+  listPostsAction:listPosts
+})(BlogSlideSection);

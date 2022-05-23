@@ -11,10 +11,10 @@ import Labelafricinnov from '../Components/Labelafricinnov';
 import { TeamData } from '../data/TeamData';
 import { useDispatch, useSelector } from 'react-redux';
 import { listHubs } from '../actions/HubActions';
-import Loading from '../Components/Loading';
 import MessageBox from '../Components/MessageBox';
 import ErrorBoundary from '../Components/ErrorBoundary';
 import { CurrentLangContext } from '../Context/CurrentLangContext';
+import {Helmet} from 'react-helmet'
 
 
 
@@ -36,6 +36,10 @@ function Home({hublistloading, hublistloadingerror,hubs,listHubsAction}) {
 
   return (
     <>
+    <Helmet>
+                    <title>Donilab | Accueil</title>
+                    <meta name="description" content="Bienvenue sur donilab" />
+                </Helmet>
       <Hero/>
       <ExpertiseSection/>
       <ErrorBoundary>
@@ -44,7 +48,7 @@ function Home({hublistloading, hublistloadingerror,hubs,listHubsAction}) {
       <ImpactSection/>
       <ErrorBoundary>
       {
-        hublistloading ? <Loading></Loading>  : hublistloadingerror ? <MessageBox></MessageBox> :(
+        hublistloading ? <div className="loading" />  : hublistloadingerror ? <MessageBox></MessageBox> :(
           hubs.map((hub,index)=>(
             index === 0  && (
             <TeamSection home="home" hub={hub}/> 

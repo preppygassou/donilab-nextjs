@@ -72,7 +72,7 @@ cursor:pointer;
 text-decoration:none;
 font-weight: bold;
 align-self: center;
-margin: 0 16px;
+margin: 0 14px;
 display: flex;
 flex-wrap: wrap;
 align-items: center;
@@ -80,6 +80,8 @@ justify-content: center;
 position:relative;
 &:hover{
   color:#2755A1;
+text-decoration:none;
+
 }
 @media  (max-width: 1200px) {
   p{
@@ -92,7 +94,7 @@ position:relative;
 p{
   font-family:"CeraRoundPro-Bold";
   flex: 0 0 100%;
-  font-size: 18px;
+  font-size: 15px;
   text-align: center;
   letter-spacing: .5px;
   margin: 0 0 11px;

@@ -8,7 +8,7 @@ const {
 
 
 
-function partenaireListReducer(state = { partenaires: [] }, action) {
+function partenaireListReducer(state = { loading: true,partenaires: [] }, action) {
   switch (action.type) {
     case PARTENAIRE_LIST_REQUEST:
       return { loading: true, partenaires: [] };

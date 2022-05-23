@@ -32,7 +32,7 @@ function Hub(props) {
   
   return (
 
-    loading ?<div style={{height:'50vh'}}> <Loading></Loading> </div>: error ? <div style={{height:'50vh'}}><MessageBox>erreur de chargement</MessageBox> </div>:(
+    loading ?<div style={{height:'50vh'}}> <div className="loading" />  </div>: error ? <div style={{height:'50vh'}}><MessageBox>erreur de chargement</MessageBox> </div>:(
       <HubSection>
     <ErrorBoundary>
     <HeroHub hub={hub}/>

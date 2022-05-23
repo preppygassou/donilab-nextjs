@@ -23,6 +23,7 @@ import { CurrentLangContext } from '../Context/CurrentLangContext';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import parser from 'html-react-parser';
+import { Helmet } from 'react-helmet';
 
 const AboutContainer = styled.div `
 width:100%;
@@ -291,6 +292,11 @@ export default function About() {
   }, [dispatch,currentLang])
 
   return (
+    <>
+    <Helmet>
+                    <title>Donilab | About</title>
+                    <meta name="description" content="A propos de Donilab" />
+                </Helmet>
     <AboutContainer>
       <AboutWrapper>
         {
@@ -346,7 +352,7 @@ export default function About() {
       
       <ErrorBoundary>
       {
-        loading ? <Loading/> : error ? <MessageBox>erreur de chargement .</MessageBox> :(
+        loading ? <div className="loading" />  : error ? <MessageBox>erreur de chargement .</MessageBox> :(
           hubs.map((hub,index)=>(
             index === 0  && (<TeamSection about="about" hub={hub}/> )  
             ))
@@ -358,5 +364,6 @@ export default function About() {
       </ErrorBoundary>
       </AboutWrapper>
     </AboutContainer>
+    </>
   )
 }

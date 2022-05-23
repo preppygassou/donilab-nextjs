@@ -8,7 +8,7 @@ const {
 
 
 
-function generalListReducer(state = { generals: [ 
+function generalListReducer(state = { loading: true,generals: [ 
   {
     title:{
       rendered:"",

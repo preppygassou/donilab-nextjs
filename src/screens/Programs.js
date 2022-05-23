@@ -271,7 +271,7 @@ function Program() {
         <ProgramSectionTitle>
         {t("initbydonilab")}
         </ProgramSectionTitle>
-       { loadingprogramsbydonilab ? <Loading></Loading> :errorloadingprogrambydonilab ? <MessageBox>erreur de chargement</MessageBox> :
+       { loadingprogramsbydonilab ? <div className="loading"/> :errorloadingprogrambydonilab ? <MessageBox>erreur de chargement</MessageBox> :
       <ErrorBoundary>
          <ProgramByDonilab ProgramData={programsByDonilab}/>
          </ErrorBoundary>
@@ -283,7 +283,7 @@ function Program() {
         {t("inpartner")}
         </ProgramSectionTitle>
         {
-          loading ? <Loading></Loading> :error ? <MessageBox>erreur de chargement</MessageBox> :
+          loading ? <div className="loading"/> :error ? <MessageBox>erreur de chargement</MessageBox> :
         <ErrorBoundary>
           <ProgramByDonilab ProgramData={programsWithPartners}/>
         </ErrorBoundary>

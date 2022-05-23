@@ -11,7 +11,7 @@ import Scroll from './Scroll';
 import { CurrentLangContext } from '../Context/CurrentLangContext';
 import axios from 'axios';
 import Loading from './Loading';
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 const FooterContainer = styled.div`
 position: relative;
@@ -175,9 +175,9 @@ const FooterSocialImg = styled.img`
 padding-left:15px;
 `;
 
-function Footer() {
-  const generalList = useSelector((state) => state.generalList)
-  const {loading, error,generals }= generalList
+function Footer({loading, error,generals}) {
+  /* const generalList = useSelector((state) => state.generalList)
+  const {loading, error,generals }= generalList */
   const [generale, setGenerale] = useState({
     acf:{
     about_footer:"",
@@ -293,4 +293,12 @@ function Footer() {
   </>)
 }
 
-export default Footer
+
+const mapStateToProps = ({ generalList }) => {
+  const {loading, error,generals }= generalList
+  return { loading, error,generals };
+};
+
+export default connect(mapStateToProps, {
+
+})(Footer);

@@ -63,7 +63,7 @@ function PartnersSlider({PartnersData}) {
   }}
     >
           {
-            PartnersData.map(partner=>(
+            PartnersData === undefined ? [] :PartnersData.map(partner=>(
               <Partner key={partner.id}>
                 <PartnerImg src={partner.acf.logo_partenaire.url} alt={partner.title.rendered} />
               </Partner>

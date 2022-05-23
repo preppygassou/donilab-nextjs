@@ -9,7 +9,7 @@ const {
   
 } = require("../constants/DexpertiseConstants");
 
-function dexpertiseListReducer(state = { dexpertises: [] }, action) {
+function dexpertiseListReducer(state = {loading: true, dexpertises: [] }, action) {
   switch (action.type) {
     case DEXPERTISE_LIST_REQUEST:
       return { loading: true, dexpertises: [] };

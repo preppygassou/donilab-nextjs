@@ -17,7 +17,7 @@ const {
 
 
 
-function programListReducer(state = { programs: [] }, action) {
+function programListReducer(state = {loading: true, programs: [] }, action) {
   switch (action.type) {
     case PROGRAM_LIST_REQUEST:
       return { loading: true, programs: [] };

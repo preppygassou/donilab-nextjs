@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{Suspense} from 'react'
 import { Route, Switch } from 'react-router-dom'
 import About from './screens/About'
 import Rapport from './screens/Rapport/Rapport'
@@ -13,14 +13,14 @@ import Program from './screens/Program'
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import NotFound from './screens/NotFound'
-import Scroll from './Components/Scroll'
 import CurrentLangContextProvider from './Context/CurrentLangContext'
 import Dexpertise from './screens/Dexpertise'
 
 function Router() {
   return (
       <>
-      <CurrentLangContextProvider>    
+      <CurrentLangContextProvider>  
+      <Suspense fallback={<div className="loading" />}>  
       <Header/> 
       <Switch>       
       <Route path="/" exact={true} component={Home} />
@@ -42,6 +42,7 @@ function Router() {
       <Route path="/*" component={NotFound} />
      </Switch>
       <Footer/> 
+      </Suspense>
       </CurrentLangContextProvider>
     </>
   )

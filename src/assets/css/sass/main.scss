@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates');
+@import './_03_core.scss';
+
+  @font-face {
+    font-family: 'CeraRoundPro-Bold';
+    src: url('../../font/CeraRoundPro-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+    
+
+
+/* Define css class for global loading message to cover 
+   screen during axios operations */
+
+  /*  .loading-indicator:before {
+    content: '';
+    background: #000000cc;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+} */
+
+/* .loading-indicator:after {
+    content: 'Chargement...';
+    position: fixed;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    z-index: 1001;
+    color:white;
+    text-align:center;
+    font-weight:bold;
+    font-size:1.5rem;        
+} */

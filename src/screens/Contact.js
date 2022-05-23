@@ -194,7 +194,7 @@ function Contact() {
   return (
     <ContactPage>
       {
-        loading ? <div style={{ height: '50vh' }}> <Loading></Loading> </div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> : <>
+        loading ? <div style={{ height: '50vh' }}> <div className="loading" />  </div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> : <>
       <HeroContact>
        
         <h1> {generals[0].title.rendered}</h1>

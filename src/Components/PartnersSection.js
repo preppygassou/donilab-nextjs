@@ -6,7 +6,7 @@ import { PartnersData } from '../data/PartnerData';
 import SectionTitle from "./SectionTitle"
 import PartnersSlider from './PartnersSlider';
 import Oconnect from "./../assets/svg/oconnect.svg";
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { listPartenaires } from '../actions/PartenaireActions';
 import { useTranslation } from 'react-i18next';
 
@@ -61,18 +61,18 @@ const PartnerImg = styled.img `
 
 
 
-function PartnersSection() {
+function PartnersSection({listPartenairesAction,loading, error, partenaires}) {
   const dispatch = useDispatch()
   const { t} = useTranslation()
-  const partenaireList = useSelector((state) => state.partenaireList)
+  //const partenaireList = useSelector((state) => state.partenaireList)
 
 
-  const { loading,error,partenaires } = partenaireList;
+ // const { loading,error,partenaires } = partenaireList;
 
 
   useEffect(() => {
-    dispatch(listPartenaires())
-  }, [dispatch])
+    listPartenairesAction()
+  }, [listPartenairesAction])
 
   return (
     <PartnerSection>
@@ -97,4 +97,12 @@ function PartnersSection() {
   )
 }
 
-export default PartnersSection
+const mapStateToProps = ({ partenaireList }) => {
+  const { loading,error,partenaires } = partenaireList;
+  return { loading, error, partenaires };
+};
+
+export default connect(mapStateToProps, {
+  listPartenairesAction:listPartenaires
+})(PartnersSection);
+

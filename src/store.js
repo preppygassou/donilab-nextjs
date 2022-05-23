@@ -13,9 +13,6 @@ import {
   programListTypeOfDonilabReducer,
   programListTypeWithPartnersReducer,
 } from "./reducers/ProgramReducers";
-import 
-  loader
- from "./reducers/AxiosReducers";
 
 
 const reducer = combineReducers({
@@ -37,7 +34,6 @@ const reducer = combineReducers({
   hubImage: hubImageReducer,
   eventList: eventListReducer,
   eventImage: eventImageReducer,
-  loader
 
 });
 

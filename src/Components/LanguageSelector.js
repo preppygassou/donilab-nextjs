@@ -1,5 +1,4 @@
 import React, { useContext ,useState} from "react";
-import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
 import FRSVG from './../assets/svg/fr.svg'
 import ENSVG from './../assets/svg/en.svg'

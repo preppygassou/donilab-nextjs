@@ -14,10 +14,10 @@ const {
 
 
 
-function postListReducer(state = { posts: [] }, action) {
+function postListReducer(state = {loading: true, posts: [{}] }, action) {
   switch (action.type) {
     case POST_LIST_REQUEST:
-      return { loading: true, posts: [] };
+      return { loading: true, posts: [{}] };
     case POST_LIST_SUCCESS:
       return { loading: false, posts: action.payload };
     case POST_LIST_FAIL:
@@ -26,7 +26,7 @@ function postListReducer(state = { posts: [] }, action) {
       return state;
   }
 }
-function postListCategoriesReducer(state = { categories: [] }, action) {
+function postListCategoriesReducer(state = {loading: true, categories: [] }, action) {
   switch (action.type) {
     case POST_CATEGORIES_REQUEST:
       return { loading: true, categories: [] };
@@ -38,7 +38,7 @@ function postListCategoriesReducer(state = { categories: [] }, action) {
       return state;
   }
 }
-function postImage(state = {images:[]}, action) {
+function postImage(state = {loading: true,images:[]}, action) {
   switch (action.type) {
     case POST_IMAGE_REQUEST:
       return { loading: true, images: [] };

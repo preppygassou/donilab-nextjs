@@ -17,7 +17,7 @@ const {
 
 
 
-function hubListReducer(state = { hubs: [] }, action) {
+function hubListReducer(state = { loading: true,hubs: [] }, action) {
   switch (action.type) {
     case HUB_LIST_REQUEST:
       return { loading: true, hubs: [] };
