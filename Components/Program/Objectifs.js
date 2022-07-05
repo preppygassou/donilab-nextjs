@@ -1,9 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
-import Objectifssvg from "././static/assets/svg/objectifssvg.svg";
 import parse from "html-react-parser";
-import Objectifsparalaximgtop from "././static/assets/svg/Objectifsparalaximgtop.svg";
-import Objectifsparalaximgbottom from "././static/assets/svg/Objectifsparalaximgbottom.svg";
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
 
@@ -116,9 +113,9 @@ function Objectifs({program}) {
   
   return (
     <ObjectifsSections>
-      <Objectifsparalaxtop src={Objectifsparalaximgtop} alt=""/>
-      <Objectifsparalaxbottom src={Objectifsparalaximgbottom} alt=""/>
-      <ObjectifsIcone src={Objectifssvg} alt=""/>
+      <Objectifsparalaxtop src={"/static/assets/svg/Objectifsparalaximgtop.svg"} alt=""/>
+      <Objectifsparalaxbottom src={"/static/assets/svg/Objectifsparalaximgbottom.svg"} alt=""/>
+      <ObjectifsIcone src={"/static/assets/svg/objectifssvg.svg"} alt=""/>
       <h1 className="Objectiftitle">
       {currentLang=== "en" ?"Goals":"objEctifs"}
       </h1>

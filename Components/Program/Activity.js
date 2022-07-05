@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
-import ActivityProgramsvg from "././static/assets/svg/ActivityProgramsvg.svg";
 import parse from "html-react-parser";
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
@@ -69,7 +68,7 @@ function Activity({program}) {
     <div>
       <ActivitySection>
       
-        <CibleVisionMissionIcon className="" src={ActivityProgramsvg} alt="Historic icon" />
+        <CibleVisionMissionIcon className="" src={"/static/assets/svg/ActivityProgramsvg.svg"} alt="Historic icon" />
         <h1>
   {currentLang=== "en" ?"activities carried out":"activités menées"}
 

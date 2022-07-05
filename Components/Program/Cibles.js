@@ -1,8 +1,5 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
-import Cibleparalaximgtop from "././static/assets/svg/cibleparalaximgtop.svg";
-import Cibleparalaximgbottom from "././static/assets/svg/cibleparalaximgbottom.svg";
-import CibleIcone from "././static/assets/svg/Cibleicone.svg";
 import parse from "html-react-parser";
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
@@ -94,9 +91,9 @@ function Cibles({program}) {
   return (
     
       <CibleSection>
-      <CibleparalaxImgtop src={Cibleparalaximgtop} alt=""/>
-        <CibleparalaxImgbottom src={Cibleparalaximgbottom} alt=""/>
-        <CibleVisionMissionIcon className="" src={CibleIcone} alt="Historic icon" />
+      <CibleparalaxImgtop src={"/static/assets/svg/cibleparalaximgtop.svg"} alt=""/>
+        <CibleparalaxImgbottom src={"/static/assets/svg/cibleparalaximgbottom.svg"} alt=""/>
+        <CibleVisionMissionIcon className="" src={"/static/assets/svg/Cibleicone.svg"} alt="Historic icon" />
         <h1>
   {currentLang=== "en" ?"targets":"cibles"}
 

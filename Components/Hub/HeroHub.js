@@ -1,12 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-//import DonilabHeroImg from "././static/assets/heroimage.png";
-import HeroDonilabImg from "././static/assets/herohubimg.png";
-import CircleHubHeroImg from "././static/assets/svg/CircleHeroHUb.svg";
-//import CircleHeroInImg from "././static/assets/cercleblanc.svg";
 import parse from "html-react-parser";
-import { useDispatch, useSelector } from 'react-redux';
-import { hubimage } from '../../store/actions/HubActions';
 import Dots from '../Dots';
 
 const HeroHubSection = styled.section`
@@ -232,7 +226,7 @@ right: 61vh;
 
 function HeroHub({ hub }) {
   const [current, setCurrent] = useState(0);
-  const length = hub.acf.galerie.length;
+  const length =hub&& hub.acf.galerie.length;
   const timeout = useRef(null);
 
   useEffect(() => {
@@ -256,7 +250,7 @@ function HeroHub({ hub }) {
     <HeroHubSection>
       <HeroHubWrapper>
         <HeroHubTextBox>
-          <HeroHubImgarc src={CircleHubHeroImg} />
+          <HeroHubImgarc src={"/static/assets/svg/CircleHeroHUb.svg"} />
           <HeroHubInfo>
 
             <h1>

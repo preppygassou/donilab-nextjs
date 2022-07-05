@@ -10,8 +10,8 @@ import ProgramsOfHub from '../../Components/Hub/ProgramsOfHub';
 import RelatedHub from '../../Components/Hub/RelatedHub';
 import SpecifityOfWeb from '../../Components/Hub/SpecifityOfWeb';
 import TeamsOfHub from '../../Components/Hub/TeamsOfHub';
-import Loading from '../../Components/Loading';
 import MessageBox from '../../Components/MessageBox';
+import { useRouter } from '../../node_modules/next/router';
 
 
 const HubSection = styled.section`
@@ -20,19 +20,20 @@ const HubSection = styled.section`
 
 
 function Hub(props) {
-  const hubId = props.match.params.id;
+  const router = useRouter()
+  const {slug } = router.query
   const hubDetails = useSelector((state) => state.hubDetails);
   const { loading, error, hub } = hubDetails;
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(detailsHub(hubId));
-  }, [dispatch,hubId]);
+    dispatch(detailsHub(slug));
+  }, [dispatch,slug]);
   
   return (
 
-    loading ?<div style={{height:'50vh'}}> <div className="loading" />  </div>: error ? <div style={{height:'50vh'}}><MessageBox>erreur de chargement</MessageBox> </div>:(
+    loading ?<div className='loading-overlay' ><div className="loading"></div></div>: error ? <div style={{height:'50vh'}}><MessageBox>erreur de chargement</MessageBox> </div>:(
       <HubSection>
     <ErrorBoundary>
     <HeroHub hub={hub}/>

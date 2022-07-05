@@ -1,10 +1,5 @@
 import React, { useContext, useState } from 'react'
 import styled, { css } from 'styled-components';
-import DomaineParalaxsvgtop from "././static/assets/svg/DomaineParalaxsvgtop.svg";
-import DomaineParalaxsvgbottom from "././static/assets/svg/DomaineParalaxsvgbottom.svg";
-import DomaineHubIcone from "././static/assets/svg/DomaineHubIcone.svg";
-import line from "././static/assets/svg/line.svg";
-import plus from "././static/assets/svg/plus.svg";
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
 const DomaineOfHubSection = styled.section`
@@ -14,12 +9,11 @@ background-color:#94B61D;
 color:#fff;
 @media (max-width:768px){
 padding:4rem 1rem;
-  
        }
 
 `;
 
-const DomaineHeadContent = styled.div `
+const DomaineHeadContent = styled.div`
 width:90%;
 margin:0 auto;
 text-align:center;
@@ -57,7 +51,7 @@ p{
 }
 `;
 
-const DomaineParalaxImgtop = styled.img `
+const DomaineParalaxImgtop = styled.img`
 position:absolute;
 top: 0;
 left:0;
@@ -70,7 +64,7 @@ display:none;
 }
 `;
 
-const DomaineParalaxImgbottom = styled.img `
+const DomaineParalaxImgbottom = styled.img`
 position:absolute;
 bottom: 0;
 right:0;
@@ -90,14 +84,14 @@ display:none;
 
 `;
 
-const DomainePisionMissionIcon = styled.img `
+const DomainePisionMissionIcon = styled.img`
 width:100px;
 @media (max-width:768px){
 width: 80px;
 }
 `;
 
-const DomaineAcordeon = styled.div `
+const DomaineAcordeon = styled.div`
 width:90%;
 margin:0 auto;
 height: 100%;
@@ -156,7 +150,7 @@ button.active {
 }
 
 .minus {
-  content: url(${line});
+  content: url(${"/static/assets/svg/line.svg"});
   width: 24px;
   height: 24px;
   position: absolute;
@@ -164,7 +158,7 @@ button.active {
 }
 
 .plus {
-  content: url(${plus});
+  content: url(${"/static/assets/svg/plus.svg"});
   width: 24px;
   height: 24px;
   /* transform: rotate(90deg); */
@@ -205,69 +199,69 @@ button.active {
 
 `;
 
-function DomaineOfIntervation({hub}) {
+function DomaineOfIntervation({ hub }) {
   let indexPlus;
 
-    const [active, setActive] = useState(0);
+  const [active, setActive] = useState(0);
 
-    const eventHandler = (e, index) => {
-        e.preventDefault();
-        setActive(index);
-    }
+  const eventHandler = (e, index) => {
+    e.preventDefault();
+    setActive(index);
+  }
 
-    const indexCount = (index) => {
-        indexPlus = index + 1;
-        return indexPlus;
-    }
-    const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const indexCount = (index) => {
+    indexPlus = index + 1;
+    return indexPlus;
+  }
+  const value = useContext(CurrentLangContext);
+  const { currentLang } = value
 
 
   return (
     <DomaineOfHubSection>
-       <DomaineParalaxImgtop src={DomaineParalaxsvgtop} alt=""/>
-       <DomaineParalaxImgbottom src={DomaineParalaxsvgbottom} alt=""/>
-     <DomaineHeadContent>
-        <DomainePisionMissionIcon className="" src={DomaineHubIcone} alt="Domaine icon" />
-      <h1>
-        
-        {currentLang=== "en" ?"area of intervention":"domaine d’intervention"}
+      <DomaineParalaxImgtop src={"/static/assets/svg/DomaineParalaxsvgtop.svg"} alt="" />
+      <DomaineParalaxImgbottom src={"/static/assets/svg/DomaineParalaxsvgbottom.svg"} alt="" />
+      <DomaineHeadContent>
+        <DomainePisionMissionIcon className="" src={"/static/assets/svg/DomaineHubIcone.svg"} alt="Domaine icon" />
+        <h1>
 
-      </h1>
-      <p>
-        {
-          hub.acf.description
-        }
-      </p>
-     </DomaineHeadContent>
-     <DomaineAcordeon>
-     <form>     
-                { hub.acf.domaine_Intervention.map((tab, index) => (
-                    <div key={index}>
-                        <h3>
-                            <button 
-                                onClick={(e) => eventHandler(e, index)}
-                                className={ active === index ? 'active' : 'inactive'}
-                                aria-expanded={ active === index ? 'true' : 'false' }
-                                aria-controls={ 'sect-' + indexCount(index) }
-                                aria-disabled={ active === index ? 'true' : 'false' }
-                                tabIndex={indexCount(index)}
-                            >
+          {currentLang === "en" ? "area of intervention" : "domaine d’intervention"}
 
-                                <span className="title-wrapper">{tab.Title_domaine_Intervention}
-                                    <span className={ active === index  ? 'plus' : 'minus'}></span>
-                                </span>  
-                            </button>
-                        </h3>
-                        <div id={ 'sect-' + indexCount(index) } className={ active === index  ? 'panel-open' : 'panel-close' }>
-                                { tab.description_domaine_Intervention }
-                        </div>
-                    </div>
-                    ))
-                }
-            </form>
-     </DomaineAcordeon>
-      
+        </h1>
+        <p>
+          {
+            hub.acf.description
+          }
+        </p>
+      </DomaineHeadContent>
+      <DomaineAcordeon>
+        <form>
+          {hub.acf.domaine_Intervention.map((tab, index) => (
+            <div key={index}>
+              <h3>
+                <button
+                  onClick={(e) => eventHandler(e, index)}
+                  className={active === index ? 'active' : 'inactive'}
+                  aria-expanded={active === index ? 'true' : 'false'}
+                  aria-controls={'sect-' + indexCount(index)}
+                  aria-disabled={active === index ? 'true' : 'false'}
+                  tabIndex={indexCount(index)}
+                >
+
+                  <span className="title-wrapper">{tab.Title_domaine_Intervention}
+                    <span className={active === index ? 'plus' : 'minus'}></span>
+                  </span>
+                </button>
+              </h3>
+              <div id={'sect-' + indexCount(index)} className={active === index ? 'panel-open' : 'panel-close'}>
+                {tab.description_domaine_Intervention}
+              </div>
+            </div>
+          ))
+          }
+        </form>
+      </DomaineAcordeon>
+
     </DomaineOfHubSection>
   )
 }

@@ -1,12 +1,11 @@
 import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import Link from 'next/link';;
+import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { listHubs } from '../../store/actions/HubActions';
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
-import Loading from '../Loading';
 import MessageBox from '../MessageBox';
-import RealatedHubparalaxImgbottomsvg from "././static/assets/svg/RealatedHubparalaxImgbottom.svg";
+
 
 
 const RelatedHubsSection = styled.div`
@@ -95,7 +94,7 @@ const RelatedHub = ({ hub }) => {
 
   return (
     <RelatedHubsSection background={hub?"none":"#E4E4E4"}>
-      <RealatedHubparalaxImgbottom src={RealatedHubparalaxImgbottomsvg}/>
+      <RealatedHubparalaxImgbottom src={"/static/assets/svg/RealatedHubparalaxImgbottom.svg"}/>
       <h1>
         {currentLang=== "en" ?"DISCOVER":"Découvrez"}
     <br />

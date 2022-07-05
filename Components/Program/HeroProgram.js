@@ -1,10 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import styled from 'styled-components'
-//import DonilabHeroImg from "././static/assets/heroimage.png";
-import HeroDonilabImg from "././static/assets/programhero.png";
-import CircleHeroImg from "././static/assets/rhome1.png";
-import LogoProgram from "././static/assets/logoprogram.png";
-//import CircleHeroInImg from "././static/assets/cercleblanc.svg";
 import parse from "html-react-parser";
 import Dots from '../Dots';
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
@@ -225,7 +220,7 @@ function HeroProgram({ program }) {
     <HeroProgramSection>
       <HeroProgramWrapper>
         <HeroProgramTextBox>
-          <HeroProgramImgarc src={CircleHeroImg} />
+          <HeroProgramImgarc src={"/static/assets/rhome1.png"} />
           <HeroProgramInfo>
             <img src={program.acf.logo_en_png_ou_svg.url} alt="" />
             <h1>

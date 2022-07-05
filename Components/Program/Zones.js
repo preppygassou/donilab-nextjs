@@ -1,9 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
-import Zonessvg from "././static/assets/svg/zones.svg";
-import Zonesbamako from "././static/assets/svg/zonesbamako.svg";
-
 
 const ZonesSections = styled.section`
 background-color:#2755A1;
@@ -104,7 +101,7 @@ function Zones({program}) {
 
       </ZonesBamako>
       <ZonesInfos>
-          <ZonesIcone src={Zonessvg} alt=""/>
+          <ZonesIcone src={"/static/assets/svg/zones.svg"} alt=""/>
           <h1>
       {currentLang=== "en" ?"Intervention":"zones"}
 

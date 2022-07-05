@@ -1,8 +1,5 @@
 import React, { useContext } from 'react'
-import PartnersImg from '././static/assets/svg/partnersSvgProgram.svg'
 import styled from 'styled-components/';
-import Objectifssvg from "././static/assets/svg/objectifssvg.svg";
-import LogoBene from "././static/assets/logo_doctix.png";
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
 
@@ -126,7 +123,7 @@ function Beneficiaires({program}) {
 
   return (
     <BeneficiairesSections>
-        <BeneficiairesIcon className="" src={PartnersImg} alt="Beneficiaire icon" />
+        <BeneficiairesIcon className="" src={"/static/assets/svg/partnersSvgProgram.svg"} alt="Beneficiaire icon" />
         <BeneficiairesTitle >
   {currentLang=== "en" ?"BENEFICIARIES":"BÉNÉFICIAiRES"}
          <br/> 

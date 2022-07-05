@@ -1,7 +1,5 @@
 import React, { useContext } from 'react'
 import styled, { css } from 'styled-components';
-import ProgramTopParalaxeImgFull from "././static/assets/svg/ProgramTopParalaxeImgFull.svg";
-import ProgramHubIcone from "././static/assets/svg/ProgramHubIcone.svg";
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
 
@@ -135,9 +133,9 @@ function ProgramsOfHub({ hub }) {
   const {currentLang} = value
   return (
     <ProgramOfHubSection>
-      <ProgramParalaxImgbottom src={ProgramTopParalaxeImgFull} alt="" />
+      <ProgramParalaxImgbottom src={"/static/assets/svg/ProgramTopParalaxeImgFull.svg"} alt="" />
       <ProgramHeadContent>
-        <ProgramPisionMissionIcon className="" src={ProgramHubIcone} alt="program icon" />
+        <ProgramPisionMissionIcon className="" src={"/static/assets/svg/ProgramHubIcone.svg"} alt="program icon" />
         <h1>
         {currentLang=== "en" ?"hub programs":"les programmes du hub"}
         </h1>

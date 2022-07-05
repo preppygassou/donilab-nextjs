@@ -9,29 +9,29 @@ import Beneficiaires from '../../Components/Program/Beneficiaires'
 import Partners from '../../Components/Program/Partners'
 import { useDispatch, useSelector } from 'react-redux'
 import { detailsProgram } from '../../store/actions/ProgramActions'
-import Loading from '../../Components/Loading'
 import MessageBox from '../../Components/MessageBox'
 import ErrorBoundary from '../../Components/ErrorBoundary'
+import { useRouter } from 'next/router'
 
 function Program(props) {
 
   const dispatch = useDispatch();
-  const programId = props.match.params.id;
+  const router = useRouter()
+  const {slug } = router.query
+  //const programId = props.match.params.id;
   const programDetails = useSelector((state) => state.programDetails);
   const { loading, error, program } = programDetails;
 
   useEffect(() => {
    
-    dispatch(detailsProgram(programId));
-  }, [dispatch,programId]);
+    dispatch(detailsProgram(slug));
+  }, [dispatch,slug]);
 
 
   return (
     <>
     {loading ? (
-      <div style={{height:'50vh'}}>
-        <div className="loading"/>
-      </div>
+      <div className='loading-overlay' ><div className="loading"></div></div>
       ) : error ? (
       <div style={{height:'50vh'}}>
         <MessageBox>{error}</MessageBox>

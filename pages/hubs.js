@@ -534,7 +534,7 @@ function Hubs() {
                           </div>
 
                           <div>
-                            <HubExploreLink href={`/hub/${hub.id}`} green="true">
+                            <HubExploreLink href={`/hub/${hub.slug}`} green="true">
                               {t("decouverthub")}
                     </HubExploreLink>
                           </div>
@@ -558,7 +558,7 @@ function Hubs() {
                             {parse(hub.content.rendered)}
                           </div>
                           <div>
-                            <HubExploreLink href={`/hub/${hub.id}`}>
+                            <HubExploreLink href={`/hub/${hub.slug}`}>
                               {t("decouverthub")}
               </HubExploreLink>
                           </div>
@@ -578,7 +578,7 @@ function Hubs() {
                             {parse(hub.content.rendered)}
                           </div>
                           <div>
-                            <HubExploreLink href={`/hub/${hub.id}`}>
+                            <HubExploreLink href={`/hub/${hub.slug}`}>
                               {t("decouverthub")}
               </HubExploreLink>
                           </div>

@@ -1,8 +1,5 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
-import ResultatsSectionparalaximgtop from "././static/assets/svg/resultatsSectionparalaximgtop.svg";
-import ResultatsSectionparalaximgbottom from "././static/assets/svg/resultatsSectionparalaximgbottom.svg";
-import ResultatsSectionIcone from "././static/assets/svg/ResultatsSectionIcone.svg";
 import parse from "html-react-parser";
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
@@ -90,9 +87,9 @@ function Resultats({program}) {
 
   return (
     <ResultatsSection>
-      <ResultatsSectionparalaxImgtop src={ResultatsSectionparalaximgtop} alt=""/>
-      <ResultatsSectionparalaxImgbottom src={ResultatsSectionparalaximgbottom} alt=""/>
-      <ResultatsSectionVisionMissionIcon className="" src={ResultatsSectionIcone} alt="Historic icon" />
+      <ResultatsSectionparalaxImgtop src={"/static/assets/svg/resultatsSectionparalaximgtop.svg"} alt=""/>
+      <ResultatsSectionparalaxImgbottom src={"/static/assets/svg/resultatsSectionparalaximgbottom.svg"} alt=""/>
+      <ResultatsSectionVisionMissionIcon className="" src={"/static/assets/svg/ResultatsSectionIcone.svg"} alt="Historic icon" />
 
       <h1>
       

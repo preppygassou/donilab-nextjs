@@ -63,7 +63,7 @@ const detailsHub = (HubId) => async (dispatch) => {
   try {
     const { data } = await axios.get(
       
-      "https://blog.donilab.org/wp-json/wp/v2/hubs/" + HubId
+      "https://blog.donilab.org/wp-json/wp/v2/hubs?slug=" + HubId
     );
     dispatch({ type: HUB_DETAILS_SUCCESS, payload: data });
   } catch (error) {

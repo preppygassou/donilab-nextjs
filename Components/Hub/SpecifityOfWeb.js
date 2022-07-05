@@ -1,8 +1,5 @@
 import React, { useContext } from 'react'
 import styled,{css} from 'styled-components'
-import SpecifyIcone from "././static/assets/svg/specifityicone.svg";
-import SpecifityTopParalaxeImgTop from "././static/assets/svg/SpecifityTopParalaxeImgTop.svg";
-import SpecifityTopParalaxeImgFull from "././static/assets/svg/SpecifityTopParalaxeImgFull.svg";
 import PropTypes from 'prop-types';
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
@@ -210,10 +207,10 @@ function SpecifityOfWeb({hub}) {
   const {currentLang} = value
   return (
     <SpecifitySection>
-      <SpecifityParalaxImgtop src={SpecifityTopParalaxeImgTop} alt=""/>
-        <SpecifityParalaxImgbottom src={SpecifityTopParalaxeImgFull} alt=""/>
+      <SpecifityParalaxImgtop src={"/static/assets/svg/SpecifityTopParalaxeImgTop.svg"} alt=""/>
+        <SpecifityParalaxImgbottom src={"/static/assets/svg/SpecifityTopParalaxeImgFull.svg"} alt=""/>
      <SpecifityHeadContent>
-        <SpecifityPisionMissionIcon className="" src={SpecifyIcone} alt="Historic icon" />
+        <SpecifityPisionMissionIcon className="" src={"/static/assets/svg/specifityicone.svg"} alt="Historic icon" />
       <h1>
         
         {currentLang=== "en" ?"the specificities of the hub":"les spécificités du hub"}

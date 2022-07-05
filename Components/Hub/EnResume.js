@@ -1,8 +1,5 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
-import EnResumeparalaximgtop from "././static/assets/svg/EnResumeparalaximgtop.svg";
-import EnResumeparalaximgLeft from "././static/assets/svg/EnResumeparalaximgLeft.svg";
-import EnResumeIcone from "././static/assets/svg/EnResumerIcon.svg";
 import parse from "html-react-parser";
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
@@ -80,9 +77,9 @@ function EnResume({hub}) {
   const {currentLang} = value
   return (
     <EnResumeSection>
-      <EnResumeparalaxImgtop src={EnResumeparalaximgtop} alt=""/>
-        <EnResumeparalaxImg src={EnResumeparalaximgLeft} alt=""/>
-        <EnResumeVisionMissionIcon className="" src={EnResumeIcone} alt="Historic icon" />
+      <EnResumeparalaxImgtop src={"/static/assets/svg/EnResumeparalaximgtop.svg"} alt=""/>
+        <EnResumeparalaxImg src={"/static/assets/svg/EnResumeparalaximgLeft.svg"} alt=""/>
+        <EnResumeVisionMissionIcon className="" src={"/static/assets/svg/EnResumerIcon.svg"} alt="Historic icon" />
         <h1>
         {currentLang=== "en" ?"In summary":"en résumé"}
        </h1>

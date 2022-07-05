@@ -1,7 +1,5 @@
 import React, { useContext } from 'react'
 import PartnersSlider from './PartnersSlider'
-import { PartnersData } from '../../services/data/PartnerData';
-import PartnersImg from '././static/assets/svg/PartnersProgram.svg'
 import styled from 'styled-components/';
 import { CurrentLangContext } from '../../Context/CurrentLangContext';
 
@@ -44,7 +42,7 @@ function Partners({program}) {
   return (
     <PartnersSectionLogo>
       <PartnersSectionWrapper>
-      <div><img src={PartnersImg} alt=""/></div>
+      <div><img src={"/static/assets/svg/PartnersProgram.svg'"} alt=""/></div>
         <h1>
           
   {currentLang=== "en" ?"PROGRAMS":"PARTENAIRES DU "}
