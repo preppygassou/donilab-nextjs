@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "antd": "^4.21.0",
     "axios": "^0.21.1",
     "bootstrap": "5.0.2",
     "graphql": "^15.5.0",
@@ -16,30 +17,34 @@
     "i18next": "^20.1.0",
     "i18next-browser-languagedetector": "^6.1.0",
     "i18next-xhr-backend": "^3.2.2",
-    "moment": "^2.29.1",
-    "react": "^17.0.1",
+    "moment": "^2.29.3",
+    "next": "ˆ12.0.10",
+    "next-i18next": "^11.0.0",
+    "next-pwa": "^5.5.4",
+    "next-redux-saga": "^4.1.2",
+    "next-redux-wrapper": "^7.0.5",
+    "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.4",
-    "react-dom": "^17.0.1",
+    "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-i18next": "^11.8.12",
     "react-icons": "^4.1.0",
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
     "react-slick": "^0.28.0",
     "reactstrap": "^9.0.1",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1",
     "super-react-gist": "^1.0.4",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "eslintConfig": {
     "extends": [
@@ -60,6 +65,7 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^2.0.7",
     "gulp-dart-sass": "^1.0.2"
   }
 }

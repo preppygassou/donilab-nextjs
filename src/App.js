@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
-import ScrollToTop from './Components/ScrollToTop';
+import ScrollToTop from '../Components/ScrollToTop';
 import Router from "./Router";
-import './i18n'
+import '../services/i18n'
 const App = ()=> {
   
   return (

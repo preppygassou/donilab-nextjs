@@ -1,0 +1,133 @@
+.expertise-card-group{
+  display:grid;
+ margin-left:auto;
+ margin-right:auto;
+grid-template-columns: repeat(4, 1fr);
+grid-auto-rows: 1fr;
+ max-width:85%;
+ background-color:#fff;
+ border-radius: 25px;
+ -webkit-box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
+-moz-box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
+box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
+}
+.expertiseCard{
+  width:100%;
+  height:100%;
+  color:#2755A1;
+border:2px #E3E3E3;
+border-radius: 0;
+&:hover{
+background-color:#2755A1;
+color:#fff;
+}
+object{
+  margin:0 .5rem .5rem .5rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+/* h1{
+  margin:.5rem;
+  font-size:2rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+p{
+  margin:.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+} */
+img{
+ 
+ 
+}
+img.hover{
+  display:none
+  }
+  &:hover > img.hover {
+        display: block;
+       }
+  &:hover > img.default {
+        display: none;
+       }
+      
+  &:hover > a {
+    color:#fff;   
+    border:2px solid #fff;
+  }
+}
+
+/* Hub France */
+
+section.herosection {
+  margin-top: 3rem;
+  padding-top: 0px;
+padding-bottom: 0px;
+  
+}
+section.herosection h2::before {
+  margin-bottom: 0.75rem;
+  display: block;
+  height: 0.25rem;
+  width: 5rem;
+  border-radius: 0.125rem;
+  opacity: 1;
+  background-color: rgba(39, 85, 161,1);
+  content: " ";
+  line-height: 4px;
+  margin-left: calc(50% - 40px);
+  vertical-align: top;
+}
+section.herosection h2 {
+  font-family:"Cera Round Pro";
+  margin-bottom: 3rem;
+  color: rgb(39, 85, 161);
+  text-align: center;
+}
+section.herosection .hero h1{
+  font-family:"Cera Round Pro";
+  max-width: 2rem;
+  font-size: 45px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: rgb(39, 85, 161);
+}
+section.herosection .hero p{
+  max-width: 19rem;
+}
+
+
+.ps-btn--backtop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  z-index: 10000;
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+
+  i {
+      color: #fff;
+  }
+
+  &:hover {
+      cursor: pointer;
+      border-color: rgb(39, 85, 161);;
+      i {
+          color: rgb(39, 85, 161);;
+      }
+  }
+
+  /* @include media('<lg') {
+      display: none;
+  } */
+}
+.ant-back-top {
+  right: 50px !important;
+}
