@@ -1,16 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import ExpertiseheroleftparalaxeImg from "/static/assets/svg/aboutheroleftparalaxe.svg"
-import ExpertiseherorightparalaxeImg from "/static/assets/svg/aboutherorightparalaxe.svg"
-import ExpertisesectionparalaxeImg from "/static/assets/svg/expertisesectionparalaxe.svg"
-import AccelerationImg from "/static/assets/accelerationimg.png"
-import EtudeImg from "/static/assets/etudes.png"
-import CoworkingImg from "/static/assets/coworking.png"
-import FablabImg from "/static/assets/fablab.png"
-import AccelerationIcon from '/static/assets/svg/icon-01.svg'
-import EtudeIcon from '/static/assets/svg/EtudeIcon.svg'
-import CoworkingIcon from '/static/assets/svg/icon-03.svg'
-import FablabIcon from '/static/assets/svg/icon-04.svg'
 import ExpertiseSection from '../Components/Dexpertise/ExpertiseSection'
 import Link from 'next/link';;
 import { useSelector } from 'react-redux';
@@ -223,8 +212,8 @@ function Dexpertise() {
     <ExpertiseContainer>
         <ExpertiseContainerWrapper>
         <ExpertiseHero>
-        <ExpertiseheroparalaxeLeft src={ExpertiseheroleftparalaxeImg} alt=""/>
-        <ExpertiseheroparalaxeRight src={ExpertiseherorightparalaxeImg} alt=""/>
+        <ExpertiseheroparalaxeLeft src={"/static/assets/svg/aboutheroleftparalaxe.svg"} alt=""/>
+        <ExpertiseheroparalaxeRight src={"/static/assets/svg/aboutherorightparalaxe.svg"} alt=""/>
       </ExpertiseHero>
 
       <AllExpertisesSection>
