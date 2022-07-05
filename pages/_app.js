@@ -4,7 +4,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { appWithTranslation } from 'next-i18next';
 import store from "../store/store";
-import DefaultLayout from '../components/layouts/DefaultLayout';
+//import DefaultLayout from '../components/layouts/DefaultLayout';
 import '../sass/themes/donilab.dark.scss';
 import { useEffect } from 'react';
 import Layout from "../Components/layouts/Layout";
@@ -30,8 +30,8 @@ const MyApp = (props) => {
 
 
 
-     const getLayout = Component.getLayout || (page => <DefaultLayout>{page}</DefaultLayout>);
-    return getLayout(
+    // const getLayout = Component.getLayout || (page => <DefaultLayout>{page}</DefaultLayout>);
+    return (
         <ConfigProvider locale={locale}>
             <Provider store={store}>
                 <Layout>
