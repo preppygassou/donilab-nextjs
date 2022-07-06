@@ -13,6 +13,8 @@ import parser from 'html-react-parser';
 import { useRouter } from 'next/router';
 import Layout from '../Components/layouts/Layout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { HubContext } from '../services/hub/hub.context';
+import { AboutContext } from '../services/about/about.context';
 
 const AboutContainer = styled.div`
 width:100%;
@@ -251,14 +253,17 @@ width: 200px;
 }
 `;
 
-const About = ({abouts,hubs}) => {
-  const dispatch = useDispatch()
-  const hubList = useSelector((state) => state.hubList)
+const About = () => {
+  
   const { t } = useTranslation('common')
  // const [abouts, setAbouts] = useState([])
   const [loadingabout, setLonding] = useState(false)
   const { locale } = useRouter()
- // const { loading, error, hubs } = hubList;
+  const { state } = useContext(HubContext);
+  const {hubs} =  state
+
+  const { state:aboutState } = useContext(AboutContext);
+  const {abouts,loading,error} =  aboutState
 
 
   /* useEffect(() => {
@@ -361,16 +366,14 @@ const About = ({abouts,hubs}) => {
 
 
 export const getServerSideProps = async ({ locale }) => {
-  const res = await axios.get(
+/*   const res = await axios.get(
     `https://blog.donilab.org/wp-json/wp/v2/about/?lang=${locale}`
   );
   const { data } = await axios.get(
     "https://blog.donilab.org/wp-json/wp/v2/hubs/?lang="+locale
-  );
+  ); */
   return {
     props: {
-      abouts: res.data,
-      hubs: data,
       ...await serverSideTranslations(locale, ['common']),
     },
   };

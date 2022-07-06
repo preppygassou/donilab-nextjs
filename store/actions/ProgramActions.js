@@ -54,7 +54,7 @@ const listProgramsTypeWithPartner = (ProgrammestypesWithPartnersId,currentLang) 
   }
 };
 
-const detailsProgram = (slug) => async (dispatch) => {
+const detailsProgram = async (slug) => {
   try {
     dispatch({ type: PROGRAM_DETAILS_REQUEST, payload: slug });
     const { data } = await axios.get(

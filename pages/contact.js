@@ -5,6 +5,7 @@ import MessageBox from "../Components/MessageBox";
 import Layout from "../Components/layouts/Layout";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
+import { GeneralContext } from "../services/general/general.context";
 const ContactPage = styled.section`
 
 `;
@@ -177,94 +178,94 @@ const FooterSocialImg = styled.img`
 
 function Contact() {
 
-  const generalList = useSelector((state) => state.generalList)
-  const {loading, error,generals }= generalList
+  const { state } = useContext(GeneralContext);
+  const { loading, error, generals } = state
 
   return (
     <>
-    <ContactPage>
-      {
-        loading ? <div style={{ height: '50vh' }}> <div className="loading" />  </div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> : <>
-      <HeroContact>
-       
-        <h1> {generals[0].title.rendered}</h1>
-      </HeroContact>
-      <ContactSection>
-      <ContactInfoContainer>
-         
-              <Channels>
-                 <Channel>
-                  <h1>{generals[0].acf.page_contact[0].titre_pagecontact}</h1>
+      <ContactPage>
+        {
+          loading ? <div style={{ height: '50vh' }}> <div className="loading" />  </div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> : <>
+            <HeroContact>
+
+              <h1> {generals[0].title.rendered}</h1>
+            </HeroContact>
+            <ContactSection>
+              <ContactInfoContainer>
+
+                <Channels>
+                  <Channel>
+                    <h1>{generals[0].acf.page_contact[0].titre_pagecontact}</h1>
+                    <p>
+                      {generals[0].acf.page_contact[0].description_pagecontact}
+
+                    </p>
+                    <ChannelLink href={generals[0].acf.page_contact[0].link_pagecontact} target="_blank" rel="noopener noreferrer">
+                      {
+                        generals[0].acf.page_contact[0].link_title
+                      }
+                      <i className="fas fa-arrow-right" aria-hidden="true"></i>
+                    </ChannelLink>
+                  </Channel>
+                  <Channel>
+                    <h1>{generals[0].acf.page_contact[1].titre_pagecontact}</h1>
+                    <p>
+                      {generals[0].acf.page_contact[1].description_pagecontact}
+
+                    </p>
+                    <ChannelLink href={generals[0].acf.page_contact[1].link_pagecontact} target="_blank" rel="noopener noreferrer">
+                      {
+                        generals[0].acf.page_contact[1].link_title
+                      }
+                      <i className="fas fa-arrow-right" aria-hidden="true"></i>
+                    </ChannelLink>
+                  </Channel>
+
+                </Channels>
+                <hr className="Channel_Divider" />
+
+                <GoToDonilab>
+                  <Channel>
+                    <h1>{generals[0].acf.page_contact[2].titre_pagecontact}</h1>
+                    <p>
+                      Sotuba ACI 2000 <br /> Bamako, Mali
+                    </p>
+                    <ChannelLink href="https://goo.gl/maps/FSLUzaFMUvnsJaZv8" target="_blank" rel="noopener noreferrer">
+                      {generals[0].acf.page_contact[2].link_title}
+                      <i className="fas fa-arrow-right" aria-hidden="true"></i>
+                    </ChannelLink>
+                  </Channel>
+                </GoToDonilab>
+
+                <hr className="Channel_Divider" />
+                <SocialLinks>
+                  <h1>{generals[0].acf.page_contact[3].titre_pagecontact}</h1>
                   <p>
-                  {generals[0].acf.page_contact[0].description_pagecontact}
-
+                    {generals[0].acf.page_contact[3].description_pagecontact}
                   </p>
-                  <ChannelLink href={generals[0].acf.page_contact[0].link_pagecontact} target="_blank" rel="noopener noreferrer">
-                    {
-                      generals[0].acf.page_contact[0].link_title
-                    }
-                    <i className="fas fa-arrow-right" aria-hidden="true"></i>
-                  </ChannelLink>
-                </Channel> 
-                <Channel>
-              <h1>{generals[0].acf.page_contact[1].titre_pagecontact}</h1>
-              <p>
-              {generals[0].acf.page_contact[1].description_pagecontact}
+                  <FooterSocial>
+                    <FooterSocialLink href="https://www.facebook.com/donilab.officiel" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-facebook-f" aria-hidden="true"></i>
+                    </FooterSocialLink>
+                    <FooterSocialLink href="https://twitter.com/Donilab1" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-twitter" aria-hidden="true"></i>
+                    </FooterSocialLink>
+                    <FooterSocialLink href="https://www.instagram.com/donilab1/" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-instagram" aria-hidden="true"></i>
+                    </FooterSocialLink>
+                    <FooterSocialLink href="https://www.instagram.com/donilab1/" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-linkedin" aria-hidden="true"></i>
+                    </FooterSocialLink>
+                  </FooterSocial>
+                </SocialLinks>
 
-              </p>
-              <ChannelLink href={generals[0].acf.page_contact[1].link_pagecontact} target="_blank" rel="noopener noreferrer">
-              {
-                      generals[0].acf.page_contact[1].link_title
-                    }
-                <i className="fas fa-arrow-right" aria-hidden="true"></i>
-              </ChannelLink>
-            </Channel> 
-                
-          </Channels>
-          <hr className="Channel_Divider" />
 
-           <GoToDonilab>
-             <Channel>
-               <h1>{generals[0].acf.page_contact[2].titre_pagecontact}</h1>
-               <p>
-                 Sotuba ACI 2000 <br /> Bamako, Mali
-               </p>
-               <ChannelLink href="https://goo.gl/maps/FSLUzaFMUvnsJaZv8" target="_blank" rel="noopener noreferrer">
-                 {generals[0].acf.page_contact[2].link_title}
-                 <i className="fas fa-arrow-right" aria-hidden="true"></i>
-               </ChannelLink>
-             </Channel>
-           </GoToDonilab> 
-          
-          <hr className="Channel_Divider" />
-           <SocialLinks>
-            <h1>{generals[0].acf.page_contact[3].titre_pagecontact}</h1>
-            <p>
-            {generals[0].acf.page_contact[3].description_pagecontact}
-            </p>
-            <FooterSocial>
-              <FooterSocialLink href="https://www.facebook.com/donilab.officiel" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-facebook-f"  aria-hidden="true"></i>
-              </FooterSocialLink>
-              <FooterSocialLink href="https://twitter.com/Donilab1" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-twitter" aria-hidden="true"></i>
-              </FooterSocialLink>
-              <FooterSocialLink href="https://www.instagram.com/donilab1/" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-instagram" aria-hidden="true"></i>
-              </FooterSocialLink>
-              <FooterSocialLink href="https://www.instagram.com/donilab1/" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-linkedin" aria-hidden="true"></i>
-              </FooterSocialLink>
-            </FooterSocial>
-          </SocialLinks> 
-          
- 
-        </ContactInfoContainer>
-        
-      </ContactSection>
-      </>
-    }
-    </ContactPage>
+              </ContactInfoContainer>
+
+            </ContactSection>
+          </>
+        }
+      </ContactPage>
     </>
   );
 }

@@ -1,7 +1,8 @@
-import React,{useState,useRef, useEffect} from 'react'
+import React,{useState,useRef, useEffect, useContext} from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'next-i18next';
 import { useSelector } from 'react-redux'
+import { GeneralContext } from '../services/general/general.context';
 
 const HeroSection = styled.section`
 overflow:hidden;
@@ -168,8 +169,8 @@ right: 61vh;
 const Hero = ({slides})=> {
   const { t} = useTranslation('common')
  
-  const generalList = useSelector((state) => state.generalList)
-  const {loading, error,generals }= generalList
+  const { state } = useContext(GeneralContext);
+  const {loading, error,generals} =  state
   
   return (
       <HeroSection>

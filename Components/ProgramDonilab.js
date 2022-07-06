@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import Link from 'next/link';
+
 import { useTranslation } from 'next-i18next';
 
 const ProgramDonilabContent = styled.ul `
@@ -146,13 +147,13 @@ function myFunction(str) {
   return thestr;
 }
 
-function ProgramDonilab({ProgramData,history}) {
+function ProgramDonilab({ProgramData}) {
   const { t} = useTranslation('common')
 
   return (
     <ProgramDonilabContent>
      {
-       ProgramData.map((program)=>(
+     ProgramData && ProgramData.map((program)=>(
          <OneOfProgramDonilab key={program.id}>
           <ProgramLogo>
           <img src={program.acf.logo_officiel.url} alt={program.title.rendered}/>

@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import ExpertiseSection from '../Components/ExpertiseSection'
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import parse from "html-react-parser";
 import Layout from '../Components/layouts/Layout';
-
+import { ExpertiseContext } from '../services/expertise/expertise.context';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const ExpertiseContainer = styled.div `
 margin-bottom:3rem;
@@ -207,8 +208,9 @@ transform: rotateY(180deg);
 `;
 
 function Expertise() {
-  const expertiseList = useSelector((state) => state.expertiseList);
-  const { loading, error, expertises } = expertiseList;
+  const { state } = useContext(ExpertiseContext);
+  const {expertises,loading,error} =  state
+
   return (
     <>
     <ExpertiseContainer>
@@ -220,7 +222,7 @@ function Expertise() {
 
       <AllExpertisesSection>
         <FakeMarging>
-      <ExpertiseSection expertise="true"/>
+      <ExpertiseSection expertises={expertises} expertise="true"/>
       {
         expertises.map((expertise,index)=>(
         index === 0 ? <Acceleration>
@@ -306,5 +308,14 @@ function Expertise() {
     </>
   )
 }
+export const getServerSideProps = async ({ locale }) => {
+
+  return {
+    props: {
+     
+      ...await serverSideTranslations(locale, ['common']),
+    },
+  };
+};
 
 export default Expertise

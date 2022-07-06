@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { listgenerals } from '../store/actions/GeneralActions';
 import NavLink from './NavLink';
+import { GeneralContext } from '../services/general/general.context';
 
 
 const Nav = styled.nav `
@@ -199,17 +200,11 @@ const Navbar = (props) => {
   const {toggle} = props
   const {locale} = useRouter()
 
- 
-  const generalList = useSelector((state) => state.generalList)
-  const {loading, error,generals }= generalList
-  const dispatch = useDispatch()
+
+  const { state } = useContext(GeneralContext);
+  const {loading, error,generals} =  state
 
 
-   useEffect(() => {     
-    dispatch(listgenerals(locale))       
-   }, [dispatch,locale])
-
-   console.log(locale)
 
   return (
     <Nav>

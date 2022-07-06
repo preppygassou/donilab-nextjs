@@ -8,6 +8,7 @@ import LanguageSelector from './LanguageSelector';
 import { CurrentLangContext } from '../Context/CurrentLangContext';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import { GeneralContext } from '../services/general/general.context';
 
 
 const DropdownContainer = styled.div `
@@ -123,8 +124,8 @@ width:100%;
 
 function Dropdown({isOpen,toggle}) {
 
-  const generalList = useSelector((state) => state.generalList)
-  const {loading, error,generals }= generalList
+  const { state } = useContext(GeneralContext);
+  const {loading, error,generals} =  state
   const {locale} = useRouter()
 
   return (

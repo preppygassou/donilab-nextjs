@@ -2,14 +2,13 @@ import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components/';
 import ProgramByDonilab from '../Components/ProgramDonilab';
 import SectionTitle from "../Components/SectionTitle";
-import { listProgramsTypeOfDonilab, listProgramsTypeWithPartner } from "../store/actions/ProgramActions";
-import { useDispatch, useSelector } from 'react-redux';
 import MessageBox from '../Components/MessageBox';
 import ErrorBoundary from '../Components/ErrorBoundary';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import Layout from '../Components/layouts/Layout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { ProgramContext } from '../services/program/program.context';
 
 const SectionTitlell =styled.div`
 
@@ -212,22 +211,21 @@ const ProgrammestypesWithPartnersId = 49;
 
 function Program() {
   const { t} = useTranslation('common')
-  const dispatch = useDispatch()
+  const { state ,listProgramsTypeOfDonilab,listProgramsTypeWithPartner} = useContext(ProgramContext);
+
   const {locale} = useRouter()
-  const programByDonilab = useSelector((state)=>state.programByDonilab)
-  const programWithPartners = useSelector((state)=>state.programWithPartners)
 
-  const { loadingprogramsbydonilab,errorloadingprogrambydonilab,programsByDonilab } = programByDonilab;
-  const { loading,error,programsWithPartners } = programWithPartners;
+  const { loadingprogramsbydonilab,errorloadingprogrambydonilab,programsByDonilab,loading,error,programsWithPartners } = state;
+
 
 
   useEffect(() => {
-   dispatch(listProgramsTypeOfDonilab(ProgrammestypesOfDonilab,locale))
-  }, [dispatch,locale])
+   listProgramsTypeOfDonilab(ProgrammestypesOfDonilab)
+  }, [ProgrammestypesOfDonilab])
 
   useEffect(() => {
-   dispatch(listProgramsTypeWithPartner(ProgrammestypesWithPartnersId,locale))
-  }, [dispatch,locale])
+   listProgramsTypeWithPartner(ProgrammestypesWithPartnersId)
+  }, [ProgrammestypesWithPartnersId])
 
 
   return (
@@ -238,21 +236,7 @@ function Program() {
       <ProgramheroparalaxeLeft src={"/static/assets/svg/paralaxetopheroprogram.svg"} alt=""/>
         <ProgramheroparalaxeRight src={"/static/assets/svg/paralaxebottomheroprogram.svg"} alt=""/>
         <SectionTitle className= "programsandhubstitle" white="true">
-        
-         {/*  <h1>
-
-      {t("n")}
-      <span className="conectimg">
-              o
-              <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
-                <path id="Caminho_661" data-name="Caminho 661" d="M-430.554,188.391l-17.435,20.484a16.525,16.525,0,0,1,3.358,10.076A16.6,16.6,0,0,1-461.3,235.473a16.594,16.594,0,0,1-16.522-16.666,16.594,16.594,0,0,1,16.668-16.522,16.519,16.519,0,0,1,8.618,2.455l17.52-21.039Z" transform="translate(481.135 -91.604)" fill="#95b71d" />
-                <path id="Caminho_662" data-name="Caminho 662" d="M-431.462,178.8l-21.067-19.376a16.519,16.519,0,0,1-10.7,3.855,16.594,16.594,0,0,1-16.522-16.668,16.594,16.594,0,0,1,16.666-16.522,16.6,16.6,0,0,1,16.522,16.668,16.506,16.506,0,0,1-2.053,7.926l21.737,19.993Z" transform="translate(479.75 -130.087)" fill="#95b71d" />
-                <path id="Caminho_663" data-name="Caminho 663" d="M-405.252,132.127a16.594,16.594,0,0,0-16.666,16.522,16.351,16.351,0,0,0,4.157,11.081l-10.953,13.414a64.927,64.927,0,0,1,6.514,4.568l10.953-13.325a13.261,13.261,0,0,0,5.851.928,16.593,16.593,0,0,0,16.666-16.522,16.594,16.594,0,0,0-16.522-16.666" transform="translate(517.369 -128.623)" fill="#95b71d" />
-              </svg>
-
-            </span>
-            {t("os")} {t("programs")}
-        </h1> */}
+    
         {
           locale === "en" ?
           <object type="image/svg+xml" width="500px" height="100" data={'/static/assets/svg/title/title_PROGRAMMES-EN.svg'} className="">
@@ -270,9 +254,9 @@ function Program() {
         {t("initbydonilab")}
         </ProgramSectionTitle>
        { loadingprogramsbydonilab ? <div className='loading-overlay' ><div className="loading"></div></div> :errorloadingprogrambydonilab ? <MessageBox>erreur de chargement</MessageBox> :
-      <ErrorBoundary>
+    
          <ProgramByDonilab ProgramData={programsByDonilab}/>
-         </ErrorBoundary>
+        
          }
         </ProgramByDonilabSection>
         <PrograminParnterSection>
@@ -282,9 +266,7 @@ function Program() {
         </ProgramSectionTitle>
         {
           loading ? <div className='loading-overlay' ><div className="loading"></div></div> :error ? <MessageBox>erreur de chargement</MessageBox> :
-        <ErrorBoundary>
           <ProgramByDonilab ProgramData={programsWithPartners}/>
-        </ErrorBoundary>
           }
         </PrograminParnterSection>
     </ProgramContainer>

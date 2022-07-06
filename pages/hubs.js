@@ -10,6 +10,7 @@ import ErrorBoundary from '../Components/ErrorBoundary';
 import { useTranslation } from 'next-i18next';import { useRouter } from 'next/router';
 import Layout from '../Components/layouts/Layout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { HubContext } from '../services/hub/hub.context';
 
 
 const HubPage = styled.div`
@@ -466,18 +467,18 @@ font-size: 1rem;
 function Hubs() {
   const { t} = useTranslation('common')
   const {locale} = useRouter()
-  const dispatch = useDispatch()
-  const hubList = useSelector((state) => state.hubList)
-  const { loading, error, hubs } = hubList;
+
+  const { state } = useContext(HubContext);
+  const {hubs,loading,error} =  state
 
 
-  useEffect(() => {
+/*   useEffect(() => {
     dispatch(listHubs(locale))
-  }, [dispatch,locale])
+  }, [dispatch,locale]) */
 
-  useEffect(() => {
+/*   useEffect(() => {
     dispatch(listLieuDeshubs())
-  }, [dispatch])
+  }, [dispatch]) */
 
 
   return (

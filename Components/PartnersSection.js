@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 
 import { PartnersData } from '../services/data/PartnerData';
@@ -7,6 +7,7 @@ import PartnersSlider from './PartnersSlider';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { listPartenaires } from '../store/actions/PartenaireActions';
 import { useTranslation } from 'next-i18next';import { useRouter } from '../node_modules/next/router';
+import { PartenaireContext } from '../services/partenaire/partenaire.context';
 ;
 
 
@@ -60,18 +61,12 @@ const PartnerImg = styled.img`
 
 
 
-function PartnersSection({ listPartenairesAction, loading, error, partenaires }) {
+function PartnersSection() {
   const {locale} = useRouter()
   const { t } = useTranslation('common')
-  //const partenaireList = useSelector((state) => state.partenaireList)
+  const { state } = useContext(PartenaireContext);
+  const {partenaires,loading,error} =  state
 
-
-  // const { loading,error,partenaires } = partenaireList;
-
-
-  useEffect(() => {
-    listPartenairesAction()
-  }, [listPartenairesAction])
 
   return (
     <PartnerSection>
@@ -107,12 +102,5 @@ function PartnersSection({ listPartenairesAction, loading, error, partenaires })
   )
 }
 
-const mapStateToProps = ({ partenaireList }) => {
-  const { loading, error, partenaires } = partenaireList;
-  return { loading, error, partenaires };
-};
-
-export default connect(mapStateToProps, {
-  listPartenairesAction: listPartenaires
-})(PartnersSection);
+export default PartnersSection;
 

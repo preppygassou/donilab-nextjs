@@ -6,6 +6,7 @@ import axios from 'axios';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { listDexpertises } from '../../store/actions/DexpertiseActions';
 import { useRouter } from '../../node_modules/next/router';
+import { DexpertiseContext } from '../../services/dexpertise/dexpertise.context';
 
 
 const ExpertisesContainer = styled.div `
@@ -42,26 +43,17 @@ box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
 `;
 
 
-function ExpertiseCards({loading, error, dexpertises,listDexpertisesAction}) {
- /*  const [expertises, setExpertises] = useState([]) */
-/*   useEffect(() => {
-       
-    axios.get(`https://blog.donilab.org/wp-json/wp/v2/expertises`)      
-    .then(res => 
-      setExpertises(res.data) , 
-        ); 
-  //console.log(categoriess)
-  }, [])
- */
-  //const dexpertiseList = useSelector((state) => state.dexpertiseList);
-  /* const { loading, error, dexpertises } = dexpertiseList; */
+function ExpertiseCards() {
+
+  const { state } = useContext(DexpertiseContext);
+  const {dexpertises,loading,error} =  state
  
   const {locale} = useRouter()
 
 
-  useEffect(() => {
+  /* useEffect(() => {
     listDexpertisesAction(locale)
-  }, [listDexpertisesAction,locale])
+  }, [listDexpertisesAction,locale]) */
 
   return (
         <ExpertisesContainer>
@@ -74,11 +66,5 @@ function ExpertiseCards({loading, error, dexpertises,listDexpertisesAction}) {
   )
 }
 
-const mapStateToProps = ({ dexpertiseList }) => {
-  const { loading, error, dexpertises } = dexpertiseList;
-  return { loading, error, dexpertises};
-};
 
-export default connect(mapStateToProps, {
-  listDexpertisesAction:listDexpertises
-})(ExpertiseCards);
+export default ExpertiseCards;

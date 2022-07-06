@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listExpertises } from '../store/actions/ExpertiseActions';
 import { CurrentLangContext } from '../Context/CurrentLangContext';
 import { useRouter } from 'next/router';
+import { ExpertiseContext } from '../services/expertise/expertise.context';
 
 
 const ExpertisesContainer = styled.div`
@@ -44,14 +45,17 @@ box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
 
 function ExpertiseCards() {
 
-  const expertiseList = useSelector((state) => state.expertiseList);
-  const { loading, error, expertises } = expertiseList;
-  const {locale} = useRouter()
-  const dispatch = useDispatch()
 
-  useEffect(() => {
+  //const { loading, error, expertises } = expertiseList;
+  const {locale} = useRouter()
+  /* const dispatch = useDispatch() */
+  const { state } = useContext(ExpertiseContext);
+  const {loading, error, expertises} =  state
+
+
+ /*  useEffect(() => {
     dispatch(listExpertises(locale))
-  }, [dispatch, locale])
+  }, [dispatch, locale]) */
 
   return (
     <ExpertisesContainer className='expertise-container'>

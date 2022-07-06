@@ -116,13 +116,8 @@ box-shadow: none;
 
 
 function DoniEventContent({ event }) {
-  const eventImage = useSelector((state) => state.eventImage);
-  const { loading, error, image } = eventImage;
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(eventimage(event.featured_media))
-  }, [dispatch, event.featured_media])
+
 
   return (
 

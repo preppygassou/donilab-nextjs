@@ -5,6 +5,7 @@ import Scroll from './Scroll';
 import { CurrentLangContext } from '../Context/CurrentLangContext';
 import { connect, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import { GeneralContext } from '../services/general/general.context';
 
 const FooterContainer = styled.div`
 position: relative;
@@ -180,28 +181,15 @@ const FooterSocialImg = styled.img`
 padding-left:15px;
 `;
 
-function Footer({loading, error,generals}) {
+function Footer() {
   /* const generalList = useSelector((state) => state.generalList)
   const {loading, error,generals }= generalList */
-  const [generale, setGenerale] = useState({
-    acf:{
-    about_footer:"",
-    infos_contact:[],
-    menu:[]
-  }})
+  const { state } = useContext(GeneralContext);
+  const {loading, error,generals} =  state
  // const [loading, setLoading] = useState(true)
 
   const {locale} = useRouter()
 
-  /*  useEffect(() => { 
-    setLoading(true) 
-     axios.get(`https://blog.donilab.org/wp-json/wp/v2/generale/?lang=${currentLang}`)      
-     .then(res => 
-       setGenerale(res.data[0]) ,
-       setLoading(false) 
-         ); 
-   }, [currentLang])
-   console.log(generale) */
   return (
     <>
     {
@@ -301,11 +289,4 @@ function Footer({loading, error,generals}) {
 }
 
 
-const mapStateToProps = ({ generalList }) => {
-  const {loading, error,generals }= generalList
-  return { loading, error,generals };
-};
-
-export default connect(mapStateToProps, {
-
-})(Footer);
+export default Footer;

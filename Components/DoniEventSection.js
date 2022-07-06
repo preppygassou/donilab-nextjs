@@ -8,6 +8,7 @@ import MessageBox from './MessageBox';
 import Dots from './Dots';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { EventContext } from '../services/event/event.context';
 
 
 
@@ -161,18 +162,14 @@ right: -150px;
 
 export default function DoniEvent() {
   const { t } = useTranslation('common')
-  const eventList = useSelector((state) => state.eventList);
-  const { loading, error, events } = eventList;
+  const { state } = useContext(EventContext);
+
+  const { loading, error, events } = state;
   const [current, setCurrent] = useState(0);
   const length = events.length;
   const timeout = useRef(null);
   const { locale } = useRouter()
-  const dispatch = useDispatch()
 
-
-  useEffect(() => {
-    dispatch(listevents(locale))
-  }, [dispatch, locale])
 
   useEffect(() => {
     const nextSlide = () => {

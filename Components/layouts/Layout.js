@@ -5,21 +5,16 @@ import Header from '../Header'
 import Head from './modules/Head';
 
 
-const Layout = ({  children })=> {
+const Layout = ({ children }) => {
   return (
-    <> 
-               <Head />
-                <Header />  
-                {children }           
-                <Footer/>
-           
-            </>
+    <>
+      <Head />
+      <Header />
+      {children}
+      <Footer />
+
+    </>
   )
 }
-/* export const getServerSideProps = async ({ locale }) => ({
-  props: {
-    ...await serverSideTranslations(locale, ['common']),
-  },
-})
- */
+
 export default Layout

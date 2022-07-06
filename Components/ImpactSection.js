@@ -5,6 +5,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import parse from "html-react-parser";
 import { useRouter } from "../node_modules/next/router";
+import { ImpactContext } from "../services/impact/impact.context";
 
 
 const ImpactSectionContainer = styled.section`
@@ -103,22 +104,12 @@ span{
 `; */
 function ImpactSection() {
 
-  const [loading, setloading] = useState(false)
-  const [impacts, setImpacts] = useState([])
 
   const {locale} = useRouter()
 
-  const dispatch = useDispatch()
+  const { state } = useContext(ImpactContext);
+  const {impacts,loading,error} =  state
    
-
-   useEffect(() => { 
-    setloading(true)
-     axios.get(`https://blog.donilab.org/wp-json/wp/v2/impacts/?lang=${locale}`)      
-     .then(res => 
-       setImpacts(res.data) ,
-       setloading(false) 
-         ); 
-   }, [locale])
   return (
     <ImpactSectionContainer>
       <SectionTitle white="true">
