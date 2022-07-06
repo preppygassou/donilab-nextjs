@@ -169,8 +169,6 @@ right: 61vh;
 const Hero = ({slides})=> {
   const { t} = useTranslation('common')
  
-  const { state } = useContext(GeneralContext);
-  const {loading, error,generals} =  state
   
   return (
       <HeroSection>

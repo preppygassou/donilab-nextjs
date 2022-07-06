@@ -26,30 +26,21 @@ moment.locale("fr");
 const MyApp = (props) => {
     const { Component, pageProps } = props;
     const { locale } = useRouter()
-    // const dispatch = useDispatch();
-
-    useEffect(() => {
-        setTimeout(function () {
-            document.getElementById('__next').classList.add('loaded');
-        }, 100);
-
-        //  setState({ open: true });
-
-    }, [])
+   
 
 
     return (
-        <ConfigProvider locale={locale}>
-            <GeneralContextProvider locale={locale}>
-                <ExpertiseContextProvider locale={locale}>
-                    <PostContextProvider locale={locale}>
-                        <DexpertiseContextProvider locale={locale}>
-                            <PartenaireContextProvider locale={locale}>
-                                <ImpactContextProvider locale={locale}>
-                                    <ProgramContextProvider locale={locale}>
-                                        <HubContextProvider locale={locale}>
-                                            <EventContextProvider locale={locale}>
-                                            <AboutContextProvider locale={locale}>
+        <ConfigProvider locale={"fr"}>
+            <GeneralContextProvider locale={"fr"}>
+                <ExpertiseContextProvider locale={"fr"}>
+                    <PostContextProvider locale={"fr"}>
+                        <DexpertiseContextProvider locale={"fr"}>
+                            <PartenaireContextProvider locale={"fr"}>
+                                <ImpactContextProvider locale={"fr"}>
+                                    <ProgramContextProvider locale={"fr"}>
+                                        <HubContextProvider locale={"fr"}>
+                                            <EventContextProvider locale={"fr"}>
+                                            <AboutContextProvider locale={"fr"}>
 
                                                 <Layout>
                                                     <ErrorBoundary>
