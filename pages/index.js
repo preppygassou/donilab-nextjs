@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 
 import { HubContext } from '../services/hub/hub.context';
 
-const Index =({ }) =>{
+const Index =() =>{
 /*   const {locale} = useRouter() */
 
   const { state } = useContext(HubContext);

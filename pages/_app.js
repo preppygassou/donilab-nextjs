@@ -1,9 +1,7 @@
 import moment from "moment";
 import { ConfigProvider } from "antd";
 import React from 'react';
-import { Provider } from 'react-redux';
 import { appWithTranslation } from 'next-i18next';
-import store from "../store/store";
 //import DefaultLayout from '../components/layouts/DefaultLayout';
 import { useEffect } from 'react';
 import Layout from "../Components/layouts/Layout";
@@ -12,7 +10,6 @@ import ErrorBoundary from "../Components/ErrorBoundary";
 import { PostContextProvider } from "../services/post/post.context";
 import { ExpertiseContextProvider } from "../services/expertise/expertise.context";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import '../sass/themes/donilab.dark.scss';
 import { HubContextProvider } from "../services/hub/hub.context";
 import { DexpertiseContextProvider } from "../services/dexpertise/dexpertise.context";
 import { GeneralContextProvider } from "../services/general/general.context";
@@ -21,6 +18,7 @@ import { PartenaireContextProvider } from "../services/partenaire/partenaire.con
 import { EventContextProvider } from "../services/event/event.context";
 import { ImpactContextProvider } from "../services/impact/impact.context";
 import { AboutContextProvider } from "../services/about/about.context";
+import '../sass/themes/donilab.dark.scss';
 
 
 moment.locale("fr");
@@ -40,9 +38,6 @@ const MyApp = (props) => {
     }, [])
 
 
-
-
-    // const getLayout = Component.getLayout || (page => <DefaultLayout>{page}</DefaultLayout>);
     return (
         <ConfigProvider locale={locale}>
             <GeneralContextProvider locale={locale}>

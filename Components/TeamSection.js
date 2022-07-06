@@ -420,7 +420,7 @@ function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
   const onChange = value => {
     //setValue(value);
     setCurrentIndex(value)
-    console.log("onchange" + value)
+    
   }
 
   const nextSlide = (currentSlide) => {
@@ -461,7 +461,7 @@ function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
 
   function SampleNextArrow(props) {
     const { currentSlide, onClick } = props;
-    console.log("bbb" + currentSlide)
+   
 
     return (
       <NextArrow
@@ -473,7 +473,7 @@ function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
 
   function SamplePrevArrow(props) {
     const { onClick, currentSlide } = props;
-    console.log("bbb" + currentSlide)
+
     return (
       <PrevArrow
         src={"/static/assets/svg/arowleft.svg"}
@@ -481,8 +481,6 @@ function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
       />
     );
   }
-  console.log(active)
-  console.log("My" + current)
 
   const settings = {
     className: "center",

@@ -209,23 +209,23 @@ const Navbar = (props) => {
   return (
     <Nav>
       <Logo href="/"><NavMenuLogo src={"/static/assets/logodonilab.png"} alt="logo donilab"/></Logo>
-        <MenuHamburger onClick={toggle} data-type="hamburger-button" class="hamburger-menu-button">
-          <span class="line"></span>
-          <span class="line"></span>
-          <span class="line"></span>
+        <MenuHamburger onClick={toggle} data-type="hamburger-button" className="hamburger-menu-button">
+          <span className="line"></span>
+          <span className="line"></span>
+          <span className="line"></span>
         </MenuHamburger>
       <NavMenu>
            {locale === "en" ? menuDataEn.map((item,index)=>(
         
         <NavMenuLinks className={Contactfunction(item.link)+  Activefunction(item.link)} exact={true} href={item.link} key={index}>
         <p>{item.title}</p>
-        <div class="check-item"></div>
+        <div className="check-item"></div>
         </NavMenuLinks>
        )) : menuData.map((item,index)=>(
         
             <NavMenuLinks className={Contactfunction(item.link) +  Activefunction(item.link)} exact={true} href={item.link} key={index}>
             <p>{item.title}</p>
-            <div class="check-item"></div>
+            <div className="check-item"></div>
             </NavMenuLinks>
            ))}
            <LanguageSelector current={locale}/>
