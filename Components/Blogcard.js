@@ -5,7 +5,7 @@ import axios from 'axios'
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { listCategories } from '../store/actions/PostActions';
-
+moment.locale('fr');
 
 const BlogSlider = styled.div`
 width:100%;
@@ -193,13 +193,13 @@ const Blogcard = ({ post }) => {
   return (
 
     <BlogSlider className="donilab-post__card" key={post.id} /* onClick={() => history.push("/blogsingle"+ index)} */>
-      <a className='donilab-post__thumbnail__link' href={post.link} target="_blank" rel="noopener noreferrer">
+      <a className='donilab-post__thumbnail__link' href={`https://blog.donilab.org${post.uri}`} target="_blank" rel="noopener noreferrer">
       <div className="donilab-post__thumbnail">
-        <img width={300} height={169} src={post.x_featured_media_medium} alt={post.title.rendered} />
+        <img width={300} height={169} src={post.featuredImage.node.sourceUrl} alt={post.title.rendered} />
       </div>
       </a>
       <div className="donilab-post__badge">
-      {post.x_categories}
+      {/* {post.categories.edges} */}
       {/* <h4> */}
           {/*   {
                loading ? <span>loading...</span> :
@@ -209,16 +209,16 @@ const Blogcard = ({ post }) => {
                ))
              }
   */}
-             {/*  {
-               categoriess.map((category)=>(
-                 categoriess.length === 1 ? <span key={category.id}>{category.name} </span>
-                : categoriess.lastIndexOf(category) ? <span key={category.id}>{category.name} </span>
-                : <span key={category.id}>{category.name +  ","} </span>
+              {
+               post.categories.edges.map((category,i)=>(
+                 post.categories.edges.length === 1 ? <span key={category.node.id}>{category.node.name} </span>
+                : i === post.categories.edges.length - 1 ? <span key={category.node.id}>{category.node.name} </span>
+                : <span key={category.node.id}>{category.node.name +  ","} </span>
            
                  ))
                  
                  
-                }  */}
+                } 
                 {/* <span> </span> */}
 
         {/* </h4> */}
@@ -226,14 +226,16 @@ const Blogcard = ({ post }) => {
       <div className="donilab-post__text">
       
         <h3 className='donilab-post__title'>
-        <a href={post.link} target="_blank" rel="noopener noreferrer">
-          {post.title.rendered} 
+        <a href={`https://blog.donilab.org${post.uri}`} target="_blank" rel="noopener noreferrer">
+          {post.title} 
+          {/* {post.title.rendered} */} 
         </a>
         </h3>
       </div>
      <div className="donilab-post__meta-data">
      <span className='donilab-post-date'>
-     {post.x_date}
+     
+     {moment(post.date).format('LL')}
      </span>
      </div>
     </BlogSlider>

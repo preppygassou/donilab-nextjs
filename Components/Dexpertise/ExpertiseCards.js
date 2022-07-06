@@ -5,7 +5,6 @@ import { ExpertiseData } from '../../services/data/ExpertiseData';
 import axios from 'axios';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { listDexpertises } from '../../store/actions/DexpertiseActions';
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
 import { useRouter } from '../../node_modules/next/router';
 
 

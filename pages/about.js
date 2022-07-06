@@ -251,17 +251,17 @@ width: 200px;
 }
 `;
 
-const About = () => {
+const About = ({abouts,hubs}) => {
   const dispatch = useDispatch()
   const hubList = useSelector((state) => state.hubList)
   const { t } = useTranslation('common')
-  const [abouts, setAbouts] = useState([])
+ // const [abouts, setAbouts] = useState([])
   const [loadingabout, setLonding] = useState(false)
   const { locale } = useRouter()
-  const { loading, error, hubs } = hubList;
+ // const { loading, error, hubs } = hubList;
 
 
-  useEffect(() => {
+  /* useEffect(() => {
     setLonding(true)
     axios.get(`https://blog.donilab.org/wp-json/wp/v2/about/?lang=${locale}`)
       .then(res =>
@@ -273,7 +273,7 @@ const About = () => {
 
   useEffect(() => {
     dispatch(listHubs(locale))
-  }, [dispatch, locale])
+  }, [dispatch, locale]) */
 
   return (
     <>
@@ -284,7 +284,7 @@ const About = () => {
       <AboutContainer>
         <AboutWrapper>
           {
-            loadingabout ? <div className='loading-overlay' ><div className="loading"></div></div> : abouts.map((about, index) => (
+            /* loadingabout ? <div className='loading-overlay' ><div className="loading"></div></div> : */abouts&& abouts.map((about, index) => (
               index === 0 ? <AboutHero>
                 <AboutheroparalaxeLeft src={"/static/assets/svg/aboutheroleftparalaxe.svg"} alt="" />
                 <AboutheroparalaxeRight src={"/static/assets/svg/aboutherorightparalaxe.svg"} alt="" />
@@ -343,7 +343,7 @@ const About = () => {
 
           <ErrorBoundary>
             {
-              loading ? <div className='loading-overlay' ><div className="loading"></div></div> : error ? <MessageBox>erreur de chargement .</MessageBox> : (
+              /* loading ? <div className='loading-overlay' ><div className="loading"></div></div> : error ? <MessageBox>erreur de chargement .</MessageBox> : */ hubs&&hubs.length > 0 &&(
                 hubs.map((hub, index) => (
                   index === 0 && (<TeamSection about="about" hub={hub} />)
                 ))
@@ -359,11 +359,22 @@ const About = () => {
   )
 }
 
-export const getServerSideProps = async ({ locale }) => ({
-  props: {
-    ...await serverSideTranslations(locale, ['common']),
-  },
-})
+
+export const getServerSideProps = async ({ locale }) => {
+  const res = await axios.get(
+    `https://blog.donilab.org/wp-json/wp/v2/about/?lang=${locale}`
+  );
+  const { data } = await axios.get(
+    "https://blog.donilab.org/wp-json/wp/v2/hubs/?lang="+locale
+  );
+  return {
+    props: {
+      abouts: res.data,
+      hubs: data,
+      ...await serverSideTranslations(locale, ['common']),
+    },
+  };
+};
 
 
 export default About

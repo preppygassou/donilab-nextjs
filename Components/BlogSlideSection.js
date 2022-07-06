@@ -420,6 +420,7 @@ const BlogSlideSection = ({listPostsAction,loading,error,posts}) => {
     );
   }
  */
+
   return (
     <BlogSection>
       <ParalaxeBlogImg src={"/static/assets/svg/sectionblogparalaxe.svg"} alt="" />
@@ -521,8 +522,8 @@ const BlogSlideSection = ({listPostsAction,loading,error,posts}) => {
 
 
 const mapStateToProps = ({ postList }) => {
-  const { loading, error, posts } = postList;
-  return { loading, error, posts};
+  const { loading, error, } = postList;
+  return { loading, error,};
 };
 
 export default connect(mapStateToProps, {

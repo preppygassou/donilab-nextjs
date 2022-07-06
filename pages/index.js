@@ -13,9 +13,9 @@ import MessageBox from '../Components/MessageBox';
 import { listHubs } from '../store/actions/HubActions';
 import { CurrentLangContext } from '../Context/CurrentLangContext';
 import { useRouter } from 'next/router';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 
-
-const Index =({ hublistloading, hublistloadingerror, hubs, listHubsAction }) =>{
+const Index =({ hublistloading, hublistloadingerror, hubs, listHubsAction ,posts}) =>{
   const {locale} = useRouter()
   //const dispatch = useDispatch()
   // const hubList = useSelector((state) => state.hubList)
@@ -27,12 +27,12 @@ const Index =({ hublistloading, hublistloadingerror, hubs, listHubsAction }) =>{
     listHubsAction(locale)
   }, [locale, listHubsAction])
 
-
+//console.log(posts)
   return (
     <>
       <Hero />
       <ExpertiseSection />
-        <BlogSlideSection />
+        <BlogSlideSection posts={posts}/>
       <ImpactSection />
         {
           hublistloading ? <div className='loading-overlay' ><div className="loading"></div></div> : hublistloadingerror ? <MessageBox></MessageBox> : (
@@ -59,10 +59,58 @@ const mapActionsToProps = {
   listHubsAction: listHubs
 };
 
-export const getServerSideProps = async ({ locale }) => ({
-  props: {
-    ...await serverSideTranslations(locale, ['common']),
-  },
+
+export const getServerSideProps = async ({ locale }) => {
+  const client = new ApolloClient({
+    uri: 'https://blog.donilab.org/graphql',
+    cache: new InMemoryCache(),
+  });
+
+  // const client = ...
+
+const response= await client
+.query({
+  query: gql`
+  query NewQuery {
+    posts {
+      edges {
+        node {
+          id
+          title
+          uri
+          excerpt
+          content
+          date
+          categories {
+            edges {
+              node {
+                id
+                name
+              }
+            }
+          }
+          featuredImage {
+            node {
+              id
+              sourceUrl
+            }
+          }
+
+          
+        }
+      }
+    }
+  }
+  `,
 })
 
+const posts = response.data.posts.edges.map(({node})=>node)
+console.log('posts',posts)
+  return {
+    props: {
+      ...await serverSideTranslations(locale, ['common']),
+      posts
+    },
+  };
+};
 export default connect(mapStateToProps, mapActionsToProps)(Index)

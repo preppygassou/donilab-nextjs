@@ -3,7 +3,7 @@
   "version": "v.2.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.3.11",
+    "@apollo/client": "^3.6.9",
     "@brainhubeu/react-carousel": "^1.19.26",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -11,7 +11,7 @@
     "antd": "^4.21.0",
     "axios": "^0.21.1",
     "bootstrap": "5.0.2",
-    "graphql": "^15.5.0",
+    "graphql": "^16.5.0",
     "html-react-parser": "^1.2.4",
     "i18next": "^20.1.0",
     "i18next-browser-languagedetector": "^6.1.0",
