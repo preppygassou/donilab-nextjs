@@ -21,7 +21,7 @@ const Index =() =>{
 
   return (
     <>
-      <Hero />
+      {/* <Hero />
       <ExpertiseSection />
         <BlogSlideSection />
       <ImpactSection />
@@ -37,7 +37,10 @@ const Index =() =>{
         }
       <Dexpertise />
         <PartnersSection />
-      <Labelafricinnov />
+      <Labelafricinnov /> */}
+      <h1>
+        test
+      </h1>
     </>
   )
 }
