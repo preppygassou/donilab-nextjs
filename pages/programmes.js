@@ -6,7 +6,7 @@ import { listProgramsTypeOfDonilab, listProgramsTypeWithPartner } from "../store
 import { useDispatch, useSelector } from 'react-redux';
 import MessageBox from '../Components/MessageBox';
 import ErrorBoundary from '../Components/ErrorBoundary';
-import { useTranslation } from 'next-i18next';;
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import Layout from '../Components/layouts/Layout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -269,7 +269,7 @@ function Program() {
         <ProgramSectionTitle>
         {t("initbydonilab")}
         </ProgramSectionTitle>
-       { loadingprogramsbydonilab ? <div className="loading"/> :errorloadingprogrambydonilab ? <MessageBox>erreur de chargement</MessageBox> :
+       { loadingprogramsbydonilab ? <div className='loading-overlay' ><div className="loading"></div></div> :errorloadingprogrambydonilab ? <MessageBox>erreur de chargement</MessageBox> :
       <ErrorBoundary>
          <ProgramByDonilab ProgramData={programsByDonilab}/>
          </ErrorBoundary>
@@ -281,7 +281,7 @@ function Program() {
         {t("inpartner")}
         </ProgramSectionTitle>
         {
-          loading ? <div className="loading"/> :error ? <MessageBox>erreur de chargement</MessageBox> :
+          loading ? <div className='loading-overlay' ><div className="loading"></div></div> :error ? <MessageBox>erreur de chargement</MessageBox> :
         <ErrorBoundary>
           <ProgramByDonilab ProgramData={programsWithPartners}/>
         </ErrorBoundary>

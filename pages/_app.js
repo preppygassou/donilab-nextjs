@@ -5,17 +5,18 @@ import { Provider } from 'react-redux';
 import { appWithTranslation } from 'next-i18next';
 import store from "../store/store";
 //import DefaultLayout from '../components/layouts/DefaultLayout';
-import '../sass/themes/donilab.dark.scss';
 import { useEffect } from 'react';
 import Layout from "../Components/layouts/Layout";
 import { useRouter } from "../node_modules/next/router";
+import ErrorBoundary from "../Components/ErrorBoundary";
+import '../sass/themes/donilab.dark.scss';
 
 
 moment.locale("fr");
 
 const MyApp = (props) => {
     const { Component, pageProps } = props;
-    const {locale} = useRouter()
+    const { locale } = useRouter()
     // const dispatch = useDispatch();
 
     useEffect(() => {
@@ -35,7 +36,10 @@ const MyApp = (props) => {
         <ConfigProvider locale={locale}>
             <Provider store={store}>
                 <Layout>
-                    <Component {...pageProps} />
+                    <ErrorBoundary>
+
+                        <Component {...pageProps} />
+                    </ErrorBoundary>
                 </Layout>
             </Provider>
         </ConfigProvider>

@@ -56,9 +56,9 @@ function ExpertiseCards({loading, error, dexpertises,listDexpertisesAction}) {
  */
   //const dexpertiseList = useSelector((state) => state.dexpertiseList);
   /* const { loading, error, dexpertises } = dexpertiseList; */
-  const value = useContext(CurrentLangContext);
+ 
   const {locale} = useRouter()
-  const {currentLang} = value
+
 
   useEffect(() => {
     listDexpertisesAction(locale)

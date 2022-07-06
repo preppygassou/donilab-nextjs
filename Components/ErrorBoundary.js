@@ -20,7 +20,7 @@ class ErrorBoundary extends Component {
       if (this.state.hasError) {
         // You can render any custom fallback UI
        return  <MessageBox variant="danger">
-         erreur de chargement des conetnues
+         erreur de chargement des contenue
          </MessageBox>
       }
 

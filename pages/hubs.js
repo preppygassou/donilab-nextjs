@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import styled, { css } from 'styled-components';
-import Link from 'next/link';;
+import Link from 'next/link';
 import SectionTitle from "../Components/SectionTitle";
 import { useDispatch, useSelector } from 'react-redux';
 import { listHubs, listLieuDeshubs } from '../store/actions/HubActions';
@@ -515,7 +515,7 @@ function Hubs() {
 
         <ErrorBoundary>
           {
-            loading ? <div style={{ height: '50vh' }}> <div className="loading"></div> </div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> :
+            loading ? <div className='loading-overlay' ><div className="loading"></div></div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> :
               <HubsSectionWrapper>
                 <div className="clear"></div>
                 {

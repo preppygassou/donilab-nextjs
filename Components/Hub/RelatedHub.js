@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { listHubs } from '../../store/actions/HubActions';
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 import MessageBox from '../MessageBox';
 
 
@@ -40,6 +40,30 @@ justify-content:center;
 @media (max-width:500px){
   flex-direction:column;
  
+       }
+
+       a{
+        background-color:#95B71D;
+border-radius:15px;
+color:#fff;
+padding:.7rem 1.3rem;
+font-family:"Cera Round Pro";
+  font-size:1.1rem;
+  z-index:2;
+  @media (max-width:768px){
+  font-size: 0.9rem;
+  margin:1vh;
+    width:200px;
+ 
+       }
+    text-transform: uppercase;
+    margin:3vh;
+    width:225px;
+    transition:0.3s;
+&:hover{
+
+transform:scale(1.05);
+}
        }
 `;
 
@@ -82,25 +106,25 @@ width: 200px;
 const RelatedHub = ({ hub }) => {
   const dispatch = useDispatch()
   const hubList = useSelector((state) => state.hubList)
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const {locale} = useRouter()
+  
 
 
   const { loading, error, hubs } = hubList;
 
   useEffect(() => {
-    dispatch(listHubs(currentLang))
-  }, [dispatch,currentLang])
+    dispatch(listHubs(locale))
+  }, [dispatch,locale])
 
   return (
     <RelatedHubsSection background={hub?"none":"#E4E4E4"}>
       <RealatedHubparalaxImgbottom src={"/static/assets/svg/RealatedHubparalaxImgbottom.svg"}/>
       <h1>
-        {currentLang=== "en" ?"DISCOVER":"Découvrez"}
+        {locale=== "en" ?"DISCOVER":"Découvrez"}
     <br />
     {
-      hub? currentLang=== "en" ?"OUR OTHER HUB!":"nos autres hub !" :
-      currentLang=== "en" ?"OUR MALI HUB!":"nos hub AU MALI !" 
+      hub? locale=== "en" ?"OUR OTHER HUB!":"nos autres hub !" :
+      locale=== "en" ?"OUR MALI HUB!":"nos hub AU MALI !" 
     }
     </h1>
 
@@ -109,14 +133,14 @@ const RelatedHub = ({ hub }) => {
           loading ? <div className="loading"/> : error ? <MessageBox>erreur de chargement</MessageBox> :hub?
             hubs.filter(item => item.id !== hub.id)
               .map(hubrelated => (
-                <RelatedLink key={hubrelated.id} href={`/hub/${hubrelated.id}`}>
+                <Link key={hubrelated.id} href={`/hub/${hubrelated.slug}`}>
                   {hubrelated.title.rendered}
-                </RelatedLink>
+                </Link>
               ))
               :hubs.map(hubrelated => (
-                <RelatedLink key={hubrelated.id} href={`/hub/${hubrelated.id}`}>
+                <Link key={hubrelated.id} href={`/hub/${hubrelated.slug}`}>
                   {hubrelated.title.rendered}
-                </RelatedLink>
+                </Link>
               ))
 
         }

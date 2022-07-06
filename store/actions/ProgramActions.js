@@ -54,11 +54,11 @@ const listProgramsTypeWithPartner = (ProgrammestypesWithPartnersId,currentLang) 
   }
 };
 
-const detailsProgram = (ProgramId) => async (dispatch) => {
+const detailsProgram = (slug) => async (dispatch) => {
   try {
-    dispatch({ type: PROGRAM_DETAILS_REQUEST, payload: ProgramId });
+    dispatch({ type: PROGRAM_DETAILS_REQUEST, payload: slug });
     const { data } = await axios.get(
-      `https://blog.donilab.org/wp-json/wp/v2/programs/${ProgramId}`
+      `https://blog.donilab.org/wp-json/wp/v2/programs?slug=${slug}`
     );
     dispatch({ type: PROGRAM_DETAILS_SUCCESS, payload: data });
   } catch (error) {

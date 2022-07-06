@@ -110,7 +110,7 @@ margin-bottom: 0;
 `;
 
 function ExpertiseCard({ item }) {
-  const value = useContext(CurrentLangContext);
+
   const { locale } = useRouter()
 
   return (

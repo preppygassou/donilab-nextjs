@@ -165,7 +165,7 @@ const France = () => {
   const hubListFr = useSelector((state) => state.hubListFr)
   const { loading, error, hubsfr } = hubListFr
 
-  const value = useContext(CurrentLangContext);
+  const {locale} = useRouter()
   const { currentLang } = value
   const dispatch = useDispatch()
 

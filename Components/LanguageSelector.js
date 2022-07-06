@@ -6,7 +6,7 @@ import { useRouter } from "../node_modules/next/router";
 const LanguageSelector = ({current}) => {
   //const { t, i18n } = useTranslation('common')
   const router = useRouter()
-/*   const value = useContext(CurrentLangContext);
+/*   const {locale} = useRouter()
   const {SetCurrentLang} = value */
   //const [CurrentLang, SetCurrentLang] = useState(window.localStorage.i18nextLng)
   //console.log("current lan" + CurrentLang)

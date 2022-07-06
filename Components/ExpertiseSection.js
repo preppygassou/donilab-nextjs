@@ -5,8 +5,8 @@ import ExpertiseCards from './ExpertiseCards';
 //import ConectImgTitle from "/static/assets/svg/conecttitle.svg"
 //import Oconnect from "/static/assets/svg/oconnect.svg"
 import SectionTitle from "./SectionTitle"
-import { useTranslation } from 'next-i18next';import { useRouter } from '../node_modules/next/router';
-;
+import { useTranslation } from 'next-i18next';
+import { useRouter } from '../node_modules/next/router';
 
 
 

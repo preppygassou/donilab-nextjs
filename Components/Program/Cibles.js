@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 
 
@@ -85,8 +85,8 @@ width: 80px;
 
 
 function Cibles({program}) {
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const {locale} = useRouter()
+  
 
   return (
     
@@ -95,7 +95,7 @@ function Cibles({program}) {
         <CibleparalaxImgbottom src={"/static/assets/svg/cibleparalaximgbottom.svg"} alt=""/>
         <CibleVisionMissionIcon className="" src={"/static/assets/svg/Cibleicone.svg"} alt="Historic icon" />
         <h1>
-  {currentLang=== "en" ?"targets":"cibles"}
+  {locale=== "en" ?"targets":"cibles"}
 
         
        </h1>

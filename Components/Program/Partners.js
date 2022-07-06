@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import PartnersSlider from './PartnersSlider'
 import styled from 'styled-components/';
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 const PartnersSectionLogo = styled.div `
 overflow:hidden;
@@ -36,8 +36,8 @@ width: 80px;
 
 
 function Partners({program}) {
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const {locale} = useRouter()
+  
 
   return (
     <PartnersSectionLogo>
@@ -45,10 +45,10 @@ function Partners({program}) {
       <div><img src={"/static/assets/svg/PartnersProgram.svg'"} alt=""/></div>
         <h1>
           
-  {currentLang=== "en" ?"PROGRAMS":"PARTENAIRES DU "}
+  {locale=== "en" ?"PROGRAMS":"PARTENAIRES DU "}
 
           <br/>
-  {currentLang=== "en" ?"PARTENERS":" PROGRAMME "}
+  {locale=== "en" ?"PARTENERS":" PROGRAMME "}
 
          </h1>
       </PartnersSectionWrapper>

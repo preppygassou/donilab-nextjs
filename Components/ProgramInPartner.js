@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { ProgramInPartnerData } from '../services/data/ProgramData';
-import Link from 'next/link';;
+import Link from 'next/link';
 
 const ProgramByDonilabContent = styled.div `
 

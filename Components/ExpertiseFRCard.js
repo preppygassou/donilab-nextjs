@@ -1,6 +1,6 @@
 import parse from "html-react-parser";
 import React, { useContext } from 'react'
-import Link from 'next/link';;
+import Link from 'next/link';
 import styled from 'styled-components'
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button } from "reactstrap";
 import { CurrentLangContext } from "../Context/CurrentLangContext";
@@ -135,8 +135,7 @@ const BtnLinkExpertiseCard = styled(Link)`
   border-radius: 25px;
 `;
 const ExpertiseFRCard = ({ item }) => {
-  const value = useContext(CurrentLangContext);
-  const { currentLang } = value
+ 
   return (
     <>
 

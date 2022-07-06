@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 const ZonesSections = styled.section`
 background-color:#2755A1;
@@ -79,8 +79,8 @@ function Zones({program}) {
 
   const zonesactive = (zoneactive) => (program.acf.zones.includes(zoneactive) ? "#95b71d" : "none")
   
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value 
+  const {locale} = useRouter()
+   
     
   return (
     <ZonesSections>
@@ -103,10 +103,10 @@ function Zones({program}) {
       <ZonesInfos>
           <ZonesIcone src={"/static/assets/svg/zones.svg"} alt=""/>
           <h1>
-      {currentLang=== "en" ?"Intervention":"zones"}
+      {locale=== "en" ?"Intervention":"zones"}
 
              <br/>
-      {currentLang=== "en" ?"areas":"d’interventions"}
+      {locale=== "en" ?"areas":"d’interventions"}
 
             
             </h1>

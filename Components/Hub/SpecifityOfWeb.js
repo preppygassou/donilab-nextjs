@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styled,{css} from 'styled-components'
 import PropTypes from 'prop-types';
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 
 
@@ -203,8 +203,8 @@ width: 80px;
 
 
 function SpecifityOfWeb({hub}) {
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const {locale} = useRouter()
+  
   return (
     <SpecifitySection>
       <SpecifityParalaxImgtop src={"/static/assets/svg/SpecifityTopParalaxeImgTop.svg"} alt=""/>
@@ -213,7 +213,7 @@ function SpecifityOfWeb({hub}) {
         <SpecifityPisionMissionIcon className="" src={"/static/assets/svg/specifityicone.svg"} alt="Historic icon" />
       <h1>
         
-        {currentLang=== "en" ?"the specificities of the hub":"les spécificités du hub"}
+        {locale=== "en" ?"the specificities of the hub":"les spécificités du hub"}
 
       </h1>
      </SpecifityHeadContent>

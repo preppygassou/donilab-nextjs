@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listHubs } from '../store/actions/HubActions';
 import MessageBox from '../Components/MessageBox';
 import ErrorBoundary from '../Components/ErrorBoundary';
-import { useTranslation } from 'next-i18next';;
+import { useTranslation } from 'next-i18next';
 import axios from 'axios';
 import parser from 'html-react-parser';
 import { useRouter } from 'next/router';
@@ -364,5 +364,6 @@ export const getServerSideProps = async ({ locale }) => ({
     ...await serverSideTranslations(locale, ['common']),
   },
 })
+
 
 export default About

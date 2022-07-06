@@ -10,10 +10,8 @@ import TeamSection from '../Components/TeamSection';
 import PartnersSection from '../Components/PartnersSection';
 import Labelafricinnov from '../Components/Labelafricinnov';
 import MessageBox from '../Components/MessageBox';
-import ErrorBoundary from '../Components/ErrorBoundary';
 import { listHubs } from '../store/actions/HubActions';
 import { CurrentLangContext } from '../Context/CurrentLangContext';
-import Layout from '../Components/layouts/Layout';
 import { useRouter } from 'next/router';
 
 
@@ -22,9 +20,6 @@ const Index =({ hublistloading, hublistloadingerror, hubs, listHubsAction }) =>{
   //const dispatch = useDispatch()
   // const hubList = useSelector((state) => state.hubList)
   //const { loading,error,hubs } = hubList;
-
-  const value = useContext(CurrentLangContext);
-  const { currentLang } = value
 
 
 
@@ -37,11 +32,8 @@ const Index =({ hublistloading, hublistloadingerror, hubs, listHubsAction }) =>{
     <>
       <Hero />
       <ExpertiseSection />
-      <ErrorBoundary>
         <BlogSlideSection />
-      </ErrorBoundary>
       <ImpactSection />
-      <ErrorBoundary>
         {
           hublistloading ? <div className='loading-overlay' ><div className="loading"></div></div> : hublistloadingerror ? <MessageBox></MessageBox> : (
             hubs.map((hub, index) => (
@@ -52,11 +44,8 @@ const Index =({ hublistloading, hublistloadingerror, hubs, listHubsAction }) =>{
             ))
           )
         }
-      </ErrorBoundary>
       <Dexpertise />
-      <ErrorBoundary>
         <PartnersSection />
-      </ErrorBoundary>
       <Labelafricinnov />
     </>
   )

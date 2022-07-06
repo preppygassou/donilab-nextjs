@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 
 const ActivitySection = styled.div `
@@ -61,8 +61,8 @@ width: 80px;
 `;
 
 function Activity({program}) {
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const {locale} = useRouter()
+  
 
   return (
     <div>
@@ -70,7 +70,7 @@ function Activity({program}) {
       
         <CibleVisionMissionIcon className="" src={"/static/assets/svg/ActivityProgramsvg.svg"} alt="Historic icon" />
         <h1>
-  {currentLang=== "en" ?"activities carried out":"activités menées"}
+  {locale=== "en" ?"activities carried out":"activités menées"}
 
         
        </h1>

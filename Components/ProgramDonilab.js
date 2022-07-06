@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import Link from 'next/link';;
-import parse from "html-react-parser";
-import { useTranslation } from 'next-i18next';;
+import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 
 const ProgramDonilabContent = styled.ul `
 display:grid;
@@ -164,7 +163,7 @@ function ProgramDonilab({ProgramData,history}) {
          {/* <p>{myFunction(program.acf.programme_description)}</p>  */}
          <p>{program.acf.programme_description.length > 70 ? program.acf.programme_description.substring(0,70) + "..." : program.acf.programme_description }</p> 
          </ProgramInfoContent>
-         <OneOfProgramLink href={`/program/${program.id}`}>            
+         <OneOfProgramLink href={`/program/${program.slug}`}>            
       {t("more")}
           </OneOfProgramLink>
          </ProgramBody>

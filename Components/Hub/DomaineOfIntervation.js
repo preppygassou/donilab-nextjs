@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import styled, { css } from 'styled-components';
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 const DomaineOfHubSection = styled.section`
 padding:4rem 8rem;
@@ -213,8 +213,8 @@ function DomaineOfIntervation({ hub }) {
     indexPlus = index + 1;
     return indexPlus;
   }
-  const value = useContext(CurrentLangContext);
-  const { currentLang } = value
+  const {locale} = useRouter()
+
 
 
   return (
@@ -225,7 +225,7 @@ function DomaineOfIntervation({ hub }) {
         <DomainePisionMissionIcon className="" src={"/static/assets/svg/DomaineHubIcone.svg"} alt="Domaine icon" />
         <h1>
 
-          {currentLang === "en" ? "area of intervention" : "domaine d’intervention"}
+          {locale === "en" ? "area of intervention" : "domaine d’intervention"}
 
         </h1>
         <p>

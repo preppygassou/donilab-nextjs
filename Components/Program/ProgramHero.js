@@ -140,8 +140,8 @@ right: 61vh;
 
 
 function Hero({slides}) {
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const {locale} = useRouter()
+  
  
   return (
       <HeroSection>

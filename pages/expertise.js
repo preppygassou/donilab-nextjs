@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import ExpertiseSection from '../Components/ExpertiseSection'
-import Link from 'next/link';;
+import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import parse from "html-react-parser";
 import Layout from '../Components/layouts/Layout';

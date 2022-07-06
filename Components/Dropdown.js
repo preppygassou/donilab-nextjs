@@ -122,12 +122,11 @@ width:100%;
 `;
 
 function Dropdown({isOpen,toggle}) {
-  const value = useContext(CurrentLangContext);
+
   const generalList = useSelector((state) => state.generalList)
   const {loading, error,generals }= generalList
   const {locale} = useRouter()
 
-  const {currentLang} = value
   return (
       <DropdownContainer isOpen={isOpen} onClick={toggle}>
       <DropdownLogo>

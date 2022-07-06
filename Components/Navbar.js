@@ -199,12 +199,11 @@ const Navbar = (props) => {
   const {toggle} = props
   const {locale} = useRouter()
 
-  const value = useContext(CurrentLangContext);
+ 
   const generalList = useSelector((state) => state.generalList)
   const {loading, error,generals }= generalList
   const dispatch = useDispatch()
 
-  const {currentLang} = value
 
    useEffect(() => {     
     dispatch(listgenerals(locale))       

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import parse from "html-react-parser";
 import Dots from '../Dots';
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 const HeroProgramSection = styled.section`
 overflow:hidden;
@@ -196,8 +196,8 @@ function HeroProgram({ program }) {
   const [current, setCurrent] = useState(0);
   const length = program.acf.galerie_programme.length;
   const timeout = useRef(null);
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  
+  const { locale } = useRouter()
 
   useEffect(() => {
     const nextSlide = () => {
@@ -227,12 +227,12 @@ function HeroProgram({ program }) {
               {program.title.rendered}
             </h1>
             <h3>
-        {currentLang=== "en" ?"Status of the project :":"État du projet : "}
+        {locale=== "en" ?"Status of the project :":"État du projet : "}
 
                <span>{program.acf.etat}</span>
             </h3>
             <h3>            
-        {currentLang=== "en" ?"DURATION :":"DURÉE : "}
+        {locale=== "en" ?"DURATION :":"DURÉE : "}
               <span>{program.acf.duree_du_programme}</span>
             </h3>
             {parse(program.content.rendered)}

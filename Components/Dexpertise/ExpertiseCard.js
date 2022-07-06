@@ -1,6 +1,6 @@
 import parse from "html-react-parser";
 import React, { useContext } from 'react'
-import Link from 'next/link';;
+import Link from 'next/link';
 import styled from 'styled-components'
 import { CurrentLangContext } from "../../Context/CurrentLangContext";
 
@@ -83,8 +83,7 @@ const BtnLinkExpertiseCard = styled(Link)`
   border-radius: 25px;
 `;
 function ExpertiseCard({ item }) {
-  const value = useContext(CurrentLangContext);
-  const { currentLang } = value
+  
   return (
     <ExpertiseCardContent key={item.id} className="donilab-dexpertise-card">
       {/* <img src={item.icon} alt="" srcset=""/> */}

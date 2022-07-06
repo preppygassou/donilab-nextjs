@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Link from 'next/link';;
+import Link from 'next/link';
 import styled from 'styled-components'
 import Scroll from './Scroll';
 import { CurrentLangContext } from '../Context/CurrentLangContext';
@@ -190,8 +190,7 @@ function Footer({loading, error,generals}) {
     menu:[]
   }})
  // const [loading, setLoading] = useState(true)
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+
   const {locale} = useRouter()
 
   /*  useEffect(() => { 

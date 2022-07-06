@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 
 
@@ -82,8 +82,8 @@ width: 80px;
 
 
 function Resultats({program}) {
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const {locale} = useRouter()
+  
 
   return (
     <ResultatsSection>
@@ -93,7 +93,7 @@ function Resultats({program}) {
 
       <h1>
       
-  {currentLang=== "en" ?"Results":"Résultats"}
+  {locale=== "en" ?"Results":"Résultats"}
 
      </h1>
       <p>

@@ -290,8 +290,6 @@ const BlogSlideSection = ({listPostsAction,loading,error,posts}) => {
   //const { loading, error, posts } = postList;
   /* const posts = data.posts; */
   const dispatch = useDispatch()
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
   const {locale} = useRouter()
 
 

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styled, { css } from 'styled-components';
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 
 const ProgramOfHubSection = styled.section`
@@ -129,15 +129,15 @@ img{
 `;
 
 function ProgramsOfHub({ hub }) {
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const {locale} = useRouter()
+  
   return (
     <ProgramOfHubSection>
       <ProgramParalaxImgbottom src={"/static/assets/svg/ProgramTopParalaxeImgFull.svg"} alt="" />
       <ProgramHeadContent>
         <ProgramPisionMissionIcon className="" src={"/static/assets/svg/ProgramHubIcone.svg"} alt="program icon" />
         <h1>
-        {currentLang=== "en" ?"hub programs":"les programmes du hub"}
+        {locale=== "en" ?"hub programs":"les programmes du hub"}
         </h1>
       </ProgramHeadContent>
       <ProgramOfHubContainer>

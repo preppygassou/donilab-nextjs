@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 
 const BeneficiairesSections = styled.section`
@@ -118,21 +118,21 @@ color:#fff;
 `;
 
 function Beneficiaires({program}) {
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const {locale} = useRouter()
+  
 
   return (
     <BeneficiairesSections>
         <BeneficiairesIcon className="" src={"/static/assets/svg/partnersSvgProgram.svg"} alt="Beneficiaire icon" />
         <BeneficiairesTitle >
-  {currentLang=== "en" ?"BENEFICIARIES":"BÉNÉFICIAiRES"}
+  {locale=== "en" ?"BENEFICIARIES":"BÉNÉFICIAiRES"}
          <br/> 
-  {currentLang=== "en" ?"FROM THE PROGRAM ":"DU PROGRAMME"}
+  {locale=== "en" ?"FROM THE PROGRAM ":"DU PROGRAMME"}
 
        </BeneficiairesTitle >
        <BeneficiairesLogoContent>
          <h1>
-  {currentLang=== "en" ?"1st edition":"1er édition"}
+  {locale=== "en" ?"1st edition":"1er édition"}
 
          </h1>
 

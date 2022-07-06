@@ -11,7 +11,8 @@ import RelatedHub from '../../Components/Hub/RelatedHub';
 import SpecifityOfWeb from '../../Components/Hub/SpecifityOfWeb';
 import TeamsOfHub from '../../Components/Hub/TeamsOfHub';
 import MessageBox from '../../Components/MessageBox';
-import { useRouter } from '../../node_modules/next/router';
+import { useRouter } from 'next/router';
+import axios from 'axios'
 
 
 const HubSection = styled.section`
@@ -19,21 +20,21 @@ const HubSection = styled.section`
 `;
 
 
-function Hub(props) {
+function Hub({hub}) {
   const router = useRouter()
   const {slug } = router.query
   const hubDetails = useSelector((state) => state.hubDetails);
-  const { loading, error, hub } = hubDetails;
+ // const { loading, error, hub } = hubDetails;
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch(detailsHub(slug));
-  }, [dispatch,slug]);
+  }, [dispatch,slug]); */
   
   return (
 
-    loading ?<div className='loading-overlay' ><div className="loading"></div></div>: error ? <div style={{height:'50vh'}}><MessageBox>erreur de chargement</MessageBox> </div>:(
+    hub&&(
       <HubSection>
     <ErrorBoundary>
     <HeroHub hub={hub}/>
@@ -60,5 +61,14 @@ function Hub(props) {
     )
   )
 }
-
+export const getServerSideProps = async ({ params }) => {
+  const res = await axios.get(
+    `https://blog.donilab.org/wp-json/wp/v2/hubs?slug=${params.slug}`
+  );
+  return {
+    props: {
+      hub: res.data[0],
+    },
+  };
+};
 export default Hub

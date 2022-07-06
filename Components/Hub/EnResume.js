@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 
 const EnResumeSection = styled.div `
@@ -73,15 +73,15 @@ width: 80px;
 `;
 
 function EnResume({hub}) {
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const {locale} = useRouter()
+  
   return (
     <EnResumeSection>
       <EnResumeparalaxImgtop src={"/static/assets/svg/EnResumeparalaximgtop.svg"} alt=""/>
         <EnResumeparalaxImg src={"/static/assets/svg/EnResumeparalaximgLeft.svg"} alt=""/>
         <EnResumeVisionMissionIcon className="" src={"/static/assets/svg/EnResumerIcon.svg"} alt="Historic icon" />
         <h1>
-        {currentLang=== "en" ?"In summary":"en résumé"}
+        {locale=== "en" ?"In summary":"en résumé"}
        </h1>
        <h2>{hub.acf.titreduresume}</h2>
        {parse(hub.acf.description_du_resume)}

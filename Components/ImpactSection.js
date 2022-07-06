@@ -1,12 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
-import { ImpactData } from "../services/data/ImpactData";
 import SectionTitle from "./SectionTitle";
-import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import parse from "html-react-parser";
-import { CurrentLangContext } from "../Context/CurrentLangContext";
 import { useRouter } from "../node_modules/next/router";
 
 
@@ -105,18 +102,14 @@ span{
 
 `; */
 function ImpactSection() {
-  const {t} = useTranslation('common')
+
   const [loading, setloading] = useState(false)
   const [impacts, setImpacts] = useState([])
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+
   const {locale} = useRouter()
-  /* console.log("inimpact"+t+i18n) */
+
   const dispatch = useDispatch()
    
- /*  const FecthcurrentLang = ()=>(
-    currentLang('i18nextLng') === "fr" ? setCurrentLang("fr") : setCurrentLang("en")
-  ) */
 
    useEffect(() => { 
     setloading(true)

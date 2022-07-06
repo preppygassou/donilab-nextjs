@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
-import { CurrentLangContext } from '../../Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 
 
@@ -108,8 +108,8 @@ width: 80px;
 
 
 function Objectifs({program}) {
-  const value = useContext(CurrentLangContext);
-  const {currentLang} = value
+  const {locale} = useRouter()
+  
   
   return (
     <ObjectifsSections>
@@ -117,20 +117,20 @@ function Objectifs({program}) {
       <Objectifsparalaxbottom src={"/static/assets/svg/Objectifsparalaximgbottom.svg"} alt=""/>
       <ObjectifsIcone src={"/static/assets/svg/objectifssvg.svg"} alt=""/>
       <h1 className="Objectiftitle">
-      {currentLang=== "en" ?"Goals":"objEctifs"}
+      {locale=== "en" ?"Goals":"objEctifs"}
       </h1>
       <ObjectifsTitle>
-      {currentLang=== "en" ?"GLOBAL Goals":"objectif GLOBAL"}
+      {locale=== "en" ?"GLOBAL Goals":"objectif GLOBAL"}
 
       </ObjectifsTitle>
       {parse(program.acf.objectif_global)}
 
       <ObjectifsTitle>
-      {currentLang=== "en" ?"Specific objectives":"objectifs spécifiques"}
+      {locale=== "en" ?"Specific objectives":"objectifs spécifiques"}
            
       </ObjectifsTitle>
       <h3>
-      {currentLang=== "en" ?"The specific objectives associated with the program are:":"Les objectifs spécifiques associés au programme sont : "}
+      {locale=== "en" ?"The specific objectives associated with the program are:":"Les objectifs spécifiques associés au programme sont : "}
 
       </h3>
       

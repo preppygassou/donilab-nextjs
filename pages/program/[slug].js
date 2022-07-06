@@ -12,31 +12,24 @@ import { detailsProgram } from '../../store/actions/ProgramActions'
 import MessageBox from '../../Components/MessageBox'
 import ErrorBoundary from '../../Components/ErrorBoundary'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
-function Program(props) {
+const Program = ({program}) =>{
 
   const dispatch = useDispatch();
   const router = useRouter()
   const {slug } = router.query
   //const programId = props.match.params.id;
   const programDetails = useSelector((state) => state.programDetails);
-  const { loading, error, program } = programDetails;
+ // const { loading, error, program } = programDetails;
 
-  useEffect(() => {
-   
+  /* useEffect(() => {
     dispatch(detailsProgram(slug));
-  }, [dispatch,slug]);
-
+  }, [dispatch,slug]); */
 
   return (
     <>
-    {loading ? (
-      <div className='loading-overlay' ><div className="loading"></div></div>
-      ) : error ? (
-      <div style={{height:'50vh'}}>
-        <MessageBox>{error}</MessageBox>
-      </div>
-        ) : (
+    {program&& (
       <div>
     <ErrorBoundary>
       <HeroProgram  program={program}/>
@@ -68,4 +61,14 @@ function Program(props) {
   )
 }
 
+export const getServerSideProps = async ({ params }) => {
+  const res = await axios.get(
+    `https://blog.donilab.org/wp-json/wp/v2/programs?slug=${params.slug}`
+  );
+  return {
+    props: {
+      program: res.data[0],
+    },
+  };
+};
 export default Program

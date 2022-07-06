@@ -5,7 +5,7 @@ import ExpertiseCards from './ExpertiseCards';
 //import LogoDExpertise from "/static/assets/logodolibalexpertise.svg"
 //import Oconnect from "./static/assets/svg/oconnect.svg"
 import SectionTitle from "../SectionTitle"
-import { useTranslation } from 'next-i18next';;
+import { useTranslation } from 'next-i18next';
 
 
 
