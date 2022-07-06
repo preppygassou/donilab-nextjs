@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import ExpertiseSection from '../Components/Dexpertise/ExpertiseSection'
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
 import parse from "html-react-parser";
+import { ExpertiseContext } from '../services/expertise/expertise.context';
 
 
 const ExpertiseContainer = styled.div `
@@ -206,8 +206,9 @@ transform: rotateY(180deg);
 `;
 
 function Dexpertise() {
-  const expertiseList = useSelector((state) => state.expertiseList);
-  const { loading, error, expertises } = expertiseList;
+  const { state } = useContext(ExpertiseContext);
+  const {expertises,loading,error} =  state
+
   return (
     <ExpertiseContainer>
         <ExpertiseContainerWrapper>
