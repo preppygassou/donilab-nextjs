@@ -11,9 +11,6 @@ const {
   HUB_IMAGE_FAIL,
   HUB_IMAGE_REQUEST,
   HUB_IMAGE_SUCCESS,
-  HUB_DETAILS_FAIL,
-  HUB_DETAILS_REQUEST,
-  HUB_DETAILS_SUCCESS,
   HUB_LIST_FR_REQUEST,
   HUB_LIST_FR_SUCCESS,
   HUB_LIST_FR_FAIL,
@@ -39,11 +36,11 @@ function reducer(state , action) {
       return { loading: false, hubs: action.payload };
     case HUB_LIST_FAIL:
       return { loading: false, error: action.payload };
-      case HUB_DETAILS_REQUEST:
+      case "HUB_DETAILS_REQUEST":
       return { loading: true };
-    case HUB_DETAILS_SUCCESS:
+    case "HUB_DETAILS_SUCCESS":
       return { loading: false, hub: action.payload };
-    case HUB_DETAILS_FAIL:
+    case "HUB_DETAILS_FAIL":
       return { loading: false, error: action.payload };
     default:
       return state;
@@ -65,23 +62,6 @@ export const HubContextProvider = ({ children,locale }) => {
     }
   };
 
-  const detailsHub = async (HubId) => {
-    dispatch({ type: HUB_DETAILS_REQUEST, payload: HubId });
-    try {
-      const { data } = await ClientRepository.get(
-        
-        "/hubs?slug=" + HubId
-      );
-      dispatch({ type: HUB_DETAILS_SUCCESS, payload: data });
-    } catch (error) {
-      dispatch({ type: HUB_DETAILS_FAIL, 
-        payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message, });
-    }
-  };
-  
   const listLieuDeshubs = async () => {
     try {
       dispatch({ type: HUB_LIST_TYPE_REQUEST });

@@ -1,7 +1,6 @@
-import React,{useState,useRef, useEffect} from 'react'
+import React,{useState,useRef, useEffect, useContext} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components'
-import { detailsHub } from '../../store/actions/HubActions';
 import ErrorBoundary from '../../Components/ErrorBoundary';
 import DomaineOfIntervation from '../../Components/Hub/DomaineOfIntervation';
 import EnResume from '../../Components/Hub/EnResume';
@@ -13,6 +12,7 @@ import TeamsOfHub from '../../Components/Hub/TeamsOfHub';
 import MessageBox from '../../Components/MessageBox';
 import { useRouter } from 'next/router';
 import axios from 'axios'
+import { HubContext } from '~/services/hub/hub.context';
 
 
 const HubSection = styled.section`
@@ -23,14 +23,30 @@ const HubSection = styled.section`
 function Hub({hub}) {
   const router = useRouter()
   const {slug } = router.query
-  const hubDetails = useSelector((state) => state.hubDetails);
- // const { loading, error, hub } = hubDetails;
+  const { state,dispatch } = useContext(HubContext);
+  const { hub, loading, error } = state
 
-  const dispatch = useDispatch()
 
-  /* useEffect(() => {
-    dispatch(detailsHub(slug));
-  }, [dispatch,slug]); */
+  useEffect(() => {
+    const detailsHub = async () => {
+      dispatch({ type: "HUB_DETAILS_REQUEST", payload: slug });
+      try {
+        const { data } = await ClientRepository.get(
+          
+          "/hubs?slug=" + slug
+        );
+        dispatch({ type: "HUB_DETAILS_SUCCESS", payload: data });
+      } catch (error) {
+        dispatch({ type: "HUB_DETAILS_FAIL", 
+          payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message, });
+      }
+    };
+    detailsHub()
+
+  }, [slug,dispatch]);
   
   return (
 

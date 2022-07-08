@@ -7,12 +7,10 @@ import Activity from '../../Components/Program/Activity'
 import Resultats from '../../Components/Program/Resultats'
 import Beneficiaires from '../../Components/Program/Beneficiaires'
 import Partners from '../../Components/Program/Partners'
-import { useDispatch, useSelector } from 'react-redux'
 import ClientRepository from '../../repositories/ClientRepository';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import ErrorBoundary from '../../Components/ErrorBoundary'
 import { useRouter } from 'next/router'
-import axios from 'axios'
 import { ProgramContext } from '../../services/program/program.context'
 
 const Program = () =>{
@@ -42,8 +40,6 @@ const Program = () =>{
     detailsProgram()
   }, [slug,dispatch]);
 
-
-  console.log(program)
 
   return (
     <>
