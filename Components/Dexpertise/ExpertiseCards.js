@@ -48,12 +48,7 @@ function ExpertiseCards() {
   const { state } = useContext(DexpertiseContext);
   const {dexpertises,loading,error} =  state
  
-  const {locale} = useRouter()
 
-
-  /* useEffect(() => {
-    listDexpertisesAction(locale)
-  }, [listDexpertisesAction,locale]) */
 
   return (
         <ExpertisesContainer>

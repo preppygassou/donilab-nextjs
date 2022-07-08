@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import LanguageSelector from './LanguageSelector';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 
 const LabelAfricinnovContainer = styled.div`
@@ -77,16 +78,16 @@ width:100%;
 }
 `;
 function Labelafricinnov() {
-  const { t} = useTranslation('common')
+  const {locale} = useRouter()
   return (
     <LabelAfricinnovContainer >
-      <h1>{t('label_afrinov_title')}</h1>
+      <h1>{locale === "en" ?"AFRIC'INNOV LABEL":"LE LABEL AFRIC'INNOV"}</h1>
       <LabelContent>
         <LabelLogo>
           <img src={"/static/assets/label.png"} alt="Label Afric'innov" />
         </LabelLogo>
         <LabelInfo>
-          <p>{t('label_afrinov_desc')}</p>
+          <p>{locale === "en" ?"In 2021, DoniLab had its support methodology certified. Developed to improve the readability of African entrepreneurial ecosystems, the Afric'innov Label highlights the most successful incubators on the continent. To do this, it is based on a strict quality benchmark, initiated by the International Organization of La Francophonie and the founding consortium of Afric'innov, and co-constructed with around fifty actors from our ecosystems, based on twenty criteria assessing the infrastructure, governance, methodology and support resources, as well as the range of services made available to supported entrepreneurs.":"En 2021, DoniLab a vu sa méthodologie d’accompagnement certifiée. Développé pour améliorer la lisibilité des écosystèmes entrepreneuriaux africains, le Label Afric'innov met en évidence les incubateurs les plus performants sur le continent. Pour cela, il s'appuie sur un référentiel de qualité strict, initié par l’Organisation Internationale de la Francophonie et le consortium fondateur d’Afric’innov, et co-construit avec une cinquantaine d'acteurs de nos écosystèmes, reposant sur vingt critères évaluant les infrastructures, la gouvernance, la méthodologie et ressources d'accompagnement, ainsi que l'offre de services mis à disposition des entrepreneurs accompagnés."}</p>
         </LabelInfo>
       </LabelContent>
     </LabelAfricinnovContainer >

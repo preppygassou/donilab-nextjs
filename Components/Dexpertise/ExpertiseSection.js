@@ -118,7 +118,6 @@ span{
 `;
 
 function ExpertiseSection({expertise}) {
-  const { t} = useTranslation('common')
   return (
     <ExpertisesContainerWrapper expertise={expertise}>
         <CircleAfterHeroDiv expertise={expertise} className="circleafterhero">

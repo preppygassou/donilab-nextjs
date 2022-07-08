@@ -408,7 +408,6 @@ width: 80px;
 `;
 
 function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
-  const { t } = useTranslation('common')
   const { locale } = useRouter()
   const [current, setCurrent] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -449,14 +448,6 @@ function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
   if (!Array.isArray(TeamData) || TeamData.length <= 0) {
     return null;
   }
-
-  /*  const indexOfLastProducts = currentPage * productsPerPage;
-    const indexOfFirstProducts = indexOfLastProducts - productsPerPage;
-    const currentProducts = products.slice(
-      indexOfFirstProducts,
-      indexOfLastProducts
-    ); */
-
 
 
   function SampleNextArrow(props) {
@@ -505,7 +496,7 @@ function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
         ishub ? <HubTeamSectionHead>
           <TeamInHubSectionIcon className="" src={"/static/assets/svg/teaminhubsectionicone.svg"} alt="team Icone" />
           <h1>
-            {t('notre')} {t('team')}
+            { locale === "en" ?"OUR TEAM" : "NOTRE ÉQUIPE"}
           </h1>
           <p>
             {hub.acf.description_team}
@@ -517,22 +508,11 @@ function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
             <img src="" alt="" />
             <SectionTitle>
               <h1>
-              {t('notre')} {t('team')}
+              { locale === "en" ?"OUR TEAM" : "NOTRE ÉQUIPE"}
             </h1></SectionTitle>
           </div> :
             <SectionTitle>
-              {/* <h1>
-                {t('n')}
-            <span className="conectimg">
-                  o
-              <svg id="Grupo_729" data-name="Grupo 729" xmlns="http://www.w3.org/2000/svg" width="128.639" height="143.869" viewBox="0 0 128.639 143.869">
-                    <path id="Caminho_661" data-name="Caminho 661" d="M-430.554,188.391l-17.435,20.484a16.525,16.525,0,0,1,3.358,10.076A16.6,16.6,0,0,1-461.3,235.473a16.594,16.594,0,0,1-16.522-16.666,16.594,16.594,0,0,1,16.668-16.522,16.519,16.519,0,0,1,8.618,2.455l17.52-21.039Z" transform="translate(481.135 -91.604)" fill="#95b71d" />
-                    <path id="Caminho_662" data-name="Caminho 662" d="M-431.462,178.8l-21.067-19.376a16.519,16.519,0,0,1-10.7,3.855,16.594,16.594,0,0,1-16.522-16.668,16.594,16.594,0,0,1,16.666-16.522,16.6,16.6,0,0,1,16.522,16.668,16.506,16.506,0,0,1-2.053,7.926l21.737,19.993Z" transform="translate(479.75 -130.087)" fill="#95b71d" />
-                    <path id="Caminho_663" data-name="Caminho 663" d="M-405.252,132.127a16.594,16.594,0,0,0-16.666,16.522,16.351,16.351,0,0,0,4.157,11.081l-10.953,13.414a64.927,64.927,0,0,1,6.514,4.568l10.953-13.325a13.261,13.261,0,0,0,5.851.928,16.593,16.593,0,0,0,16.666-16.522,16.594,16.594,0,0,0-16.522-16.666" transform="translate(517.369 -128.623)" fill="#95b71d" />
-                  </svg>
-                </span>
-                {t('tre')} {t('team')}
-          </h1> */}
+             
               {
                 locale === "en" ?
                   <object type="image/svg+xml" width="500px" height="100" data={'/static/assets/svg/title/title_TEAM-EN.svg'} className="">
@@ -545,8 +525,6 @@ function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
       }
 
       <div className='container-fluid first last' style={{ width: '100%', zIndex: 10, marginTop: 30, marginBottom: "15vh" }}>
-
-        {/* <Slider {...settings}> */}
         <Carousel
           slidesPerPage={5}
           infinite
@@ -597,33 +575,10 @@ function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
                 </div>
               </div>
 
-
-              /* index === current && ( */
-              /* currentSlide*/
-
-              /*  index === current ? 
-               <TeamSlideractive key={index}>
-               <TeamImg src={team.image} alt={team.teamname}/>
-               <TeamInfo>
-                  <h1>{team.teamname}</h1>
-                  <p>{team.poste}</p>
-                  </TeamInfo>    
-          </TeamSlideractive> : 
-                 
-             <TeamSlider key={index}>
-                  <TeamImg src={team.image} alt={team.teamname}/>                 
-                  <TeamImgLoop></TeamImgLoop>                                 
-             </TeamSlider> */
-              /* ) */
             ))
           }
         </Carousel>
       </div>
-      {/* </Slider> */}
-      {/*  <SliderButtons>
-            <PrevArrow  onClick={prevSlide} src={ArrowLeftIcon}/>
-            <NextArrow onClick={nextSlide} src={ArrowRighthIcon}/>
-          </SliderButtons> */}
       <Hubteamparalaxe home={home} about={about} src={"/static/assets/svg/HomeTeamparalaxeimg.svg"} alt="" />
       <TeamhomeparalaxeFirst ishub={ishub} about={about} src={"/static/assets/svg/teamhomeparalaxe1.svg"} alt="" />
       <TeamhomeparalaxeTwo ishub={ishub} about={about} src={"/static/assets/svg/teamhomeparalaxe2.svg"} alt="" />
