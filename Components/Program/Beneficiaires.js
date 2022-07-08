@@ -86,9 +86,7 @@ padding: 0.3rem;
   display:none;
 }
 `;
-const BeneficiaireLogoDescription = styled.div`
 
-`;
 const BeneficiairesLogo = styled.img`
 width:75px;
 

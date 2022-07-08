@@ -8,29 +8,46 @@ import Resultats from '../../Components/Program/Resultats'
 import Beneficiaires from '../../Components/Program/Beneficiaires'
 import Partners from '../../Components/Program/Partners'
 import { useDispatch, useSelector } from 'react-redux'
-//import { detailsProgram } from '../../store/actions/ProgramActions'
+import ClientRepository from '../../repositories/ClientRepository';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import ErrorBoundary from '../../Components/ErrorBoundary'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { ProgramContext } from '../../services/program/program.context'
 
-const Program = ({program}) =>{
+const Program = () =>{
 
 
   const router = useRouter()
   const {slug } = router.query
-  const { state,detailsProgram } = useContext(ProgramContext);
+  const { state,dispatch } = useContext(ProgramContext);
  // const programDetails = useSelector((state) => state.programDetails);
- // const { loading, error, program } = programDetails;
+  const { loading, error, program } = state;
 
   useEffect(() => {
-   detailsProgram(slug);
-  }, [slug]);
+    const detailsProgram =  async () => {
+      try {
+        dispatch({ type: "PROGRAM_DETAILS_REQUEST", payload: slug });
+        const { data } = await ClientRepository.get(
+          `/programs?slug=${slug}`
+        );
+        dispatch({ type: "PROGRAM_DETAILS_SUCCESS", payload: data[0] });
+      } catch (error) {
+        dispatch({ type: "PROGRAM_DETAILS_FAIL", payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message, });
+      }
+    };
+    detailsProgram()
+  }, [slug,dispatch]);
+
+
+  console.log(program)
 
   return (
     <>
-    {program&& (
+    { loading ? <div className='loading-overlay' ><div className="loading"></div></div> : program&& (
       <div>
     <ErrorBoundary>
       <HeroProgram  program={program}/>
@@ -64,9 +81,7 @@ const Program = ({program}) =>{
 
 
 export const getServerSideProps = async ({ locale }) => ({
-   /*  const res = await axios.get(
-    `https://blog.donilab.org/wp-json/wp/v2/programs?slug=${params.slug}`
-  ); */
+
   props: {
     ...await serverSideTranslations(locale, ['common']),
   },

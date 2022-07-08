@@ -116,53 +116,6 @@ function ExpertiseCard({ item }) {
   return (
     <>
 
-
-      {/*   <Card
-    body
-    className="text-center expertiseCard"
-    >
-     
-    <CardImg
-      alt="Card image cap"
-      src={item.acf.icone_normal.url}
-      top
-      width="100" height="100"
-      className="svg default"
-    />
-    <CardImg
-      alt="Card image cap"
-      src={item.acf.icone_onhover.url}
-      top
-      width="100" height="100"
-      className="svg hover"
-    />
-    <CardBody> 
-      <CardTitle tag="h3">
-      {item.title.rendered}
-      </CardTitle>
-
-      <CardText>
-      {parse(item.excerpt.rendered)}
-      </CardText>
-      <BtnLinkExpertiseCard href="/expertise">
-        {currentLang === "en" ? "find out more" : "en savoir plus"}
-      </BtnLinkExpertiseCard>
-    </CardBody>
-  </Card> */}
-
-      {/*   <ExpertiseCardContent key={item.id} className="expertise">
-
-      <object id={item.acf.icone_normal.id} type="image/svg+xml" width="100" height="100" data={item.acf.icone_normal.url} className="svg default">
-      </object>
-      <object id={item.acf.icone_onhover.id} type="image/svg+xml" width="100" height="100" data={item.acf.icone_onhover.url} className="svg hover">
-      </object>
-      <h1>{item.title.rendered}</h1>
-      {parse(item.excerpt.rendered)}
-      <BtnLinkExpertiseCard href="/expertise">
-        {currentLang === "en" ? "find out more" : "en savoir plus"}
-      </BtnLinkExpertiseCard>
-    </ExpertiseCardContent> */}
-
       <ExpertiseCardContent className="donilab-expertise-card" >
 
         <div className="donilab-expertise_thumnail">

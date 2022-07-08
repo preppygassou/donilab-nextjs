@@ -45,17 +45,9 @@ box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
 
 function ExpertiseCards() {
 
-
-  //const { loading, error, expertises } = expertiseList;
-  const {locale} = useRouter()
-  /* const dispatch = useDispatch() */
   const { state } = useContext(ExpertiseContext);
   const {loading, error, expertises} =  state
 
-
- /*  useEffect(() => {
-    dispatch(listExpertises(locale))
-  }, [dispatch, locale]) */
 
   return (
     <ExpertisesContainer className='expertise-container'>

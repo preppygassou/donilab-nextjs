@@ -1,8 +1,6 @@
-import React,{useState,useRef, useEffect, useContext} from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import styled from 'styled-components'
-import { useTranslation } from 'next-i18next';
-import { useSelector } from 'react-redux'
-import { GeneralContext } from '../services/general/general.context';
+import { useRouter } from 'next/router';
 
 const HeroSection = styled.section`
 overflow:hidden;
@@ -166,32 +164,32 @@ right: 61vh;
 `;
 
 
-const Hero = ({slides})=> {
-  const { t} = useTranslation('common')
- 
-  
+const Hero = ({ slides }) => {
+  const { locale } = useRouter()
+
   return (
-      <HeroSection>
-        <HeroWrapper>     
-      <HeroTextBox>
-     <HeroImgarc src={"/static/assets/rhome1.png"} />
-     <HeroInfo>
-       <h1>
-       <span className="colorgreen">{t('incubator')}</span>
-       <span>{t('de')}</span>
-       <span>{t('refe')}</span>
-       <span>{t('au')}</span>
-       </h1>
-       <p>
-      {t('parentrepreneur')} & <br/>{t('pourentrepreneur')}
-       </p>
-     </HeroInfo>
-      </HeroTextBox>
-      <HeroImgBox>
-        <HeroImg src={"/static/assets/donilabherohomeImg.jpg"}/>
-      </HeroImgBox>
-        </HeroWrapper>
-      </HeroSection>
+    <HeroSection>
+      <HeroWrapper>
+        <HeroTextBox>
+          <HeroImgarc src={"/static/assets/rhome1.png"} />
+          <HeroInfo>
+            <h1>
+              <span className="colorgreen">{locale === "en" ? "The incubator" : "L’incubateur"}</span>
+              <span>{locale === "en" ? "of" : "de"}</span>
+              <span>{locale === "en" ? "reference" : "référence"}</span>
+              <span>{locale === "en" ? "in Mali" : "au Mali"}</span>
+            </h1>
+            <p>
+              {locale === "en" ? "by entrepreneurs" : "Par les entrepreneur(e)s "}
+              & <br />{locale === "en" ? "for entrepreneurs" : "pour les entrepreneur(e)s "}
+            </p>
+          </HeroInfo>
+        </HeroTextBox>
+        <HeroImgBox>
+          <HeroImg src={"/static/assets/donilabherohomeImg.jpg"} />
+        </HeroImgBox>
+      </HeroWrapper>
+    </HeroSection>
   )
 }
 

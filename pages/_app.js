@@ -14,6 +14,7 @@ import { HubContextProvider } from "../services/hub/hub.context";
 import { DexpertiseContextProvider } from "../services/dexpertise/dexpertise.context";
 import { GeneralContextProvider } from "../services/general/general.context";
 import { ProgramContextProvider } from "../services/program/program.context";
+import { ProgramPartnersContextProvider } from "../services/partner/partner.context";
 import { PartenaireContextProvider } from "../services/partenaire/partenaire.context";
 import { EventContextProvider } from "../services/event/event.context";
 import { ImpactContextProvider } from "../services/impact/impact.context";
@@ -26,21 +27,22 @@ moment.locale("fr");
 const MyApp = (props) => {
     const { Component, pageProps } = props;
     const { locale } = useRouter()
-   
+
 
 
     return (
-        <ConfigProvider locale={"fr"}>
-            <GeneralContextProvider locale={"fr"}>
-                <ExpertiseContextProvider locale={"fr"}>
-                    <PostContextProvider locale={"fr"}>
-                        <DexpertiseContextProvider locale={"fr"}>
-                            <PartenaireContextProvider locale={"fr"}>
-                                <ImpactContextProvider locale={"fr"}>
-                                    <ProgramContextProvider locale={"fr"}>
-                                        <HubContextProvider locale={"fr"}>
-                                            <EventContextProvider locale={"fr"}>
-                                            <AboutContextProvider locale={"fr"}>
+        <ConfigProvider locale={locale}>
+            <GeneralContextProvider locale={locale}>
+                <ExpertiseContextProvider locale={locale}>
+                    <PostContextProvider locale={locale}>
+                        <DexpertiseContextProvider locale={locale}>
+                            <PartenaireContextProvider locale={locale}>
+                                <ImpactContextProvider locale={locale}>
+                                    <ProgramContextProvider locale={locale}>
+                                    <ProgramPartnersContextProvider locale={locale}>
+                                        <HubContextProvider locale={locale}>
+                                            <EventContextProvider locale={locale}>
+                                            <AboutContextProvider locale={locale}>
 
                                                 <Layout>
                                                     <ErrorBoundary>
@@ -51,6 +53,7 @@ const MyApp = (props) => {
                                             </AboutContextProvider>
                                             </EventContextProvider>
                                         </HubContextProvider>
+                                    </ProgramPartnersContextProvider>
                                     </ProgramContextProvider>
                                 </ImpactContextProvider>
                             </PartenaireContextProvider>

@@ -12,23 +12,24 @@ background-color:#2755A1;
 box-shadow: 0 0 10px 0 rgba(0,0,0,.15);
 /* cursor: pointer; */
 display: flex;
--webkit-box-orient: vertical;
--webkit-box-direction: normal;
--ms-flex-direction: column;
 flex-direction: column;
 overflow: hidden;
 position: relative;
 min-height: 100%;
 border: 0 solid #818a91;
--webkit-transition: all .25s;
--o-transition: all .25s;
 transition: all .25s;
+
+&:hover {
+  box-shadow: 0 0 20px 0 rgba(0,0,0,.15);
+}
+
+&:hover .donilab-post__thumbnail__link::after {
+  opacity: .5;
+}
 
 .donilab-post__thumbnail__link::after {
   display: block;
   content: "";
-  background-image: -o-linear-gradient(bottom,rgba(0,0,0,.35) 0,transparent 75%);
-  background-image: -webkit-gradient(linear,left bottom,left top,from(rgba(0,0,0,.35)),color-stop(75%,transparent));
   background-image: linear-gradient(0deg,rgba(0,0,0,.35),transparent 75%);
   background-repeat: no-repeat;
   height: 100%;
@@ -36,8 +37,6 @@ transition: all .25s;
   position: absolute;
   bottom: 0;
   opacity: 1;
-  -webkit-transition: all .3s ease-out;
-  -o-transition: all .3s ease-out;
   transition: all .3s ease-out;
 }
 .donilab-post__thumbnail__link {
@@ -54,7 +53,6 @@ transition: all .25s;
   padding-bottom: calc( 0.66 * 100% );
   position: relative;
 transform-style: preserve-3d;
--webkit-transform-style: preserve-3d;
 top: 0;
 left: 0;
 right: 0;
@@ -69,17 +67,13 @@ overflow: hidden;
 position: absolute;
 top: calc(50% + 1px);
 left: calc(50% + 1px);
--webkit-transform: scale(1.01) translate(-50%,-50%);
--ms-transform: scale(1.01) translate(-50%,-50%);
 transform: scale(1.01) translate(-50%,-50%);
 
 /* display: block;
 width: 100%; */
 /* max-height: none;
 max-width: none; */
--webkit-transition: -webkit-filter .3s;
 transition: -webkit-filter .3s;
--o-transition: filter .3s;
 transition: filter .3s;
 transition: filter .3s,-webkit-filter .3s;
 
@@ -161,44 +155,44 @@ p{
 
 const Blogcard = ({ post }) => {
   // const [imgUrl, setImgUrl] = useState('')
- // const [categoriess, setCategories] = useState([])
+  // const [categoriess, setCategories] = useState([])
   //const [isLoaded, setIsLoaded] = useState(false)
- // const PostId = post.id;
+  // const PostId = post.id;
   /* const CategoriesId = post.categories; */
- // const postListCategories = useSelector((state) => state.postListCategories);
- // const { loading, error, categories } = postListCategories;
+  // const postListCategories = useSelector((state) => state.postListCategories);
+  // const { loading, error, categories } = postListCategories;
 
-/*   const dispatch = useDispatch()
+  /*   const dispatch = useDispatch()
+  
+     useEffect(() => {
+         
+       axios.get(`https://www.blog.donilab.net/wp-json/wp/v2/categories?post=${PostId}&cat_relation=AND`)      
+       .then(res => 
+         setCategories(res.data) , 
+           ); 
+     //console.log(categoriess)
+     }, [PostId])
+   */
 
-   useEffect(() => {
-       
-     axios.get(`https://www.blog.donilab.net/wp-json/wp/v2/categories?post=${PostId}&cat_relation=AND`)      
-     .then(res => 
-       setCategories(res.data) , 
-         ); 
-   //console.log(categoriess)
-   }, [PostId])
- */
-
- // const intersection = categories.filter(element => post.categories.includes(element.id));
+  // const intersection = categories.filter(element => post.categories.includes(element.id));
   /*  const CategoryFilter = (inc)=>categoriess.filter(filterCat=>(
      inc ===filterCat.id ? [...(filterCat.name)] :""
      
    )) */
 
   return (
-<>
+    <>
 
 
-    <BlogSlider className="donilab-post__card" key={post.id} /* onClick={() => history.push("/blogsingle"+ index)} */>
-      <a className='donilab-post__thumbnail__link' href={post.link} target="_blank" rel="noopener noreferrer">
-      <div className="donilab-post__thumbnail">
-        <img width={300} height={169} src={post.x_featured_media_medium} alt={post.title.rendered} />
-      </div>
-      </a>
-      <div className="donilab-post__badge">
-      {post.x_categories}
-      {/* <h4> */}
+      <BlogSlider className="donilab-post__card" key={post.id} /* onClick={() => history.push("/blogsingle"+ index)} */>
+        <a className='donilab-post__thumbnail__link' href={post.link} target="_blank" rel="noopener noreferrer">
+          <div className="donilab-post__thumbnail">
+            <img width={300} height={169} src={post.x_featured_media_medium} alt={post.title.rendered} />
+          </div>
+        </a>
+        <div className="donilab-post__badge">
+          {post.x_categories}
+          {/* <h4> */}
           {/*   {
                loading ? <span>loading...</span> :
                categories.map(category=>(
@@ -207,7 +201,7 @@ const Blogcard = ({ post }) => {
                ))
              }
   */}
-             {/*  {
+          {/*  {
                categoriess.map((category)=>(
                  categoriess.length === 1 ? <span key={category.id}>{category.name} </span>
                 : categoriess.lastIndexOf(category) ? <span key={category.id}>{category.name} </span>
@@ -217,25 +211,25 @@ const Blogcard = ({ post }) => {
                  
                  
                 }  */}
-                {/* <span> </span> */}
+          {/* <span> </span> */}
 
-        {/* </h4> */}
-      </div>
-      <div className="donilab-post__text">
-      
-        <h3 className='donilab-post__title'>
-        <a href={post.link} target="_blank" rel="noopener noreferrer">
-          {post.title.rendered} 
-        </a>
-        </h3>
-      </div>
-     <div className="donilab-post__meta-data">
-     <span className='donilab-post-date'>
-     {post.x_date}
-     </span>
-     </div>
-    </BlogSlider>
-    {/* <BlogSlider className="donilab-post__card" key={post.id}>
+          {/* </h4> */}
+        </div>
+        <div className="donilab-post__text">
+
+          <h3 className='donilab-post__title'>
+            <a href={post.link} target="_blank" rel="noopener noreferrer">
+              {post.title.rendered}
+            </a>
+          </h3>
+        </div>
+        <div className="donilab-post__meta-data">
+          <span className='donilab-post-date'>
+            {post.x_date}
+          </span>
+        </div>
+      </BlogSlider>
+      {/* <BlogSlider className="donilab-post__card" key={post.id}>
     <a className='donilab-post__thumbnail__link' href={`https://blog.donilab.org${post.uri}`} target="_blank" rel="noopener noreferrer">
     <div className="donilab-post__thumbnail">
       <img width={300} height={169} src={post.featuredImage.node.sourceUrl} alt={post.title.rendered} />

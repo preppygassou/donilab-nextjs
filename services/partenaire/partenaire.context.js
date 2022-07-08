@@ -33,7 +33,7 @@ function reducer(state , action) {
 export const PartenaireContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const listPartenaires = () => async (dispatch) => {
+  const listPartenaires = async () => {
     try {
       dispatch({ type: PARTENAIRE_LIST_REQUEST });
       const { data } = await ClientRepository.get(

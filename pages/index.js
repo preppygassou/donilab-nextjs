@@ -21,7 +21,7 @@ const Index =() =>{
 
   return (
     <>
-      {/* <Hero />
+      <Hero />
       <ExpertiseSection />
         <BlogSlideSection />
       <ImpactSection />
@@ -37,10 +37,7 @@ const Index =() =>{
         }
       <Dexpertise />
         <PartnersSection />
-      <Labelafricinnov /> */}
-      <h1>
-        test
-      </h1>
+      <Labelafricinnov />
     </>
   )
 }
@@ -48,52 +45,6 @@ const Index =() =>{
 
 
 export const getServerSideProps = async ({ locale }) => {
- /*  const client = new ApolloClient({
-    uri: 'https://blog.donilab.org/graphql',
-    cache: new InMemoryCache(),
-  });
-
-  const lang ={lang:locale} */
-
-  // const client = ...
-
-/* const response= await client
-.query({
-  query: gql`
-  query NewQuery {
-    posts {
-      edges {
-        node {
-          id
-          title
-          uri
-          excerpt
-          content
-          date
-          categories {
-            edges {
-              node {
-                id
-                name
-              }
-            }
-          }
-          featuredImage {
-            node {
-              id
-              sourceUrl
-            }
-          }
-
-          
-        }
-      }
-    }
-  }
-  `,
-}) */
-
-//const posts = response.data.posts.edges.map(({node})=>node)
 
   return {
     props: {

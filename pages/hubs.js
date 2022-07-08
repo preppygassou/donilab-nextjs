@@ -7,7 +7,7 @@ import { listHubs, listLieuDeshubs } from '../store/actions/HubActions';
 import parse from "html-react-parser";
 import MessageBox from '../Components/MessageBox';
 import ErrorBoundary from '../Components/ErrorBoundary';
-import { useTranslation } from 'next-i18next';import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next'; import { useRouter } from 'next/router';
 import Layout from '../Components/layouts/Layout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { HubContext } from '../services/hub/hub.context';
@@ -446,8 +446,9 @@ border-radius: 20px;
 }
 
 `;
-const HubExploreLink = styled(Link)`
-color:#fff;
+const HubExploreLink = styled.div`
+a{
+  color:#fff;
 background-color: ${({ green }) => (green ? '#95B71D' : '#2755A1')};
 border-radius:30px;
 padding:.5rem 1rem;
@@ -461,35 +462,37 @@ text-decoration:none;
 font-size: 1rem;
 
 }
+}
+
 
 `;
 
 function Hubs() {
-  const { t} = useTranslation('common')
-  const {locale} = useRouter()
+  const { t } = useTranslation('common')
+  const { locale } = useRouter()
 
   const { state } = useContext(HubContext);
-  const {hubs,loading,error} =  state
+  const { hubs, loading, error } = state
 
 
-/*   useEffect(() => {
-    dispatch(listHubs(locale))
-  }, [dispatch,locale]) */
+  /*   useEffect(() => {
+      dispatch(listHubs(locale))
+    }, [dispatch,locale]) */
 
-/*   useEffect(() => {
-    dispatch(listLieuDeshubs())
-  }, [dispatch]) */
+  /*   useEffect(() => {
+      dispatch(listLieuDeshubs())
+    }, [dispatch]) */
 
 
   return (
     <>
-    <HubPage>
-      <HeroHub>
-        <HubheroparalaxeLeft src={"/static/assets/svg/paralaxetopherohub.svg"} alt="" />
-        <HubheroparalaxeRight src={"/static/assets/svg/paralaxebottomherohub.svg"} alt="" />
+      <HubPage>
+        <HeroHub>
+          <HubheroparalaxeLeft src={"/static/assets/svg/paralaxetopherohub.svg"} alt="" />
+          <HubheroparalaxeRight src={"/static/assets/svg/paralaxebottomherohub.svg"} alt="" />
 
-        <SectionTitle className= "programsandhubstitle" white="true">
-          {/* <h1>
+          <SectionTitle className="programsandhubstitle" white="true">
+            {/* <h1>
           {t("n")}
             <span className="conectimg">
               o
@@ -501,104 +504,104 @@ function Hubs() {
             </span>
             {t("os")} hubs
         </h1> */}
-        {
-          locale === "en" ?
-          <object type="image/svg+xml" width="500px" height="100" data={'/static/assets/svg/title/title_HUBS-EN.svg'} className="">
-          </object> :
-           <object type="image/svg+xml" width="500px" height="100" data={'/static/assets/svg/title/title_HUBS-FR.svg'} className="">
-           </object>
-           }
-        </SectionTitle>
+            {
+              locale === "en" ?
+                <object type="image/svg+xml" width="500px" height="100" data={'/static/assets/svg/title/title_HUBS-EN.svg'} className="">
+                </object> :
+                <object type="image/svg+xml" width="500px" height="100" data={'/static/assets/svg/title/title_HUBS-FR.svg'} className="">
+                </object>
+            }
+          </SectionTitle>
 
-      </HeroHub>
+        </HeroHub>
 
-      <HubsSection>
+        <HubsSection>
 
-        <ErrorBoundary>
-          {
-            loading ? <div className='loading-overlay' ><div className="loading"></div></div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> :
-              <HubsSectionWrapper>
-                <div className="clear"></div>
-                {
-                  hubs.map((hub, index) => (
-                    index === 0 ? (
-                      <HubBamako key={index}>
-                        <Hubbamakoparalaxe src={"/static/assets/svg/paralaxebamakohub.svg"} alt="" />
-                        <HubBamakoInfo>
-                          <div>
-                            <h1>
-                              Bamako
-                       </h1>
-                          </div>
-                          <div className="contenthubinfo">
-                            {parse(hub.content.rendered)}
-                          </div>
+          <ErrorBoundary>
+            {
+              loading ? <div className='loading-overlay' ><div className="loading"></div></div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> :
+                <HubsSectionWrapper>
+                  <div className="clear"></div>
+                  {
+                    hubs.map((hub, index) => (
+                      index === 0 ? (
+                        <HubBamako key={index}>
+                          <Hubbamakoparalaxe src={"/static/assets/svg/paralaxebamakohub.svg"} alt="" />
+                          <HubBamakoInfo>
+                            <div>
+                              <h1>
+                                Bamako
+                              </h1>
+                            </div>
+                            <div className="contenthubinfo">
+                              {parse(hub.content.rendered)}
+                            </div>
 
-                          <div>
-                            <HubExploreLink href={`/hub/${hub.slug}`} green="true">
-                              {t("decouverthub")}
-                    </HubExploreLink>
-                          </div>
-                        </HubBamakoInfo>
-                        <HubBamakoImg>
-                          <img src={hub.fimg_url} alt="" />
-                        </HubBamakoImg>
-                      </HubBamako>
-                    ) : index === 1 ? (
-                      <HubSikasso key={index}>
-                        <Hubsikassoparalaxe src={"/static/assets/svg/paralaxesikassohub.svg"} alt="" />
-                        <HubSikassoImg>
-                          <img src={hub.fimg_url} alt="" />
-                        </HubSikassoImg>
+                            <HubExploreLink green="true">
+                              <Link href={`/hub/${hub.slug}`} >
+                                {locale==="en"? "DISCOVER THE HUB": "DÉCOUVRIR LE HUB"}
+                              </Link>
+                            </HubExploreLink>
+                          </HubBamakoInfo>
+                          <HubBamakoImg>
+                            <img src={hub.fimg_url} alt="" />
+                          </HubBamakoImg>
+                        </HubBamako>
+                      ) : index === 1 ? (
+                        <HubSikasso key={index}>
+                          <Hubsikassoparalaxe src={"/static/assets/svg/paralaxesikassohub.svg"} alt="" />
+                          <HubSikassoImg>
+                            <img src={hub.fimg_url} alt="" />
+                          </HubSikassoImg>
 
-                        <HubSikassoInfo>
-                          <div>
-                            <h1>sikasso</h1>
-                          </div>
-                          <div className="contenthubinfo">
-                            {parse(hub.content.rendered)}
-                          </div>
-                          <div>
-                            <HubExploreLink href={`/hub/${hub.slug}`}>
-                              {t("decouverthub")}
-              </HubExploreLink>
-                          </div>
-                        </HubSikassoInfo>
+                          <HubSikassoInfo>
+                            <div>
+                              <h1>sikasso</h1>
+                            </div>
+                            <div className="contenthubinfo">
+                              {parse(hub.content.rendered)}
+                            </div>
+                            <HubExploreLink>
+                              <Link href={`/hub/${hub.slug}`}>
+                              {locale==="en"? "DISCOVER THE HUB": "DÉCOUVRIR LE HUB"}
+                              </Link>
+                            </HubExploreLink>
+                          </HubSikassoInfo>
 
-                      </HubSikasso>
+                        </HubSikasso>
 
-                    ) : (
+                      ) : (
 
-                      <HubSegou key={index}>
-                        <Hubbamakoparalaxe src={"/static/assets/svg/paralaxesegouhub.svg"} alt="" />
-                        <HubSegouInfo gris="true">
-                          <div>
-                            <h1>segou</h1>
-                          </div>
-                          <div className="contenthubinfo">
-                            {parse(hub.content.rendered)}
-                          </div>
-                          <div>
-                            <HubExploreLink href={`/hub/${hub.slug}`}>
-                              {t("decouverthub")}
-              </HubExploreLink>
-                          </div>
-                        </HubSegouInfo>
-                        <HubBamakoImg>
-                          <img src={hub.fimg_url} alt="" />
-                        </HubBamakoImg>
-                      </HubSegou>
-                    )
-                  ))
-                }
-              </HubsSectionWrapper>
-          }
+                        <HubSegou key={index}>
+                          <Hubbamakoparalaxe src={"/static/assets/svg/paralaxesegouhub.svg"} alt="" />
+                          <HubSegouInfo gris="true">
+                            <div>
+                              <h1>segou</h1>
+                            </div>
+                            <div className="contenthubinfo">
+                              {parse(hub.content.rendered)}
+                            </div>
+                            <HubExploreLink>
+                              <Link href={`/hub/${hub.slug}`}>
+                              {locale==="en"? "DISCOVER THE HUB": "DÉCOUVRIR LE HUB"}
+                              </Link>
+                            </HubExploreLink>
+                          </HubSegouInfo>
+                          <HubBamakoImg>
+                            <img src={hub.fimg_url} alt="" />
+                          </HubBamakoImg>
+                        </HubSegou>
+                      )
+                    ))
+                  }
+                </HubsSectionWrapper>
+            }
 
-        </ErrorBoundary>
+          </ErrorBoundary>
 
-      </HubsSection>
+        </HubsSection>
 
-    </HubPage>
+      </HubPage>
     </>
   )
 }
