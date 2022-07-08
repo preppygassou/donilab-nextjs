@@ -34,7 +34,8 @@ withPWA({
     dest: 'public',
     runtimeCaching,
   },
-  images: { domains: ['https://blog.donilab.org','secure.gravatar.com'] },
+  images: { domains: ['https://blog.donilab.org','2.gravatar.com',
+  'secure.gravatar.com',] },
  /*  images: { domains: ['res.cloudinary.com'] },
   eslint: {
     ignoreDuringBuilds: true,
