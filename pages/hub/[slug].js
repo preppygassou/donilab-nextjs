@@ -20,7 +20,7 @@ const HubSection = styled.section`
 `;
 
 
-function Hub({hub}) {
+function Hub() {
   const router = useRouter()
   const {slug } = router.query
   const { state,dispatch } = useContext(HubContext);
