@@ -24,7 +24,7 @@ export const CurrentLangContext = createContext({});
 
 const CurrentLangContextProvider = props => {
 
-  const [currentLang, SetCurrentLang] = useState(() => getLocalStorage("currentLang",localStorage.i18nextLng));
+  const [currentLang, SetCurrentLang] = useState(() => getLocalStorage("currentLang",localStorage.currentLang));
 
   useEffect(() => {
     setLocalStorage("currentLang", currentLang);
