@@ -90,7 +90,6 @@ export const HubContextProvider = ({ children,locale }) => {
        state,
        dispatch,
        listHubs,
-       detailsHub,
       }}
     >
       {children}
