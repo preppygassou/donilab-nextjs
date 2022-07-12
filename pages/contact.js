@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled, { css } from 'styled-components';
-import { useSelector } from "react-redux";
 import MessageBox from "../Components/MessageBox";
 import Layout from "../Components/layouts/Layout";
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
 import { GeneralContext } from "../services/general/general.context";
+import { CurrentLangContext } from "~/Context/CurrentLangContext";
 const ContactPage = styled.section`
 
 `;
@@ -167,6 +166,7 @@ border-radius:50%;
 transition:0.3s;
 &:hover{
 transform:scale(1.05);
+color:#fff;
 }
 margin:.5rem;
 width:55px;
@@ -180,6 +180,9 @@ function Contact() {
 
   const { state } = useContext(GeneralContext);
   const { loading, error, generals } = state
+
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
   return (
     <>
@@ -269,13 +272,9 @@ function Contact() {
     </>
   );
 }
-export const getServerSideProps = async ({ locale }) => ({
-  props: {
-    ...await serverSideTranslations(locale, ['common']),
-  },
-})
 
 
 
-export default dynamic(() => Promise.resolve(Contact), { ssr: false });
+
+export default Contact;
 

@@ -28,7 +28,6 @@ module.exports =
 withPWA({
   reactStrictMode: true,
   concurrentFeatures: true,
-  i18n,
   pwa: {
     disable: process.env.NODE_ENV !== 'development',
     dest: 'public',
@@ -46,7 +45,7 @@ withPWA({
     };
 },
    */
-    async rewrites() {
+    /* async rewrites() {
         return [
           {
             source: '/api/:slug*',
@@ -54,6 +53,6 @@ withPWA({
           }
           
         ]
-      },
+      }, */
 })
 

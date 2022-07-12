@@ -1,4 +1,5 @@
-import React, {  createContext, useReducer, useEffect } from "react";
+import React, {  createContext, useReducer, useEffect, useContext } from "react";
+import { CurrentLangContext } from "~/Context/CurrentLangContext";
 import ClientRepository from '../../repositories/ClientRepository';
 
 const {
@@ -25,6 +26,8 @@ export const initialState = {
   abouts: [],
   hub:null,
   error: false,
+  errorHub: false,
+  loadingHub: false,
   loading: false,
 };
 
@@ -37,18 +40,20 @@ function reducer(state , action) {
     case HUB_LIST_FAIL:
       return { loading: false, error: action.payload };
       case "HUB_DETAILS_REQUEST":
-      return { loading: true };
+      return { loadingHub: true };
     case "HUB_DETAILS_SUCCESS":
-      return { loading: false, hub: action.payload };
+      return { loadingHub: false, hub: action.payload };
     case "HUB_DETAILS_FAIL":
-      return { loading: false, error: action.payload };
+      return { loadingHub: false, errorHub: action.payload };
     default:
       return state;
   }
 }
 
-export const HubContextProvider = ({ children,locale }) => {
+export const HubContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { state:stateLocale } = useContext(CurrentLangContext);
+    const {locale} =  stateLocale
 
   const listHubs = async (locale) => {
     try {

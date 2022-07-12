@@ -3,18 +3,12 @@ import styled from 'styled-components'
 import DoniEvent from '../Components/DoniEventSection';
 import TeamSection from '../Components/TeamSection';
 import SectionTitle from "../Components/SectionTitle";
-import { useDispatch, useSelector } from 'react-redux';
-import { listHubs } from '../store/actions/HubActions';
-import MessageBox from '../Components/MessageBox';
 import ErrorBoundary from '../Components/ErrorBoundary';
-import { useTranslation } from 'next-i18next';
-import axios from 'axios';
 import parser from 'html-react-parser';
-import { useRouter } from 'next/router';
 import Layout from '../Components/layouts/Layout';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { HubContext } from '../services/hub/hub.context';
 import { AboutContext } from '../services/about/about.context';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 const AboutContainer = styled.div`
 width:100%;
@@ -255,10 +249,11 @@ width: 200px;
 
 const About = () => {
   
-  const { t } = useTranslation('common')
+  
  // const [abouts, setAbouts] = useState([])
   const [loadingabout, setLonding] = useState(false)
-  const { locale } = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   const { state } = useContext(HubContext);
   const {hubs} =  state
 
@@ -364,20 +359,6 @@ const About = () => {
   )
 }
 
-
-export const getServerSideProps = async ({ locale }) => {
-/*   const res = await axios.get(
-    `https://blog.donilab.org/wp-json/wp/v2/about/?lang=${locale}`
-  );
-  const { data } = await axios.get(
-    "https://blog.donilab.org/wp-json/wp/v2/hubs/?lang="+locale
-  ); */
-  return {
-    props: {
-      ...await serverSideTranslations(locale, ['common']),
-    },
-  };
-};
 
 
 export default About

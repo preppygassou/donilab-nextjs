@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import parse from "html-react-parser";
 import Layout from '../Components/layouts/Layout';
 import { ExpertiseContext } from '../services/expertise/expertise.context';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 
 const ExpertiseContainer = styled.div `
 margin-bottom:3rem;
@@ -308,14 +308,6 @@ function Expertise() {
     </>
   )
 }
-export const getServerSideProps = async ({ locale }) => {
 
-  return {
-    props: {
-     
-      ...await serverSideTranslations(locale, ['common']),
-    },
-  };
-};
 
 export default Expertise

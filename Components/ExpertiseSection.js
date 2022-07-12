@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import ExpertiseCards from './ExpertiseCards';
 //import CircleAfterHero from "/static/assets/circleafterhero.svg";
 //import ConectImgTitle from "/static/assets/svg/conecttitle.svg"
 //import Oconnect from "/static/assets/svg/oconnect.svg"
 import SectionTitle from "./SectionTitle"
-import { useTranslation } from 'next-i18next';
+
 import { useRouter } from '../node_modules/next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 
 
@@ -108,7 +109,8 @@ span{
 `;
 
 function ExpertiseSection({ expertise }) {
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   return (
     <ExpertisesContainerWrapper expertise={expertise}>
       <CircleAfterHeroDiv expertise={expertise} className="circleafterhero">

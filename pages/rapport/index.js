@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled, { css } from 'styled-components';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 export const RapportPage = styled.section`
 
@@ -115,21 +115,24 @@ font-size: 1rem;
 
 `;
 
-function Rapport() {
+const Rapport = () =>{
+
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   return (
     <>
     <RapportPage>
       <HeroRapport>
-        <h1> RAPPORT ANNUEL</h1>
+        <h1> {locale==="en"?"ANNUAL REPORT":"RAPPORT ANNUEL"}</h1>
       </HeroRapport>
       <Container>
         <Cover>
           <img src={"/static/assets/Rapport-dactivite-Donilab-2021-VF-01.png"} alt="RAPPORT 2021" />
         </Cover>
         <DownloadCtn>
-          <h1>RAPPORT 2021</h1>
+          <h1>{locale==="en"?"REPORT":"RAPPORT"} 2021</h1>
           <DownLoadBtn href="https://bit.ly/Rapport_Donilab_2021" target="_blank" className="allblog">
-            Télecharger
+             {locale==="en"?"Download":"Télecharger"}
           </DownLoadBtn>
         </DownloadCtn>
 
@@ -137,9 +140,9 @@ function Rapport() {
       <Container className="revers">
         
         <DownloadCtn>
-          <h1>RAPPORT 2020</h1>
+          <h1>{locale==="en"?"REPORT":"RAPPORT"} 2020</h1>
           <DownLoadBtn href="https://bit.ly/Rapport_Donilab_2020" target="_blank" className="allblog">
-            Télecharger
+           {locale==="en"?"Download":"Télecharger"}
           </DownLoadBtn>
         </DownloadCtn>
         <Cover>
@@ -152,9 +155,5 @@ function Rapport() {
     </>
   )
 }
-export const getServerSideProps = async ({ locale }) => ({
-  props: {
-    ...await serverSideTranslations(locale, ['common']),
-  },
-})
+
 export default Rapport

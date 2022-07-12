@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import styled, { css } from 'styled-components'
 import { TeamData } from '../services/data/TeamData';
 import SectionTitle from "./SectionTitle"
@@ -6,8 +6,9 @@ import Slider from "react-slick";
 import CarouselCenter from './CarouselCenter'
 import Carousel, { autoplayPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
-import { useTranslation } from 'next-i18next';
+
 import { useRouter } from '../node_modules/next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 
 
@@ -408,7 +409,8 @@ width: 80px;
 `;
 
 function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
-  const { locale } = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   const [current, setCurrent] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [active, setActive] = useState(0);

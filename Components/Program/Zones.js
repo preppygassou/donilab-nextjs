@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import { useRouter } from 'next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 const ZonesSections = styled.section`
 background-color:#2755A1;
@@ -79,7 +80,8 @@ function Zones({program}) {
 
   const zonesactive = (zoneactive) => (program.acf.zones.includes(zoneactive) ? "#95b71d" : "none")
   
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
    
     
   return (

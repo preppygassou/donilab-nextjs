@@ -4,11 +4,10 @@ import ProgramInPartner from '../Components/ProgramInPartner';
 import ProgramByDonilab from '../Components/ProgramDonilab';
 import SectionTitle from "../Components/SectionTitle";
 import MessageBox from '../Components/MessageBox';
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import { ProgramContext } from '../services/program/program.context';
 import { ProgramPartnersContext } from '../services/partner/partner.context';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 const SectionTitlell =styled.div`
 
@@ -210,11 +209,12 @@ const ProgrammestypesOfDonilab = 48;
 const ProgrammestypesWithPartnersId = 49;
 
 function Programs() {
-  const { t} = useTranslation('common')
+ 
   const { state:statepartners } = useContext(ProgramPartnersContext);
   const { state ,listProgramsTypeOfDonilab} = useContext(ProgramContext);
 
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
   const { loadingprogramsbydonilab,errorloadingprogrambydonilab,programsByDonilab } = state;
   const { loading,error,programsWithPartners } = statepartners;
@@ -253,7 +253,7 @@ function Programs() {
         <ProgramdonilabparalaxeLeft src={"/static/assets/svg/paralaxetopdonilabprogram.svg"} alt=""/>
         <ProgramdonilabparalaxeRight src={"/static/assets/svg/paralaxebottomdonilabprogram.svg"} alt=""/>
         <ProgramSectionTitle>
-        {t("initbydonilab")}
+        {locale==='en'? "INITIATED BY DONILAB":"INITIÉS PAR DONILAB"}
         </ProgramSectionTitle>
        { loadingprogramsbydonilab ? <div className='loading-overlay' ><div className="loading"></div></div> :errorloadingprogrambydonilab ? <MessageBox>erreur de chargement</MessageBox> :
     
@@ -264,7 +264,7 @@ function Programs() {
         <PrograminParnterSection>
         <Programpartnerparalaxe src={"/static/assets/svg/paralaxepartnerprogram.svg"} alt=""/>
         <ProgramSectionTitle>
-        {t("inpartner")}
+        {locale==="en"? "IN PARTNERSHIP":"EN PARTENARIAT"}
         </ProgramSectionTitle>
         {
           loading? <div className='loading-overlay' ><div className="loading"></div></div> :error ? <MessageBox>erreur de chargement</MessageBox> :
@@ -276,10 +276,6 @@ function Programs() {
   )
 }
 
-export const getServerSideProps = async ({ locale }) => ({
-  props: {
-    ...await serverSideTranslations(locale, ['common']),
-  },
-})
+
 
 export default Programs

@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components';
 import SectionTitle from "./SectionTitle";
-import axios from "axios";
-import { useDispatch } from "react-redux";
 import parse from "html-react-parser";
-import { useRouter } from "../node_modules/next/router";
 import { ImpactContext } from "../services/impact/impact.context";
+import { CurrentLangContext } from "~/Context/CurrentLangContext";
 
 
 const ImpactSectionContainer = styled.section`
@@ -105,7 +103,8 @@ span{
 function ImpactSection() {
 
 
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
   const { state } = useContext(ImpactContext);
   const {impacts,loading,error} =  state

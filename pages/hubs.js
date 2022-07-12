@@ -7,10 +7,11 @@ import { listHubs, listLieuDeshubs } from '../store/actions/HubActions';
 import parse from "html-react-parser";
 import MessageBox from '../Components/MessageBox';
 import ErrorBoundary from '../Components/ErrorBoundary';
-import { useTranslation } from 'next-i18next'; import { useRouter } from 'next/router';
+ import { useRouter } from 'next/router';
 import Layout from '../Components/layouts/Layout';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import { HubContext } from '../services/hub/hub.context';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 
 const HubPage = styled.div`
@@ -468,8 +469,9 @@ font-size: 1rem;
 `;
 
 function Hubs() {
-  const { t } = useTranslation('common')
-  const { locale } = useRouter()
+  
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
   const { state } = useContext(HubContext);
   const { hubs, loading, error } = state
@@ -605,10 +607,6 @@ function Hubs() {
     </>
   )
 }
-export const getServerSideProps = async ({ locale }) => ({
-  props: {
-    ...await serverSideTranslations(locale, ['common']),
-  },
-})
+
 
 export default Hubs

@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
 import { useRouter } from 'next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 
 
@@ -30,6 +31,7 @@ position:relative;
 }
 p{
   color:#2755A1;
+  margin-bottom: .2rem;
 }
 
 h1{
@@ -82,7 +84,8 @@ width: 80px;
 
 
 function Resultats({program}) {
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   
 
   return (
@@ -96,12 +99,11 @@ function Resultats({program}) {
   {locale=== "en" ?"Results":"Résultats"}
 
      </h1>
-      <p>
+     
      {
        parse(program.acf.resultats)
      }
 
-      </p>
     </ResultatsSection>
     
   )

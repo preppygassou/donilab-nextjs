@@ -8,7 +8,7 @@ import Resultats from '../../Components/Program/Resultats'
 import Beneficiaires from '../../Components/Program/Beneficiaires'
 import Partners from '../../Components/Program/Partners'
 import ClientRepository from '../../repositories/ClientRepository';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import ErrorBoundary from '../../Components/ErrorBoundary'
 import { useRouter } from 'next/router'
 import { ProgramContext } from '../../services/program/program.context'
@@ -20,9 +20,10 @@ const Program = () =>{
   const {slug } = router.query
   const { state,dispatch } = useContext(ProgramContext);
  // const programDetails = useSelector((state) => state.programDetails);
-  const { loading, error, program } = state;
+  const { loading, errorHub, program } = state;
 
   useEffect(() => {
+
     const detailsProgram =  async () => {
       try {
         dispatch({ type: "PROGRAM_DETAILS_REQUEST", payload: slug });
@@ -37,6 +38,7 @@ const Program = () =>{
             : error.message, });
       }
     };
+
     detailsProgram()
   }, [slug,dispatch]);
 
@@ -75,11 +77,4 @@ const Program = () =>{
   )
 }
 
-
-export const getServerSideProps = async ({ locale }) => ({
-
-  props: {
-    ...await serverSideTranslations(locale, ['common']),
-  },
-})
 export default Program

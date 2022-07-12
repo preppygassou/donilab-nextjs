@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import { useRouter } from 'next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 
 const BeneficiairesSections = styled.section`
@@ -68,8 +69,9 @@ margin:1rem;
   .BeneficiairesLogoDescription{
 background-color:#95B71D;
 color:#fff;
-width: 145px;
-    height: 145px;
+width: 150px;
+max-height:100%;
+    min-height: 150px;
     border-radius: 15px;
     display:flex;
     flex-direction:column;
@@ -78,6 +80,7 @@ width: 145px;
     p{
 width:100%;
 padding: 0.3rem;
+/* font-size:14px; */
     word-break: break-word
     }
 }
@@ -116,7 +119,8 @@ color:#fff;
 `;
 
 function Beneficiaires({program}) {
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   
 
   return (

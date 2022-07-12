@@ -198,7 +198,8 @@ const Contactfunction =(stylecontact) =>{
 const Navbar = (props) => {
 
   const {toggle} = props
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
 
   const { state } = useContext(GeneralContext);
@@ -228,7 +229,7 @@ const Navbar = (props) => {
             <div className="check-item"></div>
             </NavMenuLinks>
            ))}
-           <LanguageSelector current={locale}/>
+           <LanguageSelector />
       </NavMenu>
       {/* <NavMenu>
            {

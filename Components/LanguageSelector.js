@@ -1,12 +1,13 @@
 import React, { useContext ,useState} from "react";
-import i18next from 'i18next'
+import Cookies from 'js-cookie';
 import { CurrentLangContext } from "../Context/CurrentLangContext";
-import { useRouter } from "../node_modules/next/router";
 
-const LanguageSelector = ({current}) => {
+const LanguageSelector = ({}) => {
   //const { t, i18n } = useTranslation('common')
-  const router = useRouter()
-/*   const {locale} = useRouter()
+  const { state,dispatch } = useContext(CurrentLangContext);
+    const {locale} =  state
+/*   const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   const {SetCurrentLang} = value */
   //const [CurrentLang, SetCurrentLang] = useState(window.localStorage.i18nextLng)
   //console.log("current lan" + CurrentLang)
@@ -14,7 +15,7 @@ const LanguageSelector = ({current}) => {
   /* const changeLanguage = (event) => {
     i18n.changeLanguage(event.target.value)
   } */
-  const changeLanguageToFR = () => {
+ /*  const changeLanguageToFR = () => {
     i18next.changeLanguage('fr')
     SetCurrentLang('fr') 
 
@@ -22,9 +23,12 @@ const LanguageSelector = ({current}) => {
   const changeLanguageToEN = () => {
     i18next.changeLanguage('en')
    SetCurrentLang('en')   
-  }
+  } */
   const onChangeLanguage = (lang) => {
-    router.push(router.asPath, undefined, { locale: lang })
+   
+    dispatch({ type: lang==="fr" ? 'EN_MODE_OFF' : 'EN_MODE_ON' });
+    //const newLangMode = !locale;
+    Cookies.set('locale', lang==="en" ? 'en' : 'fr');
 }
 
   return ( 
@@ -35,12 +39,12 @@ const LanguageSelector = ({current}) => {
     </div> */}
     {/* <button onClick={()=>i18next.changeLanguage('fr')}> */}
     {
-      current==="en" ?
-      <button onClick={()=>{onChangeLanguage("fr")}}>
+      locale==="en" ?
+      <button onClick={()=>onChangeLanguage("fr")}>
       
       <img src={"/static/assets/svg/fr.svg"} alt=""/>
     </button>
-      : <button onClick={()=>{onChangeLanguage("en")}}>
+      : <button onClick={()=>onChangeLanguage("en")}>
     
       <img src={"/static/assets/svg/en.svg"} alt=""/>
   

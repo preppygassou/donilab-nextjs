@@ -126,7 +126,9 @@ function Dropdown({isOpen,toggle}) {
 
   const { state } = useContext(GeneralContext);
   const {loading, error,generals} =  state
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
+  
 
   return (
       <DropdownContainer isOpen={isOpen} onClick={toggle}>

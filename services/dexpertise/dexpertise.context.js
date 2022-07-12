@@ -1,4 +1,5 @@
-import React, {  createContext, useReducer, useEffect } from "react";
+import React, {  createContext, useReducer, useEffect, useContext } from "react";
+import { CurrentLangContext } from "~/Context/CurrentLangContext";
 import ClientRepository from '../../repositories/ClientRepository';
 
 
@@ -41,8 +42,10 @@ function reducer(state , action) {
   }
 }
 
-export const DexpertiseContextProvider = ({ children,locale }) => {
+export const DexpertiseContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { state:stateLocale } = useContext(CurrentLangContext);
+    const {locale} =  stateLocale
 
   const listDexpertises = async (locale) => {
     try {

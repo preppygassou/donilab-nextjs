@@ -1,14 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components';
-import Slider from "react-slick";
-import { useDispatch, useSelector } from 'react-redux';
-import { eventimage, listevents } from '../store/actions/EventActions';
 import DoniEventContent from './DoniEventContent';
 import MessageBox from './MessageBox';
 import Dots from './Dots';
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import { EventContext } from '../services/event/event.context';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 
 
@@ -161,14 +157,15 @@ right: -150px;
 
 
 export default function DoniEvent() {
-  const { t } = useTranslation('common')
+  
   const { state } = useContext(EventContext);
 
   const { loading, error, events } = state;
   const [current, setCurrent] = useState(0);
   const length = events.length;
   const timeout = useRef(null);
-  const { locale } = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
 
   useEffect(() => {
@@ -206,7 +203,7 @@ export default function DoniEvent() {
   return (
     <DoniEventSection>
       <DoniEventHead>
-        <h1>{t("nos")} {t("eventitile")}</h1>
+        <h1>{locale==="en"? "OUR EVENTS":"NOS ÉVÈNEMENTS"}</h1>
       </DoniEventHead>
 
       {

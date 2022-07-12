@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 const DomaineOfHubSection = styled.section`
 padding:4rem 8rem;
@@ -213,7 +214,8 @@ function DomaineOfIntervation({ hub }) {
     indexPlus = index + 1;
     return indexPlus;
   }
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
 
 
@@ -248,8 +250,9 @@ function DomaineOfIntervation({ hub }) {
                   tabIndex={indexCount(index)}
                 >
 
-                  <span className="title-wrapper">{tab.Title_domaine_Intervention}
+                  <span className="title-wrapper">
                     <span className={active === index ? 'plus' : 'minus'}></span>
+                    {tab.Title_domaine_Intervention}
                   </span>
                 </button>
               </h3>

@@ -10,7 +10,7 @@ import { listPosts } from '../store/actions/PostActions'
 /* import Carousel from './Carousel' */
 import Carousel, { slidesToShowPlugin, arrowsPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
-import { useTranslation } from 'next-i18next';
+
 import { CurrentLangContext } from '../Context/CurrentLangContext'
 import { useRouter } from 'next/router';
 import { PostContext } from '../services/post/post.context';
@@ -286,13 +286,14 @@ function SampleNextArrow(props) {
 const BlogSlideSection = () => {
  /*  const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(false) */
-  const { t} = useTranslation('common')
+ 
   const [isloaded, setIsloaded] = useState(false)
   //const postList = useSelector((state) => state.postList);
   //const { loading, error, posts } = postList;
   /* const posts = data.posts; */
 
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   const { state,getPosts } = useContext(PostContext);
  const {posts,loading,error} =  state
 
@@ -358,7 +359,10 @@ const BlogSlideSection = () => {
 }
       </BlogContainer>
       <AllblogBtnsection className="allblog">
-        <a href="https://blog.donilab.org" target="_blank" rel="noopener noreferrer">{t('allactu')}</a>
+        <a href="https://blog.donilab.org" target="_blank" rel="noopener noreferrer">{
+        locale==="en" ? "ALL OURS NEWS":"TOUTES NOS ACTUALITÉS"
+        }
+        </a>
       </AllblogBtnsection>
     </BlogSection>
   )

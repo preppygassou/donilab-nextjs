@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components';
 import { listHubs } from '../../store/actions/HubActions';
 import { useRouter } from 'next/router';
 import MessageBox from '../MessageBox';
+import { HubContext } from '~/services/hub/hub.context';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 
 
@@ -104,17 +106,12 @@ width: 200px;
        }
 `;
 const RelatedHub = ({ hub }) => {
-  const dispatch = useDispatch()
-  const hubList = useSelector((state) => state.hubList)
-  const {locale} = useRouter()
+
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   
-
-
-  const { loading, error, hubs } = hubList;
-
-  useEffect(() => {
-    dispatch(listHubs(locale))
-  }, [dispatch,locale])
+  const { state, dispatch } = useContext(HubContext);
+  const { hubs, loading, error } = state
 
   return (
     <RelatedHubsSection background={hub?"none":"#E4E4E4"}>

@@ -1,4 +1,6 @@
-import React, { createContext, useState, useEffect } from "react";
+import Cookies from 'js-cookie';
+import React, { createContext, useState, useEffect,useReducer } from "react";
+
 
 function setLocalStorage(key, value) {
   try {
@@ -22,17 +24,33 @@ function getLocalStorage(key, initialValue) {
 
 export const CurrentLangContext = createContext({});
 
+const initialState = {
+  locale: Cookies.get('locale') === "en" ? "en" : "fr",
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'EN_MODE_ON':
+      return { ...state, locale: "en" };
+    case 'EN_MODE_OFF':
+      return { ...state, locale: "fr" };
+    default:
+      return state;
+  }
+}
+
 const CurrentLangContextProvider = props => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+ // const [currentLang, SetCurrentLang] = useState(() => getLocalStorage("currentLang",localStorage.currentLang));
+  const value = { state, dispatch };
 
-  const [currentLang, SetCurrentLang] = useState(() => getLocalStorage("currentLang",localStorage.currentLang));
-
-  useEffect(() => {
+ /*  useEffect(() => {
     setLocalStorage("currentLang", currentLang);
-  }, [currentLang]);
+  }, [currentLang]); */
 
 
   return (
-    <CurrentLangContext.Provider value={{currentLang,SetCurrentLang}}>
+    <CurrentLangContext.Provider value={value}>
       {props.children}
     </CurrentLangContext.Provider>
   );

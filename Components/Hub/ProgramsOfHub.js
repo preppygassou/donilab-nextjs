@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 
 const ProgramOfHubSection = styled.section`
@@ -122,14 +123,18 @@ const ProgramOfHubLists = styled.div`
 
 img{
 
-  width:80%;
+  /* width:80%; */
+  vertical-align: middle;
+  border-style: none;
+  max-width: 75%;
   
 }
 
 `;
 
 function ProgramsOfHub({ hub }) {
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   
   return (
     <ProgramOfHubSection>

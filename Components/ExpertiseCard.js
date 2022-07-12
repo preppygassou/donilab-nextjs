@@ -111,7 +111,8 @@ margin-bottom: 0;
 
 function ExpertiseCard({ item }) {
 
-  const { locale } = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
   return (
     <>

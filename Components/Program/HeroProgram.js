@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import parse from "html-react-parser";
 import Dots from '../Dots';
 import { useRouter } from 'next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 const HeroProgramSection = styled.section`
 overflow:hidden;
@@ -197,7 +198,8 @@ function HeroProgram({ program }) {
   const length = program.acf.galerie_programme.length;
   const timeout = useRef(null);
   
-  const { locale } = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
   useEffect(() => {
     const nextSlide = () => {

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components';
 
 
-import { useTranslation } from 'next-i18next';
+
 import { useRouter } from 'next/router';
 import Router, { withRouter } from 'next/router'
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 const ProgramDonilabContent = styled.div`
  -webkit-box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
 -moz-box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
@@ -264,8 +265,9 @@ flex-direction:column;
 
 
 function ProgramInPartner({ programPartnersData,history }) {
-  const { t } = useTranslation('common')
-  const { locale } = useRouter()
+  
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
   return (
     <ProgramDonilabContent className="donilab-program_container">

@@ -1,15 +1,11 @@
+import React from 'react';
 import moment from "moment";
 import { ConfigProvider } from "antd";
-import React from 'react';
-import { appWithTranslation } from 'next-i18next';
 //import DefaultLayout from '../components/layouts/DefaultLayout';
-import { useEffect } from 'react';
 import Layout from "../Components/layouts/Layout";
-import { useRouter } from "../node_modules/next/router";
 import ErrorBoundary from "../Components/ErrorBoundary";
 import { PostContextProvider } from "../services/post/post.context";
 import { ExpertiseContextProvider } from "../services/expertise/expertise.context";
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { HubContextProvider } from "../services/hub/hub.context";
 import { DexpertiseContextProvider } from "../services/dexpertise/dexpertise.context";
 import { GeneralContextProvider } from "../services/general/general.context";
@@ -20,29 +16,29 @@ import { EventContextProvider } from "../services/event/event.context";
 import { ImpactContextProvider } from "../services/impact/impact.context";
 import { AboutContextProvider } from "../services/about/about.context";
 import '../sass/themes/donilab.dark.scss';
+import CurrentLangContextProvider, { CurrentLangContext } from "~/Context/CurrentLangContext";
 
 
 moment.locale("fr");
 
 const MyApp = (props) => {
     const { Component, pageProps } = props;
-    const { locale } = useRouter()
-
-
+   
 
     return (
-        <ConfigProvider locale={locale}>
-            <GeneralContextProvider locale={locale}>
-                <ExpertiseContextProvider locale={locale}>
-                    <PostContextProvider locale={locale}>
-                        <DexpertiseContextProvider locale={locale}>
-                            <PartenaireContextProvider locale={locale}>
-                                <ImpactContextProvider locale={locale}>
-                                    <ProgramContextProvider locale={locale}>
-                                    <ProgramPartnersContextProvider locale={locale}>
-                                        <HubContextProvider locale={locale}>
-                                            <EventContextProvider locale={locale}>
-                                            <AboutContextProvider locale={locale}>
+        <CurrentLangContextProvider>
+        <ConfigProvider /* locale={"FR"} */>
+            <GeneralContextProvider>
+                <ExpertiseContextProvider>
+                    <PostContextProvider>
+                        <DexpertiseContextProvider>
+                            <PartenaireContextProvider>
+                                <ImpactContextProvider>
+                                    <ProgramContextProvider>
+                                    <ProgramPartnersContextProvider>
+                                        <HubContextProvider>
+                                            <EventContextProvider>
+                                            <AboutContextProvider>
 
                                                 <Layout>
                                                     <ErrorBoundary>
@@ -62,18 +58,12 @@ const MyApp = (props) => {
                 </ExpertiseContextProvider>
             </GeneralContextProvider>
         </ConfigProvider>
+        </CurrentLangContextProvider>
 
     );
 
 }
 
-export const getServerSideProps = async ({ locale }) => {
-    return {
-        props: {
-            ...await serverSideTranslations(locale, ['common']),
-        },
-    };
-};
 
-export default appWithTranslation(MyApp);
+export default MyApp;
 

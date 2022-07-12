@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import PartnersSlider from './PartnersSlider'
 import styled from 'styled-components/';
 import { useRouter } from 'next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 const PartnersSectionLogo = styled.div `
 overflow:hidden;
@@ -36,7 +37,8 @@ width: 80px;
 
 
 function Partners({program}) {
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   
 
   return (

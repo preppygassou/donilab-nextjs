@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
 import { useRouter } from 'next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 
 const ActivitySection = styled.div `
@@ -48,7 +49,9 @@ h1{
 padding-left:-0.5em;
 
 }
-
+p{
+  margin-bottom: .2rem;
+}
 `;
 
 
@@ -61,7 +64,8 @@ width: 80px;
 `;
 
 function Activity({program}) {
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   
 
   return (

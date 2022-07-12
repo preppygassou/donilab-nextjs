@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import { useRouter } from 'next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 const HeroSection = styled.section`
 overflow:hidden;
@@ -165,7 +166,8 @@ right: 61vh;
 
 
 const Hero = ({ slides }) => {
-  const { locale } = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
   return (
     <HeroSection>

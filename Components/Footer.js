@@ -188,7 +188,8 @@ function Footer() {
   const {loading, error,generals} =  state
  // const [loading, setLoading] = useState(true)
 
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
 
   return (
     <>

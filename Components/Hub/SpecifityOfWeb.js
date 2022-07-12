@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import styled,{css} from 'styled-components'
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
+import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 
 
@@ -203,7 +204,8 @@ width: 80px;
 
 
 function SpecifityOfWeb({hub}) {
-  const {locale} = useRouter()
+  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale
   
   return (
     <SpecifitySection>

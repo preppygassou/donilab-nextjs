@@ -1,4 +1,5 @@
-import React, {  createContext, useReducer, useEffect } from "react";
+import React, {  createContext, useReducer, useEffect, useContext } from "react";
+import { CurrentLangContext } from "~/Context/CurrentLangContext";
 import ClientRepository from '../../repositories/ClientRepository';
 
 const {
@@ -34,8 +35,10 @@ function reducer(state , action) {
   }
 }
 
-export const ProgramPartnersContextProvider = ({ children,locale }) => {
+export const ProgramPartnersContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { state:stateLocale } = useContext(CurrentLangContext);
+    const {locale} =  stateLocale
   const ProgrammestypesWithPartnersId = 49;
 
 
