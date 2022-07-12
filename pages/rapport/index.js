@@ -150,6 +150,31 @@ const Rapport = () =>{
         </Cover>
 
       </Container>
+      <Container>
+        <Cover>
+          <img src={"/static/assets/Rapport_activite_2019-01.png"} alt="RAPPORT 2019" />
+        </Cover>
+        <DownloadCtn>
+          <h1>{locale==="en"?"REPORT":"RAPPORT"} 2019</h1>
+          <DownLoadBtn href="https://bit.ly/Rapport_Donilab_2019" target="_blank" className="allblog">
+             {locale==="en"?"Download":"Télecharger"}
+          </DownLoadBtn>
+        </DownloadCtn>
+
+      </Container>
+      <Container className="revers">
+        
+        <DownloadCtn>
+          <h1>{locale==="en"?"REPORT":"RAPPORT"} 2018</h1>
+          <DownLoadBtn href="https://bit.ly/Rapport_Donilab_2018" target="_blank" className="allblog">
+           {locale==="en"?"Download":"Télecharger"}
+          </DownLoadBtn>
+        </DownloadCtn>
+        <Cover>
+          <img src={"/static/assets/Rapport_d_activite_2018-01.png"} alt="RAPPORT 2018" />
+        </Cover>
+
+      </Container>
 
     </RapportPage>
     </>
