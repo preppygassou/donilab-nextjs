@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import styled, { css } from 'styled-components';
+import Layout from '~/Components/layouts/Layout';
 import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
 export const RapportPage = styled.section`
@@ -120,7 +121,7 @@ const Rapport = () =>{
   const { state:stateLocale } = useContext(CurrentLangContext);
   const {locale} =  stateLocale
   return (
-    <>
+    <Layout>
     <RapportPage>
       <HeroRapport>
         <h1> {locale==="en"?"ANNUAL REPORT":"RAPPORT ANNUEL"}</h1>
@@ -177,7 +178,7 @@ const Rapport = () =>{
       </Container>
 
     </RapportPage>
-    </>
+    </Layout>
   )
 }
 

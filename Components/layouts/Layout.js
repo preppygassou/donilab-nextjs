@@ -1,17 +1,18 @@
 import React from 'react'
+import ClientRepository from '~/repositories/ClientRepository';
 import Footer from '../Footer'
 import Header from '../Header'
 //
 import Head from './modules/Head';
 
 
-const Layout = ({ children }) => {
+const Layout = ({generales, children }) => {
   return (
     <>
       <Head />
       <Header />
       {children}
-      <Footer />
+      <Footer generals={generales}/>
 
     </>
   )

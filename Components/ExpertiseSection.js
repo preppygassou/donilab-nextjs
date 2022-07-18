@@ -108,7 +108,7 @@ span{
 
 `;
 
-function ExpertiseSection({ expertise }) {
+function ExpertiseSection({ expertise,expertises }) {
   const { state:stateLocale } = useContext(CurrentLangContext);
   const {locale} =  stateLocale
   return (
@@ -141,7 +141,7 @@ function ExpertiseSection({ expertise }) {
         }
        
       </SectionTitle>
-      <ExpertiseCards />
+      {expertises &&<ExpertiseCards expertises={expertises} />}
     </ExpertisesContainerWrapper>
   )
 }

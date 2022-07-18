@@ -487,7 +487,7 @@ function Hubs() {
 
 
   return (
-    <>
+    <Layout>
       <HubPage>
         <HeroHub>
           <HubheroparalaxeLeft src={"/static/assets/svg/paralaxetopherohub.svg"} alt="" />
@@ -604,7 +604,7 @@ function Hubs() {
         </HubsSection>
 
       </HubPage>
-    </>
+    </Layout>
   )
 }
 

@@ -194,7 +194,7 @@ function Footer() {
   return (
     <>
     {
-      loading ? <div className='loading-overlay' ><div className="loading"></div></div> : 
+      /* loading ? <div className='loading-overlay' ><div className="loading"></div></div> : */ 
       
       generals && <FooterContainer>
       

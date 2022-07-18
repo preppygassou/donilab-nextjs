@@ -43,23 +43,22 @@ box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
 `;
 
 
-function ExpertiseCards() {
+function ExpertiseCards({expertises}) {
 
   const { state } = useContext(ExpertiseContext);
-  const {loading, error, expertises} =  state
+  const {loading, error/* , expertises */} =  state
 
 
   return (
     <ExpertisesContainer className='expertise-container'>
   {
-    loading? <div className='loading-overlay' ><div className="loading"></div></div>:<>
-    {expertises.map((item, index) => (
+    /* loading? <div className='loading-overlay' ><div className="loading"></div></div>: */<>
+    {expertises&&expertises.map((item, index) => (
         <ExpertiseCard item={item} index={index} />
       ))}
     </>
   }
       
-
     </ExpertisesContainer> 
   )
 }

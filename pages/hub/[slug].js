@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios'
 import { HubContext } from '~/services/hub/hub.context';
 import ClientRepository from '../../repositories/ClientRepository';
+import Layout from '~/Components/layouts/Layout';
 
 
 const HubSection = styled.section`
@@ -60,7 +61,7 @@ function Hub() {
   }, [slug]);
 
   return (
-    <>
+    <Layout>
 {
  loading?<div className='loading-overlay' ><div className="loading"></div></div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> : hub&&(
     <HubSection>
@@ -88,7 +89,7 @@ function Hub() {
   </HubSection>
   )
 }
-    </>
+</Layout>
   )
 }
 

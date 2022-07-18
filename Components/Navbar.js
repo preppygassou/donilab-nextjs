@@ -202,9 +202,9 @@ const Navbar = (props) => {
   const {locale} =  stateLocale
 
 
-  const { state } = useContext(GeneralContext);
+ /*  const { state } = useContext(GeneralContext);
   const {loading, error,generals} =  state
-
+ */
 
 
   return (

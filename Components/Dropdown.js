@@ -124,8 +124,8 @@ width:100%;
 
 function Dropdown({isOpen,toggle}) {
 
-  const { state } = useContext(GeneralContext);
-  const {loading, error,generals} =  state
+ /*  const { state } = useContext(GeneralContext);
+  const {loading, error,generals} =  state */
   const { state:stateLocale } = useContext(CurrentLangContext);
   const {locale} =  stateLocale
   

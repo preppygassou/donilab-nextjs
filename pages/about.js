@@ -276,7 +276,7 @@ const About = () => {
   }, [dispatch, locale]) */
 
   return (
-    <>
+    <Layout>
       {/*  <Helmet>
         <title>Donilab | About</title>
         <meta name="description" content="A propos de Donilab" />
@@ -355,7 +355,7 @@ const About = () => {
           </ErrorBoundary>
         </AboutWrapper>
       </AboutContainer>
-    </>
+      </Layout>
   )
 }
 

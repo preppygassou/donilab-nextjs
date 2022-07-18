@@ -4,10 +4,12 @@ import ProgramInPartner from '../Components/ProgramInPartner';
 import ProgramByDonilab from '../Components/ProgramDonilab';
 import SectionTitle from "../Components/SectionTitle";
 import MessageBox from '../Components/MessageBox';
-
+import ClientRepository from '~/repositories/ClientRepository';
 import { ProgramContext } from '../services/program/program.context';
 import { ProgramPartnersContext } from '../services/partner/partner.context';
 import { CurrentLangContext } from '~/Context/CurrentLangContext';
+import { getProgramByprogrammestypes } from '~/utilities/program-helper';
+import Layout from '~/Components/layouts/Layout';
 
 const SectionTitlell =styled.div`
 
@@ -208,22 +210,24 @@ flex-direction:column;
 const ProgrammestypesOfDonilab = 48;
 const ProgrammestypesWithPartnersId = 49;
 
-function Programs() {
+function Programs({donilab,partners,generales}) {
  
-  const { state:statepartners } = useContext(ProgramPartnersContext);
+/*   const { state:statepartners } = useContext(ProgramPartnersContext);
   const { state ,listProgramsTypeOfDonilab} = useContext(ProgramContext);
-
+ */
   const { state:stateLocale } = useContext(CurrentLangContext);
   const {locale} =  stateLocale
-
+/* 
   const { loadingprogramsbydonilab,errorloadingprogrambydonilab,programsByDonilab } = state;
   const { loading,error,programsWithPartners } = statepartners;
+ */
+ // const donilab = getProgramByprogrammestypes(programs, ProgrammestypesOfDonilab);
+ // const partners = getProgramByprogrammestypes(programs, ProgrammestypesWithPartnersId);
+//console.log(programs)
 
-
-
-  useEffect(() => {
+ /*  useEffect(() => {
    listProgramsTypeOfDonilab(ProgrammestypesOfDonilab)
-  }, [ProgrammestypesOfDonilab])
+  }, [ProgrammestypesOfDonilab]) */
 
 /*   useEffect(() => {
    listProgramsTypeWithPartner(ProgrammestypesWithPartnersId)
@@ -231,9 +235,8 @@ function Programs() {
 
 
   return (
-    <>
-    <ProgramContainer>
-      
+    <Layout>
+    <ProgramContainer>  
       <HeroProgram>
       <ProgramheroparalaxeLeft src={"/static/assets/svg/paralaxetopheroprogram.svg"} alt=""/>
         <ProgramheroparalaxeRight src={"/static/assets/svg/paralaxebottomheroprogram.svg"} alt=""/>
@@ -255,9 +258,9 @@ function Programs() {
         <ProgramSectionTitle>
         {locale==='en'? "INITIATED BY DONILAB":"INITIÉS PAR DONILAB"}
         </ProgramSectionTitle>
-       { loadingprogramsbydonilab ? <div className='loading-overlay' ><div className="loading"></div></div> :errorloadingprogrambydonilab ? <MessageBox>erreur de chargement</MessageBox> :
+       { /* loadingprogramsbydonilab ? <div className='loading-overlay' ><div className="loading"></div></div> :errorloadingprogrambydonilab ? <MessageBox>erreur de chargement</MessageBox> : */
     
-         <ProgramByDonilab ProgramData={programsByDonilab}/>
+         <ProgramByDonilab ProgramData={donilab}/>
         
          }
         </ProgramByDonilabSection>
@@ -267,15 +270,33 @@ function Programs() {
         {locale==="en"? "IN PARTNERSHIP":"EN PARTENARIAT"}
         </ProgramSectionTitle>
         {
-          loading? <div className='loading-overlay' ><div className="loading"></div></div> :error ? <MessageBox>erreur de chargement</MessageBox> :
-          <ProgramInPartner programPartnersData={programsWithPartners}/>
+          /* loading? <div className='loading-overlay' ><div className="loading"></div></div> :error ? <MessageBox>erreur de chargement</MessageBox> : */
+          <ProgramInPartner programPartnersData={partners}/>
           }
         </PrograminParnterSection>
     </ProgramContainer>
-    </>
+    </Layout>
   )
 }
 
+export async function getServerSideProps({locale}) {
+ 
+  const ProgrammestypesOfDonilab = 48;
+const ProgrammestypesWithPartnersId = 49;
+  //const types = [ProgrammestypesOfDonilab,]
+  const resdonilab = await ClientRepository.get(
+    `/programs?programmestypes=${ProgrammestypesOfDonilab}&lang=${locale}`
+  );
+  const res = await ClientRepository.get(
+    `/programs?programmestypes=${ProgrammestypesWithPartnersId}&lang=${locale}`
+  );
 
+  return {
+    props: {
+      donilab:resdonilab.data,
+      partners:res.data,
+    }, // will be passed to the page component as props
+  }
+}
 
 export default Programs

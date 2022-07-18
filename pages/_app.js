@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from "moment";
 import { ConfigProvider } from "antd";
+import NextNProgress from "nextjs-progressbar";
 //import DefaultLayout from '../components/layouts/DefaultLayout';
 import Layout from "../Components/layouts/Layout";
 import ErrorBoundary from "../Components/ErrorBoundary";
@@ -23,43 +24,45 @@ moment.locale("fr");
 
 const MyApp = (props) => {
     const { Component, pageProps } = props;
-   
+
 
     return (
-        <CurrentLangContextProvider>
-        <ConfigProvider /* locale={"FR"} */>
-            <GeneralContextProvider>
-                <ExpertiseContextProvider>
-                    <PostContextProvider>
-                        <DexpertiseContextProvider>
-                            <PartenaireContextProvider>
-                                <ImpactContextProvider>
-                                    <ProgramContextProvider>
-                                    <ProgramPartnersContextProvider>
-                                        <HubContextProvider>
-                                            <EventContextProvider>
-                                            <AboutContextProvider>
+        <>
+            <NextNProgress />
+            <CurrentLangContextProvider>
+                <ConfigProvider /* locale={"FR"} */>
+                    <GeneralContextProvider>
+                    <ExpertiseContextProvider>
+                        {/* <PostContextProvider> */}
+                        {/* <DexpertiseContextProvider> */}
+                        {/* <PartenaireContextProvider> */}
+                        {/*  <ImpactContextProvider> */}
+                        {/* <ProgramContextProvider> */}
+                        {/* <ProgramPartnersContextProvider> */}
+                        <HubContextProvider>
+                            <AboutContextProvider>
+                                <EventContextProvider>
 
-                                                <Layout>
-                                                    <ErrorBoundary>
-                                                        <Component {...pageProps} />
-                                                    </ErrorBoundary>
-                                                </Layout>
 
-                                            </AboutContextProvider>
-                                            </EventContextProvider>
-                                        </HubContextProvider>
-                                    </ProgramPartnersContextProvider>
-                                    </ProgramContextProvider>
-                                </ImpactContextProvider>
-                            </PartenaireContextProvider>
-                        </DexpertiseContextProvider>
-                    </PostContextProvider>
-                </ExpertiseContextProvider>
-            </GeneralContextProvider>
-        </ConfigProvider>
-        </CurrentLangContextProvider>
+                                    <ErrorBoundary>
+                                        <Component {...pageProps} />
+                                    </ErrorBoundary>
 
+
+                                </EventContextProvider>
+                            </AboutContextProvider>
+                        </HubContextProvider>
+                        {/*  </ProgramPartnersContextProvider> */}
+                        {/* </ProgramContextProvider> */}
+                        {/*  </ImpactContextProvider> */}
+                        {/*  </PartenaireContextProvider> */}
+                        {/*  </DexpertiseContextProvider> */}
+                        {/* </PostContextProvider> */}
+                    </ExpertiseContextProvider>
+                    </GeneralContextProvider>
+                </ConfigProvider>
+            </CurrentLangContextProvider>
+        </>
     );
 
 }

@@ -100,14 +100,14 @@ span{
 }
 
 `; */
-function ImpactSection() {
+function ImpactSection({impacts}) {
 
 
   const { state:stateLocale } = useContext(CurrentLangContext);
   const {locale} =  stateLocale
 
-  const { state } = useContext(ImpactContext);
-  const {impacts,loading,error} =  state
+  /* const { state } = useContext(ImpactContext);
+  const {impacts,loading,error} =  state */
    
   return (
     <ImpactSectionContainer>
@@ -121,7 +121,7 @@ function ImpactSection() {
            }
       </SectionTitle>
       <ImpactWrapper>
-        {loading ? <div className='loading-overlay' ><div className="loading"></div></div> : impacts.map(impact => (
+        {/* loading ? <div className='loading-overlay' ><div className="loading"></div></div> : */ impacts.map(impact => (
           <ImpactCard key={impact.id}>
             <img src={impact.fimg_url} alt="" />
             <h1>{impact.title.rendered}</h1>

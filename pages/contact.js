@@ -6,12 +6,10 @@ import dynamic from 'next/dynamic';
 import { GeneralContext } from "../services/general/general.context";
 import { CurrentLangContext } from "~/Context/CurrentLangContext";
 const ContactPage = styled.section`
-
 `;
 
 const HeroContact = styled.div`
   text-align:left;
-  
   background-color: #2755a1;
   padding:10rem 10rem 7rem 10rem;
   h1 {
@@ -185,7 +183,7 @@ function Contact() {
   const {locale} =  stateLocale
 
   return (
-    <>
+    <Layout>
       <ContactPage>
         {
           loading ? <div style={{ height: '50vh' }}> <div className="loading" />  </div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> : <>
@@ -261,15 +259,13 @@ function Contact() {
                     </FooterSocialLink>
                   </FooterSocial>
                 </SocialLinks>
-
-
               </ContactInfoContainer>
 
             </ContactSection>
           </>
         }
       </ContactPage>
-    </>
+    </Layout>
   );
 }
 

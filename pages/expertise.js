@@ -212,7 +212,7 @@ function Expertise() {
   const {expertises,loading,error} =  state
 
   return (
-    <>
+    <Layout>
     <ExpertiseContainer>
         <ExpertiseContainerWrapper>
         <ExpertiseHero>
@@ -305,7 +305,7 @@ function Expertise() {
       </AllExpertisesSection>
       </ExpertiseContainerWrapper>
     </ExpertiseContainer>
-    </>
+    </Layout>
   )
 }
 

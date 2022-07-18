@@ -9,9 +9,19 @@ export const customHeaders = {
 
 const baseURL = `${clientDomain}`;
 
-const api = axios.create({
+export default axios.create({
     baseURL,
+    headers: customHeaders,
   });
 
-  export default api;
+ // export default api;
+
+  export const serializeQuery = query => {
+    return Object.keys(query)
+        .map(
+            key =>
+                `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`
+        )
+        .join('&');
+};
 

@@ -299,7 +299,7 @@ function ProgramInPartner({ programPartnersData,history }) {
       </div> */}
 
       {
-        programPartnersData && programPartnersData.map((program) => (
+        programPartnersData && programPartnersData.length > 0 && programPartnersData.map((program) => (
           <OneOfProgramDonilab className='donilab-program-card' key={program.id}>
              <div className='donilab-program_thumnail'>
             <img className='card-img-top' src={program.acf.logo_officiel.url ? program.acf.logo_officiel.url : "/static/assets/dummy.png"} alt={"programme image"} />

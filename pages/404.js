@@ -1,6 +1,7 @@
 import React from "react";
 import Link from 'next/link';
 import styled from 'styled-components';
+import Layout from "~/Components/layouts/Layout";
 
 const NotFoundConatiner = styled.div`
   main {
@@ -117,6 +118,7 @@ main #g6219 {
 
 function Error() {
   return (
+    <Layout>
     <NotFoundConatiner>
       <main>
         <svg viewBox="0 0 541.17206 328.45184" height="328.45184" width="541.17206" id="svg2" version="1.1">
@@ -324,6 +326,7 @@ function Error() {
       </main>
 
     </NotFoundConatiner>
+    </Layout>
   );
 }
 

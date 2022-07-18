@@ -43,17 +43,17 @@ box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
 `;
 
 
-function ExpertiseCards() {
+function ExpertiseCards({dexpertises}) {
 
-  const { state } = useContext(DexpertiseContext);
-  const {dexpertises,loading,error} =  state
+ /*  const { state } = useContext(DexpertiseContext);
+  const {dexpertises,loading,error} =  state */
  
 
 
   return (
         <ExpertisesContainer>
           {
-          loading ? <div className='loading-overlay' ><div className="loading"></div></div> : dexpertises.map((item,index)=>(
+          /* loading ? <div className='loading-overlay' ><div className="loading"></div></div> : */ dexpertises.map((item,index)=>(
             <ExpertiseCard item={item} index={index}/>
               
             ))}

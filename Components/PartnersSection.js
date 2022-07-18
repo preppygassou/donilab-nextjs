@@ -14,11 +14,11 @@ overflow:hidden;
 
 
 
-function PartnersSection() {
+function PartnersSection({partenaires}) {
   const { state:stateLocale } = useContext(CurrentLangContext);
   const {locale} =  stateLocale
-  const { state } = useContext(PartenaireContext);
-  const {partenaires,loading,error} =  state
+  /* const { state } = useContext(PartenaireContext);
+  const {partenaires,loading,error} =  state */
 
 
   return (
@@ -34,7 +34,7 @@ function PartnersSection() {
            }
       </SectionTitle>
       {
-        loading ? <div className='loading-overlay' ><div className="loading"></div></div> :
+        /* loading ? <div className='loading-overlay' ><div className="loading"></div></div> : */
         <PartnersSlider PartnersData={partenaires} />
       }
       

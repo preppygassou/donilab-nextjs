@@ -117,7 +117,7 @@ span{
 
 `;
 
-function ExpertiseSection({expertise}) {
+function ExpertiseSection({expertise,dexpertises}) {
   return (
     <ExpertisesContainerWrapper expertise={expertise}>
         <CircleAfterHeroDiv expertise={expertise} className="circleafterhero">
@@ -126,7 +126,7 @@ function ExpertiseSection({expertise}) {
       <SectionTitletest>
           <img src={"/static/assets/logodolibalexpertise.svg"} alt="" />
         </SectionTitletest>
-      <ExpertiseCards/>  
+      <ExpertiseCards dexpertises={dexpertises}/>  
     </ExpertisesContainerWrapper>
   )
 }

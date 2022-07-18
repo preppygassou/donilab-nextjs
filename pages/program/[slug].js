@@ -12,17 +12,18 @@ import ClientRepository from '../../repositories/ClientRepository';
 import ErrorBoundary from '../../Components/ErrorBoundary'
 import { useRouter } from 'next/router'
 import { ProgramContext } from '../../services/program/program.context'
+import Layout from '~/Components/layouts/Layout'
 
-const Program = () =>{
+const Program = ({program}) =>{
 
 
   const router = useRouter()
-  const {slug } = router.query
-  const { state,dispatch } = useContext(ProgramContext);
+  /* const {slug } = router.query
+  const { state,dispatch } = useContext(ProgramContext); */
  // const programDetails = useSelector((state) => state.programDetails);
-  const { loading, errorHub, program } = state;
+ // const { loading, errorHub, program } = state;
 
-  useEffect(() => {
+  /* useEffect(() => {
 
     const detailsProgram =  async () => {
       try {
@@ -41,11 +42,11 @@ const Program = () =>{
 
     detailsProgram()
   }, [slug,dispatch]);
-
+ */
 
   return (
-    <>
-    { loading ? <div className='loading-overlay' ><div className="loading"></div></div> : program&& (
+    <Layout>
+    { /* loading ? <div className='loading-overlay' ><div className="loading"></div></div> :  */program&& (
       <div>
     <ErrorBoundary>
       <HeroProgram  program={program}/>
@@ -73,8 +74,22 @@ const Program = () =>{
     </ErrorBoundary>
       </div>
         )}
-    </>
+    </Layout>
   )
 }
+
+export async function getServerSideProps(contex) {
+  console.log(contex)
+  const res = await ClientRepository.get(
+    `/programs?slug=${contex.params.slug}`
+  );
+  console.log(res.data[0])
+  return {
+    props: {
+      program:res.data[0],
+    }, // will be passed to the page component as props
+  }
+}
+
 
 export default Program

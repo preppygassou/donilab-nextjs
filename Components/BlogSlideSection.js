@@ -283,7 +283,7 @@ function SampleNextArrow(props) {
 }
 
 
-const BlogSlideSection = () => {
+const BlogSlideSection = ({posts}) => {
  /*  const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(false) */
  
@@ -294,8 +294,8 @@ const BlogSlideSection = () => {
 
   const { state:stateLocale } = useContext(CurrentLangContext);
   const {locale} =  stateLocale
-  const { state,getPosts } = useContext(PostContext);
- const {posts,loading,error} =  state
+  /* const { state,getPosts } = useContext(PostContext);
+ const {posts,loading,error} =  state */
 
 
 /*   useEffect(() => {
@@ -327,7 +327,7 @@ const BlogSlideSection = () => {
 
         {
 
-          loading ? <div className='loading-overlay' ><div className="loading"></div></div>  :<>
+          /* loading ? <div className='loading-overlay' ><div className="loading"></div></div>  : */<>
           {
             <Carousel
               slidesPerPage={4}
