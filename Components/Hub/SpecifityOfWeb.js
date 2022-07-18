@@ -204,8 +204,7 @@ width: 80px;
 
 
 function SpecifityOfWeb({hub}) {
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  const { locale } = useRouter();
   
   return (
     <SpecifitySection>

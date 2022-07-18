@@ -64,8 +64,9 @@ width: 80px;
 `;
 
 function Activity({program}) {
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+ /*  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale */
+  const { locale } = useRouter();
   
 
   return (

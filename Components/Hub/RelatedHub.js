@@ -2,9 +2,7 @@ import React, { useContext, useEffect } from 'react'
 
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
-import { listHubs } from '../../store/actions/HubActions';
 import { useRouter } from 'next/router';
-import MessageBox from '../MessageBox';
 import { HubContext } from '~/services/hub/hub.context';
 import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
@@ -107,8 +105,7 @@ width: 200px;
 `;
 const RelatedHub = ({ hub }) => {
 
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  const { locale } = useRouter();
   
   const { state, dispatch } = useContext(HubContext);
   const { hubs, loading, error } = state

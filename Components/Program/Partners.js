@@ -37,8 +37,7 @@ width: 80px;
 
 
 function Partners({program}) {
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  const { locale } = useRouter();
   
 
   return (

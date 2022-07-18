@@ -119,9 +119,7 @@ color:#fff;
 `;
 
 function Beneficiaires({program}) {
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
-  
+  const { locale } = useRouter();
 
   return (
     <BeneficiairesSections>

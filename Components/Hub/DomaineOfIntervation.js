@@ -214,8 +214,9 @@ function DomaineOfIntervation({ hub }) {
     indexPlus = index + 1;
     return indexPlus;
   }
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  /* const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale */
+  const { locale } = useRouter();
 
 
 

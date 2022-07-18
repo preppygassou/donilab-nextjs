@@ -80,9 +80,7 @@ function Zones({program}) {
 
   const zonesactive = (zoneactive) => (program.acf.zones.includes(zoneactive) ? "#95b71d" : "none")
   
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
-   
+  const { locale } = useRouter();
     
   return (
     <ZonesSections>

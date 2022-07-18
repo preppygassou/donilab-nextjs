@@ -109,8 +109,7 @@ width: 80px;
 
 
 function Objectifs({program}) {
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  const { locale } = useRouter();
   
   
   return (
