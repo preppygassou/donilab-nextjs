@@ -7,8 +7,6 @@ import ImpactSection from '../Components/ImpactSection';
 import TeamSection from '../Components/TeamSection';
 import PartnersSection from '../Components/PartnersSection';
 import Labelafricinnov from '../Components/Labelafricinnov';
-import MessageBox from '../Components/MessageBox';
-
 import { HubContext } from '../services/hub/hub.context';
 import ClientRepository from '~/repositories/ClientRepository';
 import Layout from '~/Components/layouts/Layout';

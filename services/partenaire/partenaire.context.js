@@ -33,8 +33,9 @@ function reducer(state , action) {
 
 export const PartenaireContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  /* const { state:stateLocale } = useContext(CurrentLangContext);
-    const {locale} =  stateLocale */
+  /* import { useRouter } from "next/router";
+
+const { locale} = useRouter(); */
 
   const listPartenaires = async () => {
     try {

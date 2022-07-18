@@ -1,7 +1,7 @@
 import React, {  createContext, useReducer, useEffect, useContext } from "react";
 import { CurrentLangContext } from "~/Context/CurrentLangContext";
 import ClientRepository from '../../repositories/ClientRepository';
-
+import { useRouter } from "next/router";
 const {
   GENERAL_LIST_SUCCESS,
   GENERAL_LIST_REQUEST,
@@ -102,8 +102,9 @@ function reducer(state , action) {
 
 export const GeneralContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { state:stateLocale } = useContext(CurrentLangContext);
-    const {locale} =  stateLocale
+  
+
+const { locale} = useRouter();
 
   const listgenerals = async (locale) => {
     try {

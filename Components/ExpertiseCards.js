@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import ExpertiseCard from './ExpertiseCard';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { listExpertises } from '../store/actions/ExpertiseActions';
+
 import { CurrentLangContext } from '../Context/CurrentLangContext';
 import { useRouter } from 'next/router';
 import { ExpertiseContext } from '../services/expertise/expertise.context';

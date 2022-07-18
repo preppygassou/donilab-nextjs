@@ -1,7 +1,7 @@
 import React, {  createContext, useReducer, useEffect, useContext } from "react";
 import { CurrentLangContext } from "~/Context/CurrentLangContext";
 import ClientRepository from '../../repositories/ClientRepository';
-
+import { useRouter } from "next/router";
 
 
 export const AboutContext = createContext();
@@ -28,8 +28,9 @@ function reducer(state , action) {
 
 export const AboutContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-   const { state:stateLocale } = useContext(CurrentLangContext);
-    const {locale} =  stateLocale
+   
+
+const { locale} = useRouter();
 
   const getAbouts = async (locale) => {
     try {

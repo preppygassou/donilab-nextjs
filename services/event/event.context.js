@@ -1,6 +1,7 @@
 import React, {  createContext, useReducer, useEffect, useContext } from "react";
 import { CurrentLangContext } from "~/Context/CurrentLangContext";
 import ClientRepository from '../../repositories/ClientRepository';
+import { useRouter } from "next/router";
 
 const {
   EVENT_LIST_SUCCESS,
@@ -61,9 +62,8 @@ function reducer(state , action) {
 }
 
 export const EventContextProvider = ({ children}) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { state:stateLocale } = useContext(CurrentLangContext);
-    const {locale} =  stateLocale
+  const [state, dispatch] = useReducer(reducer, initialState); 
+  const { locale} = useRouter();
 
   const listevents =  async (locale) => {
     try {

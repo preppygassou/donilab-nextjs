@@ -1,6 +1,7 @@
 import React, {  createContext, useReducer, useEffect, useContext } from "react";
 import { CurrentLangContext } from "~/Context/CurrentLangContext";
 import ClientRepository from '../../repositories/ClientRepository';
+import { useRouter } from "next/router";
 
 const {
   HUB_LIST_SUCCESS,
@@ -52,8 +53,9 @@ function reducer(state , action) {
 
 export const HubContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { state:stateLocale } = useContext(CurrentLangContext);
-    const {locale} =  stateLocale
+  
+
+const { locale} = useRouter();
 
   const listHubs = async (locale) => {
     try {

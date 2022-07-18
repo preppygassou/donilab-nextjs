@@ -409,8 +409,9 @@ width: 80px;
 `;
 
 function TeamSection({ initialSlide, about, ishub, hub, home, children }) {
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+ /*  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale */
+  const { locale} = useRouter();
   const [current, setCurrent] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [active, setActive] = useState(0);

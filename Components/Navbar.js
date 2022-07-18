@@ -8,8 +8,6 @@ import { useRouter } from 'next/router';
 import LanguageSelector from './LanguageSelector';
 import { CurrentLangContext } from '../Context/CurrentLangContext';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { listgenerals } from '../store/actions/GeneralActions';
 import NavLink from './NavLink';
 import { GeneralContext } from '../services/general/general.context';
 
@@ -198,8 +196,9 @@ const Contactfunction =(stylecontact) =>{
 const Navbar = (props) => {
 
   const {toggle} = props
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  /* const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale */
+  const { locale} = useRouter();
 
 
  /*  const { state } = useContext(GeneralContext);

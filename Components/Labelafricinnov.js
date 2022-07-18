@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { CurrentLangContext } from '~/Context/CurrentLangContext';
@@ -76,8 +77,9 @@ width:100%;
 }
 `;
 function Labelafricinnov() {
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  /* const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale */
+  const { locale} = useRouter();
   return (
     <LabelAfricinnovContainer >
       <h1>{locale === "en" ?"AFRIC'INNOV LABEL":"LE LABEL AFRIC'INNOV"}</h1>

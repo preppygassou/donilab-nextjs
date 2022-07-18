@@ -1,7 +1,7 @@
 import React, {  createContext, useReducer, useEffect, useContext } from "react";
 import { CurrentLangContext } from "~/Context/CurrentLangContext";
 import ClientRepository from '../../repositories/ClientRepository';
-
+import { useRouter } from "next/router";
 const {
   PROGRAM_LIST_TYPE_FAIL,
   PROGRAM_LIST_TYPE_REQUEST,
@@ -37,8 +37,9 @@ function reducer(state , action) {
 
 export const ProgramPartnersContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { state:stateLocale } = useContext(CurrentLangContext);
-    const {locale} =  stateLocale
+  
+
+const { locale} = useRouter();
   const ProgrammestypesWithPartnersId = 49;
 
 

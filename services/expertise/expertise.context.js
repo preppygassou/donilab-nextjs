@@ -1,7 +1,7 @@
 import React, {  createContext, useReducer, useEffect, useContext } from "react";
 import { CurrentLangContext } from "~/Context/CurrentLangContext";
 import ClientRepository from '../../repositories/ClientRepository';
-
+import { useRouter } from "next/router";
 const {
   EXPERTISE_LIST_SUCCESS,
   EXPERTISE_LIST_REQUEST,
@@ -43,8 +43,9 @@ function reducer(state , action) {
 
 export const ExpertiseContextProvider = ({ children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { state:stateLocale } = useContext(CurrentLangContext);
-    const {locale} =  stateLocale
+  
+
+const { locale} = useRouter();
 
   const listExpertises = async (locale) => {
     try {

@@ -9,6 +9,7 @@ import Layout from '../Components/layouts/Layout';
 import { HubContext } from '../services/hub/hub.context';
 import { AboutContext } from '../services/about/about.context';
 import { CurrentLangContext } from '~/Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 const AboutContainer = styled.div`
 width:100%;
@@ -252,8 +253,9 @@ const About = () => {
   
  // const [abouts, setAbouts] = useState([])
   const [loadingabout, setLonding] = useState(false)
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  /* const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale */
+  const { locale} = useRouter();
   const { state } = useContext(HubContext);
   const {hubs} =  state
 

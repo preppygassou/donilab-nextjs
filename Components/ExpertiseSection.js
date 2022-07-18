@@ -109,8 +109,9 @@ span{
 `;
 
 function ExpertiseSection({ expertise,expertises }) {
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  /* const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale */
+  const { locale} = useRouter();
   return (
     <ExpertisesContainerWrapper expertise={expertise}>
       <CircleAfterHeroDiv expertise={expertise} className="circleafterhero">

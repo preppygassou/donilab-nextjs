@@ -5,6 +5,7 @@ import MessageBox from './MessageBox';
 import Dots from './Dots';
 import { EventContext } from '../services/event/event.context';
 import { CurrentLangContext } from '~/Context/CurrentLangContext';
+import { useRouter } from 'next/router';
 
 
 
@@ -164,8 +165,7 @@ export default function DoniEvent() {
   const [current, setCurrent] = useState(0);
   const length = events.length;
   const timeout = useRef(null);
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  const { locale} = useRouter();
 
 
   useEffect(() => {

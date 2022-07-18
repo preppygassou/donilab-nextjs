@@ -10,6 +10,7 @@ import { ProgramPartnersContext } from '../services/partner/partner.context';
 import { CurrentLangContext } from '~/Context/CurrentLangContext';
 import { getProgramByprogrammestypes } from '~/utilities/program-helper';
 import Layout from '~/Components/layouts/Layout';
+import { useRouter } from 'next/router';
 
 const SectionTitlell =styled.div`
 
@@ -215,8 +216,7 @@ function Programs({donilab,partners,generales}) {
 /*   const { state:statepartners } = useContext(ProgramPartnersContext);
   const { state ,listProgramsTypeOfDonilab} = useContext(ProgramContext);
  */
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  const { locale} = useRouter();
 /* 
   const { loadingprogramsbydonilab,errorloadingprogrambydonilab,programsByDonilab } = state;
   const { loading,error,programsWithPartners } = statepartners;

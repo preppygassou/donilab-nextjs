@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
-import { eventimage } from '../store/actions/EventActions';
 import parse from 'html-react-parser'
-import Carousel from '@brainhubeu/react-carousel';
 
 
 const DoniEventSlider = styled.div`

@@ -1,11 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ExpertiseCard from './ExpertiseCard';
 import styled from 'styled-components';
-import { ExpertiseData } from '../../services/data/ExpertiseData';
-import axios from 'axios';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { listDexpertises } from '../../store/actions/DexpertiseActions';
-import { useRouter } from '../../node_modules/next/router';
+import { useRouter } from 'next/router';
 import { DexpertiseContext } from '../../services/dexpertise/dexpertise.context';
 
 

@@ -2,14 +2,11 @@ import React, { useContext, useEffect } from 'react'
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import SectionTitle from "../Components/SectionTitle";
-import { useDispatch, useSelector } from 'react-redux';
-import { listHubs, listLieuDeshubs } from '../store/actions/HubActions';
 import parse from "html-react-parser";
 import MessageBox from '../Components/MessageBox';
 import ErrorBoundary from '../Components/ErrorBoundary';
- import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import Layout from '../Components/layouts/Layout';
-
 import { HubContext } from '../services/hub/hub.context';
 import { CurrentLangContext } from '~/Context/CurrentLangContext';
 
@@ -469,9 +466,10 @@ font-size: 1rem;
 `;
 
 function Hubs() {
-  
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+
+  /*  const { state:stateLocale } = useContext(CurrentLangContext);
+   const {locale} =  stateLocale */
+  const { locale } = useRouter();
 
   const { state } = useContext(HubContext);
   const { hubs, loading, error } = state
@@ -541,7 +539,7 @@ function Hubs() {
 
                             <HubExploreLink green="true">
                               <Link href={`/hub/${hub.slug}`} >
-                                {locale==="en"? "DISCOVER THE HUB": "DÉCOUVRIR LE HUB"}
+                                {locale === "en" ? "DISCOVER THE HUB" : "DÉCOUVRIR LE HUB"}
                               </Link>
                             </HubExploreLink>
                           </HubBamakoInfo>
@@ -565,7 +563,7 @@ function Hubs() {
                             </div>
                             <HubExploreLink>
                               <Link href={`/hub/${hub.slug}`}>
-                              {locale==="en"? "DISCOVER THE HUB": "DÉCOUVRIR LE HUB"}
+                                {locale === "en" ? "DISCOVER THE HUB" : "DÉCOUVRIR LE HUB"}
                               </Link>
                             </HubExploreLink>
                           </HubSikassoInfo>
@@ -585,7 +583,7 @@ function Hubs() {
                             </div>
                             <HubExploreLink>
                               <Link href={`/hub/${hub.slug}`}>
-                              {locale==="en"? "DISCOVER THE HUB": "DÉCOUVRIR LE HUB"}
+                                {locale === "en" ? "DISCOVER THE HUB" : "DÉCOUVRIR LE HUB"}
                               </Link>
                             </HubExploreLink>
                           </HubSegouInfo>

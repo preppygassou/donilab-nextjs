@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useContext } from 'react'
 import styled, { css } from 'styled-components';
 import Layout from '~/Components/layouts/Layout';
@@ -118,8 +119,7 @@ font-size: 1rem;
 
 const Rapport = () =>{
 
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  const { locale} = useRouter();
   return (
     <Layout>
     <RapportPage>

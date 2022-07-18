@@ -1,16 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
-import Link from 'next/link';
 import SectionTitle from "./SectionTitle"
-import Slider from "react-slick";
-import axios from 'axios'
-import { connect, useDispatch, useSelector } from 'react-redux'
 import Blogcard from "./Blogcard"
-import { listPosts } from '../store/actions/PostActions'
-/* import Carousel from './Carousel' */
 import Carousel, { slidesToShowPlugin, arrowsPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
-
 import { CurrentLangContext } from '../Context/CurrentLangContext'
 import { useRouter } from 'next/router';
 import { PostContext } from '../services/post/post.context';
@@ -292,8 +285,9 @@ const BlogSlideSection = ({posts}) => {
   //const { loading, error, posts } = postList;
   /* const posts = data.posts; */
 
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+ /*  const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale */
+  const { locale} = useRouter();
   /* const { state,getPosts } = useContext(PostContext);
  const {posts,loading,error} =  state */
 

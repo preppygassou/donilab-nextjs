@@ -1,11 +1,14 @@
 import React, { useContext ,useState} from "react";
 import Cookies from 'js-cookie';
 import { CurrentLangContext } from "../Context/CurrentLangContext";
+import { useRouter } from "next/router";
 
 const LanguageSelector = ({}) => {
   //const { t, i18n } = useTranslation('common')
   const { state,dispatch } = useContext(CurrentLangContext);
-    const {locale} =  state
+    //const {locale} =  state
+    const router = useRouter()
+    const { locale } = useRouter();
 /*   const { state:stateLocale } = useContext(CurrentLangContext);
   const {locale} =  stateLocale
   const {SetCurrentLang} = value */
@@ -24,12 +27,22 @@ const LanguageSelector = ({}) => {
     i18next.changeLanguage('en')
    SetCurrentLang('en')   
   } */
+
   const onChangeLanguage = (lang) => {
+    router.push(router.asPath, undefined, { locale: lang })
+    /* if(lang === 'en') {
+        router.push('en')
+    } else {
+        
+        router.push('/fr')
+    } */
+}
+
+/*   const onChangeLanguage = (lang) => {
    
     dispatch({ type: lang==="fr" ? 'EN_MODE_OFF' : 'EN_MODE_ON' });
-    //const newLangMode = !locale;
     Cookies.set('locale', lang==="en" ? 'en' : 'fr');
-}
+} */
 
   return ( 
     <div className="selectorlanguage">

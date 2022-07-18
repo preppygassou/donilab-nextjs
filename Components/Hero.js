@@ -166,8 +166,9 @@ right: 61vh;
 
 
 const Hero = ({ slides }) => {
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  /* const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale */
+  const { locale} = useRouter();
 
   return (
     <HeroSection>

@@ -4,6 +4,7 @@ import SectionTitle from "./SectionTitle";
 import parse from "html-react-parser";
 import { ImpactContext } from "../services/impact/impact.context";
 import { CurrentLangContext } from "~/Context/CurrentLangContext";
+import { useRouter } from "next/router";
 
 
 const ImpactSectionContainer = styled.section`
@@ -103,8 +104,9 @@ span{
 function ImpactSection({impacts}) {
 
 
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  /* const { state:stateLocale } = useContext(CurrentLangContext);
+  const {locale} =  stateLocale */
+  const { locale} = useRouter();
 
   /* const { state } = useContext(ImpactContext);
   const {impacts,loading,error} =  state */

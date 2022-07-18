@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { listHubs } from '../../store/actions/HubActions';
