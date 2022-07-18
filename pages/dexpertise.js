@@ -4,6 +4,7 @@ import ExpertiseSection from '../Components/Dexpertise/ExpertiseSection'
 import Link from 'next/link';
 import parse from "html-react-parser";
 import { ExpertiseContext } from '../services/expertise/expertise.context';
+import ClientRepository from '~/repositories/ClientRepository';
 
 
 const ExpertiseContainer = styled.div `
@@ -205,9 +206,9 @@ transform: rotateY(180deg);
 
 `;
 
-function Dexpertise() {
-  const { state } = useContext(ExpertiseContext);
-  const {expertises,loading,error} =  state
+function Dexpertise({expertises}) {
+ /*  const { state } = useContext(ExpertiseContext);
+  const {expertises,loading,error} =  state */
 
   return (
     <ExpertiseContainer>
@@ -304,6 +305,22 @@ function Dexpertise() {
       </ExpertiseContainerWrapper>
     </ExpertiseContainer>
   )
+}
+
+
+export async function getServerSideProps({locale}) {
+ 
+  const resexpertise = await ClientRepository.get(
+    `/expertises/?lang=${locale}`
+  );
+
+ // console.log(res.data)
+  return {
+    props: {
+      expertises:resexpertise.data,
+      
+    }, // will be passed to the page component as props
+  }
 }
 
 export default Dexpertise
