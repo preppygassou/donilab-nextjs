@@ -83,7 +83,6 @@ export async function getServerSideProps(contex) {
   const res = await ClientRepository.get(
     `/programs?slug=${contex.params.slug}`
   );
-  console.log(res.data[0])
   return {
     props: {
       program:res.data[0],
