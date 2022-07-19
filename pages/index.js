@@ -44,7 +44,7 @@ const Index =({hubs,expertises,blogs,impacts,dexpertises,partners,generales}) =>
 
 
 
-export async function getServerSideProps({req,res,locale}) {
+export async function getStaticProps({req,res,locale}) {
 
  
 
@@ -71,8 +71,8 @@ export async function getServerSideProps({req,res,locale}) {
     `/generale/?lang=${locale}`
   );
 
-  res.setHeader('Cache-Control',
-  'public, s-maxage=20, stale-while-revalidate=59') 
+  /* res.setHeader('Cache-Control',
+  'public, s-maxage=20, stale-while-revalidate=59')  */
  // console.log(res.data)
   return {
     props: {
@@ -84,6 +84,7 @@ export async function getServerSideProps({req,res,locale}) {
       partners:respartners.data,
       generales:resgenerales.data,
     }, // will be passed to the page component as props
+    revalidate: 10,
   }
 }
 
