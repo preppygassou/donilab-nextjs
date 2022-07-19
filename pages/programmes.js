@@ -279,7 +279,7 @@ function Programs({donilab,partners,generales}) {
   )
 }
 
-export async function getServerSideProps({locale}) {
+export async function getStaticProps({locale}) {
  
   const ProgrammestypesOfDonilab = 48;
 const ProgrammestypesWithPartnersId = 49;
@@ -295,7 +295,9 @@ const ProgrammestypesWithPartnersId = 49;
     props: {
       donilab:resdonilab.data,
       partners:res.data,
-    }, // will be passed to the page component as props
+    }, 
+    revalidate: 10,
+    // will be passed to the page component as props
   }
 }
 

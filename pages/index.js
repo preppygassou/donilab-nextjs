@@ -44,8 +44,12 @@ const Index =({hubs,expertises,blogs,impacts,dexpertises,partners,generales}) =>
 
 
 
-export async function getServerSideProps({locale}) {
-  const res = await ClientRepository.get(
+export async function getServerSideProps({req,res,locale}) {
+
+ 
+
+
+  const reshubs = await ClientRepository.get(
     `/hubs/?lang=${locale}`
   );
   const resexpertise = await ClientRepository.get(
@@ -66,10 +70,13 @@ export async function getServerSideProps({locale}) {
   const resgenerales = await ClientRepository.get(
     `/generale/?lang=${locale}`
   );
+
+  res.setHeader('Cache-Control',
+  'public, s-maxage=20, stale-while-revalidate=59') 
  // console.log(res.data)
   return {
     props: {
-      hubs:res.data,
+      hubs:reshubs.data,
       expertises:resexpertise.data,
       dexpertises:resdexpertise.data,
       blogs:resblogs.data,
