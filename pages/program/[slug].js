@@ -79,9 +79,8 @@ const Program = ({program}) =>{
 }
 
 export async function getServerSideProps(contex) {
-  console.log(contex)
   const res = await ClientRepository.get(
-    `/programs?slug=${contex.params.slug}`
+    `/programs?slug=${contex.params.slug}&lang=${contex.locale}`
   );
   return {
     props: {
@@ -89,6 +88,5 @@ export async function getServerSideProps(contex) {
     }, // will be passed to the page component as props
   }
 }
-
 
 export default Program

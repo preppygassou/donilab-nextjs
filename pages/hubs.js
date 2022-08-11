@@ -524,7 +524,7 @@ function Hubs() {
                   <div className="clear"></div>
                   {
                     hubs.map((hub, index) => (
-                      index === 0 ? (
+                      index === 1 ? (
                         <HubBamako key={index}>
                           <Hubbamakoparalaxe src={"/static/assets/svg/paralaxebamakohub.svg"} alt="" />
                           <HubBamakoInfo>
@@ -547,7 +547,7 @@ function Hubs() {
                             <img src={hub.fimg_url} alt="" />
                           </HubBamakoImg>
                         </HubBamako>
-                      ) : index === 1 ? (
+                      ) : index === 2 ? (
                         <HubSikasso key={index}>
                           <Hubsikassoparalaxe src={"/static/assets/svg/paralaxesikassohub.svg"} alt="" />
                           <HubSikassoImg>
@@ -570,7 +570,7 @@ function Hubs() {
 
                         </HubSikasso>
 
-                      ) : (
+                      ) :index === 3 ? (
 
                         <HubSegou key={index}>
                           <Hubbamakoparalaxe src={"/static/assets/svg/paralaxesegouhub.svg"} alt="" />
@@ -591,7 +591,7 @@ function Hubs() {
                             <img src={hub.fimg_url} alt="" />
                           </HubBamakoImg>
                         </HubSegou>
-                      )
+                      ):(<></>)
                     ))
                   }
                 </HubsSectionWrapper>
