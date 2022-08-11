@@ -267,7 +267,8 @@ flex-direction:column;
 function ProgramInPartner({ programPartnersData,history }) {
   
   const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  //const {locale} =  stateLocale
+  const { locale} = useRouter();
 
   return (
     <ProgramDonilabContent className="donilab-program_container">
