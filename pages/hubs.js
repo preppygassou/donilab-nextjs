@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import Layout from '../Components/layouts/Layout';
 import { HubContext } from '../services/hub/hub.context';
 import { CurrentLangContext } from '~/Context/CurrentLangContext';
+import { Colxx } from '~/Components/common/CustomBootstrap';
 
 
 const HubPage = styled.div`
@@ -100,16 +101,57 @@ right:0;
 
 `;
 const HubsSection = styled.section`
-width:100%;
-height:100%;
-@media (max-width:768px){
+/* width:100%;
+height:100%; */
+margin-top:6rem;
+/* @media (max-width:768px){
  margin-top:2vh;
  
+} */
+
+.reverse div:nth-of-type(1) {
+    order: 2;
+  }
+.reverse  {
+  grid-template-columns: 40% 60% !important;
+  }
+.donilab-hub__container{
+  position: relative;
+/* height: 90vh; */
+  top:30vh;
+  height: 450px;
+ margin-bottom:5px;
+max-width: 1200px;
+padding-right: 15px;
+padding-left: 15px;
+margin-right: auto;
+margin-left: auto;
+display: grid;
+grid-template-columns: 60% 40%;
+  @media (max-width: 1200px){
+
+    max-width: 1140px;
+  }
+  @media (max-width: 992px){
+
+    max-width: 960px;
+  }
+  @media (max-width:  768px){
+
+    max-width: 720px;
+  }
+  @media (max-width: 576px){
+
+    max-width: 540px;
+  }
+
+
 }
+
 
 `;
 
-const HubsSectionWrapper = styled.section`
+const HubsSectionWrapper = styled.div`
 
 position:relative;
 .clear{
@@ -123,6 +165,8 @@ position:relative;
     margin-top: 5vh;
 
 }
+//display:grid;
+
 }
 
 `;
@@ -421,18 +465,6 @@ top:19%;
 height: 45vh;
 }
 
-
-/* @media (max-width: 1199px) {
-width: 45vh;
-height: 45vh;
-top:19%;
-}
-
-@media (max-width:991px){
-  width: 40vh;
-height: 40vh;
-}
- */
 @media (max-width:900px){
 width:100%;
 position: static !important;
@@ -520,17 +552,76 @@ function Hubs() {
           <ErrorBoundary>
             {
               loading ? <div className='loading-overlay' ><div className="loading"></div></div> : error ? <div style={{ height: '50vh' }}><MessageBox>erreur de chargement des hubs</MessageBox> </div> :
-                <HubsSectionWrapper>
-                  <div className="clear"></div>
+                <HubsSectionWrapper className='donilab-hubs__container'>
+
+                 {/*  {
+                    hubs.map((hub, index) => (
+                      <div className={`donilab-hub__container ${index === 1 || index === 3 || index === 5 || index === 7 || index === 9 || index === 11 || index === 13 || index === 15 || index === 17 ? "reverse" : ""}`}>
+                        <div className={`"donilab-hub__info" ${index === 1 || index === 4 || index === 7 || index === 10 || index === 13 || index === 16 || index === 19 ? "green" : index === 2 || index === 5 || index === 8 || index === 11 || index === 14 || index === 17 || index === 20 ? "gris" : "blue"}
+                            ${index === 1 || index === 3 || index === 5 || index === 7 || index === 9 || index === 11 || index === 13 || index === 15 || index === 17 || index === 19 ? "right" : "left"}
+                            `}>
+                          <div className="donilab-hub__info-wrap">
+                            <div className="donilab-hub__title">
+                              <h3> {hub.title.rendered}</h3>
+
+                            </div>
+                            <div className="donilab-hub_description">
+                              {parse(hub.content.rendered)}
+                            </div>
+
+                            <div className="donilab-hub__link">
+                              <Link href={`/hub/${hub.slug}`}>
+                                {locale === "en" ? "DISCOVER THE HUB" : "DÉCOUVRIR LE HUB"}
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="donilab-hub__thumbnail">
+                          <img src={hub.fimg_url} alt="" />
+                        </div>
+
+                      </div>
+                    ))
+                  } */}
+                  {/*  {
+                        hubs.map((hub, index) => (
+                          <div className={`donilab-hub__container ${index === 1 || index === 3 || index === 5 || index === 7 || index === 9 || index === 11 || index === 13 || index === 15 || index === 17 ? "reverse" : ""}`}>
+
+                            <div className={`"donilab-hub__info" ${index === 1 || index === 4 || index === 7 || index === 10 || index === 13 || index === 16 || index === 19 ? "green" : index === 2 || index === 5 || index === 8 || index === 11 || index === 14 || index === 17 || index === 20 ? "gris" : "blue"}`}>
+                              <div className="donilab-hub__info-wrap">
+                                <div className="donilab-hub__title">
+                                  <h3> {hub.title.rendered}</h3>
+
+                                </div>
+                                <div className="donilab-hub_description">
+                                  {parse(hub.content.rendered)}
+                                </div>
+
+                                <div className="donilab-hub__link">
+                                  <Link href={`/hub/${hub.slug}`}>
+                                    {locale === "en" ? "DISCOVER THE HUB" : "DÉCOUVRIR LE HUB"}
+                                  </Link>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="donilab-hub__thumbnail">
+                              <img src={hub.fimg_url} alt="" />
+                            </div>
+
+                          </div>
+                        ))
+                      } */}
+
+                  {/*  <div className="clear"></div> */}
                   {
                     hubs.map((hub, index) => (
-                      index === 1 ? (
+                      index === 0 || index === 3 || index === 6 || index === 9 || index === 12 || index === 15 || index === 18 || index === 21 || index === 24 || index === 27  ? (
                         <HubBamako key={index}>
                           <Hubbamakoparalaxe src={"/static/assets/svg/paralaxebamakohub.svg"} alt="" />
                           <HubBamakoInfo>
                             <div>
                               <h1>
-                                Bamako
+                              {hub.title.rendered}
                               </h1>
                             </div>
                             <div className="contenthubinfo">
@@ -547,7 +638,7 @@ function Hubs() {
                             <img src={hub.fimg_url} alt="" />
                           </HubBamakoImg>
                         </HubBamako>
-                      ) : index === 2 ? (
+                      ) : index === 1 || index === 4 || index === 7 || index === 10 || index === 13 || index === 16 || index === 19 || index === 22 || index === 25 || index === 29 ? (
                         <HubSikasso key={index}>
                           <Hubsikassoparalaxe src={"/static/assets/svg/paralaxesikassohub.svg"} alt="" />
                           <HubSikassoImg>
@@ -570,7 +661,7 @@ function Hubs() {
 
                         </HubSikasso>
 
-                      ) :index === 3 ? (
+                      ) :  (
 
                         <HubSegou key={index}>
                           <Hubbamakoparalaxe src={"/static/assets/svg/paralaxesegouhub.svg"} alt="" />
@@ -591,7 +682,7 @@ function Hubs() {
                             <img src={hub.fimg_url} alt="" />
                           </HubBamakoImg>
                         </HubSegou>
-                      ):(<></>)
+                      )
                     ))
                   }
                 </HubsSectionWrapper>
