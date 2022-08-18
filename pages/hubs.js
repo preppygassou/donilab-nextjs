@@ -647,7 +647,7 @@ function Hubs() {
 
                           <HubSikassoInfo>
                             <div>
-                            {hub.title.rendered}
+                              <h1>{hub.title.rendered}</h1>
                             </div>
                             <div className="contenthubinfo">
                               {parse(hub.content.rendered)}
@@ -667,7 +667,7 @@ function Hubs() {
                           <Hubbamakoparalaxe src={"/static/assets/svg/paralaxesegouhub.svg"} alt="" />
                           <HubSegouInfo gris="true">
                             <div>
-                            {hub.title.rendered}
+                              <h1>{hub.title.rendered}</h1>
                             </div>
                             <div className="contenthubinfo">
                               {parse(hub.content.rendered)}
