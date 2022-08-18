@@ -11,32 +11,36 @@ import { HubContext } from '../services/hub/hub.context';
 import ClientRepository from '~/repositories/ClientRepository';
 import Layout from '~/Components/layouts/Layout';
 
-const Index =({hubs,expertises,blogs,impacts,dexpertises,partners,generales}) =>{
-/*   const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale */
+const Index = ({ hubs, expertises, blogs, impacts, dexpertises, partners, generales }) => {
+  /*   const { state:stateLocale } = useContext(CurrentLangContext);
+    const {locale} =  stateLocale */
 
   const { state } = useContext(HubContext);
-  const {/* hubs, */loading,error} =  state
+  const {/* hubs, */loading, error } = state
 
   return (
     <Layout generales={generales}>
       <Hero />
-       { expertises&& expertises.length > 0 && <ExpertiseSection expertises={expertises}/>}
-      
-        { blogs&& blogs.length > 0 && <BlogSlideSection posts={blogs}/>}
-       { impacts&& impacts.length > 0 && <ImpactSection impacts={impacts}/>}
-        {
-         hubs&& hubs.length > 0 &&(
-            hubs.map((hub, index) => (
-              index === 0 && (
-                <TeamSection home="home" hub={hub} />
+      {expertises && expertises.length > 0 && <ExpertiseSection expertises={expertises} />}
 
-              )
-            )) 
-          )
-        }
-      {dexpertises&& dexpertises.length > 0 && <Dexpertise dexpertises={dexpertises}/>}
-       {partners&& partners.length > 0 && <PartnersSection partenaires={partners}/>}
+      {blogs && blogs.length > 0 && <BlogSlideSection posts={blogs} />}
+      {impacts && impacts.length > 0 && <ImpactSection impacts={impacts} />}
+      {
+        hubs && hubs.length > 0 && (
+          hubs.map((hub, index) => (
+            hub.title.rendered === "Hub de Bamako" ? (
+              <TeamSection home="home" hub={hub} />
+            ) : hub.title.rendered === "Bamako Hub" ? (
+              <TeamSection home="home" hub={hub} />
+            ) : hub.title.rendered === "Hub of Bamako" ? (
+              <TeamSection home="home" hub={hub} />
+            ) : <></>
+          ))
+
+        )
+      }
+      {dexpertises && dexpertises.length > 0 && <Dexpertise dexpertises={dexpertises} />}
+      {partners && partners.length > 0 && <PartnersSection partenaires={partners} />}
       <Labelafricinnov />
     </Layout>
   )
@@ -44,9 +48,9 @@ const Index =({hubs,expertises,blogs,impacts,dexpertises,partners,generales}) =>
 
 
 
-export async function getStaticProps({req,res,locale}) {
+export async function getStaticProps({ req, res, locale }) {
 
- 
+
 
 
   const reshubs = await ClientRepository.get(
@@ -73,16 +77,16 @@ export async function getStaticProps({req,res,locale}) {
 
   /* res.setHeader('Cache-Control',
   'public, s-maxage=20, stale-while-revalidate=59')  */
- // console.log(res.data)
+  // console.log(res.data)
   return {
     props: {
-      hubs:reshubs.data,
-      expertises:resexpertise.data,
-      dexpertises:resdexpertise.data,
-      blogs:resblogs.data,
-      impacts:resimpact.data,
-      partners:respartners.data,
-      generales:resgenerales.data,
+      hubs: reshubs.data,
+      expertises: resexpertise.data,
+      dexpertises: resdexpertise.data,
+      blogs: resblogs.data,
+      impacts: resimpact.data,
+      partners: respartners.data,
+      generales: resgenerales.data,
     }, // will be passed to the page component as props
     revalidate: 10,
   }
