@@ -14,6 +14,7 @@ import { ProgramContextProvider } from "../services/program/program.context";
 import { ProgramPartnersContextProvider } from "../services/partner/partner.context";
 import { PartenaireContextProvider } from "../services/partenaire/partenaire.context";
 import { EventContextProvider } from "../services/event/event.context";
+import { RapportContextProvider } from "../services/rapport/rapport.context";
 import { ImpactContextProvider } from "../services/impact/impact.context";
 import { AboutContextProvider } from "../services/about/about.context";
 import '../sass/themes/donilab.dark.scss';
@@ -42,6 +43,7 @@ const MyApp = (props) => {
                         <HubContextProvider>
                             <AboutContextProvider>
                                 <EventContextProvider>
+                                <RapportContextProvider>
 
 
                                     <ErrorBoundary>
@@ -49,6 +51,7 @@ const MyApp = (props) => {
                                     </ErrorBoundary>
 
 
+                                </RapportContextProvider>
                                 </EventContextProvider>
                             </AboutContextProvider>
                         </HubContextProvider>
