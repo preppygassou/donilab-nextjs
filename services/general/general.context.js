@@ -58,8 +58,10 @@ export const initialState = {
 function reducer(state , action) {
   switch (action.type) {
     case GENERAL_LIST_REQUEST:
-      return { loading: true, generals: [
-        {acf:{
+      return { loading: true, 
+        generals: [
+        {
+        acf:{
           doni_about_footer:"",
           infos_contact:[],
           page_contact:[
@@ -87,9 +89,9 @@ function reducer(state , action) {
         description_pagecontact:"",
         link_title:"",
       },
-    ],
+                       ],
           menu:[]
-        }}
+         }}
       ] };
     case GENERAL_LIST_SUCCESS:
       return { loading: false, generals: action.payload };
@@ -104,7 +106,8 @@ export const GeneralContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   
 
-const { locale} = useRouter();
+const params = useParams<{ locale: string; }>()
+  const { locale} = params;
 
   const listgenerals = async (locale) => {
     try {

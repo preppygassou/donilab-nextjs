@@ -63,7 +63,8 @@ function reducer(state , action) {
 
 export const EventContextProvider = ({ children}) => {
   const [state, dispatch] = useReducer(reducer, initialState); 
-  const { locale} = useRouter();
+  const params = useParams<{ locale: string; }>()
+  const { locale} = params;
 
   const listevents =  async (locale) => {
     try {

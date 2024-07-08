@@ -35,7 +35,8 @@ export const PartenaireContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   /* import { useRouter } from "next/router";
 
-const { locale} = useRouter(); */
+const params = useParams<{ locale: string; }>()
+  const { locale} = params; */
 
   const listPartenaires = async () => {
     try {

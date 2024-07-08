@@ -1,26 +1,48 @@
 
 
-export const ImpactData = [
+export const ImpactData = 
+[
   {
-    icon: "/static/assets/svg/icon-14.svg" , 
+    id:"1",
+    image: {
+      url:"/assets/svg/icon-14.svg"
+    } , 
     total: '81', 
-    description: 'Entreprises Incubés et accélérées depuis 2015', 
+    description: {
+      fr:'Entreprises Incubés et accélérées depuis 2015',
+      en:'Entreprises Incubés et accélérées depuis 2015',
+    }, 
   },
-  {
-    icon: "/static/assets/svg/icon-15.svg", 
+  {id:"2",
+    image: {
+      url:"/assets/svg/icon-15.svg"
+    }, 
     total: '74', 
-    description: 'Emplois créés par les entreprises accompagnées ', 
+    description: {
+      fr:'Emplois créés par les entreprises accompagnées ',
+      en:'Emplois créés par les entreprises accompagnées ',
+    }, 
   },
   {
-    icon: "/static/assets/svg/icon-16.svg", 
+    id:"3",
+    image: {
+      url:"/assets/svg/icon-16.svg"
+    }, 
     total: '830', 
-    description: 'Millions de francs CFA levés par les entreprises incubées ', 
+    description: {
+      fr:'Millions de francs CFA levés par les entreprises incubées ',
+      en:'Millions de francs CFA levés par les entreprises incubées ',
+    }, 
   },
   {
-    icon: "/static/assets/svg/icon-17.svg", 
+    id:"4",
+    image: {
+      url:"/assets/svg/icon-17.svg"
+    }, 
     total: '30', 
-    description: 'Evénements organisés', 
-  },
-  
- 
+    description: {
+      fr:'Evénements organisés',
+      en:'Evénements organisés',
+    }, 
+  }
 ]

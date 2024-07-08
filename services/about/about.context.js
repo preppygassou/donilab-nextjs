@@ -30,7 +30,8 @@ export const AboutContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
    
 
-const { locale} = useRouter();
+const params = useParams<{ locale: string; }>()
+  const { locale} = params;
 
   const getAbouts = async (locale) => {
     try {

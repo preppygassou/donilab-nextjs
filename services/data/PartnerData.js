@@ -1,38 +1,70 @@
+import { url } from "inspector";
 
 export const PartnersData = [
   {
-    image: "/static/assets/partners/WorldBank.png" , 
-    title: 'banque Mondial', 
+    id:"1",
+    logo: {
+      url:"/assets/partners/WorldBank.png"
+    } , 
+    name: {
+      fr:'Banque Mondial',
+      en:""
+    }, 
     
   },
   {
-    image: "/static/assets/partners/Logo_OIF.png", 
-    title: 'la francophone', 
+    id:"2",
+    logo: {
+      url:"/assets/partners/Logo_OIF.png"
+    }, 
+    name: {
+      fr:"La francophone",
+      en:""
+    }, 
     
   },
   {
-    image: "/static/assets/partners/AfricInnov.png", 
-    title: 'africinnov', 
+    id:"3",
+    logo: {
+      url:"/assets/partners/AfricInnov.png"
+    }, 
+    name:{
+      fr:"Africinnov",
+      en:""
+    }, 
     
   },
   {
-    image: "/static/assets/partners/index.png", 
-    title: 'ada', 
+    id:"4",
+    logo: {
+      url:"/assets/partners/index.png"
+    }, 
+    name: {
+      fr:"Ada",
+      en:""
+    }, 
     
   },
   {
-    image: "/static/assets/partners/AfricInnov.png", 
-    title: 'ada', 
+    id:"6",
+    logo:{
+      url:"/assets/partners/AfricInnov.png"
+    }, 
+    name: {
+      fr:"Ada",
+      en:""
+    }, 
     
   },
   {
-    image: "/static/assets/partners/AfricInnov.png", 
-    title: 'ada', 
-    
-  },
-  {
-    image: "/static/assets/partners/WorldBank.png", 
-    title: 'ada', 
+    id:"7",
+    logo:{
+      url:"/assets/partners/WorldBank.png"
+    }, 
+    name: {
+      fr:"Ada",
+      en:""
+    }, 
     
   },
   

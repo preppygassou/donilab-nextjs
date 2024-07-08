@@ -1,0 +1,243 @@
+.expertise-card-group {
+  display: grid;
+  margin-left: auto;
+  margin-right: auto;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  max-width: 85%;
+  background-color: #fff;
+  border-radius: 25px;
+  -webkit-box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
+  -moz-box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
+  box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
+}
+
+.expertiseCard {
+  width: 100%;
+  height: 100%;
+  color: #2755A1;
+  border: 2px #E3E3E3;
+  border-radius: 0;
+}
+
+.expertiseCard:hover {
+  background-color: #2755A1;
+  color: #fff;
+}
+
+.expertiseCard object {
+  margin: 0 .5rem .5rem .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expertiseCard img {
+}
+
+.expertiseCard img.hover {
+  display: none;
+}
+
+.expertiseCard:hover > img.hover {
+  display: block;
+}
+
+.expertiseCard:hover > img.default {
+  display: none;
+}
+
+.expertiseCard:hover > a {
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+/* Hub France */
+
+section.herosection {
+  margin-top: 3rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+section.herosection h2::before {
+  margin-bottom: 0.75rem;
+  display: block;
+  height: 0.25rem;
+  width: 5rem;
+  border-radius: 0.125rem;
+  opacity: 1;
+  background-color: rgba(39, 85, 161, 1);
+  content: " ";
+  line-height: 4px;
+  margin-left: calc(50% - 40px);
+  vertical-align: top;
+}
+
+section.herosection h2 {
+  font-family: "Cera Round Pro";
+  margin-bottom: 3rem;
+  color: rgb(39, 85, 161);
+  text-align: center;
+}
+
+section.herosection .hero h1 {
+  font-family: "Cera Round Pro";
+  max-width: 2rem;
+  font-size: 45px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: rgb(39, 85, 161);
+}
+
+section.herosection .hero p {
+  max-width: 19rem;
+}
+
+.ps-btn--backtop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  z-index: 10000;
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+}
+
+.ps-btn--backtop i {
+  color: #fff;
+}
+
+.ps-btn--backtop:hover {
+  cursor: pointer;
+  border-color: rgb(39, 85, 161);
+}
+
+.ps-btn--backtop:hover i {
+  color: rgb(39, 85, 161);
+}
+
+.ant-back-top {
+  right: 50px !important;
+}
+
+
+/* Not found */
+
+.not-found-container main {
+  height: 100vh;
+  width: 100vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+.not-found-container main #errorText {
+  font-size: 22px;
+  margin: 14px 0;
+}
+
+.not-found-container main #errorLink {
+  font-size: 20px;
+  padding: 12px;
+  border: 1px solid;
+  color: #000;
+  background-color: transparent;
+  text-decoration: none;
+  transition: all 0.5s ease-in-out;
+}
+
+.not-found-container main #errorLink:hover,
+.not-found-container main #errorLink:active {
+  color: #fff;
+  background: #000;
+}
+
+.not-found-container main #g6219 {
+  transform-origin: 85px 4px;
+  -webkit-animation: an1 12s 0.5s infinite ease-out;
+  animation: an1 12s 0.5s infinite ease-out;
+}
+
+@-webkit-keyframes an1 {
+  0% {
+    transform: rotate(0);
+  }
+  5% {
+    transform: rotate(3deg);
+  }
+  15% {
+    transform: rotate(-2.5deg);
+  }
+  25% {
+    transform: rotate(2deg);
+  }
+  35% {
+    transform: rotate(-1.5deg);
+  }
+  45% {
+    transform: rotate(1deg);
+  }
+  55% {
+    transform: rotate(-1.5deg);
+  }
+  65% {
+    transform: rotate(2deg);
+  }
+  75% {
+    transform: rotate(-2deg);
+  }
+  85% {
+    transform: rotate(2.5deg);
+  }
+  95% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes an1 {
+  0% {
+    transform: rotate(0);
+  }
+  5% {
+    transform: rotate(3deg);
+  }
+  15% {
+    transform: rotate(-2.5deg);
+  }
+  25% {
+    transform: rotate(2deg);
+  }
+  35% {
+    transform: rotate(-1.5deg);
+  }
+  45% {
+    transform: rotate(1deg);
+  }
+  55% {
+    transform: rotate(-1.5deg);
+  }
+  65% {
+    transform: rotate(2deg);
+  }
+  75% {
+    transform: rotate(-2deg);
+  }
+  85% {
+    transform: rotate(2.5deg);
+  }
+  95% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}

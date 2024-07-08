@@ -55,7 +55,8 @@ export const HubContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   
 
-const { locale} = useRouter();
+const params = useParams<{ locale: string; }>()
+  const { locale} = params;
 
   const listHubs = async (locale) => {
     try {

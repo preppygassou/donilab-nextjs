@@ -51,7 +51,8 @@ function reducer(state , action) {
 export const ProgramContextProvider = ({ children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
  
-const { locale} = useRouter();
+const params = useParams<{ locale: string; }>()
+  const { locale} = params;
   const ProgrammestypesOfDonilab = 48;
   const ProgrammestypesWithPartnersId = 49;
   
