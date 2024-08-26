@@ -43,27 +43,27 @@ interface UploadRequestBody {
 export async function POST(req: Request) {
   const { name, type, base64File } = await req.json();
 
-  const buffer = Buffer.from(base64File, 'base64');
+  //const buffer = Buffer.from(base64File, 'base64');
   const key = `${uuidv4()}_${name}`;
 
-  const params = {
+ /*  const params = {
     Bucket: process.env.N0C_BUCKET_NAME!,
     Key: key,
     Body: buffer,
     ContentType: type,
-  };
+  }; */
 
   try {
     /* const command = new PutObjectCommand(params);
   const data=  await s3Client.send(command); */
-    const url = `${process.env.N0C_BUCKET_NAME}.${process.env.N0C_ENDPOINT}${key}`;
+    const url = "`${process.env.N0C_BUCKET_NAME}.${process.env.N0C_ENDPOINT}${key}`";
 
     //const data = await s3Client.upload(params).promise();
     const metaData={
 
       'Content-Type': type,
     }
- await minioClient.putObject(process.env.N0C_BUCKET_NAME!, key, buffer, metaData)
+ //await minioClient.putObject(process.env.N0C_BUCKET_NAME!, key, buffer, metaData)
   
 
    // console.log("data",data)
