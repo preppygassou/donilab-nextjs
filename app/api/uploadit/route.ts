@@ -1,19 +1,19 @@
 // pages/api/upload.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
+/* import type { NextApiRequest, NextApiResponse } from 'next';
 import {createRouter, expressWrapper} from 'next-connect';
 import multer from 'multer';
 import minioClient from '@/lib/n0cStorage';
 import { v4 as uuidv4 } from 'uuid';
-
-const upload = multer({
+ */
+/* const upload = multer({
   storage: multer.memoryStorage(),
-});
+}); */
 
-const apiRoute = createRouter<NextApiRequest, NextApiResponse>();
+/* const apiRoute = createRouter<NextApiRequest, NextApiResponse>();
 
-apiRoute.use(upload.single('file'));
+apiRoute.use(upload.single('file')); */
 
-apiRoute.post(async (req, res) => {
+/* apiRoute.post(async (req, res) => {
   const file = req.file;
   const key = `${uuidv4()}_${file.originalname}`;
   
@@ -34,11 +34,11 @@ apiRoute.post(async (req, res) => {
     res.status(500).json({ error: 'Failed to upload file' });
   }
 });
-
+ */
 /* export const config = {
   api: {
     bodyParser: false, // Disallow body parsing, since we're using multer
   },
 }; */
 
-export default apiRoute;
+//export default apiRoute;
