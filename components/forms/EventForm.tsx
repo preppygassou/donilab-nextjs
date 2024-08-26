@@ -21,6 +21,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Checkbox } from "../ui/checkbox"
 import { useRouter } from "next/navigation"
 import { createEvent, updateEvent } from "@/lib/queries"
+import NocFileView from "../global/noc-file-view"
+import UploadComponent from "../global/noc-file-uploader"
 /* import { createEvent, updateEvent } from "@/lib/actions/event.actions"
  */
 
@@ -157,6 +159,8 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       imageUrl={field.value}
                       setFiles={setFiles}
                     /> */}
+                    <UploadComponent />
+                    {/* <NocFileView imageUrl={field.value}/> */}
                   </FormControl>
                   <FormMessage />
                 </FormItem>

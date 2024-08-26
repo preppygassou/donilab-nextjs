@@ -21,7 +21,7 @@ const layout = async ({ children, params }: Props) => {
   const user = await currentUser()
 
   if (!user) {
-    return redirect('/')
+    return redirect('/auth/login')
   }
 
  /*  if (!siteId) {

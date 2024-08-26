@@ -22,7 +22,7 @@ const HubLayout = async ({ children, params }: Props) => {
   if (!siteId) return <Unauthorized /> */
   const user = await currentUser()
   if (!user) {
-    return redirect('/')
+    return redirect('/auth/login')
   }
 
   let notifications: any = []

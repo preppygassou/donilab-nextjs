@@ -135,7 +135,7 @@ p {
   font-family: "Cera Round Pro";
   flex: 0 0 100%;
   font-size: 15px;
-  text-align: center;
+  /* text-align: center; */
   letter-spacing: .5px;
   margin: 0 0 11px;
   transition: all .2s linear;

@@ -5,10 +5,11 @@ import { Toaster } from '@/components/ui/toaster'
 import { Toaster as SonnarToaster } from '@/components/ui/sonner'
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
-import { i18n, type Locale } from "@/i18n-config";
+
 
 import { cn } from "@/lib/utils"
 import "@/styles/globals.css"
+import "@/public/fonts/font-awesome/css/all.min.css"
 
 import StyledJsxRegistry from './registry'
 import { Metadata } from 'next'
@@ -21,16 +22,11 @@ const montserrat_Alternates = Montserrat_Alternates({
   variable: '--font-montserrat-alternates',
 })
 
-/* export const metadata: Metadata = {
+export const metadata: Metadata = {
   title: 'Donilab',
   description: 'Incubateur | Coworking | FabLab',
 }
 
-
-export async function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }));
-}
- */
 
 export default async function RootLayout({
   children,

@@ -62,6 +62,8 @@ export default auth((request) => {
     '/_next', 
     '/favicon.ico', 
     '/dashboard', 
+    '/site', 
+    '/hub', 
     '/main', 
     '/404', 
     '/500', 
