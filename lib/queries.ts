@@ -25,6 +25,9 @@ import { currentUser } from './auth'
 import { CreateCategoryParams, CreateEventParams, DeleteEventParams, GetAllEventsParams, GetRelatedEventsByCategoryParams } from '@/types'
 import { handleError } from './utils'
 
+export const getUserPermissions =async()=>{
+
+}
 export const getAuthUserDetails = async () => {
   const user = await currentUser()
   if (!user) {
