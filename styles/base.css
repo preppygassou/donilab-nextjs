@@ -1,0 +1,271 @@
+  @font-face {
+    font-family: 'Cera Round Pro';
+    src: url('../public/fonts/CeraRoundPro-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+    
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-montserrat-alternates), sans-serif;
+  scrollbar-color: #454a4d #202324;
+}
+
+svg:hover path {
+  background-color: #fff;
+}
+
+body, html {
+  font-family: var(--font-montserrat-alternates), "Cera Round Pro", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.homesectiontitle {
+  color: #2755A1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: .5vh 0 9vh 0;
+}
+
+.homesectiontitle h1 {
+  font-size: 5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.homesectiontitle img {
+  position: absolute;
+  width: 95px;
+  left: 51vh;
+  bottom: -1vh;
+}
+
+.homesectiontitle span {
+  color: #95B71D;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.cls-2 * {
+  fill: #2755a1;
+}
+
+.cls-2:hover * {
+  fill: #fff;
+}
+
+/* Alert */
+.loadingg {
+  width: 100%;
+  background-color: #202324;
+  height: 100vh;
+  z-index: 999;
+}
+
+.success {
+  color: #20a020;
+}
+
+.danger {
+  color: #a02020;
+}
+
+.alert {
+  padding: 1rem;
+  border: 0.1rem solid transparent;
+  border-radius: 0.5rem;
+}
+
+.alert-info {
+  color: #2020a0;
+  background-color: #e0e0ff;
+}
+
+.alert-danger {
+  color: #a02020;
+  background-color: #ffe0e0;
+}
+
+.alert-success {
+  color: #20a020;
+  background-color: #eeffe0;
+}
+
+.navlinkcss {
+  color: #C1BEBE;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  align-self: center;
+  margin: 0 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.navlinkcss:hover {
+  color: #2755A1;
+  text-decoration: none;
+}
+
+@media (max-width: 1200px) {
+  .navlinkcss p {
+    font-size: 15px;
+  }
+}
+
+p {
+  font-family: "Cera Round Pro";
+  flex: 0 0 100%;
+  font-size: 15px;
+  /* text-align: center; */
+  letter-spacing: .5px;
+  margin: 0 0 11px;
+  transition: all .2s linear;
+}
+
+/* Animations */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.donilab-hubs__container .donilab-hub__info {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border-radius: 15px;
+}
+
+.donilab-hubs__container .right {
+  position: absolute;
+  top: 11%;
+  right: 8%;
+}
+
+.donilab-hubs__container .left {
+  position: absolute;
+  left: 8%;
+  top: 11%;
+}
+
+.donilab-hubs__container .blue {
+  background-color: #2755A1;
+  color: #fff;
+}
+
+.donilab-hubs__container .gris {
+  background-color: #EFEFEF;
+  color: #2755A1;
+}
+
+.donilab-hubs__container .green {
+  background-color: #95B71D;
+  color: #fff;
+}
+
+.donilab-hubs__container .donilab-hub__info-wrap {
+  width: 80%;
+}
+
+.donilab-hubs__container .donilab-hub__title h3 {
+  font-size: 35px;
+  font-weight: bold;
+  font-family: "Cera Round Pro";
+  text-transform: uppercase;
+}
+
+.donilab-hubs__container .donilab-hub__description {
+  margin-top: 25px;
+}
+
+.donilab-hubs__container .donilab-hub__description p {
+  word-wrap: break-word;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.donilab-hubs__container .donilab-hub__link {
+  margin-top: 25px;
+  margin-bottom: 0;
+}
+
+.donilab-hubs__container a {
+  color: #fff;
+  border-radius: 25px;
+  padding: .5rem 1rem;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: "Cera Round Pro";
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.donilab-hubs__container .left .donilab-hub__thumbnail,
+.donilab-hubs__container .right .donilab-hub__thumbnail {
+  z-index: 10;
+  background-color: #fff;
+  width: 100vh;
+  height: 50vh;
+  position: absolute;
+  border-radius: 20px 0 0 20px;
+  top: 17%;
+  padding: 1vh 0 1vh 1vh;
+  transform: rotateY(180deg);
+}
+
+.donilab-hubs__container .donilab-hub__thumbnail img {
+  width: 100%;
+  border-radius: 20px 0 0 20px;
+  height: 100%;
+  object-fit: cover;
+}

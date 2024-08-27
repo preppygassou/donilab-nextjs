@@ -1,53 +1,116 @@
 
-export const TeamData = [
+export const TeamData = 
+[
   {
-    image: "/static/assets/team/tidiane.png" , 
-    teamname: 'Laye Kone', 
-    poste: 'banque Mondial', 
+    id:"1",
+    profile:{
+      url:"/assets/team/tidiane.png"
+    } ,
+    hubId:"",
+    siteId:"", 
+    name: 'Laye Kone', 
+    poste: {
+      fr:'banque Mondial',
+      en:'banque Mondial',
+    }, 
     
   },
   {
-    image: "/static/assets/team/tidiane.png", 
-    teamname: 'Djon Byll', 
-    poste: 'Dev', 
+    id:"2",
+    profile:{
+      url:"/assets/team/tidiane.png"
+    },
+    hubId:"",
+    siteId:"", 
+    name: 'Djon Byll', 
+    poste: {
+      fr:'Dev',
+      en:'Dev'
+    }, 
     
   },
   {
-    image: "/static/assets/team/tidiane.png", 
-    teamname: 'Laye Ball', 
-    poste: 'Charger de comm', 
+    id:"3",
+    profile:{
+      url:"/assets/team/tidiane.png"
+    },
+    hubId:"",
+    siteId:"", 
+    name: 'Laye Ball', 
+    poste: {
+      fr:'Charger de comm',
+      en:'Charger de comm',
+    }, 
     
   },
   {
-    image: "/static/assets/team/tidiane.png", 
-    teamname: 'Tidiane Ball', 
-    poste: 'Directeur', 
+    id:"4",
+    profile:{
+      url:"/assets/team/tidiane.png"
+    },
+    hubId:"",
+    siteId:"", 
+    name: 'Tidiane Ball', 
+    poste: {
+      fr:'Directeur',
+      en:'Directeur',
+    }, 
     
   },
   {
-    image: "/static/assets/team/tidiane.png", 
-    teamname: 'Ali Kouma', 
-    poste: 'Responsable projet', 
+    id:"5",
+    profile:{
+      url:"/assets/team/tidiane.png"
+    },
+    hubId:"",
+    siteId:"", 
+    name: 'Ali Kouma', 
+    poste: {
+      fr:'Responsable projet',
+      en:'Responsable projet',
+    }, 
     
   },
   {
-    image: "/static/assets/team/tidiane.png", 
-    teamname: 'Tidiane Nene', 
-    poste: 'Comptable', 
+    id:"6",
+    profile:{
+      url:"/assets/team/tidiane.png"
+    },
+    hubId:"",
+    siteId:"", 
+    name: 'Tidiane Nene', 
+    poste: {
+      fr:'Comptable',
+      en:'Comptable',
+    }, 
     
   },
   {
-    image: "/static/assets/team/tidiane.png", 
-    teamname: 'Saali NN', 
-    poste: 'Comptable', 
+    id:"7",
+    profile:{
+      url:"/assets/team/tidiane.png"
+    },
+    hubId:"",
+    siteId:"", 
+    name: 'Saali NN', 
+    poste: {
+      fr:'Comptable',
+      en:'Comptable',
+    }, 
     
   },
   {
-    image: "/static/assets/team/tidiane.png", 
-    teamname: 'Pajj Nene', 
-    poste: 'Comptable', 
+    id:"8",
+    profile:{
+      url:"/assets/team/tidiane.png"
+    },
+    hubId:"",
+    siteId:"", 
+    name: 'Pajj Nene', 
+    poste: {
+      fr:'Comptable',
+      en:'Comptable',
+    }, 
     
   },
-  
- 
 ]

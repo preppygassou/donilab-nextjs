@@ -1,0 +1,490 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  USER
+  SITE_ADMIN
+  SITE_MANAGER
+  SITE_MODERATOR
+  SITE_EDITOR
+  HUB_USER
+  HUB_GUEST
+  HUB_MANAGER
+  HUB_MODERATOR
+  HUB_EDITOR
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+enum Icon {
+  SETTINGS
+  BLOG
+  HUB
+  PROGRAM
+  EXPERTISE
+  SERVICE
+  IMPACT
+  EVENT
+  PARTNER
+  REPORT
+  CHART
+  CALENDAR
+  CHECK
+  CHIP
+  COMPASS
+  DATABASE
+  FLAG
+  HOME
+  INFO
+  LINK
+  LOCK
+  MESSAGES
+  NOTIFICATION
+  PAYMENT
+  POWER
+  RECEIPT
+  SHIELD
+  STAR
+  TUNE
+  VIDEORECORDER
+  WALLET
+  WARNING
+  HEADPHONE
+  SEND
+  PIPELINES
+  PERSON
+  CATEGORY
+  CONTACT
+  CLIPBOARD_ICON
+}
+
+enum InvitationStatus {
+  ACCEPTED
+  REVOKED
+  PENDING
+}
+
+model SitePartner {
+  siteId    String
+  partnerId Int
+
+  site    Site    @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  partner Partner @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+
+  @@id([siteId, partnerId])
+}
+
+
+
+model HubPartner {
+  hubId     String
+  partnerId Int
+
+  hub     Hub     @relation(fields: [hubId], references: [id], onDelete: Cascade)
+  partner Partner @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+
+  @@id([hubId, partnerId])
+}
+
+model PostCategory {
+  postId     Int
+  categoryId Int
+
+  post     Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([postId, categoryId])
+}
+
+model PostTag {
+  postId Int
+  tagId  Int
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([postId, tagId])
+}
+
+
+model User {
+  id                    String                 @id @default(cuid())
+  name                  String?
+  email                 String?                @unique
+  emailVerified         DateTime?
+  image                 Json?
+  password              String?
+  role                  UserRole               @default(USER)
+  status                Status                 @default(ACTIVE)
+  SitePermissions       SitePermissions[]
+  HubPermissions        HubPermissions[]
+  Notification          Notification[]
+  accounts              Account[]
+  team                  Team?
+  isTwoFactorEnabled    Boolean                @default(false)
+  twoFactorConfirmation TwoFactorConfirmation?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  posts                 Post[]
+  bookings              Booking[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorConfirmation {
+  id      String @id @default(cuid())
+  userId  String @unique
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model SitePermissions {
+  id      String   @id @default(uuid())
+  email   String
+  User    User     @relation(fields: [email], references: [email], onDelete: Cascade)
+  siteId  String
+  Site    Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  access  Boolean
+
+  @@index([siteId])
+  @@index([email])
+}
+
+model HubPermissions {
+  id      String   @id @default(uuid())
+  email   String
+  User    User     @relation(fields: [email], references: [email], onDelete: Cascade)
+  hubId   String
+  Hub     Hub      @relation(fields: [hubId], references: [id], onDelete: Cascade)
+  access  Boolean
+
+  @@index([hubId])
+  @@index([email])
+}
+
+model Site {
+  id               String               @id @default(uuid())
+  name             Json
+  description      Json
+  slogan           Json
+  logo             Json
+  featured_media   Json?
+  email            String
+  phone            String
+  additionalPhone  String
+  address          String
+  city             String
+  postalCode       String
+  zipCode          String
+  state            String
+  country          String
+  data             Json
+  expertise        Json
+  services         Json
+  impact           Json
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  hubs             Hub[]
+  permissions      SitePermissions[]
+  partners         SitePartner[]
+  programs         Program[]
+  posts            Post[]
+  teams            Team[]
+  events           Event[]
+  reports          Report[]
+  sidebarOptions   SiteSidebarOption[]
+  notifications    Notification[]
+  invitations      Invitation[]         @relation("SiteInvitations")
+  status           Status               @default(ACTIVE)
+}
+
+model Hub {
+  id               String               @id @default(uuid())
+  title            Json
+  description      Json
+  logo             Json
+  featured_media   Json?
+  galerie          Json
+  summary          Json
+  specificities    Json
+  services         Json
+  data             Json
+  slug             Json?   @unique
+  email            String
+  phone            String
+  additionalPhone  String
+  address          String
+  city             String
+  postalCode       String
+  zipCode          String
+  state            String
+  country          String
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  siteId           String
+  site             Site                 @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  sidebarOptions   HubSidebarOption[]
+  permissions      HubPermissions[]
+  events           Event[]
+  programs         Program[]
+  partners         HubPartner[]
+  teams            Team[]
+  notifications    Notification[]
+  status           Status               @default(ACTIVE)
+
+  @@index([siteId])
+}
+
+model Post {
+  id             Int        @id @default(autoincrement())
+  siteId         String
+  site           Site       @relation(fields: [siteId], references: [id])
+  title          Json
+  content        Json
+  authorId       String
+  author         User       @relation(fields: [authorId], references: [id])
+  excerpt        Json?
+  featured_media Json?
+  categories     PostCategory[]
+  tags           PostTag[]
+  link           String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  slug           Json?   @unique
+  status         String     @default("draft")
+  comments       Comment[]
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        Json
+  slug        Json?   @unique
+  description Json?
+  link        String?
+  parent      Int?
+  count       Int      @default(0)
+  posts       PostCategory[]
+  events      Event[]
+}
+
+model Partner {
+  id          Int      @id @default(autoincrement())
+  name        Json
+  logo        Json
+  link        String?
+  sites       SitePartner[]
+  hubs        HubPartner[]
+}
+
+model Program {
+  id          Int      @id @default(autoincrement())
+  logo        Json
+  title       Json
+  type        String
+  description Json
+  slug        Json?   @unique
+  siteId      String?
+  site        Site?     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  hubId       String?
+  hub         Hub?      @relation(fields: [hubId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now())
+  
+}
+
+model Report {
+  id             Int      @id @default(autoincrement())
+  title          Json
+  featured_media Json?
+  year           String?
+  url            String?
+  siteId         String
+  site           Site     @relation(fields: [siteId], references: [id])
+}
+
+model Team {
+  id          Int      @id @default(autoincrement())
+  name        String
+  userId      String  @unique
+  user        User     @relation(fields: [userId], references: [id])
+  profile     Json
+  poste       Json
+  siteId      String
+  site        Site     @relation(fields: [siteId], references: [id])
+  hubId       String?
+  hub         Hub?     @relation(fields: [hubId], references: [id], onDelete: Cascade)
+}
+
+model Tag {
+  id          Int      @id @default(autoincrement())
+  name        Json
+  slug        Json?   @unique
+  description Json?
+  link        String?
+  count       Int      @default(0)
+  posts       PostTag[]
+}
+
+model Comment {
+  id          Int      @id @default(autoincrement())
+  content     Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  status      String   @default("approved")
+  author      String
+  parent      Int?
+  link        String?
+  postId      Int
+  post        Post     @relation(fields: [postId], references: [id])
+  author_email String
+  author_name  String
+  author_url   String?
+}
+
+model Event {
+  id              Int       @id @default(autoincrement())
+  title           Json
+  featured_media Json?
+  siteId          String
+  site            Site      @relation(fields: [siteId], references: [id])
+  description     Json
+  startDateTime   DateTime  @default(now())
+  endDateTime     DateTime  @default(now())
+  location        String
+  price           String
+  categoryId      Int
+  category        Category  @relation(fields: [categoryId], references: [id])
+  url             String
+  isFree          Boolean   @default(true)
+  bookings        Booking[]
+  organizerId     String
+  organizer       Hub       @relation(fields: [organizerId], references: [id], onDelete: Cascade)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Booking {
+  id          Int      @id @default(autoincrement())
+  eventId     Int
+  event       Event    @relation(fields: [eventId], references: [id])
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  totalAmount String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SiteSidebarOption {
+  id        String     @id @default(uuid())
+  name      String     @default("Menu")
+  link      String     @default("#")
+  icon      String       @default("INFO")
+  status    Status     @default(ACTIVE)
+  siteId    String
+  Site      Site?      @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([siteId])
+}
+
+model HubSidebarOption {
+  id        String     @id @default(uuid())
+  name      String     @default("Menu")
+  link      String     @default("#")
+  icon      String     @default("INFO")
+  status    Status     @default(ACTIVE)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now())
+  hubId     String
+  Hub       Hub?       @relation(fields: [hubId], references: [id], onDelete: Cascade)
+
+  @@index([hubId])
+}
+
+model Invitation {
+  id      String           @id @default(uuid())
+  email   String           @unique
+  siteId  String
+  site    Site             @relation(fields: [siteId], references: [id], onDelete: Cascade, name: "SiteInvitations")
+  status  InvitationStatus @default(PENDING)
+  role    UserRole         @default(HUB_USER)
+
+  @@index([siteId])
+}
+
+model Notification {
+  id           String     @id @default(uuid())
+  notification String
+  siteId       String
+  hubId        String?
+  userId       String
+
+  User         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Site         Site       @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  Hub          Hub?       @relation(fields: [hubId], references: [id], onDelete: Cascade)
+
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([siteId])
+  @@index([hubId])
+  @@index([userId])
+}

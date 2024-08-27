@@ -29,7 +29,8 @@ export const ImpactContextProvider = ({ children}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   
 
-const { locale} = useRouter();
+const params = useParams<{ locale: string; }>()
+  const { locale} = params;
 
   const listImpacts = async (locale) => {
     try {
