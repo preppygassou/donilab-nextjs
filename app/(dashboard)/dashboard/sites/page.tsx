@@ -1,10 +1,25 @@
 import BreadCrumb from '@/components/breadcrumb';
 import { SiteClient } from '@/components/tables/user-tables/site';
 import { getSites } from '@/data/sites';
+import { cookies } from 'next/headers'
 
 const breadcrumbItems = [{ title: 'Sites', link: '/dashboard/sites' }];
-export default async function page() {
-  const sites = await getSites();
+export default async function Page() {
+  const cookieStore = cookies()
+  const locale = cookieStore.get('NEXT_LOCALE')?.value
+
+  const sitesData = await getSites();
+  const sites = sitesData?.map((site)=>{
+    const localName = site.name[locale]
+    return{
+      id: site.id,
+      name:localName,
+      description: site.description,
+      status: site.status,
+      country: site.country,
+    }
+  });
+
 
   return (
     <>

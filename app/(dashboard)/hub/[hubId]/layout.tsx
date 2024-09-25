@@ -21,9 +21,9 @@ const HubLayout = async ({ children, params }: Props) => {
   /* const siteId = await verifyAndAcceptInvitation()
   if (!siteId) return <Unauthorized /> */
   const user = await currentUser()
-  if (!user) {
+  /* if (!user) {
     return redirect('/auth/login')
-  }
+  } */
 
   let notifications: any = []
 

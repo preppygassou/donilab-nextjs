@@ -118,21 +118,22 @@ function ExpertiseCard({ item }:{item:any}) {
   return (
     <>
 
-      <ExpertiseCardContent className="donilab-expertise-card" >
+      {<ExpertiseCardContent className="donilab-expertise-card" >
 
         <div className="donilab-expertise_thumnail">
-          <object id={item.icon.url} type="image/svg+xml" width="100" height="100" data={item.icon.url} className="svg default">
+          <object id={item?.icon.url} type="image/svg+xml" width="100" height="100" data={item?.icon.url} className="svg default">
           </object>
-          <object id={item.iconHover.url} type="image/svg+xml" width="100" height="100" data={item.iconHover.url} className="svg hover">
+          <object id={item?.iconHover.url} type="image/svg+xml" width="100" height="100" data={item?.iconHover.url} className="svg hover">
           </object>
 
         </div>
         <div className="donilab-expertise__title">
-          <h3 className="card-title"> {item.title[locale]}</h3>
+          <h3 className="card-title"> {item?.title[locale]}</h3>
 
         </div>
         <div className="donilab-expertise_description">
-          {parse(item.description[locale])}
+          {/* {parse(item?.description[locale])} */}
+          {item?.description[locale]}
         </div>
 
         <div className="donilab-expertise_link">
@@ -141,7 +142,7 @@ function ExpertiseCard({ item }:{item:any}) {
           </Link>
         </div>
 
-      </ExpertiseCardContent>
+      </ExpertiseCardContent>}
     </>
 
   )

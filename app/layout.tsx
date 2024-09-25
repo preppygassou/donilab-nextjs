@@ -5,7 +5,7 @@ import { Toaster } from '@/components/ui/toaster'
 import { Toaster as SonnarToaster } from '@/components/ui/sonner'
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
-
+import 'react-quill/dist/quill.snow.css';
 
 import { cn } from "@/lib/utils"
 import "@/styles/globals.css"

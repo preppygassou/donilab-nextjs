@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { login } from "@/actions/login";
+import Loading from "../global/loading";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -53,7 +54,7 @@ export const LoginForm = () => {
       login(values, callbackUrl)
         .then((data) => {
           if (data?.error) {
-            form.reset();
+           // form.reset();
             setError(data.error);
           }
 
@@ -151,8 +152,9 @@ export const LoginForm = () => {
           <FormError message={error || errorUrl} />
           <FormSuccess message={success} />
           <Button type="submit" disabled={isPending} className="w-full">
-            {showTwoFactor ? "Confirm" : "Login"}
+            {isPending ? <Loading />: showTwoFactor ? "Confirm" : "Login"}
           </Button>
+          
         </form>
       </Form>
     </CardWrapper>

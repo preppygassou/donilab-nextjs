@@ -2,8 +2,6 @@
 import { Site } from '@prisma/client'
 import { useForm } from 'react-hook-form'
 import React, { useEffect, useState } from 'react'
-import { NumberInput } from '@tremor/react'
-import { v4 } from 'uuid'
 import { SiteSchema } from "@/schemas";
 import { useRouter } from 'next/navigation'
 import {
@@ -28,7 +26,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -39,12 +36,9 @@ import { useToast } from '../ui/use-toast'
 import * as z from 'zod'
 import FileUpload from '../global/file-upload'
 import { Input } from '../ui/input'
-import { Switch } from '../ui/switch'
+
 import {
   deleteSite,
-  initUser,
-  saveActivityLogsNotification,
-  updateSiteDetails,
   upsertSite,
 } from '@/lib/queries'
 import { Button } from '../ui/button'

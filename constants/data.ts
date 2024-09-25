@@ -37,6 +37,25 @@ export type Site = {
     createdAt: Date;
     updatedAt: Date;
 };
+export type Post = {
+  id: number
+  siteId: string
+  title: object
+  content: object
+  authorId: string
+  author: string
+  categories: any[]
+  tags: any[]
+  comments: any[]
+  excerpt: object | null
+  featured_media: object | null
+  link: string | null
+  createdAt: Date
+  updatedAt: Date
+  slug: object | null
+  status: string
+};
+
 export const users: User[] = [
   {
     id: 1,

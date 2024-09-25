@@ -20,9 +20,9 @@ const layout = async ({ children, params }: Props) => {
   //const siteId = await verifyAndAcceptInvitation()
   const user = await currentUser()
 
-  if (!user) {
+  /* if (!user) {
     return redirect('/auth/login')
-  }
+  } */
 
  /*  if (!siteId) {
     return redirect('/site')

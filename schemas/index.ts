@@ -98,3 +98,27 @@ export const eventFormSchema = z.object({
   isFree: z.boolean(),
   url: z.string().url()
 })
+
+export const postFormSchema = z.object({
+  title:z.object({
+    fr: z.string().min(3, 'Title must be at least 3 characters'),
+    en: z.string().min(3, 'Title must be at least 3 characters'),
+    
+  }),
+  content: z.object({
+    fr: z.string().min(3, 'Description must be at least 3 characters').max(400, 'Description must be less than 400 characters'),
+    en: z.string().min(3, 'Description must be at least 3 characters').max(400, 'Description must be less than 400 characters'),
+  }) ,
+  excerpt: z.object({
+    fr: z.string().min(3, 'Description must be at least 3 characters').max(400, 'Description must be less than 400 characters'),
+    en: z.string().min(3, 'Description must be at least 3 characters').max(400, 'Description must be less than 400 characters'),
+  }),
+  featured_media: z.object({}),
+  categories: z.array(z.number()),
+  tags: z.array(z.number()).optional(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  slug: z.string(),
+  status: z.boolean(),
+  link: z.string().url()
+})

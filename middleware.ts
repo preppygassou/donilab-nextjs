@@ -80,6 +80,32 @@ export default auth((request) => {
 
    // Skip internationalization for excluded paths
    if (isExcludedPath) {
+    if (isApiAuthRoute) {
+      return NextResponse.next();
+    }
+
+    if (isAuthRoute) {
+      if (isLoggedIn) {
+        const callbackUrl = nextUrl.searchParams.get('callbackUrl');
+        if (callbackUrl) {
+          const decodedUrl = decodeURIComponent(callbackUrl);
+          return NextResponse.rewrite(new URL(decodedUrl, request.url));
+        }
+        return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, request.url));
+      }
+      return NextResponse.next();
+    }
+
+    if (!isLoggedIn && !isPublicRoute) {
+      let callbackUrl = nextUrl.pathname;
+      if (nextUrl.search) {
+        callbackUrl += nextUrl.search;
+      }
+  
+      const encodedCallbackUrl = encodeURIComponent(callbackUrl);
+      return NextResponse.redirect(new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`, request.url));
+    }
+    
      return NextResponse.next();
    }
 

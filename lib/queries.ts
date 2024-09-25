@@ -1107,6 +1107,134 @@ export async function getAllEvents({ query, limit = 6, page, category }: GetAllE
     handleError(error)
   }
 }
+
+// CREATE
+export async function createPost({ userId, event, path }: CreateEventParams) {
+  try {
+
+    const organizer = await db.user.findUnique({
+      where:{
+        id:userId
+      }
+    })
+    if (!organizer) throw new Error('Organizer not found')
+
+    const newPost = await db.event.create({ data:{...event, category: event.categoryId, organizer: userId }})
+    revalidatePath(path)
+
+    return JSON.parse(JSON.stringify(newPost))
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+// GET ONE EVENT BY ID
+export async function getPostById(eventId: string) {
+  try {
+
+    const event = await db.event.findUnique({
+      where:{
+        id:eventId
+      }
+    }) 
+    //const event = await populatePost(Post.findById(eventId))
+
+    if (!event) throw new Error('Post not found')
+
+    return JSON.parse(JSON.stringify(event))
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+// UPDATE
+export async function updatePost({ userId, event, path }: {}) {
+  try {
+
+    const eventToUpdate = await db.event.findUnique({
+      where:{
+        id:event._id
+      }
+    })
+    /* if (!eventToUpdate || eventToUpdate.organizer.toHexString() !== userId) {
+      throw new Error('Unauthorized or event not found')
+    } */
+
+    const updatedPost = await db.event.update(
+      {
+       where: { id: event._id },
+       data: { ...event, category: event.categoryId },
+      }
+    )
+    revalidatePath(path)
+
+    return JSON.parse(JSON.stringify(updatedPost))
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+// DELETE
+export async function deletePost({ eventId, path }: {}) {
+  try {
+
+    const deletedPost = await db.event.delete({ where: { id: eventId } })
+    if (deletedPost) revalidatePath(path)
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+// GET ALL EVENTS
+export async function getAllPosts({ query="", limit = 6, page, category }: GetAllEventsParams) {
+  try {
+    const titleCondition = query ? { title: { contains: query, mode: 'insensitive' } } : {}
+    let categoryCondition: any = {}
+
+    if (category) {
+      const categoryData = await db.category.findUnique({
+        where: { name: category }
+      })
+      if (categoryData) {
+        categoryCondition = { categoryId: categoryData.id }
+      } else {
+        categoryCondition = { categoryId: null } // No matching category found
+      }
+    }
+
+    const conditions = {
+      AND: [titleCondition, categoryCondition],
+    }
+
+    //const skipAmount = (Number(page) - 1) * limit
+
+    const posts = await db.post.findMany({
+      where: conditions,
+      orderBy: { createdAt: 'desc' },
+      /* skip: skipAmount,
+      take: limit, */
+      include: {
+        author: {
+          select: { id: true, name: true},
+        },
+        categories: {
+          select: { categoryId: true },
+        },
+      },
+    })
+
+    const postsCount = await db.post.count({ where: conditions })
+
+    return {
+      data: posts,
+      totalPages: Math.ceil(postsCount / limit),
+    }
+  } catch (error) {
+    console.error(error)
+    handleError(error)
+  }
+}
+
 // GET EVENTS BY ORGANIZER
 /* export async function getEventsByUser({ userId, limit = 6, page }: GetEventsByUserParams) {
   try {
