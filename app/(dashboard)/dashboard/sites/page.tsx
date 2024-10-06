@@ -6,11 +6,11 @@ import { cookies } from 'next/headers'
 const breadcrumbItems = [{ title: 'Sites', link: '/dashboard/sites' }];
 export default async function Page() {
   const cookieStore = cookies()
-  const locale = cookieStore.get('NEXT_LOCALE')?.value
+  const locale = cookieStore.get('NEXT_LOCALE')?.value || "fr"
 
   const sitesData = await getSites();
   const sites = sitesData?.map((site)=>{
-    const localName = site.name[locale]
+    const localName = site.name[locale] 
     return{
       id: site.id,
       name:localName,
