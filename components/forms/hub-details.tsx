@@ -25,7 +25,7 @@ import {
   CardContent,
 } from '@/components/ui/card'
 
-import FileUpload from '../global/file-upload'
+import FileUpload from '../global/file-uploader'
 import { Site,Hub } from '@prisma/client'
 import { useToast } from '../ui/use-toast'
 import { saveActivityLogsNotification, upsertHub } from '@/lib/queries'

@@ -122,67 +122,54 @@ const Page = () => {
     <ScrollArea className="h-full">
       <Card className="lg:w-[1000px] mx-auto sm:container bg-primary/[3%] dark:bg-dark">
         <CardHeader>
-          <p className="text-2xl font-semibold text-center">Ajouter un nouvel article</p>
+          <p className="text-2xl font-semibold text-left">Ajouter une nouvelle impact</p>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
               <div className="space-y-4">
-                <FormItem>
-                  <div className={`${imageLoading ? "w-1/2" : "w-full"}`}>
-                    <label className="mb-3 block text-sm font-medium text-dark dark:text-white">
-                      Définir l'image de couverture
-                    </label>
+              <div className="flex flex-col gap-5 md:flex-row">
+          <FormItem className={`w-1/2`}>
+            <div className={`w-full`}>
+              <label className="mb-3 block text-sm font-medium text-dark dark:text-white">
+                Définir l'icon
+              </label>
 
-                    <div className="flex items-center justify-center w-full">
-                      <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                          <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                          </svg>
-                          <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
-                          <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                        </div>
-                        <input
-                          id="dropzone-file"
-                          accept="image/*"
-                          max={1000000}
-                          onChange={handleBlogImageChange}
-                          type="file" className="hidden"
-                        />
-                      </label>
-                    </div>
-                  </div>
-                  {imageLoading ? (
-                    <div className="w-1/2">
-                      <Loading />
-                    </div>
-                  ) : null}
-                </FormItem>
+              <div className="flex items-center justify-center w-full">
+                <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+              </svg>
+              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Cliquez pour télécharger</span> ou glisser-déposer</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            </div>
+            <input
+              id="dropzone-file"
+              accept="image/*"
+              max={1000000}
+              onChange={handleBlogImageChange}
+              type="file" className="hidden"
+            />
+                </label>
+              </div>
+            </div>
+            {imageLoading ? (
+              <div className="w-1/2">
+                <Loading />
+              </div>
+            ) : null}
+          </FormItem>
+          
+              </div>
+
+              
                 <FormField
                   control={form.control}
-                  name="title.fr"
+                  name="total"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Titre en Fr</FormLabel>
-                      <FormControl>
-                        <Input
-                          className="bg-white w-full mb-8 rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
-                          {...field}
-                          placeholder="John Doe"
-                          disabled={isPending}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="title.en"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Titre en En</FormLabel>
+                      <FormLabel>Total</FormLabel>
                       <FormControl>
                         <Input
                           className="bg-white w-full mb-8 rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp"
@@ -248,89 +235,6 @@ const Page = () => {
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name="categories"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Categories</FormLabel>
-                      <Select
-
-                        disabled={isPending}
-                        onValueChange={field.onChange}
-                      /* defaultValue={field.value} */
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Sélectionnez" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="bg-white">
-                          {/* <SelectItem value={UserRole.ADMIN}>Admin</SelectItem>
-                        <SelectItem value={UserRole.USER}>User</SelectItem>
-                        <SelectItem value={UserRole.SITE_MANAGER}>Manager Donilab</SelectItem>
-                        <SelectItem value={UserRole.HUB_MANAGER}>Hub Manager</SelectItem> */}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="tags"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Tags</FormLabel>
-                      <Select
-
-                        disabled={isPending}
-                        onValueChange={field.onChange}
-                      /* defaultValue={field.value} */
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Sélectionnez" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="bg-white">
-                          {/* <SelectItem value={UserRole.ADMIN}>Admin</SelectItem>
-                        <SelectItem value={UserRole.USER}>User</SelectItem>
-                        <SelectItem value={UserRole.SITE_MANAGER}>Manager Donilab</SelectItem>
-                        <SelectItem value={UserRole.HUB_MANAGER}>Hub Manager</SelectItem> */}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="excerpt.fr"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Resumer en FR</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Resumer" {...field} className="bg-white w-full resize-none rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="excerpt.en"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Resumer en EN</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Resumer" {...field} className="bg-white w-full resize-none rounded-md border border-transparent py-3 px-6 text-base text-body-color placeholder-body-color shadow-one outline-none focus:border-primary focus-visible:shadow-none dark:bg-[#242B51] dark:shadow-signUp" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
               </div>
               <FormError message={error} />
               <FormSuccess message={success} />
@@ -338,9 +242,7 @@ const Page = () => {
                 <Button disabled={isPending} type="submit">
                   Publier
                 </Button>
-                <Button disabled={isPending} variant={"ghost"} type="submit" >
-                  Enregistrer comme brouillon
-                </Button>
+                
               </div>
 
             </form>

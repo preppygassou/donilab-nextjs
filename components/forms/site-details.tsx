@@ -34,7 +34,7 @@ import {
 import { useToast } from '../ui/use-toast'
 
 import * as z from 'zod'
-import FileUpload from '../global/file-upload'
+import FileUpload from '../global/file-uploader'
 import { Input } from '../ui/input'
 
 import {

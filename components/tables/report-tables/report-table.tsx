@@ -12,7 +12,7 @@ interface PostProps {
   data: Post[];
 }
 
-export const ProgramTableView: React.FC<PostProps> =({data})=> {
+export const ReportTableView: React.FC<PostProps> =({data})=> {
   const router = useRouter();
   const params = useParams();
   const siteId = params.siteId
@@ -22,12 +22,12 @@ export const ProgramTableView: React.FC<PostProps> =({data})=> {
     <>
       <div className="flex items-start justify-between">
         <Heading
-          title={`Programmes (${data.length})`}
-          description="Gérer les programmes"
+          title={`Rapport annuel (${data.length})`}
+          description="Gérer les rapports annuels"
         />
         <Button
           className="text-xs md:text-sm"
-          onClick={() => router.push(`/site/${siteId}/programs/add`)}
+          onClick={() => router.push(`/site/${siteId}/report/add`)}
         >
           <Plus className="mr-2 h-4 w-4" /> Ajouter un nouveau
         </Button>

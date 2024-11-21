@@ -122,16 +122,16 @@ const Page = () => {
     <ScrollArea className="h-full">
       <Card className="lg:w-[1000px] mx-auto sm:container bg-primary/[3%] dark:bg-dark">
         <CardHeader>
-          <p className="text-2xl font-semibold text-center">Ajouter un nouvel article</p>
+          <p className="text-2xl font-semibold text-center">Ajouter une nouvelle programme</p>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
               <div className="space-y-4">
                 <FormItem>
-                  <div className={`${imageLoading ? "w-1/2" : "w-full"}`}>
+                  <div className={`w-1/2`}>
                     <label className="mb-3 block text-sm font-medium text-dark dark:text-white">
-                      Définir l'image de couverture
+                      Définir le logo
                     </label>
 
                     <div className="flex items-center justify-center w-full">
@@ -250,10 +250,10 @@ const Page = () => {
 
                 <FormField
                   control={form.control}
-                  name="categories"
+                  name="types"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Categories</FormLabel>
+                      <FormLabel>les types</FormLabel>
                       <Select
 
                         disabled={isPending}
@@ -278,10 +278,10 @@ const Page = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="tags"
+                  name="hub"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Tags</FormLabel>
+                      <FormLabel>Le hub organisataire</FormLabel>
                       <Select
 
                         disabled={isPending}
@@ -337,9 +337,6 @@ const Page = () => {
               <div className="flex flex-row justify-between" role="group">
                 <Button disabled={isPending} type="submit">
                   Publier
-                </Button>
-                <Button disabled={isPending} variant={"ghost"} type="submit" >
-                  Enregistrer comme brouillon
                 </Button>
               </div>
 

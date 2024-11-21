@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const { i18n } = require('./next-i18next.config')
+//const { i18n } = require('./next-i18next.config')
 
 const nextConfig = {
   reactStrictMode: true,
@@ -8,9 +8,16 @@ const nextConfig = {
   },
   /* i18n, */
   images: { 
-    domains: ['https://blog.donilab.org','2.gravatar.com',
-  'secure.gravatar.com',] 
-},
+      /* remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'upload.donilab.org',
+          port: '',
+          pathname: '/uploads/**',
+        },
+      ], */
+      domains: ['upload.donilab.ml'], 
+  },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
@@ -29,4 +36,4 @@ const nextConfig = {
   
 };
 
-module.exports = nextConfig;
+export default nextConfig;

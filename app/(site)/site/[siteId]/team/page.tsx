@@ -13,7 +13,7 @@ type Props = {
 const TeamPage = async ({ params }: Props) => {
   const authUser = await currentUser()
   const teamMembers = await db.user.findMany({
-    where: {
+    /* where: {
       Site: {
         id: params.siteId,
       },
@@ -21,7 +21,7 @@ const TeamPage = async ({ params }: Props) => {
     include: {
       Site: { include: { Hub: true } },
       Permissions: { include: { Hub: true } },
-    },
+    }, */
   })
 
   if (!authUser) return null
@@ -29,9 +29,9 @@ const TeamPage = async ({ params }: Props) => {
     where: {
       id: params.siteId,
     },
-    include: {
+    /* include: {
       Hub: true,
-    },
+    }, */
   })
 
   if (!siteDetails) return

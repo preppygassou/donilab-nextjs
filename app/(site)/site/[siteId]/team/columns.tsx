@@ -88,9 +88,9 @@ export const columns: ColumnDef<UsersWithSiteHubPermissionsSidebarOptions>[] =
       header: 'Comptes détenus',
       cell: ({ row }) => {
         const isSiteOwner = row.getValue('role') === 'SITE_ADMIN'
-        const ownedAccounts = row.original?.Permissions.filter(
+        const ownedAccounts =[] /* row.original?.Permissions.filter(
           (per) => per.access
-        )
+        ) */
 
         if (isSiteOwner)
           return (

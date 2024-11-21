@@ -1,19 +1,22 @@
 import EventForm from '@/components/forms/EventForm'
 import { currentUser } from '@/lib/auth'
 import React from 'react'
-
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 const Page = async () => {
   const user = await currentUser()
   return (
-    <>
-      <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
-        <h3 className="wrapper h3-bold text-center sm:text-left">Create Event</h3>
-      </section>
-
-      <div className="wrapper my-8">
+    <ScrollArea className="h-full">
+      <Card className="lg:w-[1000px] mx-auto sm:container bg-primary/[3%] dark:bg-dark">
+        <CardHeader>
+          <p className="text-2xl font-semibold text-center">Ajouter une nouvelle Evénement</p>
+        </CardHeader>
+        <CardContent>
         <EventForm userId={user?.id} type="Create" />
-      </div>
-    </>
+      </CardContent>
+
+      </Card>
+    </ScrollArea>
   )
 }
 

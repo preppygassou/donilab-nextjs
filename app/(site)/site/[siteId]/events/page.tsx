@@ -1,5 +1,5 @@
 import React from 'react'
-import { PostTableView } from '@/components/tables/post-tables/post-table';
+import { EventTableView } from '@/components/tables/event-tables/event-table';
 import { getAllPosts } from '@/lib/queries';
 
 const Page =async (params: { siteId: string }) => {
@@ -8,7 +8,7 @@ const Page =async (params: { siteId: string }) => {
   return (
     <>
       <div className="flex-1 space-y-4  p-4 pt-6 md:p-8">
-        <PostTableView data={[]} />
+        <EventTableView data={[]} />
       </div>
     </>
   )
