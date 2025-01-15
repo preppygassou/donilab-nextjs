@@ -2,8 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import parse from "html-react-parser";
 import Dots from '../site/components/Dots';
-import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
+import { useParams, useRouter } from 'next/navigation';
 
 const HeroProgramSection = styled.section`
 overflow:hidden;
@@ -195,11 +194,11 @@ width:100%;
 
 function HeroProgram({ program }) {
   const [current, setCurrent] = useState(0);
-  const length = program.acf.galerie_programme.length;
+  const length = program?.galerie.length;
   const timeout = useRef(null);
-  
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  const params = useParams()
+  const { locale } = params;
+
 
   useEffect(() => {
     const nextSlide = () => {
@@ -214,30 +213,41 @@ function HeroProgram({ program }) {
   }, [current, length])
 
 
-  if (!Array.isArray(program.acf.galerie_programme) || program.acf.galerie_programme.length <= 0) {
+  if (!Array.isArray(program?.galerie) || program?.galerie.length <= 0) {
     return null;
   }
-
+  const statusTranslations = {
+    'FINISHED': 'TERMINÉ',
+    'IN PROGRESS': 'EN COURS',
+    'OPEN': 'OUVERT',
+    'REOPEN': 'RÉOUVERT',
+    'CLOSE': 'FERMÉ'
+  };
   return (
     <HeroProgramSection>
       <HeroProgramWrapper>
         <HeroProgramTextBox>
           <HeroProgramImgarc src={"/assets/rhome1.png"} />
           <HeroProgramInfo>
-            <img src={program.acf.logo_en_png_ou_svg.url} alt="" />
+            <img src={program?.logo.url} alt="" />
             <h1>
-              {program.title.rendered}
+              {program.title[locale]}
             </h1>
             <h3>
-        {locale=== "en" ?"Status of the project :":"État du projet : "}
+              {locale === "en" ? "Status of the project :" : "État du projet : "}
 
-               <span>{program.acf.etat}</span>
+              <span> {
+
+
+                locale === 'fr' ? statusTranslations[program?.status] : program?.status
+              }</span>
+
             </h3>
-            <h3>            
-        {locale=== "en" ?"DURATION :":"DURÉE : "}
-              <span>{program.acf.duree_du_programme}</span>
+            <h3>
+              {locale === "en" ? "DURATION :" : "DURÉE : "}
+              <span>{program?.duration[locale]}</span>
             </h3>
-            {parse(program.content.rendered)}
+            {program.description[locale]}
 
             {/* dangerouslySetInnerHTML={{ __html: program.content.rendered }}  */}
 
@@ -245,7 +255,7 @@ function HeroProgram({ program }) {
         </HeroProgramTextBox>
         <HeroProgramSlideWrapper>
           {
-            program.acf.galerie_programme.map((image, index) => (
+            program?.galerie.map((image, index) => (
               <HeroProgramSlide key={index}>
                 {index === current && (
                   <HeroProgramSlider>
@@ -258,7 +268,7 @@ function HeroProgram({ program }) {
           }
 
           <SliderDots>
-            <Dots slides={program.acf.galerie_programme} activeIndex={current}></Dots>
+            <Dots slides={program?.galerie} activeIndex={current}></Dots>
           </SliderDots>
         </HeroProgramSlideWrapper>
       </HeroProgramWrapper>

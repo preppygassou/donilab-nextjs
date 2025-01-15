@@ -1,9 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
-import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
-
+import { useParams, useRouter } from 'next/navigation';
 
 
 
@@ -84,9 +82,8 @@ width: 80px;
 
 
 function Resultats({program}) {
-  /* const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale */
-  const { locale } = useRouter();
+  const params = useParams()
+  const { locale} = params;
   
 
   return (
@@ -102,7 +99,18 @@ function Resultats({program}) {
      </h1>
      
      {
-       parse(program.acf.resultats)
+      <ul>
+        {program?.results?.map((resultat, index) => (
+          <li key={index}>
+        <p>{locale === "en" ? resultat.en : resultat.fr}</p>
+        <p>{locale === "en" ? `Indicator: ${resultat.indicator.en}` : `Indicateur: ${resultat.indicator.fr}`}</p>
+        <p>{locale === "en" ? `Achieved: ${resultat.achieved}` : `Réalisé: ${resultat.achieved}`}</p>
+        <p>{locale === "en" ? `Target: ${resultat.target}` : `Cible: ${resultat.target}`}</p>
+       
+
+          </li>
+        ))}
+      </ul>
      }
 
     </ResultatsSection>

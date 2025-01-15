@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
 import PartnersSlider from './PartnersSlider'
 import styled from 'styled-components/';
-import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
+import { useParams, useRouter } from 'next/navigation';
 
 const PartnersSectionLogo = styled.div `
 overflow:hidden;
@@ -37,7 +36,8 @@ width: 80px;
 
 
 function Partners({program}) {
-  const { locale } = useRouter();
+  const params = useParams()
+  const { locale} = params;
   
 
   return (

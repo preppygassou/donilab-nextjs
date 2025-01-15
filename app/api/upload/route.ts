@@ -6,8 +6,8 @@ import cloudinary from '@/lib/cloudinary';
 import { v4 as uuidv4 } from 'uuid';
 /* import { PutObjectCommand } from '@aws-sdk/client-s3'; */
 import minioClient from '@/lib/n0cStorage';
-/* import { s3Client } from '../../../lib/n0cStorage';
- */
+import { s3Client } from '../../../lib/n0cStorage';
+
 /* type Data = {
   url?: string;
   error?: string;

@@ -2,8 +2,6 @@ import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
 import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
-
 
 
 const ObjectifsSections = styled.section`
@@ -124,7 +122,17 @@ function Objectifs({program}) {
       {locale=== "en" ?"GLOBAL Goals":"objectif GLOBAL"}
 
       </ObjectifsTitle>
-      {parse(program.acf.objectif_global)}
+
+      <h3>
+      {locale=== "en" ?"The Goals objectives associated with the program are:":"Les objectifs global associés au programme sont : "}
+
+      </h3>
+    
+      {program?.objectif?.global?.map((obj) => (
+        <p key={obj.id}>
+          {locale === "en" ? obj.en : obj.fr}
+        </p>
+      ))}
 
       <ObjectifsTitle>
       {locale=== "en" ?"Specific objectives":"objectifs spécifiques"}
@@ -134,10 +142,11 @@ function Objectifs({program}) {
       {locale=== "en" ?"The specific objectives associated with the program are:":"Les objectifs spécifiques associés au programme sont : "}
 
       </h3>
-      
-      {parse(program.acf.objectif_specifiques)}
-
-
+      {program?.objectif?.specifiques?.map((obj) => (
+        <p key={obj.id}>
+          {locale === "en" ? obj.en : obj.fr}
+        </p>
+      ))}
 
     </ObjectifsSections>
   )

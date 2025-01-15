@@ -8,7 +8,9 @@ import dynamic from 'next/dynamic';
 import { GeneralContext } from "../../../../services/general/general.context";
 import { CurrentLangContext } from "@/Context/CurrentLangContext";
 import { useParams } from "next/navigation";
-import { site } from "../../components/siteData";
+import { useSite } from "@/hooks/useSites";
+import LoadingPage from "@/components/global/loading-page";
+/* import { site } from "../../components/siteData"; */
 const ContactPage = styled.section`
 `;
 
@@ -182,10 +184,14 @@ function Contact() {
 
   const params = useParams<{ locale: string; }>()
   const { locale} = params;
+ const { data: site, isLoading, error } = useSite("dml");
 
   return (
-    <Layout footer={site?.data?.footer}>
-      <ContactPage>
+    <>
+    {
+      isLoading?<LoadingPage/>:
+    <Layout data={site} footer={site?.data?.footer}>
+      {site&&<ContactPage>
         {
    <>
             <HeroContact>
@@ -265,8 +271,10 @@ function Contact() {
             </ContactSection>
           </>
         }
-      </ContactPage>
+      </ContactPage>}
     </Layout>
+     }
+    </>
   );
 }
 

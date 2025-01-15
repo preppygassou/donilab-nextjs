@@ -190,7 +190,7 @@ const Contactfunction =(stylecontact: string) =>{
 
 const Navbar = (props: { toggle: any; }) => {
 
-  const {toggle} = props
+  const {toggle,data} = props
 
   const params = useParams<{ locale: string; }>()
   const { locale} = params;
@@ -205,7 +205,7 @@ const Navbar = (props: { toggle: any; }) => {
         </MenuHamburger>
       <NavMenu>
            {
-         site &&  site?.data?.header?.menu.map((item,index)=>(
+         data &&  data?.data?.header?.menu.map((item,index)=>(
         
         <NavMenuLinks className={Contactfunction(item.link) +  Activefunction(item.link)} exact={true} href={item.link} key={index}>
         <p>{item.title[locale]}</p>

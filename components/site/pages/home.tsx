@@ -11,27 +11,34 @@ import Dexpertise from '@/components/site/components/Dexpertise'
 import PartnersSection from '@/components/site/components/PartnersSection';
 import Labelafricinnov from '@/components/site/components/Labelafricinnov';
 import Layout from '@/components/site/components/Layout';
-import { site } from '../components/siteData';
+import { useSite } from '@/hooks/useSites';
+import Loading from '@/components/global/loading';
 
 
 export default function Home(/* { hubs, expertises, blogs, impacts, dexpertises, partners, generales } */) {
-
+//  const { data, isLoading, error } = useSite("dml");
+ const { data: site, isLoading, error } = useSite("dml");
 
   return (
-    <Layout footer={site?.data?.footer}>
+    <>
+    {
+      isLoading?<Loading/>:<Layout data={site} footer={site?.data?.footer}>
 
       <Hero site={site}/>
-      {site.expertise && site.expertise.length > 0 && <ExpertiseSection expertises={site.expertise} />}
-      {site.posts && site.posts.length > 0 && <BlogSlideSection posts={site.posts} />}
-      {site.impact && site.impact.length > 0 && <ImpactSection impacts={site.impact} />}
+      {site?.expertise && site?.expertise.length > 0 && <ExpertiseSection expertises={site?.expertise} />}
+      {site?.posts && site?.posts.length > 0 && <BlogSlideSection posts={site?.posts} />}
+      {site?.impact && site?.impact.length > 0 && <ImpactSection impacts={site?.impact} />}
       {
-        site.teams && site.teams.length > 0 && <TeamSection home="home" teams={site.teams} />
+        site?.teams && site?.teams.length > 0 && <TeamSection home="home" teams={site?.teams} />
       }
-      {site.services && site.services.length > 0 && <Dexpertise dexpertises={site.services} />}
+      {site?.services && site?.services.length > 0 && <Dexpertise dexpertises={site?.services} />}
 
-      {site.partners && site.partners.length > 0 && <PartnersSection partenaires={site.partners} />}
+      {site?.partners && site?.partners.length > 0 && <PartnersSection partenaires={site?.partners} />}
       <Labelafricinnov />
     </Layout>
+    }
+    </>
+    
   )
 }
 

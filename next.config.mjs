@@ -30,6 +30,14 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: process.env.REACT_APP_BASE_URL + '/:path*',
+      }
+    ]
+  },
   env: {
     REACT_APP_BASE_URL: process.env.REACT_APP_BASE_URL,
   },

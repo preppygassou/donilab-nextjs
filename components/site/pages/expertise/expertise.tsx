@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import ExpertiseSection from '../../components/ExpertiseSection'
 import Link from 'next/link';
 import Layout from '../../components/Layout';
-import { site } from '../../components/siteData';
 import { useParams } from 'next/navigation';
+import { useSite } from '@/hooks/useSites';
+import LoadingPage from '@/components/global/loading-page';
 
 
 const ExpertiseContainer = styled.div `
@@ -210,9 +211,13 @@ transform: rotateY(180deg);
 function Expertise() {
   const params = useParams<{ locale: string; }>()
   const { locale} = params;
+ const { data: site, isLoading, error } = useSite("dml");
 
   return (
-    <Layout footer={site?.data?.footer}>
+    <>
+    {
+      isLoading?<LoadingPage/>:
+    <Layout data={site} footer={site?.data?.footer}>
     <ExpertiseContainer>
         <ExpertiseContainerWrapper>
         <ExpertiseHero>
@@ -306,6 +311,8 @@ function Expertise() {
       </ExpertiseContainerWrapper>
     </ExpertiseContainer>
     </Layout>
+     }
+    </>
   )
 }
 

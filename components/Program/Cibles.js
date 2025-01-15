@@ -1,9 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
-import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
-
+import { useParams } from 'next/navigation';
 
 
 
@@ -86,25 +84,28 @@ width: 80px;
 
 
 function Cibles({program}) {
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
+  const params = useParams()
+  const { locale} = params;
   
 
   return (
-    
       <CibleSection>
-      <CibleparalaxImgtop src={"/assets/svg/cibleparalaximgtop.svg"} alt=""/>
+        <CibleparalaxImgtop src={"/assets/svg/cibleparalaximgtop.svg"} alt=""/>
         <CibleparalaxImgbottom src={"/assets/svg/cibleparalaximgbottom.svg"} alt=""/>
         <CibleVisionMissionIcon className="" src={"/assets/svg/Cibleicone.svg"} alt="Historic icon" />
         <h1>
-  {locale=== "en" ?"targets":"cibles"}
-
-        
-       </h1>
-       <div className="cibleslistes">
-        {
-          parse(program.acf.les_cibles_du_programmes)
-        }
+          {locale === "en" ? "targets" : "cibles"}
+        </h1>
+        <div className="cibleslistes">
+          <ul>
+            {
+              program?.targets?.map(target => (
+                <li key={target.id}>
+                  {locale === "en" ? target.en : target.fr} - {locale === "en" ?"Achieved":"Réalisé"} {target.value}
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </CibleSection>
   )

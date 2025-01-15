@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
-import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
-
+import { useParams, useRouter } from 'next/navigation';
 
 const BeneficiairesSections = styled.section`
   background-color:#2755A1;
@@ -119,18 +117,51 @@ color:#fff;
 `;
 
 function Beneficiaires({program}) {
-  const { locale } = useRouter();
+  const params = useParams()
+  const { locale} = params;
+
+  const getFilteredBeneficiaries = (editionId) => {
+    return program?.beneficiaries?.filter(beneficiary => 
+      beneficiary.editions.includes(editionId)
+    );
+  };
+
 
   return (
     <BeneficiairesSections>
         <BeneficiairesIcon className="" src={"/assets/svg/partnersSvgProgram.svg"} alt="Beneficiaire icon" />
         <BeneficiairesTitle >
-  {locale=== "en" ?"BENEFICIARIES":"BÉNÉFICIAiRES"}
+  {locale=== "en" ?"BENEFICIARIES":"BÉNÉFICIAIRES"}
          <br/> 
   {locale=== "en" ?"FROM THE PROGRAM ":"DU PROGRAMME"}
 
        </BeneficiairesTitle >
-       <BeneficiairesLogoContent>
+       {
+        program?.editions && program?.editions.length > 0 && program?.editions.map((edition) => (
+<BeneficiairesLogoContent key={edition.id}>
+<h1>
+  {edition.name[locale]}
+
+         </h1>
+         <BeneficiairesLogoCards>
+         {
+           getFilteredBeneficiaries(edition.id) && getFilteredBeneficiaries(edition.id).length > 0 && getFilteredBeneficiaries(edition.id).map((beneficiary,index)=>(
+               <BeneficiaireLogoWrapper key={index}>
+              <div className="BeneficiairesLogoCard">
+              <BeneficiairesLogo src={beneficiary.logo.url}/>
+              </div>
+              <div className="BeneficiairesLogoDescription">
+                <p>{beneficiary.summary}</p>
+              </div>
+              </BeneficiaireLogoWrapper>
+
+             ))
+           }
+         </BeneficiairesLogoCards>
+</BeneficiairesLogoContent>
+        ))
+       }
+       {/* <BeneficiairesLogoContent>
          <h1>
   {locale=== "en" ?"1st edition":"1er édition"}
 
@@ -138,13 +169,13 @@ function Beneficiaires({program}) {
 
          <BeneficiairesLogoCards>
            {
-             program.acf.information_du_beneficiare.map((beneficiaires,index)=>(
+           filteredBeneficiaries && filteredBeneficiaries.length > 0 && filteredBeneficiaries.map((beneficiary,index)=>(
                <BeneficiaireLogoWrapper key={index}>
               <div className="BeneficiairesLogoCard">
-              <BeneficiairesLogo src={beneficiaires.logo_de_lentreprise_beneficiaire.url}/>
+              <BeneficiairesLogo src={beneficiary.logo.url}/>
               </div>
               <div className="BeneficiairesLogoDescription">
-                <p>{beneficiaires.bref_resumer}</p>
+                <p>{beneficiary.summary}</p>
               </div>
               </BeneficiaireLogoWrapper>
 
@@ -152,7 +183,7 @@ function Beneficiaires({program}) {
            }
          </BeneficiairesLogoCards>
        </BeneficiairesLogoContent>
-      
+       */}
     </BeneficiairesSections>
   )
 }

@@ -5,6 +5,7 @@ import HeroDonilabImg from "/assets/herodonilab.png"
 import CircleHeroImg from "/assets/rhome1.png"
 import CircleHeroInImg from "/assets/cercleblanc.svg"
 import { CurrentLangContext } from '../../Context/CurrentLangContext'
+import { useParams } from 'next/navigation'
 
 const HeroSection = styled.section`
 overflow:hidden;
@@ -140,9 +141,8 @@ right: 61vh;
 
 
 function Hero({slides}) {
-  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale
-  
+  const params = useParams()
+  const { locale} = params;
  
   return (
       <HeroSection>

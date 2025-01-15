@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
-import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
+import { useParams, useRouter } from 'next/navigation';
 
 const ZonesSections = styled.section`
 background-color:#2755A1;
@@ -78,9 +77,10 @@ width: 100px;
 
 function Zones({program}) {
 
-  const zonesactive = (zoneactive) => (program.acf.zones.includes(zoneactive) ? "#95b71d" : "none")
+  const zonesactive = (zoneactive) => (program?.Zones.some(zone => zone.name[locale] === zoneactive) ? "#95b71d" : "none")
   
-  const { locale } = useRouter();
+  const params = useParams()
+  const { locale} = params;
     
   return (
     <ZonesSections>
@@ -113,8 +113,8 @@ function Zones({program}) {
           
           <ul>
           {
-            program.acf.zones.map((zone,index)=>(
-              <li key={index}>{zone}</li>
+            program?.Zones.map((zone,index)=>(
+              <li key={index}>{zone.name[locale]}</li>
               ))
           }
           </ul>

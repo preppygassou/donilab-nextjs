@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React  from 'react'
 import styled from 'styled-components';
 
 
 
-import { useRouter } from 'next/navigation';
-import Router, { withRouter } from 'next/router'
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
+import { useParams,useRouter } from 'next/navigation';
+
+
+
 const ProgramDonilabContent = styled.div`
  -webkit-box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
 -moz-box-shadow: 4px 12px 20px 0px rgba(0,0,0,0.27);
@@ -264,12 +265,13 @@ flex-direction:column;
 
 
 
-function ProgramInPartner({ programPartnersData,history }) {
+function ProgramInPartner({ programPartnersData }) {
   
-  const { state:stateLocale } = useContext(CurrentLangContext);
   //const {locale} =  stateLocale
-  const params = useParams<{ locale: string; }>()
+  const params = useParams()
   const { locale} = params;
+
+  const Router =useRouter()
 
   return (
     <ProgramDonilabContent className="donilab-program_container">
@@ -277,7 +279,7 @@ function ProgramInPartner({ programPartnersData,history }) {
         {
           ProgramData && ProgramData.map((program) => (
             <OneOfProgramDonilab className='donilab-program-card card' key={program.id}>
-                <img className='card-img-top' src={program.acf.logo_officiel.url} alt={program.title.rendered} />
+                <img className='card-img-top' src={program?.logo_officiel.url} alt={program.title.rendered} />
               <ProgramLogo className='donilab-program_thumnail'>
               </ProgramLogo>
 
@@ -287,7 +289,7 @@ function ProgramInPartner({ programPartnersData,history }) {
 
                 </div>
                 <div className="donilab-program_description">
-                  <p className='card-text'>{program.acf.programme_description.length > 100 ? program.acf.programme_description.substring(0, 100) + "..." : program.acf.programme_description}</p>
+                  <p className='card-text'>{program?.programme_description.length > 100 ? program?.programme_description.substring(0, 100) + "..." : program?.programme_description}</p>
                 </div>
                 <div className="donilab-program_link">
                   <Link className="program-link-action" href={`/program/${program.slug}`}>
@@ -304,25 +306,25 @@ function ProgramInPartner({ programPartnersData,history }) {
         programPartnersData && programPartnersData.length > 0 && programPartnersData.map((program) => (
           <OneOfProgramDonilab className='donilab-program-card' key={program.id}>
              <div className='donilab-program_thumnail'>
-            <img className='card-img-top' src={program.acf.logo_officiel.url ? program.acf.logo_officiel.url : program.acf.logo_en_png_ou_svg.url ? program.acf.logo_en_png_ou_svg.url : "/assets/dummy.png"} alt={"programme image"} />
+             <img className='card-img-top' src={program?.logo?.url ? program?.logo?.url : "/assets/dummy.png"} alt={"programme image"} />
               </div>
             <div className="donilab-program__content">
             <div className="donilab-program__card-body">
               {/* <h5 className="card-title"> {program.title.rendered}</h5> */}
               <div className="donilab-program__title">
-                  <h3 className="card-title"> {program.title.rendered}</h3>
+              <h3 className="card-title"> {program.title[locale]}</h3>
 
                 </div>
                 <div className="donilab-program_description">
-                  <p className='card-text'>{program.acf.programme_description.length > 100 ? program.acf.programme_description.substring(0, 100) + "..." : program.acf.programme_description}</p>
+                  <p className='card-text'>{program?.description[locale].length > 100 ? program?.description[locale].substring(0, 100) + "..." : program?.description[locale]}</p>
                 </div>
-              {/* <p className='card-text'>{program.acf.programme_description.length > 70 ? program.acf.programme_description.substring(0, 70) + "..." : program.acf.programme_description}</p> */}
-              {/* <p className='card-text'>{program.acf.programme_description.length > 100 ? program.acf.programme_description.substring(0, 100) + "..." : program.acf.programme_description}</p> */}
+              {/* <p className='card-text'>{program?.programme_description.length > 70 ? program?.programme_description.substring(0, 70) + "..." : program?.programme_description}</p> */}
+              {/* <p className='card-text'>{program?.description[locale].length > 100 ? program?.description[locale].substring(0, 100) + "..." : program?.description[locale]}</p> */}
 
 
             </div>
             <div class="donilab-program_card-footer">
-              <button className='btn' onClick={() => { Router.push(`/program/${program.slug}`) }}>
+            <button className='btn' onClick={() => { Router.push(`/${locale}/programme/${program.slug[locale]}`) }}>
 
                 {locale === "en" ? "find out more" : "en savoir plus"}
               </button>

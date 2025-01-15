@@ -49,7 +49,7 @@ const { auth } = NextAuth(authConfig);
 export default auth((request) => {
   const pathname = request.nextUrl.pathname;
   const { nextUrl } = request;
-  const isLoggedIn = !!request.auth;
+/*   const isLoggedIn = !!request.auth;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
@@ -73,9 +73,9 @@ export default auth((request) => {
     "/auth/error",
     "/auth/reset",
     "/auth/new-password", 
-  ];
+  ]; */
 
-   // Check if the pathname starts with any of the excluded paths
+ /*   // Check if the pathname starts with any of the excluded paths
    const isExcludedPath = excludedPaths.some((path) => pathname.startsWith(path));
 
    // Skip internationalization for excluded paths
@@ -108,7 +108,7 @@ export default auth((request) => {
     
      return NextResponse.next();
    }
-
+ */
     // Set Accept-Language header based on the NEXT_LOCALE cookie
   const localeCookie = request.cookies.get('NEXT_LOCALE');
   if (localeCookie) {

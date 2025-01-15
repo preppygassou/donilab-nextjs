@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
-import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
+import { useParams, useRouter } from 'next/navigation';
 
 
 const ActivitySection = styled.div `
@@ -47,7 +46,7 @@ h1{
 .cibleslistes ul li{
   margin-top:1rem;
 padding-left:-0.5em;
-
+text-align: left;
 }
 p{
   margin-bottom: .2rem;
@@ -64,25 +63,46 @@ width: 80px;
 `;
 
 function Activity({program}) {
- /*  const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale */
-  const { locale } = useRouter();
-  
+  const params = useParams()
+  const { locale} = params;
+
+  const translateStatus = (status) => {
+    if (locale === "fr") {
+      switch (status) {
+        case 'planned':
+          return 'prévu';
+        case 'in_progress':
+          return 'en cours';
+        case 'completed':
+          return 'terminé';
+        case 'cancelled':
+          return 'annulé';
+        default:
+            if (status === 'in_progress') {
+            return 'in progress';
+            }
+            return status;
+      }
+    }
+    return status;
+  };
 
   return (
     <div>
       <ActivitySection>
-      
         <CibleVisionMissionIcon className="" src={"/assets/svg/ActivityProgramsvg.svg"} alt="Historic icon" />
         <h1>
-  {locale=== "en" ?"activities carried out":"activités menées"}
-
-        
-       </h1>
+          {locale === "fr" ? "activités menées" : "activities carried out"}
+        </h1>
         <div className="cibleslistes">
-        {
-          parse(program.acf.activites)
-        }
+          <ul>
+            {program.activities.map(activity => (
+              <li key={activity.id}>
+               - {locale === "fr" ? activity.fr : activity.en} - {new Date(activity.startDate).toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long' })} {locale === "fr" ? "au":"to" } {new Date(activity.endDate).toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long' })} ({translateStatus(activity.status)})
+              
+              </li>
+            ))}
+          </ul>
         </div>
       </ActivitySection>
     </div>

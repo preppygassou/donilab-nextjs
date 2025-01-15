@@ -1,10 +1,8 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
-import { useRouter } from 'next/navigation';
-import { HubContext } from '~/services/hub/hub.context';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
+import { useParams } from 'next/navigation';
 
 
 
@@ -103,12 +101,10 @@ width: 200px;
   width: 150px;
        }
 `;
-const RelatedHub = ({ hub }) => {
+const RelatedHub = ({hubs, hub }) => {
 
-  const { locale } = useRouter();
-  
-  const { state, dispatch } = useContext(HubContext);
-  const { hubs, loading, error } = state
+  const params = useParams()
+  const { locale} = params;
 
   return (
     <RelatedHubsSection background={hub?"none":"#E4E4E4"}>
@@ -124,16 +120,16 @@ const RelatedHub = ({ hub }) => {
 
       <LinksRelateds>
         {
-          loading ? <div className="loading"/> : error ? <MessageBox>erreur de chargement</MessageBox> :hub?
-            hubs.filter(item => item.id !== hub.id)
+          hub?
+            hubs?.filter(item => item.id !== hub.id)
               .map(hubrelated => (
-                <Link key={hubrelated.id} href={`/hub/${hubrelated.slug}`}>
-                  {hubrelated.title.rendered}
+                <Link key={hubrelated.id} href={`/hub/${hubrelated.slug[locale]}`}>
+                  {hubrelated.title[locale]}
                 </Link>
               ))
-              :hubs.map(hubrelated => (
-                <Link key={hubrelated.id} href={`/hub/${hubrelated.slug}`}>
-                  {hubrelated.title.rendered}
+              :hubs?.map(hubrelated => (
+                <Link key={hubrelated.id} href={`/hub/${hubrelated.slug[locale]}`}>
+                  {hubrelated.title[locale]}
                 </Link>
               ))
 
