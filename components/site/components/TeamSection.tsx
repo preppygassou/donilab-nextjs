@@ -502,7 +502,7 @@ function TeamSection({ initialSlide, about, ishub, hub,teams, home, children }) 
             { locale === "en" ?"OUR TEAM" : "NOTRE ÉQUIPE"}
           </h1>
           <p>
-            {hub.acf.description_team}
+            {(hub?.description_team[locale])}
           </p>
 
         </HubTeamSectionHead> :
@@ -560,7 +560,7 @@ function TeamSection({ initialSlide, about, ishub, hub,teams, home, children }) 
           }}
         >
           {
-            teams.map((team, index) => (
+           teams && teams.length > 0 && teams.map((team, index) => (
 
               <div className={`team-slider ${index === 0 ? "first" : ""} ${index === teams.length - 1 ? "last" : ""}`} key={index}>
 

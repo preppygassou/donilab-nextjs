@@ -5,8 +5,10 @@ import DoniEvent from '../../components/DoniEventSection';
 import TeamSection from '../../components/TeamSection';
 import SectionTitle from "../../components/SectionTitle";
 import Layout from '@/components/site/components/Layout';
-import { site } from '@/components/site/components/siteData';
+/* import { site } from '@/components/site/components/siteData'; */
 import { useParams } from 'next/navigation';
+import { useSite } from '@/hooks/useSites';
+import LoadingPage from '@/components/global/loading-page';
 
 const AboutContainer = styled.div`
 width:100%;
@@ -250,14 +252,15 @@ export default function About() {
   
   const params = useParams<{ locale: string; }>()
   const { locale} = params;
-
-
+  const { data: site, isLoading, error } = useSite("dml");
   return (
-    <Layout footer={site?.data?.footer}>
+    <>
+    {
+      isLoading?<LoadingPage/>: <Layout data={site} footer={site?.data?.footer}>
       <AboutContainer>
         <AboutWrapper>
           {
-            site.data.about_page.about&& site.data.about_page.about.map((about, index) => (
+            site?.data?.about_page?.about&& site?.data?.about_page?.about.map((about, index) => (
               index === 0 ? <AboutHero>
                 <AboutheroparalaxeLeft src={"/assets/svg/aboutheroleftparalaxe.svg"} alt="" />
                 <AboutheroparalaxeRight src={"/assets/svg/aboutherorightparalaxe.svg"} alt="" />
@@ -322,11 +325,13 @@ export default function About() {
               )
             } */}
             {
-        site.teams && site.teams.length > 0 && <TeamSection about="about" teams={site.teams} />
+        site?.teams && site?.teams.length > 0 && <TeamSection about="about" teams={site?.teams} />
       }
-          <DoniEvent events={site.events}/>
+          <DoniEvent events={site?.events}/>
         </AboutWrapper>
       </AboutContainer>
       </Layout>
+      }
+    </>
   )
 }

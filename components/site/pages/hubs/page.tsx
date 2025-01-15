@@ -5,8 +5,9 @@ import SectionTitle from "../../components/SectionTitle";
 import ErrorBoundary from '../../components/ErrorBoundary';
 import { useParams } from 'next/navigation';
 import Layout from '../../components/Layout';
-
-import { site } from '../../components/siteData';
+import { useHubs } from '@/hooks/useHubs';
+import { useSite } from '@/hooks/useSites';
+import LoadingPage from '@/components/global/loading-page';
 
 
 const HubPage = styled.div`
@@ -499,11 +500,12 @@ function Hubs() {
  
   const params = useParams<{ locale: string; }>()
   const { locale} = params;
-  /* const { state } = useContext(HubContext);
-  const { hubs, loading, error } = state */
+  const { data: site, isLoading, error } = useSite("dml");
 
   return (
-    <Layout footer={site?.data?.footer}>
+    <>
+    {
+      isLoading?<LoadingPage/>:<Layout data={site} footer={site?.data?.footer}>
       <HubPage>
         <HeroHub>
           <HubheroparalaxeLeft src={"/assets/svg/paralaxetopherohub.svg"} alt="" />
@@ -528,82 +530,38 @@ function Hubs() {
             {
               
                 <HubsSectionWrapper className='donilab-hubs__container'>
+                  {site?.hubs?.length > 0 && site.hubs.map((hub, index) => {
+                    const isBamako = [0, 3, 6, 9, 12, 15, 18, 21, 24, 27].includes(index);
+                    const isSikasso = [1, 4, 7, 10, 13, 16, 19, 22, 25, 29].includes(index);
 
+                    const HubComponent = isBamako ? HubBamako : isSikasso ? HubSikasso : HubSegou;
+                    const HubParalaxe = isBamako ? Hubbamakoparalaxe : isSikasso ? Hubsikassoparalaxe : Hubbamakoparalaxe;
+                    const HubInfoComponent = isBamako ? HubBamakoInfo : isSikasso ? HubSikassoInfo : HubSegouInfo;
+                    const hubInfoProps = isBamako ? {} : isSikasso ? {} : { gris: true };
+                    const HubImgComponent = isBamako || !isSikasso ? HubBamakoImg : HubSikassoImg;
 
-
-                  {/* the realy */}
-                  {/* {
-                    hubs.map((hub, index) => (
-                      index === 0 || index === 3 || index === 6 || index === 9 || index === 12 || index === 15 || index === 18 || index === 21 || index === 24 || index === 27  ? (
-                        <HubBamako key={index}>
-                          <Hubbamakoparalaxe src={"/assets/svg/paralaxebamakohub.svg"} alt="" />
-                          <HubBamakoInfo>
-                            <div>
-                              <h1>
-                              {hub.title.rendered}
-                              </h1>
-                            </div>
-                            <div className="contenthubinfo">
-                              {parse(hub.content.rendered)}
-                            </div>
-
-                            <HubExploreLink green="true">
-                              <Link href={`/hub/${hub.slug}`} >
-                                {locale === "en" ? "DISCOVER THE HUB" : "DÉCOUVRIR LE HUB"}
-                              </Link>
-                            </HubExploreLink>
-                          </HubBamakoInfo>
-                          <HubBamakoImg>
-                            <img src={hub.fimg_url} alt="" />
-                          </HubBamakoImg>
-                        </HubBamako>
-                      ) : index === 1 || index === 4 || index === 7 || index === 10 || index === 13 || index === 16 || index === 19 || index === 22 || index === 25 || index === 29 ? (
-                        <HubSikasso key={index}>
-                          <Hubsikassoparalaxe src={"/assets/svg/paralaxesikassohub.svg"} alt="" />
-                          <HubSikassoImg>
-                            <img src={hub.fimg_url} alt="" />
-                          </HubSikassoImg>
-
-                          <HubSikassoInfo>
-                            <div>
-                              <h1>{hub.title.rendered}</h1>
-                            </div>
-                            <div className="contenthubinfo">
-                              {parse(hub.content.rendered)}
-                            </div>
-                            <HubExploreLink>
-                              <Link href={`/hub/${hub.slug}`}>
-                                {locale === "en" ? "DISCOVER THE HUB" : "DÉCOUVRIR LE HUB"}
-                              </Link>
-                            </HubExploreLink>
-                          </HubSikassoInfo>
-
-                        </HubSikasso>
-
-                      ) :  (
-
-                        <HubSegou key={index}>
-                          <Hubbamakoparalaxe src={"/assets/svg/paralaxesegouhub.svg"} alt="" />
-                          <HubSegouInfo gris="true">
-                            <div>
-                              <h1>{hub.title.rendered}</h1>
-                            </div>
-                            <div className="contenthubinfo">
-                              {parse(hub.content.rendered)}
-                            </div>
-                            <HubExploreLink>
-                              <Link href={`/hub/${hub.slug}`}>
-                                {locale === "en" ? "DISCOVER THE HUB" : "DÉCOUVRIR LE HUB"}
-                              </Link>
-                            </HubExploreLink>
-                          </HubSegouInfo>
-                          <HubBamakoImg>
-                            <img src={hub.fimg_url} alt="" />
-                          </HubBamakoImg>
-                        </HubSegou>
-                      )
-                    ))
-                  } */}
+                    return (
+                      <HubComponent key={index}>
+                        <HubParalaxe src={isBamako ? "/assets/svg/paralaxebamakohub.svg" : isSikasso ? "/assets/svg/paralaxesikassohub.svg" : "/assets/svg/paralaxesegouhub.svg"} alt="" />
+                        <HubInfoComponent {...hubInfoProps}>
+                          <div>
+                            <h1>{hub.title[locale]}</h1>
+                          </div>
+                          <div className="contenthubinfo">
+                            {hub.description[locale]}
+                          </div>
+                          <HubExploreLink green={isSikasso}>
+                            <a href={`/hub/${hub.slug[locale]}`}>
+                              {locale === "en" ? "DISCOVER THE HUB" : "DÉCOUVRIR LE HUB"}
+                            </a>
+                          </HubExploreLink>
+                        </HubInfoComponent>
+                        <HubImgComponent>
+                          <img src={hub.fimg_url} alt="" />
+                        </HubImgComponent>
+                      </HubComponent>
+                    );
+                  })}
                 </HubsSectionWrapper>
             }
 
@@ -613,6 +571,9 @@ function Hubs() {
 
       </HubPage>
     </Layout>
+    }
+    </>
+    
   )
 }
 

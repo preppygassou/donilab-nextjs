@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
 import styled, { css } from 'styled-components';
-import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
-
+import { useParams, useRouter } from 'next/navigation';
 
 const ProgramOfHubSection = styled.section`
 padding:4rem;
@@ -132,10 +130,10 @@ img{
 
 `;
 
-function ProgramsOfHub({ hub }) {
-  /* const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale */
-  const { locale } = useRouter();
+function ProgramsOfHub({programtypes, hub }) {
+  const params = useParams()
+  const { slug,locale} = params;
+   
   
   return (
     <ProgramOfHubSection>
@@ -146,32 +144,27 @@ function ProgramsOfHub({ hub }) {
         {locale=== "en" ?"hub programs":"les programmes du hub"}
         </h1>
       </ProgramHeadContent>
-      <ProgramOfHubContainer>
-        <ProgramOfHubListsContent>
-          <p>{hub.acf.description_programme_hub} </p>
+      {
+       programtypes && programtypes.length > 0 && 
+       <ProgramOfHubContainer>
+       {programtypes.map((type) => (
+        <ProgramOfHubListsContent key={type.id}>
+          <p>{type.name[locale]} </p>
           <ProgramOfHubLists>
-            {
-              hub.acf.programmes_par_hub.map((program,index) => (
-                <div key={index} className="logoprogramhub">
-                  <img src={program.logo.url} alt={program.name} />
-                </div>
-              ))
-            }
+          {hub?.Programs
+          ?.filter((program) => program.programTypeId === type.id)
+          .map((filteredProgram, index) => (
+            <div key={index} className="logoprogramhub">
+              <img src={filteredProgram?.logo?.url} alt={filteredProgram?.title[locale]} />
+            </div>
+          ))}
           </ProgramOfHubLists>
         </ProgramOfHubListsContent>
-        <ProgramOfHubListsContent>
-          <p>{hub.acf.description_programme_partenariat} </p>
-          <ProgramOfHubLists>
-            {
-              hub.acf.programmes_en_partenariat.map((program,index) => (
-                <div key={index} className="logoprogramhub">
-                  <img src={program.logo.url} alt={program.name} />
-                </div>
-              ))
-            }
-          </ProgramOfHubLists>
-        </ProgramOfHubListsContent>
+      ))}
+       
       </ProgramOfHubContainer>
+      }
+      
     </ProgramOfHubSection>
   )
 }

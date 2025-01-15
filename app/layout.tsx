@@ -5,7 +5,7 @@ import { Toaster } from '@/components/ui/toaster'
 import { Toaster as SonnarToaster } from '@/components/ui/sonner'
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
-
+import 'react-quill/dist/quill.snow.css';
 
 import { cn } from "@/lib/utils"
 import "@/styles/globals.css"
@@ -13,6 +13,7 @@ import "@/public/fonts/font-awesome/css/all.min.css"
 
 import StyledJsxRegistry from './registry'
 import { Metadata } from 'next'
+import { Providers } from '@/providers/query-provider'
 
 
 const montserrat_Alternates = Montserrat_Alternates({
@@ -52,9 +53,13 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <ModalProvider>
-          <StyledJsxRegistry>{children}</StyledJsxRegistry>
+          <Providers>
+          <StyledJsxRegistry>
+            {children}
+          </StyledJsxRegistry>
           <Toaster />
           <SonnarToaster position="bottom-left" />
+            </Providers>
           </ModalProvider>
         </ThemeProvider>
          

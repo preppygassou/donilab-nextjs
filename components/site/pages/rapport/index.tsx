@@ -3,7 +3,8 @@ import { useParams } from 'next/navigation';
 import React from 'react'
 import styled from 'styled-components';
 import Layout from '@/components/site/components/Layout';
-import { site } from '../../components/siteData';
+import { useSite } from '@/hooks/useSites';
+import LoadingPage from '@/components/global/loading-page';
 
 export const RapportPage = styled.section`
 
@@ -122,66 +123,43 @@ const Rapport = () =>{
 
   const params = useParams<{ locale: string; }>()
   const { locale} = params;
+ const { data: site, isLoading, error } = useSite("dml");
 
   return (
-    <Layout footer={site?.data?.footer}>
+    <>
+    {
+      isLoading?<LoadingPage/>:
+    <Layout data={site} footer={site?.data?.footer}>
     <RapportPage>
       <HeroRapport>
         <h1> {locale==="en"?"ANNUAL REPORT":"RAPPORT ANNUEL"}</h1>
       </HeroRapport>
-      <Container>
+      {site?.reports && site.reports.map((report, index) => (
+        <Container key={index} className={index % 2 === 1 ? "revers" : ""}>
+          {index % 2 === 0 && (
         <Cover>
-          <img src={"/assets/Rapport-dactivite-Donilab-2021-VF-01.png"} alt="RAPPORT 2021" />
+          <img src={report.featured_media.url} alt={`RAPPORT ${report.year}`} />
         </Cover>
-        <DownloadCtn>
-          <h1>{locale==="en"?"REPORT":"RAPPORT"} 2021</h1>
-          <DownLoadBtn href="https://bit.ly/Rapport_Donilab_2021" target="_blank" className="allblog">
-             {locale==="en"?"Download":"Télecharger"}
-          </DownLoadBtn>
-        </DownloadCtn>
-
-      </Container>
-      <Container className="revers">
-        
-        <DownloadCtn>
-          <h1>{locale==="en"?"REPORT":"RAPPORT"} 2020</h1>
-          <DownLoadBtn href="https://bit.ly/Rapport_Donilab_2020" target="_blank" className="allblog">
-           {locale==="en"?"Download":"Télecharger"}
-          </DownLoadBtn>
-        </DownloadCtn>
+          )}
+          <DownloadCtn>
+        <h1>{locale === "en" ? "REPORT" : "RAPPORT"} {report.year}</h1>
+        <DownLoadBtn href={report.link} target="_blank" className="allblog">
+          {locale === "en" ? "Download" : "Télecharger"}
+        </DownLoadBtn>
+          </DownloadCtn>
+          {index % 2 === 1 && (
         <Cover>
-          <img src={"/assets/Rapport_Donilab_2020-01.png"} alt="RAPPORT 2020" />
+          <img src={report.image} alt={`RAPPORT ${report.year}`} />
         </Cover>
-
-      </Container>
-      <Container>
-        <Cover>
-          <img src={"/assets/Rapport_activite_2019-01.png"} alt="RAPPORT 2019" />
-        </Cover>
-        <DownloadCtn>
-          <h1>{locale==="en"?"REPORT":"RAPPORT"} 2019</h1>
-          <DownLoadBtn href="https://bit.ly/Rapport_Donilab_2019" target="_blank" className="allblog">
-             {locale==="en"?"Download":"Télecharger"}
-          </DownLoadBtn>
-        </DownloadCtn>
-
-      </Container>
-      <Container className="revers">
-        
-        <DownloadCtn>
-          <h1>{locale==="en"?"REPORT":"RAPPORT"} 2018</h1>
-          <DownLoadBtn href="https://bit.ly/Rapport_Donilab_2018" target="_blank" className="allblog">
-           {locale==="en"?"Download":"Télecharger"}
-          </DownLoadBtn>
-        </DownloadCtn>
-        <Cover>
-          <img src={"/assets/Rapport_d_activite_2018-01.png"} alt="RAPPORT 2018" />
-        </Cover>
-
-      </Container>
-
+          )}
+        </Container>
+      ))}
+      
     </RapportPage>
     </Layout>
+     }
+     </>
+     
   )
 }
 

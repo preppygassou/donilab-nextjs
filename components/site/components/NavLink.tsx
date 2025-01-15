@@ -43,8 +43,6 @@ const NavLink = ({ href, exact, children, ...props }) =>{
   if (active) {
     props.className = `${props.className ? props.className : ''} active`.trim();
   }
-
-  console.log("pathnameWithoutLocale",pathnameWithoutLocale)
   return (
       <Link href={href} {...props}>
         {children}

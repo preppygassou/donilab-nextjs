@@ -13,8 +13,12 @@ import { getProgramByprogrammestypes } from '@/utilities/program-helper';
 import Layout from '@/components/site/components/Layout';
 import { site } from '../../components/siteData';
 import { useParams, useRouter } from 'next/navigation';
+import { useSite } from '@/hooks/useSites';
+import LoadingPage from '@/components/global/loading-page';
+import { useProgramTypes } from '@/hooks/useProgramTypes';
+import ErrorAlert from '@/components/ErrorAlert';
 
-const SectionTitlell =styled.div`
+const SectionTitlell = styled.div`
 
 color: #fff;
   
@@ -40,7 +44,7 @@ span{
 
 `;
 
-const HeroProgram = styled.div `
+const HeroProgram = styled.div`
 display: flex;
   justify-content: center;
   width:100%;
@@ -85,7 +89,7 @@ width: 54px;
 
 `;
 
-const ProgramheroparalaxeLeft  = styled.img `
+const ProgramheroparalaxeLeft = styled.img`
 position:absolute;
 top:0;
 left:0;
@@ -119,7 +123,7 @@ height: 30%;
 width:40%;
 } */
 `;
-const ProgramheroparalaxeRight = styled.img `
+const ProgramheroparalaxeRight = styled.img`
 position:absolute;
 right:0;
 width:21%;
@@ -149,30 +153,30 @@ height:100%;
   display:none;
 }
 `;
-const ProgramdonilabparalaxeLeft= styled.img `
+const ProgramdonilabparalaxeLeft = styled.img`
 position:absolute;
 top:0;
 left:0;
 width:250px;
 `;
-const ProgramdonilabparalaxeRight = styled.img `
+const ProgramdonilabparalaxeRight = styled.img`
 position:absolute;
 bottom:0;
 right:0;
 width:250px;
 `;
-const Programpartnerparalaxe = styled.img `
+const Programpartnerparalaxe = styled.img`
 position:absolute;
 bottom:0;
 right:0;
 `;
-const ProgramContainer = styled.div `
+const ProgramContainer = styled.div`
 width:100%;
 `;
-const ProgramContainerWrapper = styled.div `
+const ProgramContainerWrapper = styled.div`
 
 `;
-const ProgramSectionTitle = styled.h1 `
+const ProgramSectionTitle = styled.h1`
 color:#2755A1;
 font-size: 3rem;
   font-weight: bold;
@@ -192,7 +196,7 @@ font-size: 3rem;
 
 }
 `;
-const ProgramByDonilabSection = styled.section `
+const ProgramByDonilabSection = styled.section`
 position:relative;
 text-align:center;
 padding:5rem 4vh 7rem 4vh;
@@ -200,7 +204,7 @@ display:flex;
 align-items:center;
 flex-direction:column;
 `;
-const PrograminParnterSection = styled.section `
+const PrograminParnterSection = styled.section`
 position:relative;
 text-align:center;
 background-color:#EFEFEF;
@@ -213,55 +217,70 @@ flex-direction:column;
 const ProgrammestypesOfDonilab = 48;
 const ProgrammestypesWithPartnersId = 49;
 
-function Programs({donilab,partners,generales}) {
- 
+function Programs() {
+
 
   const params = useParams<{ locale: string; }>()
-  const { locale} = params;
+  const { locale } = params;
+  const { data: site, isLoading: loading, error: errorSite } = useSite("dml");
+  const { data: programtypes, isLoading:isLoadingProgramTypes,error: errorProgramTypes } = useProgramTypes();
 
+  if (loading||loading||isLoadingProgramTypes) return <LoadingPage />;
+  if ( errorSite||errorProgramTypes) return <ErrorAlert message="Programs not found" />;
 
+console.log("site",site)
   return (
-    <Layout footer={site?.data?.footer}>
-    <ProgramContainer>  
-      <HeroProgram>
-      <ProgramheroparalaxeLeft src={"/assets/svg/paralaxetopheroprogram.svg"} alt=""/>
-        <ProgramheroparalaxeRight src={"/assets/svg/paralaxebottomheroprogram.svg"} alt=""/>
-        <SectionTitle className= "programsandhubstitle" white="true">
-    
-        {
-          locale === "en" ?
-          <object type="image/svg+xml" width="500px" height="100" data={'/assets/svg/title/title_PROGRAMMES-EN.svg'} className="">
-          </object> :
-           <object type="image/svg+xml" width="500px" height="100" data={'/assets/svg/title/title_PROGRAMMES-FR.svg'} className="">
-           </object>
-           }
-        </SectionTitle>
-      </HeroProgram>
+    <>
+      {
+        loading ? <LoadingPage /> : <Layout data={site} footer={site?.data?.footer}>
 
-        <ProgramByDonilabSection>
-        <ProgramdonilabparalaxeLeft src={"/assets/svg/paralaxetopdonilabprogram.svg"} alt=""/>
-        <ProgramdonilabparalaxeRight src={"/assets/svg/paralaxebottomdonilabprogram.svg"} alt=""/>
-        <ProgramSectionTitle>
-        {locale==='en'? "INITIATED BY DONILAB":"INITIÉS PAR DONILAB"}
-        </ProgramSectionTitle>
-       {/* { 
-    
-         <ProgramByDonilab ProgramData={donilab}/>
-        
-         } */}
-        </ProgramByDonilabSection>
-        <PrograminParnterSection>
-        <Programpartnerparalaxe src={"/assets/svg/paralaxepartnerprogram.svg"} alt=""/>
-        <ProgramSectionTitle>
-        {locale==="en"? "IN PARTNERSHIP":"EN PARTENARIAT"}
-        </ProgramSectionTitle>
-        {/* {
-         
-          <ProgramInPartner programPartnersData={partners}/>
-          } */}
-        </PrograminParnterSection>
-    </ProgramContainer>
-    </Layout>
+          <ProgramContainer>
+            <HeroProgram>
+              <ProgramheroparalaxeLeft src={"/assets/svg/paralaxetopheroprogram.svg"} alt="" />
+              <ProgramheroparalaxeRight src={"/assets/svg/paralaxebottomheroprogram.svg"} alt="" />
+              <SectionTitle className="programsandhubstitle" white="true">
+
+                {
+                  locale === "en" ?
+                    <object type="image/svg+xml" width="500px" height="100" data={'/assets/svg/title/title_PROGRAMMES-EN.svg'} className="">
+                    </object> :
+                    <object type="image/svg+xml" width="500px" height="100" data={'/assets/svg/title/title_PROGRAMMES-FR.svg'} className="">
+                    </object>
+                }
+              </SectionTitle>
+            </HeroProgram>
+<>
+{
+       programtypes && programtypes.length > 0 && 
+      programtypes.map((programtype, index) => (
+        index % 2 === 0 ? (
+          <ProgramByDonilabSection key={programtype.id}>
+            <ProgramdonilabparalaxeLeft src={"/assets/svg/paralaxetopdonilabprogram.svg"} alt="" />
+            <ProgramdonilabparalaxeRight src={"/assets/svg/paralaxebottomdonilabprogram.svg"} alt="" />
+            <ProgramSectionTitle>
+              {programtype.name[locale]}
+            </ProgramSectionTitle>
+            <ProgramByDonilab ProgramData={site?.Programs
+          ?.filter((program) => program.programTypeId === programtype.id)} />
+          </ProgramByDonilabSection>
+        ) : (
+          <PrograminParnterSection key={programtype.id}>
+            <Programpartnerparalaxe src={"/assets/svg/paralaxepartnerprogram.svg"} alt="" />
+            <ProgramSectionTitle>
+              {programtype.name[locale]}
+            </ProgramSectionTitle>
+            <ProgramInPartner programPartnersData={site?.Programs
+          ?.filter((program) => program.programTypeId === programtype.id)} />
+          </PrograminParnterSection>
+        )
+      ))
+       }
+</>
+          </ProgramContainer>
+        </Layout>
+      }
+    </>
+
   )
 }
 

@@ -1,0 +1,25 @@
+version: "3.5"
+
+networks:
+  default:
+    external: true
+    name: postgres_db_network
+
+services:
+  donilab_nextjs:
+    container_name: donilab_nextjs
+    image: donilab_nextjs
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3001:${API_PORT}"
+    volumes:
+      - "./:/app"
+      - "/app/node_modules"
+    # depends_on:
+    #   - default
+    # networks:
+    #   - default
+  

@@ -1,9 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/';
 import parse from "html-react-parser";
-import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
-
+import { useParams, useRouter } from 'next/navigation';
 
 const EnResumeSection = styled.div `
 background-color:#255199;
@@ -74,7 +72,8 @@ width: 80px;
 `;
 
 function EnResume({hub}) {
-  const { locale } = useRouter();
+  const params = useParams()
+  const { slug,locale} = params;
   
   return (
     <EnResumeSection>
@@ -84,8 +83,8 @@ function EnResume({hub}) {
         <h1>
         {locale=== "en" ?"In summary":"en résumé"}
        </h1>
-       <h2>{hub.acf.titreduresume}</h2>
-       {parse(hub.acf.description_du_resume)}
+       <h2>{hub.summary.title[locale]}</h2>
+       {parse(hub.summary.description[locale])}
       </EnResumeSection>
   )
 }

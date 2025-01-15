@@ -35,7 +35,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import FileUpload from '../global/file-upload'
+import FileUpload from '../global/file-uploader'
 import { Input } from '../ui/input'
 import {
   Select,

@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { register } from "@/actions/register";
+import Loading from "../global/loading";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -112,7 +113,8 @@ export const RegisterForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button type="submit" disabled={isPending} className="w-full">
-            Create an account
+            
+            {isPending ? <Loading />: "Create an account"}
           </Button>
         </form>
       </Form>

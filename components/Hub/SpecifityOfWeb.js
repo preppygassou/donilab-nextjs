@@ -1,9 +1,7 @@
 import React, { useContext } from 'react'
 import styled,{css} from 'styled-components'
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
-
+import { useParams, useRouter } from 'next/navigation';
 
 
 const SpecifitySection = styled.div `
@@ -204,7 +202,8 @@ width: 80px;
 
 
 function SpecifityOfWeb({hub}) {
-  const { locale } = useRouter();
+  const params = useParams()
+  const { slug,locale} = params;
   
   return (
     <SpecifitySection>
@@ -220,27 +219,26 @@ function SpecifityOfWeb({hub}) {
      </SpecifityHeadContent>
      <SpecifityContent>
        {
-         hub.acf.specificite_du_hub.map((specificite,index)=>(
+         hub?.specificities.map((specificite,index)=>(
            index === 0 ? (
             <SpecifityContentCardOne>
             <div className="SpecifityContentBox">
-               <h1>{specificite.titre_du_specificite_du_hub}</h1>
-               <p>{specificite.description_du_specificite_du_hub}
+               <h1>{specificite.title[locale]	}</h1>
+               <p>{specificite.description[locale]}
                    </p>
             </div>
             <div className="SpecifityContentImage">
-               <img src={specificite.imgae_illustrative_du_specificite_du_hub.sizes.large} alt=""/>
+               <img src={specificite.image[locale]} alt=""/>
             </div>
            </SpecifityContentCardOne>
            ) :(
             <SpecifityContentCardTwo>
             <div className="SpecifityContentImage">
-            <img src={specificite.imgae_illustrative_du_specificite_du_hub.sizes.large} alt=""/>
+            <img src={specificite.image[locale]} alt=""/>
              </div>
              <div className="SpecifityContentBox">
-             <h1>{specificite.titre_du_specificite_du_hub}</h1>
-
-             <p>{specificite.description_du_specificite_du_hub}
+             <h1>{specificite.title[locale]	}</h1>
+               <p>{specificite.description[locale]}
                    </p>
              </div>
              

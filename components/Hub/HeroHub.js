@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import parse from "html-react-parser";
 import Dots from '../site/components/Dots';
+import { useParams } from 'next/navigation';
 
 const HeroHubSection = styled.section`
  height:78vh;
@@ -226,9 +227,10 @@ right: 61vh;
 
 function HeroHub({ hub }) {
   const [current, setCurrent] = useState(0);
-  const length =hub&& hub.acf.galerie.length;
+  const length =hub&& hub?.galerie.length;
   const timeout = useRef(null);
-
+  const params = useParams()
+  const { slug,locale} = params;
   useEffect(() => {
     const nextSlide = () => {
       setCurrent(current => (current === length - 1 ? 0 : current + 1))
@@ -242,7 +244,7 @@ function HeroHub({ hub }) {
   }, [current, length])
 
 
-  if (!Array.isArray(hub.acf.galerie) || hub.acf.galerie.length <= 0) {
+  if (!Array.isArray(hub?.galerie) || hub?.galerie.length <= 0) {
     return null;
   }
 
@@ -254,17 +256,17 @@ function HeroHub({ hub }) {
           <HeroHubInfo>
 
             <h1>
-              {hub.title.rendered}
+              {hub?.title[locale]}
             </h1>
-            {
-              parse(hub.content.rendered)
-            }
+            <p>
+            {hub?.description[locale]}
+            </p>
 
           </HeroHubInfo>
         </HeroHubTextBox>
         <HeroHubSlideWrapper>
           {
-            hub.acf.galerie.map((image, index) => (
+            hub?.galerie.map((image, index) => (
               <HeroHubSlide key={index}>
                 {index === current && (
                   <HeroHubSlider>
@@ -277,7 +279,7 @@ function HeroHub({ hub }) {
           }
 
           <SliderDots>
-            <Dots slides={hub.acf.galerie} activeIndex={current}></Dots>
+            <Dots slides={hub?.galerie} activeIndex={current}></Dots>
           </SliderDots>
         </HeroHubSlideWrapper>
       </HeroHubWrapper>

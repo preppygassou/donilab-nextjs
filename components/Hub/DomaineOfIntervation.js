@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import styled, { css } from 'styled-components';
-import { useRouter } from 'next/navigation';
-import { CurrentLangContext } from '~/Context/CurrentLangContext';
+import { useParams, useRouter } from 'next/navigation';
 
 const DomaineOfHubSection = styled.section`
 padding:4rem 8rem;
@@ -201,6 +200,8 @@ button.active {
 `;
 
 function DomaineOfIntervation({ hub }) {
+  const params = useParams()
+  const { slug,locale} = params;
   let indexPlus;
 
   const [active, setActive] = useState(0);
@@ -214,10 +215,7 @@ function DomaineOfIntervation({ hub }) {
     indexPlus = index + 1;
     return indexPlus;
   }
-  /* const { state:stateLocale } = useContext(CurrentLangContext);
-  const {locale} =  stateLocale */
-  const { locale } = useRouter();
-
+  
 
 
   return (
@@ -233,13 +231,13 @@ function DomaineOfIntervation({ hub }) {
         </h1>
         <p>
           {
-            hub.acf.description
+            hub?.description[locale]
           }
         </p>
       </DomaineHeadContent>
       <DomaineAcordeon>
         <form>
-          {hub.acf.domaine_Intervention.map((tab, index) => (
+          {hub?.service && hub?.service.length > 0 && hub?.service?.map((tab, index) => (
             <div key={index}>
               <h3>
                 <button
@@ -253,12 +251,12 @@ function DomaineOfIntervation({ hub }) {
 
                   <span className="title-wrapper">
                     <span className={active === index ? 'plus' : 'minus'}></span>
-                    {tab.Title_domaine_Intervention}
+                    {tab.title[locale]}
                   </span>
                 </button>
               </h3>
               <div id={'sect-' + indexCount(index)} className={active === index ? 'panel-open' : 'panel-close'}>
-                {tab.description_domaine_Intervention}
+                {tab.description[locale]}
               </div>
             </div>
           ))

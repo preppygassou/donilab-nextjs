@@ -19,18 +19,19 @@ export default s3Client; */
 // lib/n0cStorage.ts
 //import { S3Client } from '@aws-sdk/client-s3';
 
-const s3Client = new S3Client({
+const s3Client = new AWS.S3({
   region: process.env.N0C_REGION, // Specify your region
   credentials: {
     accessKeyId: process.env.N0C_ACCESS_KEY_ID!,
     secretAccessKey: process.env.N0C_SECRET_ACCESS_KEY!,
   },
   endpoint: `${process.env.N0C_ENDPOINT}`, // e.g., 'https://s3.your-n0c-storage-provider.com',
-  forcePathStyle: true, 
-  requestHandler: {
-    connectionTimeout: 30000, // 30 seconds
-    socketTimeout: 30000, // 30 seconds
-  },
+  s3ForcePathStyle: true, 
+  signatureVersion: 'v4',
+  
+ /*  httpOptions: {
+   
+  }, */
   
 });
 

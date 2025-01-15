@@ -124,7 +124,8 @@ function ImpactSection({impacts}:{impacts:any}) {
           <ImpactCard key={impact.id}>
             <img src={impact.icon.url} alt={impact.total}/>
             <h1>{impact.total}</h1>
-            {parse(impact.description[locale])}
+            {impact.description[locale]}
+            {/* {parse(impact.description[locale])} */}
           </ImpactCard>
         ))}
       </ImpactWrapper>

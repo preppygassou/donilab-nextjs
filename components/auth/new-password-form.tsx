@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { newPassword } from "@/actions/new-password";
+import Loading from "../global/loading";
 
 export const NewPasswordForm = () => {
   const searchParams = useSearchParams();
@@ -81,7 +82,8 @@ export const NewPasswordForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button type="submit" disabled={isPending} className="w-full">
-            Reset password
+            
+            {isPending ? <Loading />: "Reset password"}
           </Button>
         </form>
       </Form>
