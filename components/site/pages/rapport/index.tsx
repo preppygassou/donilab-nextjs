@@ -138,7 +138,7 @@ const Rapport = () =>{
         <Container key={index} className={index % 2 === 1 ? "revers" : ""}>
           {index % 2 === 0 && (
         <Cover>
-          <img src={report.featured_media.url} alt={`RAPPORT ${report.year}`} />
+          <img src={report?.featured_media?.url} alt={`RAPPORT ${report.year}`} />
         </Cover>
           )}
           <DownloadCtn>
@@ -149,7 +149,7 @@ const Rapport = () =>{
           </DownloadCtn>
           {index % 2 === 1 && (
         <Cover>
-          <img src={report.image} alt={`RAPPORT ${report.year}`} />
+          <img src={report?.featured_media?.url} alt={`RAPPORT ${report.year}`} />
         </Cover>
           )}
         </Container>
