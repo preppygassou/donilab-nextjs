@@ -270,7 +270,7 @@ function HeroHub({ hub }) {
               <HeroHubSlide key={index}>
                 {index === current && (
                   <HeroHubSlider>
-                    <HeroHubSliderImg style={{ backgroundImage: `url("${image.url}")` }}>
+                    <HeroHubSliderImg style={{ backgroundImage: `url(${image.url})` }}>
                     </HeroHubSliderImg>
                   </HeroHubSlider>
                 )}

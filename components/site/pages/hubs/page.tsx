@@ -557,7 +557,7 @@ function Hubs() {
                           </HubExploreLink>
                         </HubInfoComponent>
                         <HubImgComponent>
-                          <img src={hub.fimg_url} alt="" />
+                          <img src={hub?.featured_media?.url} alt="" />
                         </HubImgComponent>
                       </HubComponent>
                     );

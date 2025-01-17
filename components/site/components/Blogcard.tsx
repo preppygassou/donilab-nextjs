@@ -191,7 +191,7 @@ const Blogcard = ({ post }:{post:any}) => {
 
 
       <BlogSlider className="donilab-post__card" key={post.id} /* onClick={() => history.push("/blogsingle"+ index)} */>
-        <a className='donilab-post__thumbnail__link' href={post.link} target="_blank" rel="noopener noreferrer">
+        <a className='donilab-post__thumbnail__link' href={post.slug[locale]} target="_blank" rel="noopener noreferrer">
           <div className="donilab-post__thumbnail">
             <img width={300} height={169} src={post.featured_media.url} alt={post.title[locale]} />
           </div>
@@ -227,7 +227,7 @@ const Blogcard = ({ post }:{post:any}) => {
         <div className="donilab-post__text">
 
           <h3 className='donilab-post__title'>
-            <a href={post.link} target="_blank" rel="noopener noreferrer">
+            <a href={post.slug[locale]} target="_blank" rel="noopener noreferrer">
               {post.title[locale]}
             </a>
           </h3>
