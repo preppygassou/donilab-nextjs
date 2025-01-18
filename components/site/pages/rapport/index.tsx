@@ -143,7 +143,7 @@ const Rapport = () =>{
           )}
           <DownloadCtn>
         <h1>{locale === "en" ? "REPORT" : "RAPPORT"} {report.year}</h1>
-        <DownLoadBtn href={report.link} target="_blank" className="allblog">
+        <DownLoadBtn href={report?.link} target="_blank" className="allblog">
           {locale === "en" ? "Download" : "Télecharger"}
         </DownLoadBtn>
           </DownloadCtn>

@@ -228,7 +228,7 @@ function Programs() {
   if (loading||loading||isLoadingProgramTypes) return <LoadingPage />;
   if ( errorSite||errorProgramTypes) return <ErrorAlert message="Programs not found" />;
 
-console.log("site",site)
+
   return (
     <>
       {

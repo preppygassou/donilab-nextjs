@@ -259,7 +259,7 @@ function HeroProgram({ program }) {
               <HeroProgramSlide key={index}>
                 {index === current && (
                   <HeroProgramSlider>
-                    <HeroProgramSliderImg style={{ backgroundImage: `url("${image.url}")` }}>
+                    <HeroProgramSliderImg style={{ backgroundImage: `url(${image.url})` }}>
                     </HeroProgramSliderImg>
                   </HeroProgramSlider>
                 )}
